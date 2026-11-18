@@ -1,0 +1,105 @@
+﻿[
+    {
+        "id":  "earthquake-salt-lake",
+        "question":  "What should I do after a major earthquake in the Salt Lake Valley? Give concise immediate actions and note which hazards are specific to this region. Use only retrieved official-emergency sources; clearly label anything missing.",
+        "elapsedSeconds":  16.35,
+        "done":  true,
+        "doneReason":  "stop",
+        "content":  "**Immediate actions after a major earthquake in the Salt Lake Valley:**\n\n- **DROP, COVER, and HOLD ON** until shaking stops to protect yourself from falling debris.  \n- **Move to a safe location** such as under a sturdy table or desk, away from windows, bookshelves, and heavy furniture.  \n- **Check for injuries** and provide first aid if safe to do so.  \n- **Evacuate if your building is unsafe**—do not re-enter a structure that is damaged or appears to be collapsing.  \n- **Stay informed** by listening to local emergency broadcasts or official alerts (e.g., through emergency radio or local government websites).  \n- **Be prepared for long-term disruptions**: Water, sewer, and power services may not be restored for weeks or months after a major quake.  \n\n**Hazards specific to the Salt Lake Valley region:**  \n- **Unreinforced Masonry Buildings (URMs)**: Approximately 140,000 URMs exist statewide, including 130 school campuses and homes. These buildings are at high risk of collapse or significant damage during strong shaking and are a major source of injuries and fatalities.  \n- **Critical infrastructure disruption**: A major Wasatch Fault event could leave around 330,000 homes (about 1 million people) without water for up to three months. Water shortages can impact power, medical care, and fire response.  \n- **Transportation damage**: Roads and rail systems may suffer physical damage, disrupting evacuation and emergency response efforts.  \n- **School facilities as emergency shelters**: While school buildings are vulnerable, they may be used as emergency shelters if retrofitted.  \n\n*Note: This information is based on the Utah Enhanced State Hazard Mitigation Plan and the Utah Seismic Safety Commission’s 2022 guide. No current live status of emergency alerts, evacuations, or service disruptions is available in this offline context. For real-time updates, verify with official emergency services.*",
+        "thinking":  null,
+        "sources":  [
+                        {
+                            "title":  "Putting-Down-Roots-Utah-2nd-Edition-2022.pdf-8e8482836248.pdf",
+                            "source":  "/app/storage/kb_uploads/Putting-Down-Roots-Utah-2nd-Edition-2022.pdf-8e8482836248.pdf"
+                        },
+                        {
+                            "title":  "Utah-Enhanced-State-Hazard-Mitigation-Plan-2024.pdf-157b425529c4.pdf",
+                            "source":  "/app/storage/kb_uploads/Utah-Enhanced-State-Hazard-Mitigation-Plan-2024.pdf-157b425529c4.pdf"
+                        }
+                    ]
+    },
+    {
+        "id":  "boil-water",
+        "question":  "How do I safely purify water when there is a boil-water advisory? Give concise steps for boiling and, only if the source supports it, emergency disinfection. Explain limits. Use only retrieved official-emergency sources; clearly label anything missing.",
+        "elapsedSeconds":  19.57,
+        "done":  true,
+        "doneReason":  "stop",
+        "content":  "To safely purify water during a boil-water advisory, follow these steps based on official emergency guidance:\n\n**Boiling Method:**  \n- If water is cloudy, let it settle and filter it through a clean cloth, paper towel, or coffee filter.  \n- Bring the water to a rolling boil for at least one minute. At elevations above 6,500 feet (2,000 meters), boil for three minutes.  \n- Let the water cool naturally and store it in clean, covered containers.  \n- To improve taste, add one pinch of salt per quart or liter of water, or pour the water from one clean container to another several times.  \n*Boiling kills bacteria, viruses, and protozoa.*  \n\n**Emergency Disinfection with Bleach (if boiling is not possible):**  \n- If water is cloudy, let it settle and filter it through a clean cloth, paper towel, or coffee filter.  \n- Add 8 drops (or about 1/8 teaspoon) of unscented, regular household bleach (6%–8.25% sodium hypochlorite) to 1 gallon of water. For cloudy or cold water, double the amount (16 drops or ¼ teaspoon).  \n- Stir and let the water stand for 30 minutes. The water should have a slight chlorine odor. If not, repeat the dosage and let stand for another 15 minutes.  \n- If the chlorine taste is too strong, pour the water from one clean container to another and let it stand for a few hours before use.  \n*This method kills bacteria and viruses but does not remove heavy metals, salts, or other chemicals.*  \n\n**Limitations:**  \n- Boiling or disinfection will not remove chemical contaminants such as heavy metals, salts, or toxins.  \n- Most portable water filters do not remove bacteria or viruses; only filters certified to remove parasites (e.g., Giardia or Cryptosparidium cysts) and combined with disinfection are effective.  \n- Water contaminated with harmful chemicals or toxins cannot be made safe by boiling, disinfecting, or filtering.  \n\n*Note: Always follow local authority advice during a boil-water advisory. This guidance is based on CDC and EPA emergency water safety protocols.*",
+        "thinking":  null,
+        "sources":  [
+                        {
+                            "title":  "EPA-Emergency-Disinfection-Drinking-Water-2017.pdf-6304a95b3625.pdf",
+                            "source":  "/app/storage/kb_uploads/EPA-Emergency-Disinfection-Drinking-Water-2017.pdf-6304a95b3625.pdf"
+                        },
+                        {
+                            "title":  "CDC-Make-Water-Safe-During-Emergency-2025.pdf-dc4f9d116e89.pdf",
+                            "source":  "/app/storage/kb_uploads/CDC-Make-Water-Safe-During-Emergency-2025.pdf-dc4f9d116e89.pdf"
+                        },
+                        {
+                            "title":  "CDC-Backcountry-Water-Treatment.pdf-ab7ca21247f6.pdf",
+                            "source":  "/app/storage/kb_uploads/CDC-Backcountry-Water-Treatment.pdf-ab7ca21247f6.pdf"
+                        }
+                    ]
+    },
+    {
+        "id":  "toddler-choking",
+        "question":  "What should I do if my toddler is choking? Give concise emergency steps, distinguish severe airway blockage from effective coughing, and say when to call emergency services. Use only retrieved official-emergency sources; clearly label anything missing.",
+        "elapsedSeconds":  18.94,
+        "done":  true,
+        "doneReason":  "stop",
+        "content":  "If your toddler is choking, follow these steps based on the **2025 AHA Guidelines for CPR and Emergency Cardiovascular Care**:\n\n### Distinguish Severe Airway Blockage from Effective Coughing:\n- **Effective coughing**: The toddler can still cough, speak, or cry. Encourage coughing and continue to watch closely. Do **not** begin rescue maneuvers unless the obstruction becomes severe.\n- **Severe airway blockage**: The toddler cannot speak, cry, or cough effectively; there is little or no air movement; the face turns pale or blue; or responsiveness is altered.\n\n---\n\n### Emergency Steps for Severe Choking (Toddlers older than 1 year):\n\n1. **Call 911** or ask someone else to do so immediately if the toddler is unable to breathe, speak, or cough.\n2. Give **5 back blows** between the shoulder blades.\n3. Turn the toddler face-up while supporting the head lower than the chest. Give **5 chest thrusts** using the heel of one hand on the lower half of the sternum.\n4. Repeat alternating sets of five back blows and chest thrusts until the object comes out, the toddler becomes unresponsive, or help arrives.\n5. **If the toddler becomes unresponsive**, lower them safely and begin **infant CPR**. Do not perform blind finger sweeps; remove an object only if visible.\n\n\u003e ⚠️ **Note**: Do not use abdominal thrusts (Heimlich maneuver) on toddlers. Chest thrusts are recommended for children older than 1 year.\n\n---\n\n### When to Call Emergency Services:\n- **Call 911 immediately** if:\n  - The toddler cannot speak, cry, or cough.\n  - The toddler becomes unresponsive.\n  - You are unable to dislodge the object using the above steps.\n\n\u003e ✅ This procedure is based on the American Heart Association, *2025 Guidelines for CPR and Emergency Cardiovascular Care*, published 2025-10-22.\n\n\u003e ❌ No information is provided in the retrieved context about choking in toddlers under 1 year of age. For infants under 1 year, different steps apply and are not covered here. If the toddler is under 1 year, refer to infant choking procedures.",
+        "thinking":  null,
+        "sources":  [
+                        {
+                            "title":  "AHA-2025-CPR-CHOKING-QUICK-REFERENCE.md-01e7565ec421.md",
+                            "source":  "/app/storage/kb_uploads/AHA-2025-CPR-CHOKING-QUICK-REFERENCE.md-01e7565ec421.md"
+                        },
+                        {
+                            "title":  "WHO-Managing-Complications-Pregnancy-Childbirth-2017.pdf-c835c3002e84.pdf",
+                            "source":  "/app/storage/kb_uploads/WHO-Managing-Complications-Pregnancy-Childbirth-2017.pdf-c835c3002e84.pdf"
+                        }
+                    ]
+    },
+    {
+        "id":  "winter-heating",
+        "question":  "How do I safely heat an apartment during a winter power outage? Give concise actions and carbon-monoxide/fire warnings. Use only retrieved official-emergency sources; clearly label anything missing.",
+        "elapsedSeconds":  15.11,
+        "done":  true,
+        "doneReason":  "stop",
+        "content":  "To safely heat an apartment during a winter power outage:\n\n- **Use only battery-powered or hand-cranked heaters** (such as flashlights, lanterns, or portable battery-powered space heaters).  \n- **Never use gas stoves, ovens, grills, or dryers to heat your home**. These devices can produce carbon monoxide (CO) and are unsafe when used indoors.  \n- **Keep all windows, doors, and vents closed** to retain heat, but ensure they are not used to vent a gas or fuel-powered heater.  \n- **Use carbon monoxide (CO) alarms** in your apartment. These are essential, as CO is odorless and can be deadly.  \n- **Do not operate portable generators indoors** or near windows, doors, or vents. Use them only outdoors in well-ventilated areas, at least 20 feet away from the building.  \n- **Avoid using candles or open flames** to heat your apartment — they pose a fire hazard.  \n- **Unplug appliances and electronics** to prevent damage from electrical surges.  \n\n⚠️ **Important**: The retrieved context does not specify safe heating methods for an apartment during a power outage beyond general fire and CO safety. It does not cover the specific use of electric or propane heaters, or provide guidance on indoor heating devices.  \n\n➡️ **Missing**: Specific guidance on approved indoor heating devices (e.g., electric space heaters, propane heaters), safety thresholds, or manufacturer recommendations for apartment heating.  \n\nFor emergency heating, follow official guidance from **Ready.gov/power-outages** or **FEMA**. Always consult local authorities for region-specific advice.  \n\n*Note: This response is based solely on retrieved emergency sources. It does not include general knowledge about indoor heating devices or their safety parameters.*",
+        "thinking":  null,
+        "sources":  [
+                        {
+                            "title":  "FEMA-Power-Outage-Info-Sheet-2023.pdf-3d80505b7ace.pdf",
+                            "source":  "/app/storage/kb_uploads/FEMA-Power-Outage-Info-Sheet-2023.pdf-3d80505b7ace.pdf"
+                        },
+                        {
+                            "title":  "Putting-Down-Roots-Utah-2nd-Edition-2022.pdf-8e8482836248.pdf",
+                            "source":  "/app/storage/kb_uploads/Putting-Down-Roots-Utah-2nd-Edition-2022.pdf-8e8482836248.pdf"
+                        },
+                        {
+                            "title":  "USFA-Portable-Generator-Safety.pdf-5add8083ae2a.pdf",
+                            "source":  "/app/storage/kb_uploads/USFA-Portable-Generator-Safety.pdf-5add8083ae2a.pdf"
+                        }
+                    ]
+    },
+    {
+        "id":  "rexburg-hazards",
+        "question":  "What are the main earthquake and volcanic hazards near Rexburg, Idaho? Distinguish durable hazard information from live alert status. Use only retrieved official-emergency sources; clearly label anything missing.",
+        "elapsedSeconds":  18.54,
+        "done":  true,
+        "doneReason":  "stop",
+        "content":  "The main earthquake hazard near Rexburg, Idaho is moderate to high, based on seismic activity and geological evidence. Earthquakes in the region, particularly within the Yellowstone Tectonic Parabola, have historically occurred, with Idaho experiencing hundreds of earthquakes annually—most too small to be felt. The U.S. Geological Survey (USGS) indicates that movement on faults in and around Idaho can produce earthquakes of magnitude 6.5 to 7.5, with potentially catastrophic effects. A 2014 seismic hazard map shows that central and southeastern Idaho, including areas near Rexburg, fall in a medium to high-hazard zone, with a 10% probability of exceeding a certain ground acceleration (PGA) in a 50-year period.\n\nSpecifically, a 4.4 magnitude earthquake occurred in April 2019, 6 miles northeast of Lima, Montana, and was felt in Rexburg, approximately 70 miles away. No damage was reported. Additionally, a series of 50 minor earthquakes were felt in Southeast Idaho in September 2017, all within Caribou County, a frequency unprecedented in that area.\n\nVolcanic hazards near Rexburg are not currently identified in the retrieved sources. The region lies outside the known volcanic zones of the United States, such as the Yellowstone Caldera, which is located farther west and south. There is no evidence in the provided context of active volcanic activity or volcanic hazard near Rexburg.\n\n**Durable hazard information**:\n- Earthquake hazard: Medium to high, with potential for damaging events (magnitude 6.5–7.5) due to tectonic activity.\n- Historical earthquakes: Events such as the 1959 Hebgen Lake (magnitude 7.3) and 1983 Borah Peak (magnitude 6.9) earthquakes occurred in nearby areas and caused fatalities and structural damage.\n- Seismic risk is evaluated using USGS PGA (Peak Ground Acceleration) maps with a 10% probability of exceedance in 50 years.\n\n**Live alert status**:\n- No live earthquake or volcanic alert status is available in the retrieved sources. The offline library does not provide current real-time hazard alerts, emergency declarations, or service statuses. Live verification is required for such status.\n\n**Missing information**:\n- No data on current volcanic activity or volcanic hazard near Rexburg.\n- No current earthquake alert, evacuation order, or emergency declaration is reported in the retrieved sources. This status cannot be verified from offline data and requires live verification through official emergency services.\n\n\u003e **Note**: For real-time hazard status or emergency alerts, users should check official sources such as the U.S. Geological Survey (USGS) or local emergency management agencies directly.",
+        "thinking":  null,
+        "sources":  [
+                        {
+                            "title":  "Madison-County-Multi-Hazard-Mitigation-Plan-2019.pdf-b05bd34bb150.pdf",
+                            "source":  "/app/storage/kb_uploads/Madison-County-Multi-Hazard-Mitigation-Plan-2019.pdf-b05bd34bb150.pdf"
+                        },
+                        {
+                            "title":  "Idaho-State-Hazard-Mitigation-Plan-2023.pdf-1c9b2848048e.pdf",
+                            "source":  "/app/storage/kb_uploads/Idaho-State-Hazard-Mitigation-Plan-2023.pdf-1c9b2848048e.pdf"
+                        }
+                    ]
+    }
+]

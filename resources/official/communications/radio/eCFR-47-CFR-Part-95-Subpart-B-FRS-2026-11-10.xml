@@ -1,0 +1,240 @@
+<?xml version="1.0"?>
+<DIV6 N="B" TYPE="SUBPART" VOLUME="5" hierarchy_metadata="{&amp;quot;path&amp;quot;:&amp;quot;/on/_SUBSTITUTE_DATE_/title-47/part-95/subpart-B&amp;quot;,&amp;quot;citation&amp;quot;:&amp;quot;47 CFR Part 95 Subpart B&amp;quot;}">
+<HEAD>Subpart B&#x2014;Family Radio Service (FRS)</HEAD>
+<DIV8 N="95.501" TYPE="SECTION" hierarchy_metadata="{&quot;path&quot;:&quot;/on/_SUBSTITUTE_DATE_/title-47/section-95.501&quot;,&quot;citation&quot;:&quot;47 CFR 95.501&quot;}">
+<HEAD>&#xA7; 95.501 [Reserved]</HEAD>
+</DIV8>
+
+<DIV8 N="95.503" TYPE="SECTION" hierarchy_metadata="{&quot;path&quot;:&quot;/on/_SUBSTITUTE_DATE_/title-47/section-95.503&quot;,&quot;citation&quot;:&quot;47 CFR 95.503&quot;}">
+<HEAD>&#xA7; 95.503 Definitions, FRS.</HEAD>
+<P><I>Family Radio Service (FRS).</I> A short-distance two-way voice communication service, with limited data applications, between low power hand-held radios, for facilitating individual, family, group, recreational and business activities.</P>
+<P><I>FRS unit.</I> A transceiver for use in the FRS.</P>
+</DIV8>
+
+<DIV8 N="95.505-95.517" TYPE="SECTION" hierarchy_metadata="{&quot;path&quot;:&quot;/on/_SUBSTITUTE_DATE_/title-47/section-95.505-95.517&quot;,&quot;citation&quot;:&quot;47 CFR 95.505-95.517&quot;}">
+<HEAD>&#xA7;&#xA7; 95.505-95.517 [Reserved]</HEAD>
+</DIV8>
+
+<DIV8 N="95.519" TYPE="SECTION" hierarchy_metadata="{&quot;path&quot;:&quot;/on/_SUBSTITUTE_DATE_/title-47/section-95.519&quot;,&quot;citation&quot;:&quot;47 CFR 95.519&quot;}">
+<HEAD>&#xA7; 95.519 FRS replacement parts.</HEAD>
+<P>The operator of a FRS unit may replace the batteries in the FRS unit with batteries of a type specified by the manufacturer. All other internal maintenance and repairs must be carried out in accordance with &#xA7; 95.319.</P>
+</DIV8>
+
+<DIV8 N="95.521-95.529" TYPE="SECTION" hierarchy_metadata="{&quot;path&quot;:&quot;/on/_SUBSTITUTE_DATE_/title-47/section-95.521-95.529&quot;,&quot;citation&quot;:&quot;47 CFR 95.521-95.529&quot;}">
+<HEAD>&#xA7;&#xA7; 95.521-95.529 [Reserved]</HEAD>
+</DIV8>
+
+<DIV8 N="95.531" TYPE="SECTION" hierarchy_metadata="{&quot;path&quot;:&quot;/on/_SUBSTITUTE_DATE_/title-47/section-95.531&quot;,&quot;citation&quot;:&quot;47 CFR 95.531&quot;}">
+<HEAD>&#xA7; 95.531 Permissible FRS uses.</HEAD>
+<P>FRS units are primarily used for short-distance two-way voice communications between individuals.</P>
+<P>(a) <I>Digital data.</I> In addition to voice conversations, FRS units may transmit digital data containing location information, or requesting location information from one or more other FRS or GMRS units, or containing a brief text message to another specific GMRS or FRS unit. Digital data transmissions may be initiated by a manual action of the operator or on an automatic or periodic basis, and a FRS unit receiving an interrogation request may automatically respond with its location. <I>See also</I> &#xA7; 95.587(c).</P>
+<P>(b) <I>One-way communications.</I> FRS units may be used for one-way communications that are emergency messages, traveler assistance communications, voice pages or brief equipment tests.</P>
+<P>(c) <I>GMRS stations.</I> FRS units normally communicate with other FRS units, but may also be used to communicate with General Mobile Radio Service (GMRS) stations.</P>
+<CITA TYPE="N">[82 FR 41104, Aug. 29, 2017, as amended at 86 FR 53564, Sept. 28, 2021]
+</CITA>
+</DIV8>
+
+<DIV8 N="95.533" TYPE="SECTION" hierarchy_metadata="{&quot;path&quot;:&quot;/on/_SUBSTITUTE_DATE_/title-47/section-95.533&quot;,&quot;citation&quot;:&quot;47 CFR 95.533&quot;}">
+<HEAD>&#xA7; 95.533 Prohibited FRS uses.</HEAD>
+<P>FRS units must not be used for one-way communications other than those listed in &#xA7; 95.531(b). Initial transmissions to establish two-way communications and data transmissions listed in &#xA7; 95.531(a) are not considered to be one-way communications for the purposes of this section.</P>
+</DIV8>
+
+<DIV8 N="95.535-95.559" TYPE="SECTION" hierarchy_metadata="{&quot;path&quot;:&quot;/on/_SUBSTITUTE_DATE_/title-47/section-95.535-95.559&quot;,&quot;citation&quot;:&quot;47 CFR 95.535-95.559&quot;}">
+<HEAD>&#xA7;&#xA7; 95.535-95.559 [Reserved]</HEAD>
+</DIV8>
+
+<DIV8 N="95.561" TYPE="SECTION" hierarchy_metadata="{&quot;path&quot;:&quot;/on/_SUBSTITUTE_DATE_/title-47/section-95.561&quot;,&quot;citation&quot;:&quot;47 CFR 95.561&quot;}">
+<HEAD>&#xA7; 95.561 FRS transmitter certification.</HEAD>
+<P>(a)-(b) [Reserved]</P>
+<P>(c) A grant of equipment certification will not be issued for hand-held portable radio units capable of operating under both this subpart (FRS) and under any other subparts of this chapter (except part 15) if the application for such grant is filed on or after December 27, 2017.</P>
+<CITA TYPE="N">[82 FR 41104, Aug. 29, 2017, as amended at 90 FR 57711, Dec. 12, 2025]
+</CITA>
+</DIV8>
+
+<DIV8 N="95.563" TYPE="SECTION" hierarchy_metadata="{&quot;path&quot;:&quot;/on/_SUBSTITUTE_DATE_/title-47/section-95.563&quot;,&quot;citation&quot;:&quot;47 CFR 95.563&quot;}">
+<HEAD>&#xA7; 95.563 FRS channels.</HEAD>
+<P>The FRS is allotted 22 channels, each having a channel bandwidth of 12.5 kHz. All of the FRS channels are also allotted to the General Mobile Radio Service (GMRS) on a shared basis. The FRS channel center frequencies are set forth in the following table:</P>
+<DIV width="100%"><DIV class="gpotbl_div">
+<TABLE border="1" cellpadding="1" cellspacing="1" class="gpo_table" frame="void" width="100%" data-point-width="75">
+<THEAD>
+<TR>
+<TH class="center border-top-single border-bottom-single border-right-single">Channel No.</TH>
+<TH class="center border-top-single border-bottom-single">Center <br/>frequency <br/>(MHz)</TH>
+</TR>
+</THEAD>
+<TBODY>
+<TR>
+<TD class="left border-right-single">1</TD>
+<TD class="right">462.5625</TD>
+</TR>
+<TR>
+<TD class="left border-right-single">2</TD>
+<TD class="right">462.5875</TD>
+</TR>
+<TR>
+<TD class="left border-right-single">3</TD>
+<TD class="right">462.6125</TD>
+</TR>
+<TR>
+<TD class="left border-right-single">4</TD>
+<TD class="right">462.6375</TD>
+</TR>
+<TR>
+<TD class="left border-right-single">5</TD>
+<TD class="right">462.6625</TD>
+</TR>
+<TR>
+<TD class="left border-right-single">6</TD>
+<TD class="right">462.6875</TD>
+</TR>
+<TR>
+<TD class="left border-right-single">7</TD>
+<TD class="right">462.7125</TD>
+</TR>
+<TR>
+<TD class="left border-right-single">8</TD>
+<TD class="right">467.5625</TD>
+</TR>
+<TR>
+<TD class="left border-right-single">9</TD>
+<TD class="right">467.5875</TD>
+</TR>
+<TR>
+<TD class="left border-right-single">10</TD>
+<TD class="right">467.6125</TD>
+</TR>
+<TR>
+<TD class="left border-right-single">11</TD>
+<TD class="right">467.6375</TD>
+</TR>
+<TR>
+<TD class="left border-right-single">12</TD>
+<TD class="right">467.6625</TD>
+</TR>
+<TR>
+<TD class="left border-right-single">13</TD>
+<TD class="right">467.6875</TD>
+</TR>
+<TR>
+<TD class="left border-right-single">14</TD>
+<TD class="right">467.7125</TD>
+</TR>
+<TR>
+<TD class="left border-right-single">15</TD>
+<TD class="right">462.5500</TD>
+</TR>
+<TR>
+<TD class="left border-right-single">16</TD>
+<TD class="right">462.5750</TD>
+</TR>
+<TR>
+<TD class="left border-right-single">17</TD>
+<TD class="right">462.6000</TD>
+</TR>
+<TR>
+<TD class="left border-right-single">18</TD>
+<TD class="right">462.6250</TD>
+</TR>
+<TR>
+<TD class="left border-right-single">19</TD>
+<TD class="right">462.6500</TD>
+</TR>
+<TR>
+<TD class="left border-right-single">20</TD>
+<TD class="right">462.6750</TD>
+</TR>
+<TR>
+<TD class="left border-right-single">21</TD>
+<TD class="right">462.7000</TD>
+</TR>
+<TR>
+<TD class="left border-bottom-single border-right-single">22</TD>
+<TD class="right border-bottom-single">462.7250</TD>
+</TR>
+</TBODY>
+</TABLE>
+</DIV></DIV>
+</DIV8>
+
+<DIV8 N="95.565" TYPE="SECTION" hierarchy_metadata="{&quot;path&quot;:&quot;/on/_SUBSTITUTE_DATE_/title-47/section-95.565&quot;,&quot;citation&quot;:&quot;47 CFR 95.565&quot;}">
+<HEAD>&#xA7; 95.565 FRS frequency accuracy.</HEAD>
+<P>Each FRS transmitter type must be designed such that the carrier frequencies remain within &#xB1;2.5 parts-per-million of the channel center frequencies specified in &#xA7; 95.563 during normal operating conditions.</P>
+</DIV8>
+
+<DIV8 N="95.567" TYPE="SECTION" hierarchy_metadata="{&quot;path&quot;:&quot;/on/_SUBSTITUTE_DATE_/title-47/section-95.567&quot;,&quot;citation&quot;:&quot;47 CFR 95.567&quot;}">
+<HEAD>&#xA7; 95.567 FRS transmit power.</HEAD>
+<P>Each FRS transmitter type must be designed such that the effective radiated power (ERP) on channels 8 through 14 does not exceed 0.5 Watts and the ERP on channels 1 through 7 and 15 through 22 does not exceed 2.0 Watts.</P>
+</DIV8>
+
+<DIV8 N="95.569" TYPE="SECTION" hierarchy_metadata="{&quot;path&quot;:&quot;/on/_SUBSTITUTE_DATE_/title-47/section-95.569&quot;,&quot;citation&quot;:&quot;47 CFR 95.569&quot;}">
+<HEAD>&#xA7; 95.569 [Reserved]</HEAD>
+</DIV8>
+
+<DIV8 N="95.571" TYPE="SECTION" hierarchy_metadata="{&quot;path&quot;:&quot;/on/_SUBSTITUTE_DATE_/title-47/section-95.571&quot;,&quot;citation&quot;:&quot;47 CFR 95.571&quot;}">
+<HEAD>&#xA7; 95.571 FRS emission types.</HEAD>
+<P>Each FRS transmitter type must be designed such that it can transmit only the following emission types: F3E, G3E, F2D, and G2D.</P>
+</DIV8>
+
+<DIV8 N="95.573" TYPE="SECTION" hierarchy_metadata="{&quot;path&quot;:&quot;/on/_SUBSTITUTE_DATE_/title-47/section-95.573&quot;,&quot;citation&quot;:&quot;47 CFR 95.573&quot;}">
+<HEAD>&#xA7; 95.573 FRS authorized bandwidth.</HEAD>
+<P>Each FRS transmitter type must be designed such that the occupied bandwidth does not exceed 12.5 kHz.</P>
+</DIV8>
+
+<DIV8 N="95.575" TYPE="SECTION" hierarchy_metadata="{&quot;path&quot;:&quot;/on/_SUBSTITUTE_DATE_/title-47/section-95.575&quot;,&quot;citation&quot;:&quot;47 CFR 95.575&quot;}">
+<HEAD>&#xA7; 95.575 FRS modulation limits.</HEAD>
+<P>Each FRS transmitter type must be designed such that the peak frequency deviation does not exceed 2.5 kHz, and the highest audio frequency contributing substantially to modulation must not exceed 3.125 kHz.</P>
+</DIV8>
+
+<DIV8 N="95.577" TYPE="SECTION" hierarchy_metadata="{&quot;path&quot;:&quot;/on/_SUBSTITUTE_DATE_/title-47/section-95.577&quot;,&quot;citation&quot;:&quot;47 CFR 95.577&quot;}">
+<HEAD>&#xA7; 95.577 FRS tone requirements.</HEAD>
+<P>In addition to the tones permitted under &#xA7; 95.377, FRS transmitter types may be designed to transmit brief tones to indicate the end of a transmission.</P>
+</DIV8>
+
+<DIV8 N="95.579" TYPE="SECTION" hierarchy_metadata="{&quot;path&quot;:&quot;/on/_SUBSTITUTE_DATE_/title-47/section-95.579&quot;,&quot;citation&quot;:&quot;47 CFR 95.579&quot;}">
+<HEAD>&#xA7; 95.579 FRS unwanted emissions limits.</HEAD>
+<P>Each FRS transmitter type must be designed to satisfy the applicable unwanted emissions limits in this paragraph.</P>
+<P>(a) <I>Attenuation requirements.</I> The power of unwanted emissions must be attenuated below the carrier power output in Watts (P) by at least:</P>
+<P>(1) 25 dB (decibels) in the frequency band 6.25 kHz to 12.5 kHz removed from the channel center frequency.</P>
+<P>(2) 35 dB in the frequency band 12.5 kHz to 31.25 kHz removed from the channel center frequency.</P>
+<P>(3) 43 + 10 log (P) dB in any frequency band removed from the channel center frequency by more than 31.25 kHz.</P>
+<P>(b) <I>Measurement bandwidths.</I> The power of unwanted emissions in the frequency bands specified in paragraphs (a)(1) and (2) of this section is measured with a reference bandwidth of 300 Hz. The power of unwanted emissions in the frequency range specified in paragraph (a)(3) is measured with a reference bandwidth of at least 30 kHz.</P>
+<P>(c) <I>Measurement conditions.</I> The requirements in this section apply to each FRS transmitter type both with and without the connection of permitted attachments, such as an external speaker, microphone and/or power cord.</P>
+</DIV8>
+
+<DIV8 N="95.581-95.585" TYPE="SECTION" hierarchy_metadata="{&quot;path&quot;:&quot;/on/_SUBSTITUTE_DATE_/title-47/section-95.581-95.585&quot;,&quot;citation&quot;:&quot;47 CFR 95.581-95.585&quot;}">
+<HEAD>&#xA7;&#xA7; 95.581-95.585 [Reserved]</HEAD>
+</DIV8>
+
+<DIV8 N="95.587" TYPE="SECTION" hierarchy_metadata="{&quot;path&quot;:&quot;/on/_SUBSTITUTE_DATE_/title-47/section-95.587&quot;,&quot;citation&quot;:&quot;47 CFR 95.587&quot;}">
+<HEAD>&#xA7; 95.587 FRS additional requirements.</HEAD>
+<P>Each FRS transmitter type must be designed to meet the following additional requirements.</P>
+<P>(a) <I>Transmit frequency capability.</I> FRS transmitter types must not be capable of transmitting on any frequency or channel other than those listed in &#xA7; 95.563.</P>
+<P>(b) <I>Antenna.</I> The antenna of each FRS transmitter type must meet the following requirements.</P>
+<P>(1) The antenna must be a non-removable integral part of the FRS transmitter type.</P>
+<P>(2) The gain of the antenna must not exceed that of a half-wave dipole antenna.</P>
+<P>(3) The antenna must be designed such that the electric field of the emitted waves is vertically polarized when the unit is operated in the normal orientation.</P>
+<P>(c) <I>Digital data transmissions.</I> FRS transmitter types having the capability to transmit digital data must be designed to meet the following requirements.</P>
+<P>(1) FRS units may transmit digital data containing location information, or requesting location information from one or more other FRS or GMRS units, or containing a brief text message to another specific FRS or GMRS unit or units.</P>
+<P>(2) Digital data transmissions may be initiated by a manual action or command of the operator or on an automatic or periodic basis, and FRS units may be designed to automatically respond with location data upon receiving an interrogation request from another</P>
+<P>(3) Digital data transmissions must not exceed one second in duration.</P>
+<P>(4) Digital data transmissions must not be sent more frequently than one digital data transmission within a thirty-second period, except that an FRS unit may automatically respond to more than one interrogation request received within a thirty-second period.</P>
+<P>(d) <I>Packet mode.</I> FRS transmitter types must not be capable of transmitting data in the store-and-forward packet operation mode.</P>
+<P>(e) Effective September 30, 2019, no person shall manufacture or import hand-held portable radio equipment capable of operating under this subpart (FRS) and other licensed or licensed-by-rule services in this chapter (part 15 unlicensed equipment authorizations are permitted if consistent with part 15 rules).</P>
+<CITA TYPE="N">[82 FR 41104, Aug. 29, 2017, as amended at 86 FR 53565, Sept. 28, 2021]
+</CITA>
+</DIV8>
+
+<DIV8 N="95.589" TYPE="SECTION" hierarchy_metadata="{&quot;path&quot;:&quot;/on/_SUBSTITUTE_DATE_/title-47/section-95.589&quot;,&quot;citation&quot;:&quot;47 CFR 95.589&quot;}">
+<HEAD>&#xA7; 95.589 [Reserved]</HEAD>
+</DIV8>
+
+<DIV8 N="95.591" TYPE="SECTION" hierarchy_metadata="{&quot;path&quot;:&quot;/on/_SUBSTITUTE_DATE_/title-47/section-95.591&quot;,&quot;citation&quot;:&quot;47 CFR 95.591&quot;}">
+<HEAD>&#xA7; 95.591 Sales of FRS combination radios prohibited.</HEAD>
+<P>Effective September 30, 2019, no person shall sell or offer for sale hand-held portable radio equipment capable of operating under this subpart (FRS) and under any other licensed or licensed-by-rule radio services in this chapter (devices may be authorized under this subpart with part 15 unlicensed equipment authorizations).</P>
+</DIV8>
+
+<DIV8 N="95.593-95.699" TYPE="SECTION" hierarchy_metadata="{&quot;path&quot;:&quot;/on/_SUBSTITUTE_DATE_/title-47/section-95.593-95.699&quot;,&quot;citation&quot;:&quot;47 CFR 95.593-95.699&quot;}">
+<HEAD>&#xA7;&#xA7; 95.593-95.699 [Reserved]</HEAD>
+</DIV8>
+
+</DIV6>

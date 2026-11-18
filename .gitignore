@@ -66,6 +66,39 @@ server/temp
 .claude
 .codegraph
 .mcp.json
+.edge-qa-*/
+
+# Local emergency-library payloads. Keep manifests, checksums, source notes,
+# and quick-reference Markdown in git; never publish downloaded archives.
+resources/**/*.pdf
+resources/**/*.zim
+resources/**/*.pmtiles
+resources/**/*.zip
+resources/**/*.tar
+resources/**/*.gz
+resources/**/*.html
+resources/**/robots.txt
+
+# Launcher build products and abandoned candidates; source and icon stay public.
+launcher/*.exe
+launcher/bin/
+launcher/obj/
+
+# One-off browser captures and installer probes. The two final UI screenshots
+# referenced by the public documentation are explicitly retained below.
+easy-setup.html
+map-page.html
+map-extract-request.json
+verification-rag.txt
+nomad-ui-concepts-preview.html
+nomad-ui-concepts-preview.png
+nomad-ui-concepts.html
+ui-current-*.png
+ui-upgrade-*.png
+!ui-upgrade-live-final.png
+!ui-upgrade-docs-final.png
+kolibri-*.png
+wsl.conf.nomad
 
 # Frontend assets compiled code
 admin/public/assets

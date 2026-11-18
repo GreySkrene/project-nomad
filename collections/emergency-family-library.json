@@ -1,0 +1,207 @@
+{
+  "schema_version": 1,
+  "profile_id": "emergency-family-library",
+  "title": "Family Emergency Offline Library",
+  "snapshot_date": "2026-11-18",
+  "target_final_gib": 77,
+  "description": "A practical, source-first Project NOMAD library emphasizing medicine, disaster guidance, repair, food, and broad reference coverage while staying below a 100 GiB content budget.",
+  "notes": [
+    "Downloaded archives are not stored in this repository.",
+    "Kiwix snapshots are static and must not be treated as live alerts, evacuation orders, road closures, recalls, or weather reports.",
+    "The complete English Wikipedia mini edition provides breadth without images; the Best of Wikipedia maxi edition adds full-detail illustrated coverage for a smaller high-value subset.",
+    "Safety-critical procedures should be checked against the displayed original source. Local AI is optional and is not an authority."
+  ],
+  "resources": [
+    {
+      "priority": 1,
+      "category": "medical",
+      "title": "Wikipedia Medicine / WikiMed",
+      "filename": "wikipedia_en_medicine_maxi_2026-10.zim",
+      "url": "https://download.kiwix.org/zim/wikipedia/wikipedia_en_medicine_maxi_2026-10.zim",
+      "size_bytes": 1864210320,
+      "why": "Illustrated medical encyclopedia for offline reference; use professional guidance for treatment decisions."
+    },
+    {
+      "priority": 1,
+      "category": "medical",
+      "title": "MedlinePlus",
+      "filename": "medlineplus.gov_en_all_2025-01.zim",
+      "url": "https://download.kiwix.org/zim/zimit/medlineplus.gov_en_all_2025-01.zim",
+      "size_bytes": 1944841111,
+      "why": "Consumer health information from the U.S. National Library of Medicine."
+    },
+    {
+      "priority": 1,
+      "category": "medical",
+      "title": "NHS Medicines",
+      "filename": "nhs.uk_en_medicines_2025-12.zim",
+      "url": "https://download.kiwix.org/zim/zimit/nhs.uk_en_medicines_2025-12.zim",
+      "size_bytes": 16946183,
+      "why": "Compact medicine-use and safety reference from the UK National Health Service."
+    },
+    {
+      "priority": 1,
+      "category": "medical",
+      "title": "CDC Travelers' Health",
+      "filename": "wwwnc.cdc.gov_en_all_2024-11.zim",
+      "url": "https://download.kiwix.org/zim/zimit/wwwnc.cdc.gov_en_all_2024-11.zim",
+      "size_bytes": 178326622,
+      "why": "CDC infectious-disease and travel-health reference; stored guidance is not a live outbreak notice."
+    },
+    {
+      "priority": 1,
+      "category": "medical",
+      "title": "LibreTexts Medicine",
+      "filename": "libretexts.org_en_med_2025-01.zim",
+      "url": "https://download.kiwix.org/zim/libretexts/libretexts.org_en_med_2025-01.zim",
+      "size_bytes": 1192567339,
+      "why": "Detailed educational medical texts that complement concise consumer references."
+    },
+    {
+      "priority": 1,
+      "category": "medical",
+      "title": "Libre Pathology",
+      "filename": "librepathology_en_all_maxi_2026-09.zim",
+      "url": "https://download.kiwix.org/zim/other/librepathology_en_all_maxi_2026-09.zim",
+      "size_bytes": 95279611,
+      "why": "Illustrated pathology reference; primarily educational rather than a self-diagnosis tool."
+    },
+    {
+      "priority": 1,
+      "category": "medical",
+      "title": "Military Medicine",
+      "filename": "irp.fas.org_en_military-medicine_2026-10.zim",
+      "url": "https://download.kiwix.org/zim/zimit/irp.fas.org_en_military-medicine_2026-10.zim",
+      "size_bytes": 64986090,
+      "why": "Field and austere-medicine material kept as a secondary reference, not a substitute for current civilian clinical guidance."
+    },
+    {
+      "priority": 1,
+      "category": "medical",
+      "title": "OpenZIM Medicine Collection",
+      "filename": "zimgit-medicine_en_2024-08.zim",
+      "url": "https://download.kiwix.org/zim/other/zimgit-medicine_en_2024-08.zim",
+      "size_bytes": 70179585,
+      "why": "Small additional medicine collection retained for breadth and redundancy."
+    },
+    {
+      "priority": 1,
+      "category": "preparedness",
+      "title": "Ready.gov",
+      "filename": "www.ready.gov_en_2024-12.zim",
+      "url": "https://download.kiwix.org/zim/zimit/www.ready.gov_en_2024-12.zim",
+      "size_bytes": 2429921822,
+      "why": "Official U.S. civilian disaster-preparedness guidance across common hazards."
+    },
+    {
+      "priority": 2,
+      "category": "repair",
+      "title": "iFixit Repair Guides",
+      "filename": "ifixit_en_all_2025-12.zim",
+      "url": "https://download.kiwix.org/zim/ifixit/ifixit_en_all_2025-12.zim",
+      "size_bytes": 3570695757,
+      "why": "Illustrated repair procedures for electronics, appliances, vehicles, and household equipment."
+    },
+    {
+      "priority": 2,
+      "category": "repair",
+      "title": "Home Improvement Stack Exchange",
+      "filename": "diy.stackexchange.com_en_all_2026-10.zim",
+      "url": "https://download.kiwix.org/zim/stack_exchange/diy.stackexchange.com_en_all_2026-10.zim",
+      "size_bytes": 2086024326,
+      "why": "Searchable troubleshooting for plumbing, electrical, building, and household repairs; verify hazardous work against codes and manuals."
+    },
+    {
+      "priority": 2,
+      "category": "repair",
+      "title": "Motor Vehicle Maintenance & Repair Stack Exchange",
+      "filename": "mechanics.stackexchange.com_en_all_2026-10.zim",
+      "url": "https://download.kiwix.org/zim/stack_exchange/mechanics.stackexchange.com_en_all_2026-10.zim",
+      "size_bytes": 341672133,
+      "why": "Offline vehicle troubleshooting and maintenance reference."
+    },
+    {
+      "priority": 2,
+      "category": "repair",
+      "title": "Woodworking Stack Exchange",
+      "filename": "woodworking.stackexchange.com_en_all_2026-10.zim",
+      "url": "https://download.kiwix.org/zim/stack_exchange/woodworking.stackexchange.com_en_all_2026-10.zim",
+      "size_bytes": 106657287,
+      "why": "Practical material, tool, joinery, and repair knowledge."
+    },
+    {
+      "priority": 2,
+      "category": "food",
+      "title": "Seasoned Advice / Cooking Stack Exchange",
+      "filename": "cooking.stackexchange.com_en_all_2026-10.zim",
+      "url": "https://download.kiwix.org/zim/stack_exchange/cooking.stackexchange.com_en_all_2026-10.zim",
+      "size_bytes": 238098128,
+      "why": "Food preparation, preservation, substitution, and troubleshooting reference."
+    },
+    {
+      "priority": 2,
+      "category": "food",
+      "title": "FOSS Cooking",
+      "filename": "foss.cooking_en_all_2026-11.zim",
+      "url": "https://download.kiwix.org/zim/zimit/foss.cooking_en_all_2026-11.zim",
+      "size_bytes": 30424458,
+      "why": "Compact offline recipe collection useful for shelf-stable meal planning."
+    },
+    {
+      "priority": 2,
+      "category": "food",
+      "title": "Gardening & Landscaping Stack Exchange",
+      "filename": "gardening.stackexchange.com_en_all_2026-10.zim",
+      "url": "https://download.kiwix.org/zim/stack_exchange/gardening.stackexchange.com_en_all_2026-10.zim",
+      "size_bytes": 933097375,
+      "why": "Gardening, soil, plant-care, and landscape troubleshooting reference."
+    },
+    {
+      "priority": 3,
+      "category": "general-reference",
+      "title": "Complete English Wikipedia (Compact)",
+      "filename": "wikipedia_en_all_mini_2026-06.zim",
+      "url": "https://download.kiwix.org/zim/wikipedia/wikipedia_en_all_mini_2026-06.zim",
+      "size_bytes": 12531679311,
+      "why": "Whole-encyclopedia breadth within the storage budget; intentionally omits images and full detail."
+    },
+    {
+      "priority": 3,
+      "category": "general-reference",
+      "title": "Best of Wikipedia (With Images)",
+      "filename": "wikipedia_en_top_maxi_2026-06.zim",
+      "url": "https://download.kiwix.org/zim/wikipedia/wikipedia_en_top_maxi_2026-06.zim",
+      "size_bytes": 8357329540,
+      "why": "Full-detail illustrated coverage of roughly 50,000 high-value articles without the 119 GB cost of full illustrated English Wikipedia."
+    },
+    {
+      "priority": 3,
+      "category": "general-reference",
+      "title": "Wikibooks (With Images)",
+      "filename": "wikibooks_en_all_maxi_2026-10.zim",
+      "url": "https://download.kiwix.org/zim/wikibooks/wikibooks_en_all_maxi_2026-10.zim",
+      "size_bytes": 4739739728,
+      "why": "Full-detail illustrated textbooks and practical manuals; the image edition costs only about 1.1 GB more than the no-picture edition."
+    }
+  ],
+  "separate_content": {
+    "maps": {
+      "coverage": "United States, Canada, and Mexico",
+      "format": "PMTiles vector map",
+      "max_zoom": 15,
+      "measured_bytes": 33788916131,
+      "install_method": "Use NOMAD Maps to select the United States, Canada, and Mexico in one detailed extract.",
+      "limitations": "No satellite imagery, live closures, address search, or route calculation."
+    },
+    "kolibri": {
+      "channels": ["PhET", "Blockly Games", "School of Thought", "Khan Academy", "Sikana"],
+      "measured_gib": 6.3,
+      "status": "Installed; the Khan import is partial because 370 upstream files were skipped by the importer."
+    },
+    "official_documents": {
+      "manifest": "../RESOURCE_MANIFEST.csv",
+      "checksums": "../resources/official/SHA256SUMS.txt",
+      "status": "44 intentional files indexed in the local official-emergency collection; downloaded files are not redistributed by this repository."
+    }
+  }
+}

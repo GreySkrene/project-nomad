@@ -165,16 +165,21 @@ export default function Home(props: {
   props.system.services
     .filter(
       (service) =>
-        service.installed && (service.ui_location || service.custom_url) && !service.is_link_tile
+        service.installed &&
+        service.service_name !== SERVICE_NAMES.OLLAMA &&
+        (service.ui_location || service.custom_url) &&
+        !service.is_link_tile
     )
     .forEach((service) => {
+      const serviceLink = getServiceLink(service.ui_location || '', service.custom_url)
       items.push({
         // Inject custom AI Assistant name if this is the chat service
         label: service.service_name === SERVICE_NAMES.OLLAMA && aiAssistantName ? aiAssistantName : (service.friendly_name || service.service_name),
-        to:
-          service.ui_location || service.custom_url
-            ? getServiceLink(service.ui_location || '', service.custom_url)
-            : '#',
+        // Guest access is enabled for Kolibri. Link directly to Learn so the normal
+        // emergency-library path does not stop at Kolibri's optional sign-in screen.
+        to: service.service_name === SERVICE_NAMES.KOLIBRI_GEN2
+          ? new URL('/en/learn/', serviceLink).href
+          : serviceLink,
         target: '_blank',
         description:
           service.description ||
@@ -266,7 +271,22 @@ export default function Home(props: {
           </div>
         )
       }
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+      <section className="nomad-dashboard-intro">
+        <div>
+          <p className="nomad-kicker">FIELD SYSTEM / LOCAL ACCESS</p>
+          <h1>What do you need?</h1>
+          <p>Open a trusted offline library, map, manual, or system tool.</p>
+        </div>
+        <div className="nomad-readiness-card">
+          <span className="nomad-status-dot" />
+          <span>
+            <strong>Local emergency library</strong>
+            <small>Built for offline access</small>
+          </span>
+        </div>
+      </section>
+
+      <div className="nomad-tile-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
         {items.map((item) => {
           const isEasySetup = item.label === 'Easy Setup'
           const shouldHighlight = isEasySetup && shouldHighlightEasySetup
@@ -284,8 +304,8 @@ export default function Home(props: {
             <div
               className={
                 isLinkTile
-                  ? `relative rounded border-2 border-dashed ${tileColor.border} ${tileColor.bg} text-text-primary hover:bg-surface-secondary transition-colors shadow-sm h-48 flex flex-col items-center justify-center cursor-pointer text-center px-4`
-                  : 'relative rounded border-desert-green border-2 bg-desert-green hover:bg-transparent hover:text-text-primary text-white transition-colors shadow-sm h-48 flex flex-col items-center justify-center cursor-pointer text-center px-4'
+                  ? `nomad-command-tile nomad-command-tile--link relative border-2 border-dashed ${tileColor.border} ${tileColor.bg} text-text-primary transition-colors h-48 flex flex-col items-center justify-center cursor-pointer text-center px-4`
+                  : 'nomad-command-tile relative border-2 h-48 flex flex-col items-center justify-center cursor-pointer text-center px-4'
               }
             >
               {isLinkTile && (
@@ -381,6 +401,12 @@ export default function Home(props: {
           )
         })}
 
+        <div className="nomad-command-tile nomad-command-tile--paused relative border-2 h-48 flex flex-col items-center justify-center text-center px-4" aria-disabled="true">
+          <IconWifiOff size={40} />
+          <h3 className="font-bold text-xl mt-2">AI Assistant Paused</h3>
+          <p className="text-sm mt-1">Direct libraries, maps, and official sources remain available</p>
+        </div>
+
         {/* Add-a-link affordance, last in the grid so it never displaces an app. */}
         <button
           type="button"
@@ -388,7 +414,7 @@ export default function Home(props: {
             setEditingTile(null)
             setLinkModalOpen(true)
           }}
-          className="rounded border-2 border-dashed border-border-default bg-transparent text-text-muted hover:border-desert-green hover:text-text-primary transition-colors h-48 flex flex-col items-center justify-center cursor-pointer text-center px-4"
+          className="nomad-command-tile nomad-command-tile--add border-2 border-dashed h-48 flex flex-col items-center justify-center cursor-pointer text-center px-4"
         >
           <IconPlus size={40} />
           <h3 className="font-bold text-xl mt-2">Add a Link</h3>

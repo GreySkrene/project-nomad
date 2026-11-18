@@ -1,0 +1,114 @@
+﻿[
+    {
+        "id":  "earthquake-salt-lake",
+        "question":  "What should I do after a major earthquake in the Salt Lake Valley? Give concise immediate actions and note which hazards are specific to this region. Use only retrieved official-emergency sources; clearly label anything missing.",
+        "elapsedSeconds":  26.27,
+        "done":  true,
+        "doneReason":  "stop",
+        "content":  "**Immediate Actions After a Major Earthquake in the Salt Lake Valley (Based on Official Emergency Sources):**\n\n1. **DROP, COVER, and HOLD ON**  \n   Immediately drop to your hands and knees, take cover under a sturdy piece of furniture (e.g., a table), and hold on until the shaking stops. This is the primary action to protect yourself from falling debris.\n\n2. **Check for Injuries and Provide First Aid**  \n   After the shaking stops, check yourself and others for injuries. Do not re-enter damaged buildings—many structures may be unsafe.\n\n3. **Move to a Safe Location**  \n   If you are in a building that is damaged or unstable, evacuate immediately. Avoid damaged or collapsed structures.  \n   *Note: Older unreinforced masonry buildings (URMs)—common in Salt Lake Valley—are at high risk of collapse and should be avoided.*\n\n4. **Stay Informed and Follow Official Alerts**  \n   Listen to emergency broadcasts (e.g., NOAA Weather Radio, local radio, or emergency alerts) for updates on aftershocks, evacuations, and recovery efforts.\n\n5. **Check on Family and Neighbors**  \n   Ensure all family members and neighbors are safe. Communicate using alternative methods if cell service is lost.\n\n6. **Avoid Using Gas, Electricity, or Water Until Inspected**  \n   Do not attempt to use gas, electricity, or water until officials confirm it is safe. Gas leaks or electrical faults can ignite fires.\n\n7. **Be Aware of Secondary Hazards Specific to the Salt Lake Valley Region:**  \n   - **Liquefaction**: Can occur in water-saturated soils, especially in areas with recent or ongoing precipitation. This can cause ground surface to behave like a liquid, leading to foundation failure.  \n   - **Slope failure and subsidence**: Common in areas with steep terrain or clay-rich soils, particularly near the Wasatch Front.  \n   - **Flooding**: Earthquake-induced landslides or dam failures can lead to localized flooding.  \n   - **Avalanches**: In mountainous areas adjacent to the valley, such as the Wasatch Range, earthquake shaking can trigger or accelerate avalanches.  \n   - **Valley fever risk**: Though not directly caused by earthquakes, dust from disturbed soil (e.g., after landslides) can increase exposure to *Valley fever* spores in the region.\n\n8. **Prepare for Utility Disruptions**  \n   - Water and power may remain off for days or weeks.  \n   - A major Wasatch Fault event could leave up to 330,000 homes without water for three months.  \n   - Recovery of utilities and infrastructure may take months.  \n\n9. **Have an Emergency Kit Ready**  \n   As recommended in the *Utah Seismic Safety Commission’s \"Putting Down Roots in Earthquake Country\"* guide, maintain a 72- or 96-hour emergency kit with water, non-perishable food, first aid supplies, flashlights, batteries, and a radio.\n\n10. **Avoid Damaged Buildings**  \n   Do not enter buildings that show cracks, tilting, or signs of collapse. Older unreinforced masonry buildings (URMs), including homes and schools, are especially vulnerable and may pose life-threatening risks.\n\n*Note: Information on secondary hazards such as liquefaction and slope failure is derived from the Utah Enhanced State Hazard Mitigation Plan and geologic studies referenced in official sources. Specific regional hazards like avalanches and valley fever are noted in the context of the intermountain region, including the Salt Lake Valley.*\n\n*Missing: Specific guidance on evacuation routes, shelter locations, or coordination with local emergency services is not provided in the retrieved sources.*",
+        "thinking":  null,
+        "sources":  [
+                        {
+                            "title":  "Putting-Down-Roots-Utah-2nd-Edition-2022.pdf-8e8482836248.pdf",
+                            "source":  "/app/storage/kb_uploads/Putting-Down-Roots-Utah-2nd-Edition-2022.pdf-8e8482836248.pdf"
+                        },
+                        {
+                            "title":  "Utah-Enhanced-State-Hazard-Mitigation-Plan-2024.pdf-157b425529c4.pdf",
+                            "source":  "/app/storage/kb_uploads/Utah-Enhanced-State-Hazard-Mitigation-Plan-2024.pdf-157b425529c4.pdf"
+                        },
+                        {
+                            "title":  "Salt-Lake-County-MJHMP-2025.pdf-c347976819c3.pdf",
+                            "source":  "/app/storage/kb_uploads/Salt-Lake-County-MJHMP-2025.pdf-c347976819c3.pdf"
+                        }
+                    ],
+        "error":  null
+    },
+    {
+        "id":  "boil-water",
+        "question":  "How do I safely purify water when there is a boil-water advisory? Give concise steps for boiling and, only if the source supports it, emergency disinfection. Explain limits. Use only retrieved official-emergency sources; clearly label anything missing.",
+        "elapsedSeconds":  22.02,
+        "done":  true,
+        "doneReason":  "stop",
+        "content":  "**Safely Purifying Water During a Boil-Water Advisory**\n\nWhen a boil-water advisory is in effect, follow these steps to safely purify water using official emergency guidelines:\n\n---\n\n### 🔥 **Boiling Water (Recommended Method)**  \n*Boiling kills bacteria, viruses, and protozoa — the most common disease-causing microorganisms.*\n\n**Steps:**  \n1. **If water is cloudy**, let it sit for 30 minutes to allow particles to settle. Then filter it through a clean cloth, paper towel, or coffee filter.  \n2. **Bring water to a rolling boil** for **1 minute**.  \n   - At elevations **above 6,500 feet (2,000 meters)**, boil for **3 minutes**.  \n3. **Let the water cool naturally** and store it in clean, covered containers.  \n4. *(Optional)* To improve taste, add one pinch of salt per quart (liter) of water or pour the water between clean containers several times to reduce flatness.\n\n✅ *Boiling is effective against bacteria, viruses, and protozoa.*  \n❌ *Does not remove heavy metals, salts, or other chemicals.*\n\n---\n\n### 🚑 **Emergency Disinfection with Household Bleach (If Boiling Is Not Possible)**  \n*Use only unscented, regular chlorine bleach (contains 6% or 8.25% sodium hypochlorite). Do not use scented or colored bleaches.*\n\n**Steps:**  \n1. **If water is cloudy**, let it settle and filter through a clean cloth, paper towel, or coffee filter.  \n2. **Add bleach** to the water:  \n   - **8 drops (or ~1/8 tsp)** of **6% bleach** per gallon (3.8 liters) of water.  \n   - **16 drops (or ~¼ tsp)** of **6% bleach** for cloudy or cold water.  \n   - For **8.25% bleach**, use **6 drops per gallon**.  \n3. **Stir well** and let the water stand for **30 minutes**.  \n4. The water should have a **slight chlorine odor**. If not, repeat the dose and let stand for another 15 minutes.  \n5. If the chlorine taste is too strong, **pour the water from one clean container to another** and let it stand for a few hours before use.\n\n✅ *This method kills bacteria, viruses, and some protozoa.*  \n❌ *Does not remove heavy metals, salts, or other chemicals.*  \n❌ *Not effective against *Cryptosporidium* if using only chlorine; a filter certified for cyst/oocyst reduction is needed.*  \n\n\u003e ⚠️ **Note**: This method is only for emergency use when boiling is not possible. Do not rely on it for long-term or repeated use.\n\n---\n\n### ⚠️ **Limits of These Methods**  \n- **Boiling and bleach disinfection do not remove chemical contaminants** (e.g., lead, pesticides, nitrates).  \n- **Boiling and filters do not remove parasites like *Giardia* or *Cryptosporidium* unless using a certified filter with disinfectant** (e.g., chlorine dioxide).  \n- **Most portable filters do not remove bacteria or viruses** — use only filters labeled to remove parasites (e.g., \"cyst\" and \"oocyst\" reduction).  \n\n---\n\n**Source**: U.S. Environmental Protection Agency (EPA), Office of Water; Centers for Disease Control and Prevention (CDC) – *Making Water Safe During Emergencies*  \n(www.cdc.gov/healthywater/emergency/making-water-safe.html; www.epa.gov/office-of-water)  \n\n\u003e *Always follow instructions from local authorities during a boil-water advisory.*",
+        "thinking":  null,
+        "sources":  [
+                        {
+                            "title":  "EPA-Emergency-Disinfection-Drinking-Water-2017.pdf-6304a95b3625.pdf",
+                            "source":  "/app/storage/kb_uploads/EPA-Emergency-Disinfection-Drinking-Water-2017.pdf-6304a95b3625.pdf"
+                        },
+                        {
+                            "title":  "CDC-Make-Water-Safe-During-Emergency-2025.pdf-dc4f9d116e89.pdf",
+                            "source":  "/app/storage/kb_uploads/CDC-Make-Water-Safe-During-Emergency-2025.pdf-dc4f9d116e89.pdf"
+                        },
+                        {
+                            "title":  "CDC-Backcountry-Water-Treatment.pdf-ab7ca21247f6.pdf",
+                            "source":  "/app/storage/kb_uploads/CDC-Backcountry-Water-Treatment.pdf-ab7ca21247f6.pdf"
+                        }
+                    ],
+        "error":  null
+    },
+    {
+        "id":  "toddler-choking",
+        "question":  "What should I do if my toddler is choking? Give concise emergency steps, distinguish severe airway blockage from effective coughing, and say when to call emergency services. Use only retrieved official-emergency sources; clearly label anything missing.",
+        "elapsedSeconds":  16.4,
+        "done":  true,
+        "doneReason":  "stop",
+        "content":  "**What to do if your toddler is choking (age 1 year or older):**\n\n### ✅ Distinguish between effective coughing and severe airway blockage:\n- **Effective coughing**: The toddler can cough forcefully, speak, or cry. This indicates the airway is not fully blocked. **Do not intervene**—encourage coughing and watch continuously.\n- **Severe airway blockage**: The toddler **cannot speak, cry, or cough effectively**, shows **no air movement**, has a **color change** (bluish), or is **unresponsive**. This is a life-threatening emergency.\n\n---\n\n### 🚑 Emergency Steps for Severe Choking (Toddler, age 1+):\n\n1. **Call 911 or ask someone else to call emergency services** immediately.\n2. **Give 5 back blows** between the shoulder blades, followed by **5 abdominal thrusts** (Heimlich maneuver) — perform with your fist just below the rib cage, on the abdomen.\n3. **Alternate 5 back blows and 5 abdominal thrusts** in sets until:\n   - The object comes out, or  \n   - The toddler becomes unresponsive.\n4. **If unresponsive**:\n   - Lower the toddler safely.\n   - Begin **CPR** (chest compressions and rescue breaths).\n   - **Do not perform blind finger sweeps** — remove an object only if you can see it.\n5. **Continue CPR** until emergency medical services arrive or the toddler begins to breathe normally.\n\n\u003e 🔍 *Note: The 2025 AHA guidelines do not recommend abdominal thrusts for infants under 1 year. For toddlers (1 year and older), abdominal thrusts are appropriate.*\n\n---\n\n### When to Call Emergency Services:\n- **Immediately** if the toddler:\n  - Cannot speak, cry, or cough,\n  - Shows no signs of breathing or movement,\n  - Is turning blue or pale,\n  - Is unresponsive after attempts at back blows and abdominal thrusts.\n\n\u003e ⚠️ *If the toddler can still cough or breathe, do not perform abdominal thrusts—watch closely and encourage coughing.*\n\n---\n\n**Source**: American Heart Association, *2025 Guidelines for CPR and Emergency Cardiovascular Care*, published 2025-10-22.  \n*All steps are based on official AHA guidelines for children aged 1 year and older.*",
+        "thinking":  null,
+        "sources":  [
+                        {
+                            "title":  "AHA-2025-CPR-CHOKING-QUICK-REFERENCE.md-01e7565ec421.md",
+                            "source":  "/app/storage/kb_uploads/AHA-2025-CPR-CHOKING-QUICK-REFERENCE.md-01e7565ec421.md"
+                        },
+                        {
+                            "title":  "WHO-Managing-Complications-Pregnancy-Childbirth-2017.pdf-c835c3002e84.pdf",
+                            "source":  "/app/storage/kb_uploads/WHO-Managing-Complications-Pregnancy-Childbirth-2017.pdf-c835c3002e84.pdf"
+                        }
+                    ],
+        "error":  null
+    },
+    {
+        "id":  "winter-heating",
+        "question":  "How do I safely heat an apartment during a winter power outage? Give concise actions and carbon-monoxide/fire warnings. Use only retrieved official-emergency sources; clearly label anything missing.",
+        "elapsedSeconds":  15.18,
+        "done":  true,
+        "doneReason":  "stop",
+        "content":  "To safely heat an apartment during a winter power outage, follow these actions based on official emergency guidance:\n\n### **Concise Safety Actions:**\n- **Use only battery-powered or hand-crank heaters** (e.g., flashlights, lanterns) — **do not use gas stoves, candles, or portable heaters indoors** unless properly used and vented.  \n- **If using a portable heater**, place it on a stable, non-flammable surface, away from walls and flammable materials, and keep it at least 3 feet from any combustible objects.  \n- **Never use a vehicle engine indoors**, even if the garage door is open. This creates a dangerous carbon monoxide (CO) buildup.  \n- **Keep doors and windows closed** to retain heat, but ensure ventilation is not compromised to prevent CO accumulation.  \n- **Check for carbon monoxide leaks** — install and test CO alarms in your apartment.  \n- **Unplug appliances** and use surge protectors to prevent electrical damage during outages.  \n\n### **Carbon Monoxide (CO) and Fire Warnings:**\n- **Carbon Monoxide Warning**:  \n  - **Never operate generators, gas stoves, ovens, or grills indoors** — even in a garage with the door open.  \n  - Use **carbon monoxide alarms** in your apartment and ensure they are tested regularly.  \n  - CO is odorless and colorless — symptoms include headache, dizziness, and nausea. If you suspect CO exposure, evacuate immediately and call emergency services.  \n\n- **Fire Safety**:  \n  - **Do not use candles or gas stoves to heat your apartment**.  \n  - If using a fireplace or wood-burning stove, follow safe operation procedures: keep it in a well-ventilated area, ensure it is clean, and never leave it unattended.  \n  - Keep fire extinguishers accessible and know how to use them.  \n\n\u003e **Note**: Official guidance (e.g., FEMA, USFA) emphasizes that **no indoor heating should occur using gas appliances, generators, or candles** during a power outage. For safety, use only battery-powered devices and ensure CO alarms are functioning.\n\n*Source: FEMA, USFA, Ready.gov/power-outages; carbon monoxide and fire safety principles from official emergency preparedness materials.*  \n\n*Missing detail*: Specific guidance for apartment-sized units using electric space heaters during power outages is not provided in the retrieved sources. General principles apply, but a dedicated source for apartment heating during outages is not available in the context.*",
+        "thinking":  null,
+        "sources":  [
+                        {
+                            "title":  "FEMA-Power-Outage-Info-Sheet-2023.pdf-3d80505b7ace.pdf",
+                            "source":  "/app/storage/kb_uploads/FEMA-Power-Outage-Info-Sheet-2023.pdf-3d80505b7ace.pdf"
+                        },
+                        {
+                            "title":  "Putting-Down-Roots-Utah-2nd-Edition-2022.pdf-8e8482836248.pdf",
+                            "source":  "/app/storage/kb_uploads/Putting-Down-Roots-Utah-2nd-Edition-2022.pdf-8e8482836248.pdf"
+                        },
+                        {
+                            "title":  "USFA-Portable-Generator-Safety.pdf-5add8083ae2a.pdf",
+                            "source":  "/app/storage/kb_uploads/USFA-Portable-Generator-Safety.pdf-5add8083ae2a.pdf"
+                        }
+                    ],
+        "error":  null
+    },
+    {
+        "id":  "rexburg-hazards",
+        "question":  "What are the main earthquake and volcanic hazards near Rexburg, Idaho? Distinguish durable hazard information from live alert status. Use only retrieved official-emergency sources; clearly label anything missing.",
+        "elapsedSeconds":  24.26,
+        "done":  true,
+        "doneReason":  "stop",
+        "content":  "**Earthquake Hazards Near Rexburg, Idaho**\n\n- **Primary Earthquake Hazard**:  \n  The area around Rexburg, Idaho, lies within a seismically active region of the western United States, particularly influenced by the Yellowstone Tectonic Parabola. Historical records indicate that earthquakes occur frequently throughout Idaho, with most being small and undetectable. However, larger events—such as those with magnitudes of 6.5 to 7.5—can occur due to fault movement in the region.  \n  According to U.S. Geological Survey (USGS) data, central and southeastern Idaho, including areas near Rexburg, are classified as medium to high seismic hazard zones. The 2014 U.S. Geological Survey Seismic Hazard Map (Figure 9-3) shows that the probability of ground shaking (measured as PGA—Peak Ground Acceleration) exceeding a certain threshold (10% probability in 50 years) is higher in this region compared to northwestern or southwestern Idaho.\n\n- **Historical Earthquakes**:  \n  A notable 4.4-magnitude earthquake occurred on April 2019, 6 miles northeast of Lima, Montana, which was felt in Rexburg, approximately 70 miles away. No damage was reported. Additionally, in September 2017, a sequence of 50 minor earthquakes occurred in nearby Caribou County, Southeast Idaho—this frequency in a short time span is considered unprecedented for the area.\n\n- **Risk Estimate**:  \n  The U.S. Geological Survey (USGS) and the State of Idaho Hazard Mitigation Plan classify the likelihood of a damaging earthquake occurring within Madison County (which includes Rexburg) as **10–20 times every 10,000 years**. This is consistent with the \"Not Probable at All / Not Frequent at All\" designation in the 2008 Hazard Mitigation Plan due to the extremely low frequency of significant events.  \n  *Note: This is a long-term probabilistic risk estimate, not a real-time alert.*\n\n- **Damage Potential (Estimated)**:  \n  Based on FEMA’s HAZUS Loss Estimate Model, a magnitude 7.0 earthquake in Madison County (including Rexburg) would result in:  \n  - **Building Damage**:  \n    - Slight: ~105.78 single-family homes  \n    - Moderate: ~16.73 single-family homes  \n    - Extensive: ~0.99 single-family homes  \n    - Complete: negligible  \n  - **Essential Facilities**:  \n    - Hospitals: 1  \n    - Schools: 18  \n    - Police stations: 3  \n    - Fire stations: 2  \n    - Emergency Operations Centers (EOCs): 2  \n  - **Utility System Damage**:  \n    Damage to potable water, power, and communication systems is expected, though specific figures are not fully provided in the available context.\n\n**Volcanic Hazards Near Rexburg, Idaho**\n\n- **Volcanic Risk**:  \n  There are **no known active or potentially active volcanic hazards** near Rexburg, Idaho. The region lies outside of the major volcanic zones such as the Yellowstone Volcanic Field, which is located approximately 80–100 miles to the south and east.  \n  While the Yellowstone Tectonic Parabola is associated with seismic activity, it is not linked to active volcanic eruptions in the immediate vicinity of Rexburg.  \n  The U.S. Geological Survey and Idaho state emergency planning documents do not list volcanic hazards in or near Rexburg.\n\n**Durable Hazard Information vs. Live Alert Status**\n\n| Category | Information |\n|--------|------------|\n| **Durable Hazard Information** | - Earthquake hazard is medium to high in central/southeastern Idaho. \u003cbr\u003e - Historical seismic activity includes a 4.4-magnitude event in 2019 and a sequence of 50 minor quakes in 2017. \u003cbr\u003e - A magnitude 7.0 earthquake could cause moderate to extensive building damage and disrupt essential facilities. \u003cbr\u003e - Volcanic hazards are absent near Rexburg. \u003cbr\u003e - Long-term probability of a damaging earthquake is low (10–20 times in 10,000 years). |\n| **Live Alert Status** | ❌ **No active earthquake or volcanic alert** is currently issued for Rexburg, Idaho. \u003cbr\u003e - The U.S. Geological Survey does not issue live alerts for Rexburg based on current data. \u003cbr\u003e - No federal disaster or emergency declarations have been issued for earthquake events in the area since 2018 (as per the 2023 Idaho Hazard Mitigation Plan). |\n\n**Sources**:  \n- U.S. Geological Survey (USGS) Seismic Hazard Maps (2014)  \n- State of Idaho Hazard Mitigation Plan (2023)  \n- USGS Earthquake Database and Historical Records  \n\n*Note: All information is derived from official U.S. Geological Survey and Idaho state emergency planning sources. No real-time alerts or active volcanic activity are reported for Rexburg.*",
+        "thinking":  null,
+        "sources":  [
+                        {
+                            "title":  "Madison-County-Multi-Hazard-Mitigation-Plan-2019.pdf-b05bd34bb150.pdf",
+                            "source":  "/app/storage/kb_uploads/Madison-County-Multi-Hazard-Mitigation-Plan-2019.pdf-b05bd34bb150.pdf"
+                        },
+                        {
+                            "title":  "Idaho-State-Hazard-Mitigation-Plan-2023.pdf-1c9b2848048e.pdf",
+                            "source":  "/app/storage/kb_uploads/Idaho-State-Hazard-Mitigation-Plan-2023.pdf-1c9b2848048e.pdf"
+                        }
+                    ],
+        "error":  null
+    }
+]

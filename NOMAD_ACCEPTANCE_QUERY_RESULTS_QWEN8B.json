@@ -1,0 +1,51 @@
+﻿[
+    {
+        "id":  "toddler-choking",
+        "elapsedSeconds":  29.27,
+        "content":  "If your toddler is choking:  \n\n### **Severe Airway Blockage (Immediate Action)**  \n1. **Call 911** immediately if the child cannot speak, cry, or cough effectively; shows signs of distress (e.g., weak breaths, color change).  \n2. Perform **5 back blows** between the shoulder blades.  \n3. Follow with **5 abdominal thrusts** (Heimlich maneuver).  \n4. Repeat cycles until the object is expelled or the child becomes unresponsive.  \n5. If unresponsive, begin **hands-only CPR** (30 compressions followed by 2 breaths) and use an AED if available.  \n\n### **Effective Coughing (Do Not Intervene)**  \nIf the child can **cough forcefully**, **speak**, or **breathe normally**, encourage them to continue coughing. Do not perform back blows or thrusts unless the obstruction worsens.  \n\n### **When to Call Emergency Services**  \n- If the object is not dislodged after **5 cycles** of back blows and abdominal thrusts.  \n- If the child becomes **unresponsive** or stops breathing.  \n- If the child shows signs of **severe distress** (e.g., cyanosis, inability to breathe).  \n\n**Note**: Always follow dispatcher instructions if available. Avoid blind finger sweeps or using abdominal thrusts on infants.  \n\n---  \n*Sources: American Heart Association, 2025 Guidelines for CPR and Emergency Cardiovascular Care.*",
+        "sources":  [
+                        {
+                            "title":  "AHA-2025-CPR-CHOKING-QUICK-REFERENCE.md-01e7565ec421.md",
+                            "source":  "/app/storage/kb_uploads/AHA-2025-CPR-CHOKING-QUICK-REFERENCE.md-01e7565ec421.md"
+                        },
+                        {
+                            "title":  "WHO-Managing-Complications-Pregnancy-Childbirth-2017.pdf-c835c3002e84.pdf",
+                            "source":  "/app/storage/kb_uploads/WHO-Managing-Complications-Pregnancy-Childbirth-2017.pdf-c835c3002e84.pdf"
+                        }
+                    ]
+    },
+    {
+        "id":  "winter-heating",
+        "elapsedSeconds":  28.62,
+        "content":  "To safely heat an apartment during a winter power outage:  \n\n### **Concise Actions**  \n- **Use battery-powered lights or flashlights** instead of candles or gas stoves for illumination (Context 1).  \n- **Avoid using gas stoves, ovens, grills, or dryers for heating** (Context 1).  \n- **Keep freezers and refrigerators closed** to preserve food; a full freezer lasts ~48 hours without power (Context 1).  \n- **Unplug non-essential appliances** to prevent electrical surges (Context 1).  \n\n### **Carbon Monoxide \u0026 Fire Warnings**  \n- **Never use generators indoors or in enclosed spaces** (e.g., garages, apartments); operate them outdoors in well-ventilated areas (Context 3).  \n- **Install carbon monoxide alarms** and ensure they are functional (Context 3).  \n- **Do not fuel a generator while it is running** to avoid fire hazards (Context 3).  \n\n### **Missing Information**  \n- Specific guidance on using space heaters or alternative heating methods is **not provided** in the retrieved contexts.  \n- No details on emergency shelter options or prolonged outage preparedness are included.  \n\nAlways prioritize live verification for real-time safety updates.",
+        "sources":  [
+                        {
+                            "title":  "FEMA-Power-Outage-Info-Sheet-2023.pdf-3d80505b7ace.pdf",
+                            "source":  "/app/storage/kb_uploads/FEMA-Power-Outage-Info-Sheet-2023.pdf-3d80505b7ace.pdf"
+                        },
+                        {
+                            "title":  "Putting-Down-Roots-Utah-2nd-Edition-2022.pdf-8e8482836248.pdf",
+                            "source":  "/app/storage/kb_uploads/Putting-Down-Roots-Utah-2nd-Edition-2022.pdf-8e8482836248.pdf"
+                        },
+                        {
+                            "title":  "USFA-Portable-Generator-Safety.pdf-5add8083ae2a.pdf",
+                            "source":  "/app/storage/kb_uploads/USFA-Portable-Generator-Safety.pdf-5add8083ae2a.pdf"
+                        }
+                    ]
+    },
+    {
+        "id":  "rexburg-hazards",
+        "elapsedSeconds":  38.48,
+        "content":  "## Earthquake and Volcanic Hazards Near Rexburg, Idaho  \n\n### **Earthquake Hazards**  \n- **Historical Activity**:  \n  - A **4.4-magnitude earthquake** occurred in 2019 near Lima, Montana, but was felt in Rexburg (70 miles away). No damage reports were recorded.  \n  - In 2017, **50 minor earthquakes** were felt in Southeast Idaho (near Rexburg) over a short period, which is unusual for the area.  \n\n- **Hazard Risk Assessment**:  \n  - The **USGS earthquake hazard map** shows that Madison County (where Rexburg is located) has a **low to moderate risk** of damaging earthquakes. The probability of a damaging event in the county is estimated at **10–20 times every 10,000 years**.  \n  - The **State of Idaho Hazard Mitigation Plan** notes that while Idaho experiences hundreds of small earthquakes yearly, most are too minor to feel. Larger events (e.g., magnitude 6.9 or 7.3) occur less frequently but can cause significant damage.  \n\n- **Previous Major Events**:  \n  - The **1983 Borah Peak earthquake** (magnitude 6.9) and the **1959 Hebgen Lake earthquake** (magnitude 7.3) caused fatalities and structural damage, though their epicenters were in remote areas. These events highlight potential risks for larger quakes in Idaho.  \n\n### **Volcanic Hazards**  \n- **No Direct Volcanic Threat**:  \n  - The retrieved context does not mention any active volcanoes or volcanic hazards near Rexburg, Idaho. The USGS and Idaho Hazard Mitigation Plan focus primarily on seismic activity rather than volcanic risks in this region.  \n\n---\n\n### **Durable Hazard Information vs. Live Alerts**  \n- **Durable Hazard Information**:  \n  - Historical earthquake data (e.g., 2017 minor quakes, 1983/1959 events).  \n  - USGS hazard maps and statistical risk estimates (e.g., 10–20 damaging earthquakes per 10,000 years in Madison County).  \n\n- **Live Alert Status**:  \n  - **No current alerts or real-time updates** are provided in the retrieved sources. Live status (e.g., active faults, ongoing seismic activity) cannot be confirmed without real-time data.  \n\n---\n\n### **Missing Information**  \n- Specific details about **volcanic hazards** near Rexburg are not included in the retrieved context.  \n- Current **live alert statuses** (e.g., active fault lines, real-time seismic monitoring) are unavailable from the provided sources.  \n\nFor urgent updates, consult official sources like the [USGS Earthquake Hazards Program](https://earthquake.usgs.gov/) or local emergency management agencies.",
+        "sources":  [
+                        {
+                            "title":  "Madison-County-Multi-Hazard-Mitigation-Plan-2019.pdf-b05bd34bb150.pdf",
+                            "source":  "/app/storage/kb_uploads/Madison-County-Multi-Hazard-Mitigation-Plan-2019.pdf-b05bd34bb150.pdf"
+                        },
+                        {
+                            "title":  "Idaho-State-Hazard-Mitigation-Plan-2023.pdf-1c9b2848048e.pdf",
+                            "source":  "/app/storage/kb_uploads/Idaho-State-Hazard-Mitigation-Plan-2023.pdf-1c9b2848048e.pdf"
+                        }
+                    ]
+    }
+]

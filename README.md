@@ -14,6 +14,33 @@
 
 Project NOMAD is a self-contained, offline-first knowledge and education server packed with critical tools, knowledge, and AI to keep you informed and empowered — anytime, anywhere.
 
+> [!NOTE]
+> **About this fork:** this repository also contains a tested, storage-bounded
+> family emergency profile for Project NOMAD. It adds a Night Operations + Field
+> Manual interface, a Windows launcher, fixes for large multi-country map
+> extraction, a source-first emergency workflow, and a reproducible curated
+> library. Downloaded maps, ZIM archives, PDFs, credentials, and other personal
+> runtime data are not included. Start with the
+> [Family Emergency Library Profile](EMERGENCY_LIBRARY_PROFILE.md), the
+> [measured setup report](NOMAD_SETUP_REPORT.md), and the
+> [machine-readable library list](collections/emergency-family-library.json).
+
+![Night Operations emergency dashboard](ui-upgrade-live-final.png)
+
+### Emergency-profile quick start
+
+After installing and starting NOMAD, preview or queue the curated Kiwix
+selection through NOMAD's supported API:
+
+```bash
+python3 install/install_emergency_library.py --dry-run
+python3 install/install_emergency_library.py --wait
+```
+
+The final tested content target is approximately 77 GiB, including a detailed
+USA/Canada/Mexico vector map. Safety-critical answers prioritize original
+official sources; local AI is optional and is not treated as an authority.
+
 ## Installation & Quickstart
 Project NOMAD can be installed on any Debian-based operating system (we recommend Ubuntu 26.04 LTS; 24.04 LTS and Debian 12 are also supported). Installation is completely terminal-based, and all tools and resources are designed to be accessed through the browser, so there's no need for a desktop environment if you'd rather setup NOMAD as a "server" and access it through other clients.
 

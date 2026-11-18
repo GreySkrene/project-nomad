@@ -131,8 +131,8 @@ export default function ChatMessageBubble({ message, onContinue }: ChatMessageBu
         </div>
       )}
       {message.role === 'assistant' && message.sources && message.sources.length > 0 && (
-        <div className="mt-3 border-t border-border-subtle pt-2 text-xs text-text-primary">
-          <div className="mb-1 font-medium">Sources</div>
+        <div className="field-source-block mt-3 pt-3 text-xs">
+          <div className="mb-1 font-bold uppercase tracking-wider">Source record</div>
           <ul className="space-y-0.5">
             {message.sources.map((src, idx) => (
               <li key={idx}>

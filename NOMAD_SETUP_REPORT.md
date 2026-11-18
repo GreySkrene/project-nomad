@@ -1,0 +1,158 @@
+# Project NOMAD Offline Emergency System — Setup Report
+
+Report date: 2026-11-16 (America/Denver)  
+Status: core services and content are installed; safety acceptance and fully disconnected/reboot testing are not complete
+
+## 1. Host and installation
+
+| Item | Verified value |
+|---|---|
+| Laptop | Lenovo Legion 82UG |
+| Operating system | Windows 11 Home, build 26200 |
+| Processor | AMD Ryzen 9 6900HX, 8 cores / 16 threads |
+| Memory | 16 GB DDR5 |
+| Graphics | AMD Radeon RX 6800S; Windows reported about 4 GB dedicated VRAM |
+| Project NOMAD | v1.35.1, commit `54ee30a44902e5c252b477f8685c26ec3064ab72` |
+| Linux/container host | Ubuntu 24.04.5 LTS under WSL2; Docker Engine 29.9.3; Compose v5.7.0 |
+| Local AI host | Windows-native LM Studio, CLI 1.3.3; NOMAD integration paused at user request |
+
+NOMAD is reached at `http://localhost:8080`. On 2026-11-13 its health endpoint returned `{"status":"ok"}` and its LM Studio remote-status endpoint returned `configured: true, connected: true`.
+
+## 2. Installed services
+
+| Component | Version/image | Verified state | Purpose |
+|---|---|---|---|
+| NOMAD admin | Local UI build based on Project NOMAD v1.35.1 | Healthy | Main interface and service control |
+| MySQL | 8.0 container | Healthy | NOMAD database |
+| Redis | 7-alpine container | Healthy | Queue/cache |
+| Qdrant | v1.16 container | Running; RAG health online | Vector retrieval |
+| Kiwix Server | 3.8.1 | Running on port 8090 | Offline ZIM libraries |
+| Kolibri Gen 2 | 0.19.4 | Running on ports 8310/8311; guest access enabled | Offline education without a required learner login |
+| FlatNotes | 5.5.4 | Running on port 8200 | Offline notes |
+| Offline maps | Protomaps/PMTiles | Installed | Pan/zoom vector map |
+| LM Studio | Windows port 1234 | Connected from NOMAD | Local and LM Link inference/embeddings |
+
+All ten NOMAD containers reported up for approximately 46 hours when checked. Kiwix 3.8.2, Kolibri 0.19.5, and FlatNotes 5.5.5 were shown as available updates; they have not been applied or compatibility-tested.
+
+## 3. Storage and downloaded content
+
+Measured logical storage under `/opt/project-nomad/storage` is approximately **70 GiB**, below the requested 100 GB ceiling:
+
+| Content | Measured size/state |
+|---|---:|
+| Kiwix ZIM libraries | 20 files; 33,484,622,923 bytes (31.18 GiB; `du` about 32 GiB) |
+| Maps | about 32 GiB |
+| Kolibri Gen 2 | about 6.3 GiB |
+| RAG uploads | about 720 MiB |
+
+The detailed continental PMTiles file is 33,788,916,131 bytes and covers the USA, Canada, and Mexico through zoom 15. It is a vector road/terrain map, not satellite imagery, and does not provide live closures or turn-by-turn routing.
+
+Kolibri contains the selected PhET, Blockly Games, School of Thought, Khan Academy, and Sikana material. The Khan import is recorded as partial because 370 upstream files were skipped by the importer.
+
+No NOMAD download jobs were active or queued at the verified checkpoint. No redundant Mountain-region map job remained to cancel.
+
+## 4. Offline libraries
+
+Kiwix contains 20 installed ZIM files, including Wikipedia, Wikipedia Medicine/WikiMed, MedlinePlus, NHS Medicines, CDC travel health, military medicine, LibreTexts Medicine, LibrePathology, iFixit, Ready.gov, Wikibooks, and selected repair, cooking, gardening, and vehicle-maintenance references. Installed Kiwix content totals 33,484,622,923 bytes.
+
+Kiwix, Kolibri, NOMAD RAG, and maps are separate search interfaces. NOMAD does not currently provide one universal search across all four.
+
+## 5. Official emergency knowledge base
+
+The `official-emergency` collection contains **44 intentional indexed files**, **3,922 chunks**, and **754,064,249 source bytes**. It includes official medical/first-aid, water, radiological, food/power, generator/CO, radio, equipment, Utah, Idaho, county, earthquake, and Yellowstone documents.
+
+Seven regional plans were validated as PDFs, hashed, manifested, and indexed:
+
+- Salt Lake County Multi-Jurisdictional Hazard Mitigation Plan (2025)
+- Weber County Pre-Disaster Mitigation Plan (2024)
+- Davis County plan (adopted/current published version, 2022)
+- Six County Region plan covering Piute County/Marysvale (2020)
+- Utah Enhanced State Hazard Mitigation Plan (2024)
+- Madison County Multi-Hazard Mitigation Plan (2019; adopted 2020)
+- Idaho State Hazard Mitigation Plan (2023)
+
+Original SHA-256 values are in `resources/official/SHA256SUMS.txt`. The invalid access-denied eCFR capture was quarantined and replaced by a validated official FRS XML snapshot plus an indexed family-radio quick reference.
+
+## 6. Equipment library
+
+Completed and indexed packets:
+
+- Jackery Explorer 600 v2 / JE-600A official manual and quick reference
+- Lenovo Legion Go 8APU1 guide and offline-power reference
+- Midland ER10VP official material and quick reference
+- General official butane, battery, generator, carbon-monoxide, and maintenance guidance
+
+Exact manuals remain blocked on model/ownership confirmation for the butane stove, Motorola T475, ZOUPW F100W versus F110W solar panel, power banks, flashlight, backpack, and first-aid kit.
+
+## 7. LM Studio and launcher
+
+Locally installed models include Qwen3 4B/8B variants, Gemma 4 variants, Granite 4.1 8B, Qwen VL, and Nomic Embed Text v1.5. LM Link also exposes models on two larger peers when those machines are available.
+
+The local RAG import failure was traced to two verified conditions: LM Studio listened only on Windows loopback, which the WSL container could not reach, and the installed Nomic model was not loaded under NOMAD's expected identifier. A direct embedding request later returned a 768-dimension vector, and the 44-file queue completed. On 2026-11-14, NOMAD's LM Studio integration was deliberately paused so LM Studio can be used by a separate project. The NOMAD-local Qwen and Nomic models were unloaded; the user's remote LM Link model was left untouched.
+
+`launcher/NOMAD Launcher.exe` provides Start, Open, status, and Stop Everything. It keeps WSL alive while open. Its LM Studio controls are disabled, and Start/Stop explicitly leave the LM Studio server and every local or LM Link model untouched. The rebuilt executable has the NOMAD application icon. Windows may require unpinning and re-pinning the taskbar item to refresh the cached icon.
+
+## 8. AI/RAG safety acceptance
+
+The five fixed emergency queries completed on local Qwen models and returned real stored-file citations. The generated answers did **not** pass safety acceptance. Verified examples include:
+
+- Qwen3 4B changed FEMA's “battery-powered lights” into nonexistent “battery-powered heaters.”
+- Qwen3 4B substituted infant chest thrusts for the indexed over-one-year child choking procedure.
+- Qwen3 8B restored abdominal thrusts but added unsupported hands-only CPR and a conflicting delayed-call condition.
+- The water answer conflated the EPA's different bleach doses for 6% and 8.25% products.
+- Rexburg answers missed indexed Madison County volcanic-geology passages and made unsupported hazard/location claims.
+
+The supported `NOMAD.md` prompt was configured with an emergency-answer policy that prohibits invented procedures, numbers, device capabilities, and live-status claims. Retesting proved that prompt instructions alone do not make the small models reliable enough for safety-critical use.
+
+**Current safety decision:** deterministic source search, vetted quick-reference pages, and direct original-file access are the emergency core. AI is currently disabled for NOMAD. Earlier Qwen3 4B and 8B tests remain documented, but neither model is accepted as an authoritative medical or safety system.
+
+NOMAD citations identify the stored title/file/path. PDF page numbers are not preserved during extraction, so page-number citations are unavailable.
+
+## 9. Capability boundaries
+
+| Requirement | Verified behavior |
+|---|---|
+| Completely offline libraries | Kiwix, Kolibri, maps, source files, and local models are stored locally |
+| Universal search | Not available: RAG, Kiwix, Kolibri, and maps use separate interfaces |
+| RAG citations | Stored filename/path citations work |
+| PDF page citations | Not supported |
+| Safety-critical generated answers | Not accepted; source verification required |
+| Map pan/zoom | Installed; final disconnected regional visual check pending |
+| Map routing/address search | Not implemented in NOMAD |
+| Satellite map layer | Not present |
+| Live alerts/closures/fires/volcano status | Cannot be supplied by offline data; live verification required |
+| Authentication | NOMAD has no built-in authentication; do not expose it to the internet |
+
+## 9A. Local interface upgrade
+
+On 2026-11-16 the selected Night Operations + Field Manual interface was compiled into the local Docker image `project-nomad-local:night-manual-20261116` and assigned only to the `admin` service. The existing MySQL database, Redis, storage mount, Kiwix, Kolibri, maps, Qdrant, FlatNotes, and downloaded content were not replaced.
+
+The upgraded interface provides a compact dark operations header, responsive command tiles, Night Ops as the default for new browsers, a retained Day Ops toggle, paper-style documentation panels, and clearer source-record styling. Because NOMAD AI is paused and did not pass safety acceptance, the dashboard no longer offers an actionable AI tile or floating chat button; it shows a disabled status card instead.
+
+The production Docker build completed its Vite and TypeScript compilation. Live HTTP checks returned 200 for the home page, maps, documentation, Kiwix, and Kolibri; `/api/health` returned `{"status":"ok"}`. Rendered browser QA was performed for both the dashboard and Field Manual documentation in dark mode. A rollback copy of the prior Compose file is stored at `/opt/project-nomad/compose.yml.pre-night-manual-20261116`.
+
+The local image is intentionally pinned with `pull_policy: never`. A future official NOMAD update may replace or bypass the customized image, so rebuild/review this interface against the new upstream version before changing that pin.
+
+Kolibri's supported device setting `allow_guest_access` is enabled. NOMAD's Education Platform tile opens `/en/learn/` directly, bypassing Kolibri's optional sign-in landing page for normal use. The existing Kolibri administrator account was deliberately preserved for future content and facility administration.
+
+## 10. Tests still required
+
+1. Reboot Windows and verify launcher Start, Open, status, and Stop Everything.
+2. Physically disconnect networking and open NOMAD, Kiwix, Kolibri, maps, and original documents.
+3. Test street-level map rendering in Salt Lake Valley, Davis/Weber, Marysvale/Piute, Rexburg/Madison, and connecting corridors.
+4. Confirm local embedding/search with both LM Link peers unavailable.
+5. Measure library-only, 4B, and 8B power draw.
+6. Decide on a separate offline navigation application for address search and routing.
+7. Test restricted iPhone LAN access only after explicit approval; NOMAD has no authentication.
+
+## 11. Update procedure
+
+When internet is available:
+
+1. Back up `RESOURCE_MANIFEST.csv`, `resources/official/SHA256SUMS.txt`, `NOMAD_SAFETY_PROMPT.md`, and the launcher.
+2. Review NOMAD release notes before updating; do not assume newer container images are compatible.
+3. Check curated ZIM/map catalogs and official agencies for newer versions. Replace only verified updates.
+4. Record source URL, publication/version date, actual bytes, hash, and license/offline basis.
+5. Remove a replaced item from RAG before indexing its verified replacement to avoid duplicate retrieval.
+6. Rerun the fixed acceptance questions and compare against original source passages.
+7. Never treat stored road closures, weather alerts, evacuation orders, wildfire perimeters, recalls, or volcano status as current.

@@ -1,12 +1,8 @@
-import { useState } from 'react'
 import Footer from '~/components/Footer'
-import ChatButton from '~/components/chat/ChatButton'
-import ChatModal from '~/components/chat/ChatModal'
-import useServiceInstalledStatus from '~/hooks/useServiceInstalledStatus'
-import { SERVICE_NAMES } from '../../constants/service_names'
 import { Link, router } from '@inertiajs/react'
-import { IconArrowLeft } from '@tabler/icons-react'
+import { IconArrowLeft, IconHome, IconShieldCheck } from '@tabler/icons-react'
 import classNames from 'classnames'
+import ThemeToggle from '~/components/ThemeToggle'
 
 export default function AppLayout({
   children,
@@ -20,59 +16,42 @@ export default function AppLayout({
    */
   compact?: boolean
 }) {
-  const [isChatOpen, setIsChatOpen] = useState(false)
-  const aiAssistantInstalled = useServiceInstalledStatus(SERVICE_NAMES.OLLAMA)
-
   return (
-    <div className="min-h-screen flex flex-col">
-      {
-        window.location.pathname !== '/home' && (
-          <Link
-            href="/home"
-            className={classNames(
-              'absolute left-4 flex items-center',
-              compact ? 'top-4' : 'top-60 md:top-48'
-            )}
-          >
-            <IconArrowLeft className="mr-2" size={24} />
-            <p className="text-lg text-text-secondary">Back to Home</p>
-          </Link>
-        )}
-      <div
-        className={classNames(
-          'flex cursor-pointer items-center justify-center',
-          compact ? 'gap-3 p-3 flex-row' : 'gap-2 p-2 flex-col'
-        )}
-        onClick={() => router.visit('/home')}
-      >
-        <img
-          src="/nomad-primary.svg"
-          alt="Project NOMAD Logo"
-          className={compact ? 'h-12 w-12 object-contain' : 'h-40 w-40 object-contain'}
-        />
-        <h1
-          className={classNames(
-            'font-bold text-desert-green',
-            compact ? 'text-2xl' : 'text-5xl'
-          )}
+    <div className="nomad-shell min-h-screen flex flex-col">
+      <header className="nomad-ops-bar">
+        <button
+          type="button"
+          className="nomad-brand"
+          onClick={() => router.visit('/home')}
+          aria-label="Project NOMAD home"
         >
-          Command Center
-        </h1>
-      </div>
-      <hr className={
-        classNames(
-          "text-desert-green font-semibold h-[1.5px] bg-desert-green border-none",
-          !compact && window.location.pathname !== '/home' ? "mt-12 md:mt-0" : "mt-0"
-        )} />
-      <div className="flex-1 w-full bg-desert">{children}</div>
-      <Footer />
+          <img src="/nomad-primary.svg" alt="" className="h-10 w-10 object-contain" />
+          <span>
+            <strong>Project NOMAD</strong>
+            <small>Emergency Reference</small>
+          </span>
+        </button>
+        <div className="nomad-ops-actions">
+          <span className="nomad-offline-badge">
+            <IconShieldCheck size={17} /> Offline ready
+          </span>
+          <ThemeToggle compact />
+          <Link href="/home" className="nomad-home-link" aria-label="Home" title="Home">
+            <IconHome size={20} />
+          </Link>
+        </div>
+      </header>
 
-      {aiAssistantInstalled && (
-        <>
-          <ChatButton onClick={() => setIsChatOpen(true)} />
-          <ChatModal open={isChatOpen} onClose={() => setIsChatOpen(false)} />
-        </>
+      {window.location.pathname !== '/home' && (
+        <div className={classNames('nomad-context-bar', compact && 'nomad-context-bar--compact')}>
+          <Link href="/home" className="inline-flex items-center gap-2">
+            <IconArrowLeft size={19} /> Back to Command Center
+          </Link>
+        </div>
       )}
+
+      <div className="flex-1 w-full">{children}</div>
+      <Footer />
     </div>
   )
 }
