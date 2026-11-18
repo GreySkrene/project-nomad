@@ -108,7 +108,7 @@ Status key: `[x]` verified complete, `[-]` in progress, `[ ]` not started, `[!]`
 - [x] Finish and validate the illustrated Wikibooks and Best of Wikipedia upgrades; verify published SHA-256 hashes, image/detail metadata, local serving, and removal of the two superseded Wikipedia archives.
 - [x] Audit the public diff for credentials, personal paths, oversized payloads, and source/licensing concerns.
 - [!] Current upstream's production dependency tree reports 60 npm advisories (3 critical, 21 high); exploitability in NOMAD has not been triaged. Keep the service LAN-only and do not apply `npm audit fix --force` without compatibility testing.
-- [-] Publish the reviewed work to the public GitHub fork at `https://github.com/GreySkrene/project-nomad`.
+- [x] Publish the reviewed work to the public GitHub fork at `https://github.com/GreySkrene/project-nomad`.
 
 ## J. Resumable checkpoint — 2026-11-14 14:15 America/Denver
 
