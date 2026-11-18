@@ -1,7 +1,7 @@
 import * as assert from 'node:assert/strict'
 import { test } from 'node:test'
 
-import { pmtilesProgressBytes } from '../../app/jobs/run_extract_pmtiles_job.js'
+import { pmtilesProgressBytes } from '../../app/utils/pmtiles_progress.js'
 
 test('uses allocated blocks for a sparse preallocated PMTiles file', () => {
   assert.equal(pmtilesProgressBytes({ size: 34_000_000_000, blocks: 6_000_000 }), 3_072_000_000)

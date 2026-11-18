@@ -95,8 +95,8 @@ nomad-ui-concepts-preview.png
 nomad-ui-concepts.html
 ui-current-*.png
 ui-upgrade-*.png
-!ui-upgrade-live-final.png
-!ui-upgrade-docs-final.png
+!docs/emergency/images/ui-upgrade-live-final.png
+!docs/emergency/images/ui-upgrade-docs-final.png
 kolibri-*.png
 wsl.conf.nomad
 

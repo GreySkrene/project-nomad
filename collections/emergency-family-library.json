@@ -172,6 +172,7 @@
       "filename": "wikipedia_en_top_maxi_2026-06.zim",
       "url": "https://download.kiwix.org/zim/wikipedia/wikipedia_en_top_maxi_2026-06.zim",
       "size_bytes": 8357329540,
+      "sha256": "1b455d589e026d541ad6917ad1911b787448424a4d455e0f1a9531f065839c09",
       "why": "Full-detail illustrated coverage of roughly 50,000 high-value articles without the 119 GB cost of full illustrated English Wikipedia."
     },
     {
@@ -181,6 +182,7 @@
       "filename": "wikibooks_en_all_maxi_2026-10.zim",
       "url": "https://download.kiwix.org/zim/wikibooks/wikibooks_en_all_maxi_2026-10.zim",
       "size_bytes": 4739739728,
+      "sha256": "835014cde2c385f80a6388847fb8962429966a3a64a03b58552f1684cc83e7c8",
       "why": "Full-detail illustrated textbooks and practical manuals; the image edition costs only about 1.1 GB more than the no-picture edition."
     }
   ],
@@ -199,7 +201,7 @@
       "status": "Installed; the Khan import is partial because 370 upstream files were skipped by the importer."
     },
     "official_documents": {
-      "manifest": "../RESOURCE_MANIFEST.csv",
+      "manifest": "../docs/emergency/RESOURCE_MANIFEST.csv",
       "checksums": "../resources/official/SHA256SUMS.txt",
       "status": "44 intentional files indexed in the local official-emergency collection; downloaded files are not redistributed by this repository."
     }

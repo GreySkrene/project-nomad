@@ -51,11 +51,22 @@ def active_jobs(base_url: str) -> list[dict[str, Any]]:
     return jobs if isinstance(jobs, list) else []
 
 
-def wait_for_downloads(base_url: str) -> int:
+def wait_for_downloads(base_url: str, expected_filenames: set[str]) -> int:
     while True:
         jobs = active_jobs(base_url)
         if not jobs:
-            print("All queued ZIM downloads have left the active queue.")
+            installed_response = api_json(base_url, "/api/zim/list")
+            installed = {entry["name"] for entry in installed_response.get("files", [])}
+            missing = sorted(expected_filenames - installed)
+            if missing:
+                print(
+                    "The queue is empty, but these archives were not registered:",
+                    *[f"  - {name}" for name in missing],
+                    sep="\n",
+                    file=sys.stderr,
+                )
+                return 1
+            print("All expected ZIM downloads are installed and registered.")
             return 0
         print("\nActive downloads:")
         for job in jobs:
@@ -140,7 +151,8 @@ def main() -> int:
             return 4
         print(f"Queued {result.get('filename')} as job {result.get('jobId', 'unknown')}")
 
-    return wait_for_downloads(args.nomad_url) if args.wait else 0
+    expected = {resource["filename"] for resource in profile["resources"]}
+    return wait_for_downloads(args.nomad_url, expected) if args.wait else 0
 
 
 if __name__ == "__main__":

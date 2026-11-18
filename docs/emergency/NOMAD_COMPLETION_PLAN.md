@@ -1,6 +1,6 @@
 # Project NOMAD completion plan
 
-Last updated: 2026-11-16 (America/Denver)
+Last updated: 2026-11-18 (America/Denver)
 
 Status key: `[x]` verified complete, `[-]` in progress, `[ ]` not started, `[!]` blocked or needs a decision.
 
@@ -99,13 +99,16 @@ Status key: `[x]` verified complete, `[-]` in progress, `[ ]` not started, `[!]`
 ## K. Public, reproducible personal-project fork
 
 - [x] Define the emergency-family Kiwix selection in a machine-readable profile with exact filenames, URLs, sizes, and rationale.
+- [x] Verify all 19 profile archive URLs resolve successfully from the official Kiwix download service.
 - [x] Add a dependency-free installer that previews, size-gates, queues, and monitors missing ZIMs through NOMAD's supported API.
 - [x] Document storage tradeoffs, map/Kolibri setup, safety boundaries, and content that is intentionally excluded from Git.
 - [x] Update the main README to distinguish this family emergency profile from upstream Project NOMAD.
-- [-] Finish and validate the illustrated Wikibooks and Best of Wikipedia upgrades.
-- [ ] Audit the public diff for credentials, personal paths, oversized payloads, and source/licensing concerns.
-- [ ] Run targeted tests and a production build.
-- [ ] Publish the reviewed work to a public GitHub fork and record its URL.
+- [x] Rebase the public profile branch onto upstream commit `f633b36` so current map, download, catalog, and security fixes are included.
+- [x] Run a clean production build, TypeScript typecheck, and focused sparse-PMTiles progress tests on the rebased branch.
+- [x] Finish and validate the illustrated Wikibooks and Best of Wikipedia upgrades; verify published SHA-256 hashes, image/detail metadata, local serving, and removal of the two superseded Wikipedia archives.
+- [x] Audit the public diff for credentials, personal paths, oversized payloads, and source/licensing concerns.
+- [!] Current upstream's production dependency tree reports 60 npm advisories (3 critical, 21 high); exploitability in NOMAD has not been triaged. Keep the service LAN-only and do not apply `npm audit fix --force` without compatibility testing.
+- [-] Publish the reviewed work to the public GitHub fork at `https://github.com/GreySkrene/project-nomad`.
 
 ## J. Resumable checkpoint — 2026-11-14 14:15 America/Denver
 

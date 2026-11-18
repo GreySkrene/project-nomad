@@ -1,6 +1,6 @@
 # Project NOMAD Offline Emergency System — Setup Report
 
-Report date: 2026-11-16 (America/Denver)  
+Report date: 2026-11-18 (America/Denver)  
 Status: core services and content are installed; safety acceptance and fully disconnected/reboot testing are not complete
 
 ## 1. Host and installation
@@ -32,15 +32,15 @@ NOMAD is reached at `http://localhost:8080`. On 2026-11-13 its health endpoint r
 | Offline maps | Protomaps/PMTiles | Installed | Pan/zoom vector map |
 | LM Studio | Windows port 1234 | Connected from NOMAD | Local and LM Link inference/embeddings |
 
-All ten NOMAD containers reported up for approximately 46 hours when checked. Kiwix 3.8.2, Kolibri 0.19.5, and FlatNotes 5.5.5 were shown as available updates; they have not been applied or compatibility-tested.
+All ten NOMAD containers were running when checked; five reported healthy and the remaining service containers reported up. Kiwix 3.8.2, Kolibri 0.19.5, and FlatNotes 5.5.5 were shown as available updates; they have not been applied or compatibility-tested.
 
 ## 3. Storage and downloaded content
 
-Measured logical storage under `/opt/project-nomad/storage` is approximately **70 GiB**, below the requested 100 GB ceiling:
+Measured logical storage under `/opt/project-nomad/storage` is approximately **77 GiB**, below the requested 100 GB ceiling:
 
 | Content | Measured size/state |
 |---|---:|
-| Kiwix ZIM libraries | 20 files; 33,484,622,923 bytes (31.18 GiB; `du` about 32 GiB) |
+| Kiwix ZIM libraries | 19 files; 40,792,676,726 bytes (37.99 GiB) |
 | Maps | about 32 GiB |
 | Kolibri Gen 2 | about 6.3 GiB |
 | RAG uploads | about 720 MiB |
@@ -49,11 +49,16 @@ The detailed continental PMTiles file is 33,788,916,131 bytes and covers the USA
 
 Kolibri contains the selected PhET, Blockly Games, School of Thought, Khan Academy, and Sikana material. The Khan import is recorded as partial because 370 upstream files were skipped by the importer.
 
-No NOMAD download jobs were active or queued at the verified checkpoint. No redundant Mountain-region map job remained to cancel.
+No NOMAD download jobs were active or queued at the verified checkpoint. No redundant Mountain-region map job remained to cancel. The superseded no-picture Best of Wikipedia archive and tiny Top 100 mini archive were removed only after the illustrated replacement passed metadata, HTTP-serving, and checksum validation.
 
 ## 4. Offline libraries
 
-Kiwix contains 20 installed ZIM files, including Wikipedia, Wikipedia Medicine/WikiMed, MedlinePlus, NHS Medicines, CDC travel health, military medicine, LibreTexts Medicine, LibrePathology, iFixit, Ready.gov, Wikibooks, and selected repair, cooking, gardening, and vehicle-maintenance references. Installed Kiwix content totals 33,484,622,923 bytes.
+Kiwix contains 19 installed ZIM files, including compact complete Wikipedia, illustrated Best of Wikipedia, Wikipedia Medicine/WikiMed, MedlinePlus, NHS Medicines, CDC travel health, military medicine, LibreTexts Medicine, LibrePathology, iFixit, Ready.gov, illustrated Wikibooks, and selected repair, cooking, gardening, and vehicle-maintenance references. Installed Kiwix content totals 40,792,676,726 bytes.
+
+The two illustrated upgrades were independently validated on 2026-11-18. Kiwix catalog metadata reports `_pictures:yes` and `_details:yes`; each local content route returns a valid redirect; and the locally computed SHA-256 values match Kiwix's published hashes:
+
+- Best of Wikipedia maxi: `1b455d589e026d541ad6917ad1911b787448424a4d455e0f1a9531f065839c09`
+- Wikibooks maxi: `835014cde2c385f80a6388847fb8962429966a3a64a03b58552f1684cc83e7c8`
 
 Kiwix, Kolibri, NOMAD RAG, and maps are separate search interfaces. NOMAD does not currently provide one universal search across all four.
 
@@ -144,6 +149,32 @@ Kolibri's supported device setting `allow_guest_access` is enabled. NOMAD's Educ
 5. Measure library-only, 4B, and 8B power draw.
 6. Decide on a separate offline navigation application for address search and routing.
 7. Test restricted iPhone LAN access only after explicit approval; NOMAD has no authentication.
+
+## 10A. Public fork verification
+
+The reproducible emergency-profile branch was rebased onto upstream commit
+`f633b36` on 2026-11-18. On that branch:
+
+- `tsc --noEmit` passed;
+- the three pure sparse-PMTiles progress tests passed;
+- the production Vite/Adonis build completed successfully; and
+- the Kiwix installer profile parsed and dry-ran successfully against the live
+  NOMAD API.
+
+A broad Windows unit run passed 597 of 610 tests. The 13 failures included
+Linux-only `libzim` native-binding imports, tests requiring a populated Adonis
+server environment, Japa tests invoked under Node's runner, a Windows path
+normalization assertion, and a temporary-file lock. These are not counted as a
+clean suite pass. The running Linux image and the final public branch are not
+the same build: the laptop remains on its tested local v1.35.1 image until a
+separate upgrade is approved and retested.
+
+`npm audit --omit=dev` reported 60 advisories in the current upstream production
+dependency tree (3 critical, 21 high, 29 moderate, and 7 low). Their practical
+reachability in NOMAD has not been triaged. This reinforces the existing rule:
+keep NOMAD on a trusted local machine/LAN and never expose it directly to the
+public internet. Automated force-upgrades were not applied because several
+suggested fixes are major-version changes.
 
 ## 11. Update procedure
 

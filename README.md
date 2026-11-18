@@ -22,10 +22,10 @@ Project NOMAD is a self-contained, offline-first knowledge and education server 
 > library. Downloaded maps, ZIM archives, PDFs, credentials, and other personal
 > runtime data are not included. Start with the
 > [Family Emergency Library Profile](EMERGENCY_LIBRARY_PROFILE.md), the
-> [measured setup report](NOMAD_SETUP_REPORT.md), and the
+> [measured setup report](docs/emergency/NOMAD_SETUP_REPORT.md), and the
 > [machine-readable library list](collections/emergency-family-library.json).
 
-![Night Operations emergency dashboard](ui-upgrade-live-final.png)
+![Night Operations emergency dashboard](docs/emergency/images/ui-upgrade-live-final.png)
 
 ### Emergency-profile quick start
 

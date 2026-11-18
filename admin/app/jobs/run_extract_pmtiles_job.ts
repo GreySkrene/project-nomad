@@ -8,6 +8,7 @@ import logger from '@adonisjs/core/services/logger'
 import { DownloadProgressData } from '../../types/downloads.js'
 import { PMTILES_BINARY_PATH, buildPmtilesExtractArgs } from '../../constants/map_regions.js'
 import { deleteFileIfExists } from '../utils/fs.js'
+import { pmtilesProgressBytes } from '../utils/pmtiles_progress.js'
 
 export interface RunExtractPmtilesJobParams {
   sourceUrl: string
@@ -24,19 +25,6 @@ export interface RunExtractPmtilesJobParams {
     version: string
     collection_ref: string | null
   }
-}
-
-/**
- * pmtiles preallocates a sparse output at approximately its final logical size.
- * fs.stat().size therefore jumps to the estimate almost immediately and cannot
- * represent extraction progress. On Unix, blocks reports storage actually
- * allocated in 512-byte units; retain size as a portable fallback.
- */
-export function pmtilesProgressBytes(fileStat: { size: number; blocks?: number }): number {
-  if (typeof fileStat.blocks === 'number' && fileStat.blocks >= 0) {
-    return Math.min(fileStat.size, fileStat.blocks * 512)
-  }
-  return fileStat.size
 }
 
 export class RunExtractPmtilesJob {
