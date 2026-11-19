@@ -230,12 +230,13 @@ from each media type remains part of the final disconnected acceptance test.
   downloaded, validated, tested offline, and approved when the download is large.
 - Record actual publication/snapshot dates and label time-sensitive guidance.
 
-## Next audit order
+## Next action: replace rejected resources
 
-1. Finish exhaustive LibreTexts Medicine structure/content measurements and identify
-   a complete replacement or a reason to remove it.
-2. Audit Gardening Stack Exchange and compare it with coherent open gardening/plant
-   references from authoritative sources.
-3. Audit safety-critical medical and preparedness archives.
-4. Audit repair/food/reference archives, maps, Kolibri channels, and every uploaded
-   document.
+The inventory-wide content audit is complete; do not restart it. Resume with the
+transactional replacement/removal queue at the top of `NOMAD_COMPLETION_PLAN.md`.
+LibreTexts Medicine, `zimgit-medicine`, the incomplete Legion Go manual, and the
+defective Canadian map coverage are the first corrective targets. Preserve each old
+file until a licensed replacement has been downloaded, content-validated, exercised
+through the offline UI, and recorded in the manifests. Q&A collections remain
+supplemental pending a storage-value decision rather than being mistaken for core
+guides.

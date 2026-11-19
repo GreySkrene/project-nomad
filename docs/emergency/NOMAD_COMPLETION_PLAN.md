@@ -4,6 +4,43 @@ Last updated: 2026-11-19 (America/Denver)
 
 Status key: `[x]` verified complete, `[-]` in progress, `[ ]` not started, `[!]` blocked or needs a decision.
 
+## Resume here: replacement and removal queue
+
+The usefulness audit is complete. The next session should improve the installed
+library rather than repeat the inventory scan. Replacement is transactional: identify
+and license-check a candidate, download it, validate its real content (not merely its
+file/checksum), test it offline through the user interface, update the manifests and
+audit records, and only then remove the superseded resource. Ask before any large
+download and show the exact deletion target before deleting data.
+
+1. [ ] **LibreTexts Medicine** — source and validate a complete open anatomy and
+   physiology reference that actually contains its chapter bodies, figures, and
+   navigation. Re-test the Unit 1 Chemical, Cellular, and Tissue chapters offline.
+   Once the replacement passes, remove
+   `libretexts.org_en_med_2025-01.zim` (1,192,567,339 bytes) and its catalog/profile
+   entry. Do not present the current archive as an acceptable medical textbook.
+2. [ ] **OpenZIM Medical Library (`zimgit-medicine`)** — replace its blank reader and
+   mixed outdated/unverified works with authoritative, readable sources. WikiMed,
+   MedlinePlus, NHS Medicines, CDC, and LibrePathology already cover portions of the
+   need but do not by themselves prove equivalent coverage. After a gap comparison
+   and offline validation, remove `zimgit-medicine_en_2024-08.zim` (70,179,585 bytes).
+3. [ ] **Lenovo Legion Go** — obtain a genuinely complete official offline manual.
+   Verify model applicability, page/content completeness, and charging/power sections;
+   then replace the six-page interactive landing-page capture and re-index the PDF.
+4. [ ] **Canada detailed map repair** — build a corrected Canada overlay or continental
+   replacement using the fixed extraction geometry. Verify zoom-15 Vancouver and
+   Burnaby tiles plus the existing Utah/Idaho/Mexico samples before removing the
+   current 33,788,916,131-byte map. This is a large download and requires approval.
+5. [ ] **Supplemental/noise review** — decide whether Gardening Stack Exchange and the
+   other Q&A archives earn their storage after coherent replacements are in place.
+   They are labeled supplemental, not core. Remove only with explicit target review.
+6. [ ] **Cleanup after replacements** — remove the disabled 239-byte RAG verification
+   artifact, regenerate `CONTENT_INVENTORY.csv` and `RESOURCE_MANIFEST.csv`, refresh
+   hashes, reconcile Kiwix/Qdrant, and repeat the disconnected acceptance tests.
+
+Do not disturb LM Studio during this work unless the user explicitly releases it from
+the separate project. Content and UI validation do not require local generation.
+
 ## A. Correct the current installation and records
 
 - [x] Audit live Docker, Kiwix, Kolibri, map, RAG, LM Studio, and download-job state.
@@ -13,7 +50,8 @@ Status key: `[x]` verified complete, `[-]` in progress, `[ ]` not started, `[!]`
 - [x] Replace the invalid eCFR access-denied capture with a genuine official FRS regulation source.
 - [ ] Record hashes/validation evidence for the large installed ZIM and PMTiles resources where practical.
 - [x] Perform the content-level usefulness/completeness audit tracked in `CONTENT_AUDIT.md`; all 74 inventory rows now have evidence-based roles/statuses, with final hands-on media playback reserved for offline acceptance.
-- [!] Replace or remove LibreTexts Medicine after confirming its title-only book/chapter routes and validating an alternative.
+- [!] LibreTexts Medicine is proven defective; replacement/removal is queued in the
+  resume section above.
 - [x] Audit Gardening Stack Exchange against coherent gardening and plant references; Gardenology is installed/validated as the encyclopedia and Q&A is labeled supplemental.
 
 ## B. Emergency knowledge base and citations
@@ -114,7 +152,7 @@ Status key: `[x]` verified complete, `[-]` in progress, `[ ]` not started, `[!]`
 - [!] Current upstream's production dependency tree reports 60 npm advisories (3 critical, 21 high); exploitability in NOMAD has not been triaged. Keep the service LAN-only and do not apply `npm audit fix --force` without compatibility testing.
 - [x] Publish the reviewed work to the public GitHub fork at `https://github.com/GreySkrene/project-nomad`.
 
-## J. Resumable checkpoint — 2026-11-14 14:15 America/Denver
+## J. Resumable checkpoint — 2026-11-19 America/Denver
 
 - [x] No NOMAD download jobs are active or queued; no duplicate map jobs needed cancellation.
 - [!] Continental map is detailed at all primary Utah/Idaho/Mexico samples, but the 2026-11-19 audit disproved full Canadian completeness at Vancouver/Burnaby; future extraction code is fixed, existing data is not yet repaired.
@@ -127,7 +165,9 @@ Status key: `[x]` verified complete, `[-]` in progress, `[ ]` not started, `[!]`
 - [x] Updated `NOMAD_SETUP_REPORT.md` with current storage/download/index state.
 - [x] Ran the five retrieval/citation test questions and inspected cited Qdrant source passages.
 - [!] Safety decision: deterministic source search, vetted quick references, and original-file access are the emergency core; AI is optional and must be verified.
-- [ ] Next: confirm exact models for the equipment manuals still marked `[!]`.
-- [ ] Next: perform reboot and physically disconnected acceptance tests.
+- [ ] Next: execute the replacement/removal queue at the top of this plan, beginning
+  with LibreTexts Medicine and `zimgit-medicine`.
+- [ ] After replacements: confirm exact models for equipment manuals still marked
+  `[!]`, then perform reboot and physically disconnected acceptance tests.
 - [x] Investigated the current UI, produced six redesign concepts, and recorded the user's Style 2 + Style 3 selection.
 - [x] 2026-11-16: deployed the selected Night Operations + Field Manual hybrid and verified the production build and live endpoints.
