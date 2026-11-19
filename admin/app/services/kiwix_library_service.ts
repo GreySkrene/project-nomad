@@ -28,6 +28,11 @@ interface KiwixBook {
   size?: number
 }
 
+export type InstalledKiwixBook = Omit<KiwixBook, 'favicon' | 'faviconMimeType'> & {
+  filename: string
+  coverDataUrl: string | null
+}
+
 export class KiwixLibraryService {
   getLibraryFilePath(): string {
     return join(process.cwd(), KIWIX_LIBRARY_XML_PATH)
@@ -198,6 +203,34 @@ export class KiwixLibraryService {
     } catch (err: any) {
       if (err.code === 'ENOENT') return 0
       throw err
+    }
+  }
+
+  /**
+   * Read the metadata Kiwix is already using for its installed-library catalog.
+   * This is intentionally backed by the local XML rather than the online OPDS
+   * catalog, so browse/search screens remain descriptive while fully offline.
+   */
+  async listInstalledBooks(): Promise<InstalledKiwixBook[]> {
+    try {
+      const content = await readFile(this.getLibraryFilePath(), 'utf-8')
+      return this._parseExistingBooks(content).map(({ favicon, faviconMimeType, ...book }) => {
+        const filename = book.path.split('/').at(-1) ?? book.path
+        return {
+          ...book,
+          filename,
+          coverDataUrl:
+            favicon && faviconMimeType ? `data:${faviconMimeType};base64,${favicon}` : null,
+        }
+      })
+    } catch (err: any) {
+      if (err?.code === 'ENOENT') return []
+      logger.warn(
+        `[KiwixLibraryService] Could not read installed catalog metadata: ${
+          err instanceof Error ? err.message : err
+        }`
+      )
+      return []
     }
   }
 

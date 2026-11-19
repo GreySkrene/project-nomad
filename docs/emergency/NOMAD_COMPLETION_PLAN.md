@@ -140,6 +140,9 @@ the separate project. Content and UI validation do not require local generation.
 - [x] Add Field Manual document surfaces and source-record styling; render-test dark-mode document contrast.
 - [x] Remove the actionable AI tile and floating chat control while NOMAD AI is paused; show a non-interactive paused status card instead.
 - [x] Verify the live home, maps, docs, Kiwix, and Kolibri endpoints after deployment.
+- [x] Add and deploy a model-independent Browse Library: need-based categories,
+  honest source-format notes, common-search shortcuts, real offline Kiwix cover/
+  article/media metadata, and 12 useful document sets with direct original-file access.
 - [ ] Perform hands-on user review and collect any layout/content refinements.
 
 ## K. Public, reproducible personal-project fork
@@ -178,6 +181,9 @@ the separate project. Content and UI validation do not require local generation.
   two consecutive live syncs now report clean/in-sync with no jobs.
 - [x] Added a dashboard Document Library entry so stored originals remain directly
   browsable/downloadable while AI and LM Studio are paused.
+- [x] Replaced the search-only information lookup with Browse + Search views. Live
+  verification: 18/18 Kiwix archives expose titles, covers, and media metadata;
+  125 saved documents are available to the browse UI; original-file download returned 200.
 - [ ] After replacements: confirm exact models for equipment manuals still marked
   `[!]`, then perform reboot and physically disconnected acceptance tests.
 - [x] Investigated the current UI, produced six redesign concepts, and recorded the user's Style 2 + Style 3 selection.

@@ -5,6 +5,13 @@ export type ZimFileWithMetadata = FileEntry & {
   summary: string | null
   author: string | null
   size_bytes: number | null
+  uuid: string | null
+  language: string | null
+  date: string | null
+  article_count: number | null
+  media_count: number | null
+  /** Small illustration embedded in the installed ZIM; no network required. */
+  cover_data_url: string | null
 }
 
 export type ListZimFilesResponse = {

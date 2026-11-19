@@ -61,16 +61,26 @@ export class ZimService {
     const all = await listDirectoryContents(dirPath)
     const zimEntries = all.filter((item) => item.name.endsWith('.zim'))
 
+    const installedBooks = await new KiwixLibraryService().listInstalledBooks()
+    const metadataByFilename = new Map(installedBooks.map((book) => [book.filename, book]))
+
     const files = await Promise.all(
       zimEntries.map(async (entry) => {
         const filePath = entry.type === 'file' ? entry.key : join(dirPath, entry.name)
         const stats = await getFileStatsIfExists(filePath)
+        const metadata = metadataByFilename.get(entry.name)
         return {
           ...entry,
-          title: null,
-          summary: null,
-          author: null,
+          title: metadata?.title ?? null,
+          summary: metadata?.description ?? null,
+          author: metadata?.creator ?? metadata?.publisher ?? null,
           size_bytes: stats ? Number(stats.size) : null,
+          uuid: metadata?.id ?? null,
+          language: metadata?.language ?? null,
+          date: metadata?.date ?? null,
+          article_count: metadata?.articleCount ?? null,
+          media_count: metadata?.mediaCount ?? null,
+          cover_data_url: metadata?.coverDataUrl ?? null,
         }
       })
     )
