@@ -154,7 +154,16 @@
       "filename": "gardening.stackexchange.com_en_all_2026-10.zim",
       "url": "https://download.kiwix.org/zim/stack_exchange/gardening.stackexchange.com_en_all_2026-10.zim",
       "size_bytes": 933097375,
-      "why": "Gardening, soil, plant-care, and landscape troubleshooting reference."
+      "why": "Supplemental gardening troubleshooting only. This is a Q&A archive, not a coherent gardening guide or plant encyclopedia; retain only if its 0.93 GB cost remains justified after the content audit."
+    },
+    {
+      "priority": 2,
+      "category": "food",
+      "title": "Gardenology",
+      "filename": "gardenology.org_en_all_2026-09.zim",
+      "url": "https://download.kiwix.org/zim/other/gardenology.org_en_all_2026-09.zim",
+      "size_bytes": 112499438,
+      "why": "Illustrated, searchable plant and garden encyclopedia with 44,083 articles. Use as a broad reference; current Utah State University Extension guides remain preferable for regional growing recommendations."
     },
     {
       "priority": 3,

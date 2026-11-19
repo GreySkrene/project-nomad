@@ -9,7 +9,7 @@ installed target is approximately **77 GiB**:
 
 | Content | Approximate size | Purpose |
 |---|---:|---|
-| Kiwix libraries | 37.99 GiB (19 archives) | Medicine, official preparedness, repair, food, and general reference |
+| Kiwix libraries | 38.09 GiB (20 archives) | Medicine, official preparedness, repair, gardening, food, and general reference |
 | USA/Canada/Mexico vector map | 32 GiB | Detailed offline road and terrain viewing through zoom 15 |
 | Kolibri education | 6.3 GiB | Selected science, practical-skills, and Khan Academy material |
 | Authoritative source documents | 0.7 GiB | Official emergency plans, manuals, and quick references |
@@ -89,8 +89,12 @@ source-specific reuse terms, and public Git repositories are a poor update
 channel for emergency guidance. The manifest records what was selected and why;
 obtain current copies from the named primary agency before relying on them.
 
-The installed Kiwix profile was verified at 40,792,676,726 bytes. The JSON
-profile records the published SHA-256 values for the two illustrated upgrades;
+The installed Kiwix profile is currently 40,900,638,382 bytes across 20 archives.
+Downloading successfully is only the first gate: the item-level usefulness and
+completeness review is tracked in
+[`CONTENT_AUDIT.md`](docs/emergency/CONTENT_AUDIT.md). That review has already
+identified defective or supplemental-only collections that must not be presented as
+core emergency guidance. The JSON profile records the published SHA-256 values for the two illustrated upgrades;
 the local Best of Wikipedia and Wikibooks files matched those hashes before
 their smaller superseded copies were removed.
 

@@ -1,0 +1,729 @@
+{
+  "schemaVersion": 1,
+  "reports": [
+    {
+      "path": "/app/storage/zim/libretexts.org_en_med_2025-01.zim",
+      "startedAt": "2026-11-19T01:39:52.350Z",
+      "filename": "/app/storage/zim/libretexts.org_en_med_2025-01.zim",
+      "filesize": 1192567339,
+      "uuid": "bfa1e3b6-1ede-5d20-d4a8-c3a331c1b7e7",
+      "counts": {
+        "allEntriesDeclared": 77274,
+        "userEntriesDeclared": 77258,
+        "articlesDeclared": 23171,
+        "mediaDeclared": 30785,
+        "entriesScanned": 77258,
+        "redirects": 0,
+        "htmlPages": 23171,
+        "htmlReadErrors": 0,
+        "titleOnlyPages": 23160,
+        "textUnder80": 22914,
+        "textUnder250": 23161,
+        "textUnder1000": 23168,
+        "pagesWithExternalLinks": 15,
+        "externalLinks": 473,
+        "pagesWithRelativeLinks": 12,
+        "relativeLinks": 870
+      },
+      "indexes": {
+        "title": true,
+        "fulltext": true
+      },
+      "checksum": {
+        "present": true,
+        "value": "bef814a538cb0437bcf1aa7891d1e2d6",
+        "valid": true
+      },
+      "metadata": {
+        "Title": "Medicine LibreTexts",
+        "Description": "Medicine courses and bookshelves from LibreTexts.org",
+        "Creator": "LibreTexts",
+        "Publisher": "openZIM",
+        "Date": "2025-01-16",
+        "Language": "eng",
+        "Tags": "medicine",
+        "Name": "libretexts.org_en_med"
+      },
+      "samples": {
+        "titleOnly": [
+          {
+            "path": "index/page_1",
+            "title": "Home",
+            "htmlBytes": 121,
+            "textChars": 4
+          },
+          {
+            "path": "index/page_36274",
+            "title": "Introduction to Nutrition Science (Bisson et. al)",
+            "htmlBytes": 245,
+            "textChars": 49
+          },
+          {
+            "path": "index/page_36275",
+            "title": "Front Matter",
+            "htmlBytes": 225,
+            "textChars": 12
+          },
+          {
+            "path": "index/page_36276",
+            "title": "1: Basic Concepts in Nutrition",
+            "htmlBytes": 258,
+            "textChars": 30
+          },
+          {
+            "path": "index/page_36279",
+            "title": "1.5: Units of Measure",
+            "htmlBytes": 272,
+            "textChars": 21
+          },
+          {
+            "path": "index/page_36280",
+            "title": "4.5: Physical Activity and Lifestyle",
+            "htmlBytes": 298,
+            "textChars": 36
+          },
+          {
+            "path": "index/page_36284",
+            "title": "3: Nutrition Information",
+            "htmlBytes": 246,
+            "textChars": 24
+          },
+          {
+            "path": "index/page_36285",
+            "title": "4: Dietary Recommendations",
+            "htmlBytes": 250,
+            "textChars": 26
+          },
+          {
+            "path": "index/page_36287",
+            "title": "2.1: A Healthy Philosophy Toward Food",
+            "htmlBytes": 298,
+            "textChars": 37
+          },
+          {
+            "path": "index/page_36290",
+            "title": "4.4: National Goals for Nutrition and Health- Healthy People 2020",
+            "htmlBytes": 356,
+            "textChars": 65
+          },
+          {
+            "path": "index/page_36294",
+            "title": "4.7: Diet Analysis - When Enough is Enough",
+            "htmlBytes": 310,
+            "textChars": 42
+          },
+          {
+            "path": "index/page_36297",
+            "title": "5: Digestion, Absorption, and Transport of Nutrients",
+            "htmlBytes": 300,
+            "textChars": 52
+          },
+          {
+            "path": "index/page_36298",
+            "title": "6: Carbohydrates",
+            "htmlBytes": 230,
+            "textChars": 16
+          },
+          {
+            "path": "index/page_36304",
+            "title": "7: Lipids",
+            "htmlBytes": 216,
+            "textChars": 9
+          },
+          {
+            "path": "index/page_36315",
+            "title": "8: Protein",
+            "htmlBytes": 218,
+            "textChars": 10
+          },
+          {
+            "path": "index/page_36349",
+            "title": "10: Vitamins and Minerals Overview",
+            "htmlBytes": 265,
+            "textChars": 34
+          },
+          {
+            "path": "index/page_36354",
+            "title": "12.1: Introduction to Antioxidants",
+            "htmlBytes": 306,
+            "textChars": 34
+          },
+          {
+            "path": "index/page_36355",
+            "title": "12.6: Selenium and Other Antioxidant Minerals",
+            "htmlBytes": 328,
+            "textChars": 45
+          },
+          {
+            "path": "index/page_36356",
+            "title": "12.7: Phytochemicals",
+            "htmlBytes": 278,
+            "textChars": 20
+          },
+          {
+            "path": "index/page_36361",
+            "title": "11: Water and Electrolytes",
+            "htmlBytes": 249,
+            "textChars": 26
+          },
+          {
+            "path": "index/page_36362",
+            "title": "11.3: Water- Sources and Choices",
+            "htmlBytes": 289,
+            "textChars": 32
+          },
+          {
+            "path": "index/page_36363",
+            "title": "11.4: Popular Beverage Choices",
+            "htmlBytes": 285,
+            "textChars": 30
+          },
+          {
+            "path": "index/page_36364",
+            "title": "11.1: Introduction to Fluids and Electrolytes",
+            "htmlBytes": 315,
+            "textChars": 45
+          },
+          {
+            "path": "index/page_36365",
+            "title": "11.5: Overview of Fluid and Electrolyte Balance",
+            "htmlBytes": 319,
+            "textChars": 47
+          },
+          {
+            "path": "index/page_36366",
+            "title": "11.2: Water’s Importance to Vitality",
+            "htmlBytes": 298,
+            "textChars": 36
+          },
+          {
+            "path": "index/page_36367",
+            "title": "11.6: Regulation of Water Balance",
+            "htmlBytes": 291,
+            "textChars": 33
+          },
+          {
+            "path": "index/page_36369",
+            "title": "11.7: Sodium",
+            "htmlBytes": 249,
+            "textChars": 12
+          },
+          {
+            "path": "index/page_36370",
+            "title": "11.8: Chloride",
+            "htmlBytes": 253,
+            "textChars": 14
+          },
+          {
+            "path": "index/page_36371",
+            "title": "11.9: Potassium",
+            "htmlBytes": 255,
+            "textChars": 15
+          },
+          {
+            "path": "index/page_36372",
+            "title": "11.10: Consequences of Deficiency or Excess",
+            "htmlBytes": 310,
+            "textChars": 43
+          },
+          {
+            "path": "index/page_36373",
+            "title": "12: Nutrients Important as Antioxidants",
+            "htmlBytes": 275,
+            "textChars": 39
+          },
+          {
+            "path": "index/page_36375",
+            "title": "12.2: Generation of Free Radicals in the Body",
+            "htmlBytes": 328,
+            "textChars": 45
+          },
+          {
+            "path": "index/page_36377",
+            "title": "12.8: The Whole Nutrient Package versus Disease",
+            "htmlBytes": 332,
+            "textChars": 47
+          },
+          {
+            "path": "index/page_36378",
+            "title": "12.9: Exercises - Antioxidants",
+            "htmlBytes": 298,
+            "textChars": 30
+          },
+          {
+            "path": "index/page_36408",
+            "title": "TitlePage",
+            "htmlBytes": 236,
+            "textChars": 9
+          },
+          {
+            "path": "index/page_36409",
+            "title": "InfoPage",
+            "htmlBytes": 234,
+            "textChars": 8
+          },
+          {
+            "path": "index/page_36412",
+            "title": "Table of Contents",
+            "htmlBytes": 252,
+            "textChars": 17
+          },
+          {
+            "path": "index/page_36684",
+            "title": "2: Identifying With Food",
+            "htmlBytes": 246,
+            "textChars": 24
+          },
+          {
+            "path": "index/page_36816",
+            "title": "2.4: Comparing Diets",
+            "htmlBytes": 264,
+            "textChars": 20
+          },
+          {
+            "path": "index/page_36817",
+            "title": "2.3: Calories In Versus Calories Out",
+            "htmlBytes": 296,
+            "textChars": 36
+          },
+          {
+            "path": "index/page_36827",
+            "title": "2.7: Research Highlight - Maslow’s Hierarchy of Needs",
+            "htmlBytes": 331,
+            "textChars": 53
+          },
+          {
+            "path": "index/page_38028",
+            "title": "3.14: Research Highlight - Nutrition Assessments",
+            "htmlBytes": 319,
+            "textChars": 48
+          },
+          {
+            "path": "index/page_38474",
+            "title": "2.6: Health At Every Size® and Intuitive Eating",
+            "htmlBytes": 318,
+            "textChars": 47
+          },
+          {
+            "path": "index/page_38867",
+            "title": "2.5: Eating Disorders",
+            "htmlBytes": 266,
+            "textChars": 21
+          },
+          {
+            "path": "index/page_38882",
+            "title": "2.2: Eating Behaviors and Food Choices",
+            "htmlBytes": 300,
+            "textChars": 38
+          },
+          {
+            "path": "index/page_39043",
+            "title": "1.6: Research Highlight - Risk Factors",
+            "htmlBytes": 306,
+            "textChars": 38
+          },
+          {
+            "path": "index/page_39044",
+            "title": "1.7: Diet Analysis Activity -  Foundations for Self Reflection",
+            "htmlBytes": 354,
+            "textChars": 61
+          },
+          {
+            "path": "index/page_39046",
+            "title": "2.8: Diet Analysis Activity - Evaluating Food Responses",
+            "htmlBytes": 334,
+            "textChars": 55
+          },
+          {
+            "path": "index/page_39047",
+            "title": "4.6: Research Highlight - The Gut-Brain Connection",
+            "htmlBytes": 326,
+            "textChars": 50
+          },
+          {
+            "path": "index/page_39068",
+            "title": "ProgramPage",
+            "htmlBytes": 240,
+            "textChars": 11
+          }
+        ],
+        "thinUnder80": [
+          {
+            "path": "index/page_1",
+            "title": "Home",
+            "htmlBytes": 121,
+            "textChars": 4
+          },
+          {
+            "path": "index/page_36274",
+            "title": "Introduction to Nutrition Science (Bisson et. al)",
+            "htmlBytes": 245,
+            "textChars": 49
+          },
+          {
+            "path": "index/page_36275",
+            "title": "Front Matter",
+            "htmlBytes": 225,
+            "textChars": 12
+          },
+          {
+            "path": "index/page_36276",
+            "title": "1: Basic Concepts in Nutrition",
+            "htmlBytes": 258,
+            "textChars": 30
+          },
+          {
+            "path": "index/page_36279",
+            "title": "1.5: Units of Measure",
+            "htmlBytes": 272,
+            "textChars": 21
+          },
+          {
+            "path": "index/page_36280",
+            "title": "4.5: Physical Activity and Lifestyle",
+            "htmlBytes": 298,
+            "textChars": 36
+          },
+          {
+            "path": "index/page_36284",
+            "title": "3: Nutrition Information",
+            "htmlBytes": 246,
+            "textChars": 24
+          },
+          {
+            "path": "index/page_36285",
+            "title": "4: Dietary Recommendations",
+            "htmlBytes": 250,
+            "textChars": 26
+          },
+          {
+            "path": "index/page_36287",
+            "title": "2.1: A Healthy Philosophy Toward Food",
+            "htmlBytes": 298,
+            "textChars": 37
+          },
+          {
+            "path": "index/page_36290",
+            "title": "4.4: National Goals for Nutrition and Health- Healthy People 2020",
+            "htmlBytes": 356,
+            "textChars": 65
+          },
+          {
+            "path": "index/page_36294",
+            "title": "4.7: Diet Analysis - When Enough is Enough",
+            "htmlBytes": 310,
+            "textChars": 42
+          },
+          {
+            "path": "index/page_36297",
+            "title": "5: Digestion, Absorption, and Transport of Nutrients",
+            "htmlBytes": 300,
+            "textChars": 52
+          },
+          {
+            "path": "index/page_36298",
+            "title": "6: Carbohydrates",
+            "htmlBytes": 230,
+            "textChars": 16
+          },
+          {
+            "path": "index/page_36304",
+            "title": "7: Lipids",
+            "htmlBytes": 216,
+            "textChars": 9
+          },
+          {
+            "path": "index/page_36315",
+            "title": "8: Protein",
+            "htmlBytes": 218,
+            "textChars": 10
+          },
+          {
+            "path": "index/page_36349",
+            "title": "10: Vitamins and Minerals Overview",
+            "htmlBytes": 265,
+            "textChars": 34
+          },
+          {
+            "path": "index/page_36354",
+            "title": "12.1: Introduction to Antioxidants",
+            "htmlBytes": 306,
+            "textChars": 34
+          },
+          {
+            "path": "index/page_36355",
+            "title": "12.6: Selenium and Other Antioxidant Minerals",
+            "htmlBytes": 328,
+            "textChars": 45
+          },
+          {
+            "path": "index/page_36356",
+            "title": "12.7: Phytochemicals",
+            "htmlBytes": 278,
+            "textChars": 20
+          },
+          {
+            "path": "index/page_36361",
+            "title": "11: Water and Electrolytes",
+            "htmlBytes": 249,
+            "textChars": 26
+          },
+          {
+            "path": "index/page_36362",
+            "title": "11.3: Water- Sources and Choices",
+            "htmlBytes": 289,
+            "textChars": 32
+          },
+          {
+            "path": "index/page_36363",
+            "title": "11.4: Popular Beverage Choices",
+            "htmlBytes": 285,
+            "textChars": 30
+          },
+          {
+            "path": "index/page_36364",
+            "title": "11.1: Introduction to Fluids and Electrolytes",
+            "htmlBytes": 315,
+            "textChars": 45
+          },
+          {
+            "path": "index/page_36365",
+            "title": "11.5: Overview of Fluid and Electrolyte Balance",
+            "htmlBytes": 319,
+            "textChars": 47
+          },
+          {
+            "path": "index/page_36366",
+            "title": "11.2: Water’s Importance to Vitality",
+            "htmlBytes": 298,
+            "textChars": 36
+          },
+          {
+            "path": "index/page_36367",
+            "title": "11.6: Regulation of Water Balance",
+            "htmlBytes": 291,
+            "textChars": 33
+          },
+          {
+            "path": "index/page_36369",
+            "title": "11.7: Sodium",
+            "htmlBytes": 249,
+            "textChars": 12
+          },
+          {
+            "path": "index/page_36370",
+            "title": "11.8: Chloride",
+            "htmlBytes": 253,
+            "textChars": 14
+          },
+          {
+            "path": "index/page_36371",
+            "title": "11.9: Potassium",
+            "htmlBytes": 255,
+            "textChars": 15
+          },
+          {
+            "path": "index/page_36372",
+            "title": "11.10: Consequences of Deficiency or Excess",
+            "htmlBytes": 310,
+            "textChars": 43
+          },
+          {
+            "path": "index/page_36373",
+            "title": "12: Nutrients Important as Antioxidants",
+            "htmlBytes": 275,
+            "textChars": 39
+          },
+          {
+            "path": "index/page_36375",
+            "title": "12.2: Generation of Free Radicals in the Body",
+            "htmlBytes": 328,
+            "textChars": 45
+          },
+          {
+            "path": "index/page_36377",
+            "title": "12.8: The Whole Nutrient Package versus Disease",
+            "htmlBytes": 332,
+            "textChars": 47
+          },
+          {
+            "path": "index/page_36378",
+            "title": "12.9: Exercises - Antioxidants",
+            "htmlBytes": 298,
+            "textChars": 30
+          },
+          {
+            "path": "index/page_36408",
+            "title": "TitlePage",
+            "htmlBytes": 236,
+            "textChars": 9
+          },
+          {
+            "path": "index/page_36409",
+            "title": "InfoPage",
+            "htmlBytes": 234,
+            "textChars": 8
+          },
+          {
+            "path": "index/page_36412",
+            "title": "Table of Contents",
+            "htmlBytes": 252,
+            "textChars": 17
+          },
+          {
+            "path": "index/page_36684",
+            "title": "2: Identifying With Food",
+            "htmlBytes": 246,
+            "textChars": 24
+          },
+          {
+            "path": "index/page_36816",
+            "title": "2.4: Comparing Diets",
+            "htmlBytes": 264,
+            "textChars": 20
+          },
+          {
+            "path": "index/page_36817",
+            "title": "2.3: Calories In Versus Calories Out",
+            "htmlBytes": 296,
+            "textChars": 36
+          },
+          {
+            "path": "index/page_36827",
+            "title": "2.7: Research Highlight - Maslow’s Hierarchy of Needs",
+            "htmlBytes": 331,
+            "textChars": 53
+          },
+          {
+            "path": "index/page_38028",
+            "title": "3.14: Research Highlight - Nutrition Assessments",
+            "htmlBytes": 319,
+            "textChars": 48
+          },
+          {
+            "path": "index/page_38474",
+            "title": "2.6: Health At Every Size® and Intuitive Eating",
+            "htmlBytes": 318,
+            "textChars": 47
+          },
+          {
+            "path": "index/page_38867",
+            "title": "2.5: Eating Disorders",
+            "htmlBytes": 266,
+            "textChars": 21
+          },
+          {
+            "path": "index/page_38882",
+            "title": "2.2: Eating Behaviors and Food Choices",
+            "htmlBytes": 300,
+            "textChars": 38
+          },
+          {
+            "path": "index/page_39043",
+            "title": "1.6: Research Highlight - Risk Factors",
+            "htmlBytes": 306,
+            "textChars": 38
+          },
+          {
+            "path": "index/page_39044",
+            "title": "1.7: Diet Analysis Activity -  Foundations for Self Reflection",
+            "htmlBytes": 354,
+            "textChars": 61
+          },
+          {
+            "path": "index/page_39046",
+            "title": "2.8: Diet Analysis Activity - Evaluating Food Responses",
+            "htmlBytes": 334,
+            "textChars": 55
+          },
+          {
+            "path": "index/page_39047",
+            "title": "4.6: Research Highlight - The Gut-Brain Connection",
+            "htmlBytes": 326,
+            "textChars": 50
+          },
+          {
+            "path": "index/page_39068",
+            "title": "ProgramPage",
+            "htmlBytes": 240,
+            "textChars": 11
+          }
+        ],
+        "externalLinkHeavy": [
+          {
+            "path": "content/med.libretexts.org/Sandboxes/Team_Sandbox:_Nutrition_(OERI)/Introduction_to_Nutrition_Science_-_OERI_2020/09:_Macronutrient_and_Alcohol_Metabolism/9.01:_Metabolism_Basics/9.1.04:_Central_Aspect_of_Generating_Pyruvate_in_Energy_Metabolism-_Glycolysis_up_close",
+            "title": "content/med.libretexts.org/Sandboxes/Team_Sandbox:_Nutrition_(OERI)/Introduction_to_Nutrition_Science_-_OERI_2020/09:_Macronutrient_and_Alcohol_Metabolism/9.01:_Metabolism_Basics/9.1.04:_Central_Aspect_of_Generating_Pyruvate_in_Energy_Metabolism-_Glycolysis_up_close",
+            "htmlBytes": 136670,
+            "textChars": 14829,
+            "externalLinks": 64
+          },
+          {
+            "path": "content/en.wikipedia.org/wiki/Diverticulosis",
+            "title": "content/en.wikipedia.org/wiki/Diverticulosis",
+            "htmlBytes": 189706,
+            "textChars": 24130,
+            "externalLinks": 134
+          },
+          {
+            "path": "content/www.flickr.com/photos/75421774@N00/32175260",
+            "title": "content/www.flickr.com/photos/75421774@N00/32175260",
+            "htmlBytes": 470889,
+            "textChars": 1019,
+            "externalLinks": 55
+          },
+          {
+            "path": "content/med.libretexts.org/@api/deki/files/39389/FooterLumenCandela.pngfixmefixme?revision=1",
+            "title": "content/med.libretexts.org/@api/deki/files/39389/FooterLumenCandela.pngfixmefixme?revision=1",
+            "htmlBytes": 19899,
+            "textChars": 548,
+            "externalLinks": 19
+          },
+          {
+            "path": "content/med.libretexts.org/@api/deki/files/39390/FooterLumenCandela.pngfixmefixme?revision=1",
+            "title": "content/med.libretexts.org/@api/deki/files/39390/FooterLumenCandela.pngfixmefixme?revision=1",
+            "htmlBytes": 19899,
+            "textChars": 548,
+            "externalLinks": 19
+          },
+          {
+            "path": "content/med.libretexts.org/@api/deki/files/39391/FooterLumenCandela.pngfixmefixme?revision=1",
+            "title": "content/med.libretexts.org/@api/deki/files/39391/FooterLumenCandela.pngfixmefixme?revision=1",
+            "htmlBytes": 19899,
+            "textChars": 548,
+            "externalLinks": 19
+          },
+          {
+            "path": "content/www.chemspider.com/ImagesHandler.ashx?id=10292785&w=250&h=250",
+            "title": "content/www.chemspider.com/ImagesHandler.ashx?id=10292785&w=250&h=250",
+            "htmlBytes": 22514,
+            "textChars": 880,
+            "externalLinks": 37
+          },
+          {
+            "path": "content/www.chemspider.com/ImagesHandler.ashx?id=11036&w=250&h=250",
+            "title": "content/www.chemspider.com/ImagesHandler.ashx?id=11036&w=250&h=250",
+            "htmlBytes": 22514,
+            "textChars": 880,
+            "externalLinks": 37
+          },
+          {
+            "path": "content/www.chemspider.com/ImagesHandler.ashx?id=55178&w=250&h=250",
+            "title": "content/www.chemspider.com/ImagesHandler.ashx?id=55178&w=250&h=250",
+            "htmlBytes": 22514,
+            "textChars": 880,
+            "externalLinks": 37
+          },
+          {
+            "path": "content/www.chemspider.com/ImagesHandler.ashx?id=59578&w=250&h=250",
+            "title": "content/www.chemspider.com/ImagesHandler.ashx?id=59578&w=250&h=250",
+            "htmlBytes": 22514,
+            "textChars": 880,
+            "externalLinks": 37
+          }
+        ],
+        "readErrors": []
+      },
+      "finishedAt": "2026-11-19T01:39:57.539Z"
+    }
+  ]
+}

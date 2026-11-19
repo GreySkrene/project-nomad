@@ -21,7 +21,7 @@ import { KiwixLibraryService } from './kiwix_library_service.js'
 import { SERVICE_NAMES } from '../../constants/service_names.js'
 import { exec } from 'child_process'
 import { promisify } from 'util'
-import { readFile, mkdir, copyFile, chown, chmod, access, writeFile } from 'node:fs/promises'
+import { readFile, readdir, mkdir, copyFile, chown, chmod, access, writeFile } from 'node:fs/promises'
 import { randomBytes } from 'node:crypto'
 import KVStore from '#models/kv_store'
 import { BROADCAST_CHANNELS } from '../../constants/broadcast.js'
@@ -1051,12 +1051,29 @@ export class DockerService {
   private async _runPreinstallActions__KiwixServe(): Promise<void> {
     /**
      * At least one .zim file must be available before we can start the kiwix container.
-     * We'll download the lightweight mini Wikipedia Top 100 zim file for this purpose.
+     * Download the lightweight mini Wikipedia Top 100 ZIM only when the library is
+     * actually empty. Previously every reinstall downloaded it again even when a
+     * complete library was already present, creating a misleading duplicate.
      **/
     const WIKIPEDIA_ZIM_URL =
       'https://github.com/Crosstalk-Solutions/project-nomad/raw/refs/heads/main/install/wikipedia_en_100_mini_2026-01.zim'
     const filename = 'wikipedia_en_100_mini_2026-01.zim'
-    const filepath = join(process.cwd(), ZIM_STORAGE_PATH, filename)
+    const zimDirectory = join(process.cwd(), ZIM_STORAGE_PATH)
+    await mkdir(zimDirectory, { recursive: true })
+    const existingZims = (await readdir(zimDirectory)).filter((name) => name.endsWith('.zim'))
+    if (existingZims.length > 0) {
+      logger.info(
+        `[DockerService] Kiwix Serve pre-install: ${existingZims.length} ZIM file(s) already present; skipping bootstrap archive`
+      )
+      this._broadcast(
+        SERVICE_NAMES.KIWIX,
+        'preinstall',
+        `Found ${existingZims.length} existing ZIM file(s); skipping the bootstrap Wikipedia archive.`
+      )
+      return
+    }
+
+    const filepath = join(zimDirectory, filename)
     logger.info(`[DockerService] Kiwix Serve pre-install: Downloading ZIM file to ${filepath}`)
 
     this._broadcast(

@@ -12,6 +12,9 @@ Status key: `[x]` verified complete, `[-]` in progress, `[ ]` not started, `[!]`
 - [x] Update `NOMAD_SETUP_REPORT.md` so completed downloads are no longer described as pending.
 - [x] Replace the invalid eCFR access-denied capture with a genuine official FRS regulation source.
 - [ ] Record hashes/validation evidence for the large installed ZIM and PMTiles resources where practical.
+- [-] Perform the content-level usefulness/completeness audit tracked in `CONTENT_AUDIT.md`; downloaded does not mean usable.
+- [!] Replace or remove LibreTexts Medicine after confirming its title-only book/chapter routes and validating an alternative.
+- [-] Audit Gardening Stack Exchange against coherent gardening and plant references; do not treat Q&A as an encyclopedia.
 
 ## B. Emergency knowledge base and citations
 
@@ -99,7 +102,7 @@ Status key: `[x]` verified complete, `[-]` in progress, `[ ]` not started, `[!]`
 ## K. Public, reproducible personal-project fork
 
 - [x] Define the emergency-family Kiwix selection in a machine-readable profile with exact filenames, URLs, sizes, and rationale.
-- [x] Verify all 19 profile archive URLs resolve successfully from the official Kiwix download service.
+- [x] Verify/download all 20 current profile archives through the official Kiwix service; Gardenology was added after the content audit exposed the Q&A-only gardening gap.
 - [x] Add a dependency-free installer that previews, size-gates, queues, and monitors missing ZIMs through NOMAD's supported API.
 - [x] Document storage tradeoffs, map/Kolibri setup, safety boundaries, and content that is intentionally excluded from Git.
 - [x] Update the main README to distinguish this family emergency profile from upstream Project NOMAD.

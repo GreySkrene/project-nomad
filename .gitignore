@@ -67,6 +67,9 @@ server/temp
 .codegraph
 .mcp.json
 .edge-qa-*/
+.edge-libre-*/
+.edge-military-*/
+.edge-zimgit-*/
 
 # Local emergency-library payloads. Keep manifests, checksums, source notes,
 # and quick-reference Markdown in git; never publish downloaded archives.
@@ -99,6 +102,7 @@ ui-upgrade-*.png
 !docs/emergency/images/ui-upgrade-docs-final.png
 kolibri-*.png
 wsl.conf.nomad
+kiwix-smart-search.generated.html
 
 # Frontend assets compiled code
 admin/public/assets

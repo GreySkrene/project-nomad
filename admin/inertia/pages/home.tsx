@@ -179,8 +179,10 @@ export default function Home(props: {
         // emergency-library path does not stop at Kolibri's optional sign-in screen.
         to: service.service_name === SERVICE_NAMES.KOLIBRI_GEN2
           ? new URL('/en/learn/', serviceLink).href
-          : serviceLink,
-        target: '_blank',
+          : service.service_name === SERVICE_NAMES.KIWIX
+            ? '/library-search'
+            : serviceLink,
+        target: service.service_name === SERVICE_NAMES.KIWIX ? '' : '_blank',
         description:
           service.description ||
           `Access the ${service.friendly_name || service.service_name} application`,

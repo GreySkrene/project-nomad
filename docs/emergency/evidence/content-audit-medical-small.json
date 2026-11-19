@@ -1,0 +1,1535 @@
+{
+  "schemaVersion": 1,
+  "reports": [
+    {
+      "path": "/data/zim/librepathology_en_all_maxi_2026-09.zim",
+      "startedAt": "2026-11-19T02:11:48.310Z",
+      "filename": "/data/zim/librepathology_en_all_maxi_2026-09.zim",
+      "filesize": 95279611,
+      "uuid": "c31257a8-5390-385c-019a-126a22e553cf",
+      "counts": {
+        "allEntriesDeclared": 14444,
+        "userEntriesDeclared": 14426,
+        "articlesDeclared": 7193,
+        "mediaDeclared": 7214,
+        "entriesScanned": 14426,
+        "redirects": 3151,
+        "htmlPages": 4042,
+        "htmlReadErrors": 0,
+        "oversizedHtmlSkipped": 0,
+        "titleOnlyPages": 196,
+        "textUnder80": 1752,
+        "textUnder250": 1820,
+        "textUnder1000": 2278,
+        "pagesWithExternalLinks": 2224,
+        "externalLinks": 24796,
+        "pagesWithRelativeLinks": 4042,
+        "relativeLinks": 88493
+      },
+      "indexes": {
+        "title": true,
+        "fulltext": true
+      },
+      "checksum": {
+        "present": true,
+        "value": "5bfe412fff60d79c83876be9da727b97",
+        "valid": true
+      },
+      "metadata": {
+        "Title": "Libre Pathology",
+        "Description": "A pathology knowledge base",
+        "Creator": "Librepathology",
+        "Publisher": "openZIM",
+        "Date": "2026-09-01",
+        "Language": "eng",
+        "Tags": "medical;librepathology;_pictures:yes;_videos:no;_details:yes;_ftindex:yes",
+        "Name": "librepathology_en_all"
+      },
+      "samples": {
+        "titleOnly": [
+          {
+            "path": "AAN",
+            "title": "AAN",
+            "htmlBytes": 262,
+            "textChars": 7
+          },
+          {
+            "path": "AD",
+            "title": "AD",
+            "htmlBytes": 204,
+            "textChars": 5
+          },
+          {
+            "path": "AGA",
+            "title": "AGA",
+            "htmlBytes": 216,
+            "textChars": 7
+          },
+          {
+            "path": "AGBM",
+            "title": "AGBM",
+            "htmlBytes": 286,
+            "textChars": 9
+          },
+          {
+            "path": "AGC",
+            "title": "AGC",
+            "htmlBytes": 256,
+            "textChars": 7
+          },
+          {
+            "path": "AGEP",
+            "title": "AGEP",
+            "htmlBytes": 276,
+            "textChars": 9
+          },
+          {
+            "path": "AGUS",
+            "title": "AGUS",
+            "htmlBytes": 258,
+            "textChars": 9
+          },
+          {
+            "path": "AITL",
+            "title": "AITL",
+            "htmlBytes": 244,
+            "textChars": 9
+          },
+          {
+            "path": "AKI",
+            "title": "AKI",
+            "htmlBytes": 222,
+            "textChars": 7
+          },
+          {
+            "path": "ALS",
+            "title": "ALS",
+            "htmlBytes": 268,
+            "textChars": 7
+          },
+          {
+            "path": "APL",
+            "title": "APL",
+            "htmlBytes": 258,
+            "textChars": 7
+          },
+          {
+            "path": "ARF",
+            "title": "ARF",
+            "htmlBytes": 222,
+            "textChars": 7
+          },
+          {
+            "path": "ARMS",
+            "title": "ARMS",
+            "htmlBytes": 238,
+            "textChars": 9
+          },
+          {
+            "path": "ARVC",
+            "title": "ARVC",
+            "htmlBytes": 282,
+            "textChars": 9
+          },
+          {
+            "path": "ASD",
+            "title": "ASD",
+            "htmlBytes": 246,
+            "textChars": 7
+          },
+          {
+            "path": "ASHD",
+            "title": "ASHD",
+            "htmlBytes": 232,
+            "textChars": 9
+          },
+          {
+            "path": "ATN",
+            "title": "ATN",
+            "htmlBytes": 248,
+            "textChars": 7
+          },
+          {
+            "path": "AUS",
+            "title": "AUS",
+            "htmlBytes": 292,
+            "textChars": 7
+          },
+          {
+            "path": "AVM",
+            "title": "AVM",
+            "htmlBytes": 254,
+            "textChars": 7
+          },
+          {
+            "path": "AWE",
+            "title": "AWE",
+            "htmlBytes": 232,
+            "textChars": 7
+          },
+          {
+            "path": "BAC",
+            "title": "BAC",
+            "htmlBytes": 238,
+            "textChars": 7
+          },
+          {
+            "path": "BAK",
+            "title": "BAK",
+            "htmlBytes": 244,
+            "textChars": 7
+          },
+          {
+            "path": "BAL",
+            "title": "BAL",
+            "htmlBytes": 232,
+            "textChars": 7
+          },
+          {
+            "path": "BCAC",
+            "title": "BCAC",
+            "htmlBytes": 240,
+            "textChars": 9
+          },
+          {
+            "path": "BFP",
+            "title": "BFP",
+            "htmlBytes": 252,
+            "textChars": 7
+          },
+          {
+            "path": "BGH",
+            "title": "BGH",
+            "htmlBytes": 232,
+            "textChars": 7
+          },
+          {
+            "path": "BKA",
+            "title": "BKA",
+            "htmlBytes": 200,
+            "textChars": 7
+          },
+          {
+            "path": "BN",
+            "title": "BN",
+            "htmlBytes": 214,
+            "textChars": 5
+          },
+          {
+            "path": "BPD",
+            "title": "BPD",
+            "htmlBytes": 248,
+            "textChars": 7
+          },
+          {
+            "path": "C4d",
+            "title": "C4d",
+            "htmlBytes": 234,
+            "textChars": 7
+          },
+          {
+            "path": "CAA",
+            "title": "CAA",
+            "htmlBytes": 240,
+            "textChars": 7
+          },
+          {
+            "path": "CAD",
+            "title": "CAD",
+            "htmlBytes": 230,
+            "textChars": 7
+          },
+          {
+            "path": "CAN",
+            "title": "CAN",
+            "htmlBytes": 268,
+            "textChars": 7
+          },
+          {
+            "path": "CCAM",
+            "title": "CCAM",
+            "htmlBytes": 278,
+            "textChars": 9
+          },
+          {
+            "path": "CCST",
+            "title": "CCST",
+            "htmlBytes": 254,
+            "textChars": 9
+          },
+          {
+            "path": "CG",
+            "title": "CG",
+            "htmlBytes": 208,
+            "textChars": 5
+          },
+          {
+            "path": "CGCG",
+            "title": "CGCG",
+            "htmlBytes": 230,
+            "textChars": 9
+          },
+          {
+            "path": "CJD",
+            "title": "CJD",
+            "htmlBytes": 260,
+            "textChars": 7
+          },
+          {
+            "path": "CMV",
+            "title": "CMV",
+            "htmlBytes": 202,
+            "textChars": 7
+          },
+          {
+            "path": "COD",
+            "title": "COD",
+            "htmlBytes": 222,
+            "textChars": 7
+          },
+          {
+            "path": "COPD",
+            "title": "COPD",
+            "htmlBytes": 220,
+            "textChars": 9
+          },
+          {
+            "path": "CPAM",
+            "title": "CPAM",
+            "htmlBytes": 278,
+            "textChars": 9
+          },
+          {
+            "path": "CPM",
+            "title": "CPM",
+            "htmlBytes": 242,
+            "textChars": 7
+          },
+          {
+            "path": "CPT",
+            "title": "CPT",
+            "htmlBytes": 258,
+            "textChars": 7
+          },
+          {
+            "path": "DAI",
+            "title": "DAI",
+            "htmlBytes": 236,
+            "textChars": 7
+          },
+          {
+            "path": "DCM",
+            "title": "DCM",
+            "htmlBytes": 230,
+            "textChars": 7
+          },
+          {
+            "path": "DDx",
+            "title": "DDx",
+            "htmlBytes": 220,
+            "textChars": 7
+          },
+          {
+            "path": "DIC",
+            "title": "DIC",
+            "htmlBytes": 266,
+            "textChars": 7
+          },
+          {
+            "path": "DMF",
+            "title": "DMF",
+            "htmlBytes": 236,
+            "textChars": 7
+          },
+          {
+            "path": "DUB",
+            "title": "DUB",
+            "htmlBytes": 230,
+            "textChars": 7
+          }
+        ],
+        "thinUnder80": [
+          {
+            "path": "AAN",
+            "title": "AAN",
+            "htmlBytes": 262,
+            "textChars": 7
+          },
+          {
+            "path": "AD",
+            "title": "AD",
+            "htmlBytes": 204,
+            "textChars": 5
+          },
+          {
+            "path": "AFB_stain",
+            "title": "AFB stain",
+            "htmlBytes": 230,
+            "textChars": 19
+          },
+          {
+            "path": "AFB_stains",
+            "title": "AFB stains",
+            "htmlBytes": 232,
+            "textChars": 21
+          },
+          {
+            "path": "AGA",
+            "title": "AGA",
+            "htmlBytes": 216,
+            "textChars": 7
+          },
+          {
+            "path": "AGBM",
+            "title": "AGBM",
+            "htmlBytes": 286,
+            "textChars": 9
+          },
+          {
+            "path": "AGC",
+            "title": "AGC",
+            "htmlBytes": 256,
+            "textChars": 7
+          },
+          {
+            "path": "AGEP",
+            "title": "AGEP",
+            "htmlBytes": 276,
+            "textChars": 9
+          },
+          {
+            "path": "AGUS",
+            "title": "AGUS",
+            "htmlBytes": 258,
+            "textChars": 9
+          },
+          {
+            "path": "AIDS-defining_illness",
+            "title": "AIDS-defining illness",
+            "htmlBytes": 298,
+            "textChars": 43
+          },
+          {
+            "path": "AITL",
+            "title": "AITL",
+            "htmlBytes": 244,
+            "textChars": 9
+          },
+          {
+            "path": "AKI",
+            "title": "AKI",
+            "htmlBytes": 222,
+            "textChars": 7
+          },
+          {
+            "path": "ALS",
+            "title": "ALS",
+            "htmlBytes": 268,
+            "textChars": 7
+          },
+          {
+            "path": "APL",
+            "title": "APL",
+            "htmlBytes": 258,
+            "textChars": 7
+          },
+          {
+            "path": "ARF",
+            "title": "ARF",
+            "htmlBytes": 222,
+            "textChars": 7
+          },
+          {
+            "path": "ARMS",
+            "title": "ARMS",
+            "htmlBytes": 238,
+            "textChars": 9
+          },
+          {
+            "path": "ARPKD",
+            "title": "ARPKD",
+            "htmlBytes": 296,
+            "textChars": 11
+          },
+          {
+            "path": "ARVC",
+            "title": "ARVC",
+            "htmlBytes": 282,
+            "textChars": 9
+          },
+          {
+            "path": "ASC-H",
+            "title": "ASC-H",
+            "htmlBytes": 380,
+            "textChars": 11
+          },
+          {
+            "path": "ASC-US",
+            "title": "ASC-US",
+            "htmlBytes": 318,
+            "textChars": 13
+          },
+          {
+            "path": "ASCUS",
+            "title": "ASCUS",
+            "htmlBytes": 316,
+            "textChars": 11
+          },
+          {
+            "path": "ASD",
+            "title": "ASD",
+            "htmlBytes": 246,
+            "textChars": 7
+          },
+          {
+            "path": "ASHD",
+            "title": "ASHD",
+            "htmlBytes": 232,
+            "textChars": 9
+          },
+          {
+            "path": "ATN",
+            "title": "ATN",
+            "htmlBytes": 248,
+            "textChars": 7
+          },
+          {
+            "path": "AUS",
+            "title": "AUS",
+            "htmlBytes": 292,
+            "textChars": 7
+          },
+          {
+            "path": "AVM",
+            "title": "AVM",
+            "htmlBytes": 254,
+            "textChars": 7
+          },
+          {
+            "path": "AV_node",
+            "title": "AV node",
+            "htmlBytes": 218,
+            "textChars": 15
+          },
+          {
+            "path": "AWE",
+            "title": "AWE",
+            "htmlBytes": 232,
+            "textChars": 7
+          },
+          {
+            "path": "Abdo_pannus",
+            "title": "Abdo pannus",
+            "htmlBytes": 220,
+            "textChars": 23
+          },
+          {
+            "path": "Abdominal_fat_pad_biopsy",
+            "title": "Abdominal fat pad biopsy",
+            "htmlBytes": 228,
+            "textChars": 49
+          },
+          {
+            "path": "Abetalipoproteinemia",
+            "title": "Abetalipoproteinemia",
+            "htmlBytes": 304,
+            "textChars": 41
+          },
+          {
+            "path": "Abrasion",
+            "title": "Abrasion",
+            "htmlBytes": 216,
+            "textChars": 17
+          },
+          {
+            "path": "Acantholysis",
+            "title": "Acantholysis",
+            "htmlBytes": 254,
+            "textChars": 25
+          },
+          {
+            "path": "Acanthosis",
+            "title": "Acanthosis",
+            "htmlBytes": 248,
+            "textChars": 21
+          },
+          {
+            "path": "Acanthosis_nigricans",
+            "title": "Acanthosis nigricans",
+            "htmlBytes": 264,
+            "textChars": 41
+          },
+          {
+            "path": "Acetowhite_epithelium",
+            "title": "Acetowhite epithelium",
+            "htmlBytes": 268,
+            "textChars": 43
+          },
+          {
+            "path": "Acetowhite_lesion",
+            "title": "Acetowhite lesion",
+            "htmlBytes": 260,
+            "textChars": 35
+          },
+          {
+            "path": "Acne_vulgaris",
+            "title": "Acne vulgaris",
+            "htmlBytes": 256,
+            "textChars": 27
+          },
+          {
+            "path": "Acquired_cystic_kidney_disease",
+            "title": "Acquired cystic kidney disease",
+            "htmlBytes": 314,
+            "textChars": 61
+          },
+          {
+            "path": "Actinic_cheilitis",
+            "title": "Actinic cheilitis",
+            "htmlBytes": 272,
+            "textChars": 35
+          },
+          {
+            "path": "Actinic_elastosis",
+            "title": "Actinic elastosis",
+            "htmlBytes": 268,
+            "textChars": 35
+          },
+          {
+            "path": "Actinobacteria",
+            "title": "Actinobacteria",
+            "htmlBytes": 224,
+            "textChars": 29
+          },
+          {
+            "path": "Actinomyces",
+            "title": "Actinomyces",
+            "htmlBytes": 216,
+            "textChars": 23
+          },
+          {
+            "path": "Actinomycetes",
+            "title": "Actinomycetes",
+            "htmlBytes": 220,
+            "textChars": 27
+          },
+          {
+            "path": "Active_ileitis",
+            "title": "Active ileitis",
+            "htmlBytes": 224,
+            "textChars": 29
+          },
+          {
+            "path": "Acute_endometritis",
+            "title": "Acute endometritis",
+            "htmlBytes": 248,
+            "textChars": 37
+          },
+          {
+            "path": "Acute_gastritis",
+            "title": "Acute gastritis",
+            "htmlBytes": 230,
+            "textChars": 31
+          },
+          {
+            "path": "Acute_ileitis",
+            "title": "Acute ileitis",
+            "htmlBytes": 222,
+            "textChars": 27
+          },
+          {
+            "path": "Acute_interstitial_pneumonia",
+            "title": "Acute interstitial pneumonia",
+            "htmlBytes": 296,
+            "textChars": 57
+          },
+          {
+            "path": "Acute_kidney_injury",
+            "title": "Acute kidney injury",
+            "htmlBytes": 254,
+            "textChars": 39
+          }
+        ],
+        "externalLinkHeavy": [
+          {
+            "path": "Acute_appendicitis",
+            "title": "Acute appendicitis",
+            "htmlBytes": 22816,
+            "textChars": 6824,
+            "externalLinks": 18
+          },
+          {
+            "path": "Amnion_nodosum",
+            "title": "Amnion nodosum",
+            "htmlBytes": 7263,
+            "textChars": 1415,
+            "externalLinks": 10
+          },
+          {
+            "path": "Anaplastic_large_cell_lymphoma",
+            "title": "Anaplastic large cell lymphoma",
+            "htmlBytes": 13685,
+            "textChars": 3736,
+            "externalLinks": 15
+          },
+          {
+            "path": "Angiosarcoma",
+            "title": "Angiosarcoma",
+            "htmlBytes": 32461,
+            "textChars": 6532,
+            "externalLinks": 27
+          },
+          {
+            "path": "Arias-Stella_reaction",
+            "title": "Arias-Stella reaction",
+            "htmlBytes": 9615,
+            "textChars": 2512,
+            "externalLinks": 10
+          },
+          {
+            "path": "Basal_cell_carcinoma",
+            "title": "Basal cell carcinoma",
+            "htmlBytes": 42440,
+            "textChars": 13731,
+            "externalLinks": 33
+          },
+          {
+            "path": "Benign_lymphoepithelial_lesion",
+            "title": "Benign lymphoepithelial lesion",
+            "htmlBytes": 8055,
+            "textChars": 2380,
+            "externalLinks": 12
+          },
+          {
+            "path": "Bladder_cancer_staging",
+            "title": "Bladder cancer staging",
+            "htmlBytes": 9607,
+            "textChars": 2554,
+            "externalLinks": 12
+          },
+          {
+            "path": "Bosniak_classification_of_renal_cysts",
+            "title": "Bosniak classification of renal cysts",
+            "htmlBytes": 8873,
+            "textChars": 2409,
+            "externalLinks": 14
+          },
+          {
+            "path": "Cancer",
+            "title": "Cancer",
+            "htmlBytes": 13333,
+            "textChars": 3962,
+            "externalLinks": 10
+          },
+          {
+            "path": "Carcinoma_ex_pleomorphic_adenoma",
+            "title": "Carcinoma ex pleomorphic adenoma",
+            "htmlBytes": 17586,
+            "textChars": 4161,
+            "externalLinks": 10
+          },
+          {
+            "path": "Chondromyxoid_fibroma",
+            "title": "Chondromyxoid fibroma",
+            "htmlBytes": 13979,
+            "textChars": 3440,
+            "externalLinks": 22
+          },
+          {
+            "path": "Clear_cell_sarcoma",
+            "title": "Clear cell sarcoma",
+            "htmlBytes": 14851,
+            "textChars": 3448,
+            "externalLinks": 11
+          },
+          {
+            "path": "Collagenous_sprue",
+            "title": "Collagenous sprue",
+            "htmlBytes": 10606,
+            "textChars": 2219,
+            "externalLinks": 11
+          },
+          {
+            "path": "Cytokeratin_19",
+            "title": "Cytokeratin 19",
+            "htmlBytes": 8297,
+            "textChars": 1828,
+            "externalLinks": 10
+          },
+          {
+            "path": "Endoscopic_ultrasound-guided_fine_needle_aspiration",
+            "title": "Endoscopic ultrasound-guided fine needle aspiration",
+            "htmlBytes": 7497,
+            "textChars": 1857,
+            "externalLinks": 11
+          },
+          {
+            "path": "Ependymoma",
+            "title": "Ependymoma",
+            "htmlBytes": 41372,
+            "textChars": 12994,
+            "externalLinks": 40
+          },
+          {
+            "path": "Exaggerated_placental_site",
+            "title": "Exaggerated placental site",
+            "htmlBytes": 8341,
+            "textChars": 1934,
+            "externalLinks": 11
+          },
+          {
+            "path": "Focal_nodular_hyperplasia",
+            "title": "Focal nodular hyperplasia",
+            "htmlBytes": 16625,
+            "textChars": 4106,
+            "externalLinks": 11
+          },
+          {
+            "path": "GATA3",
+            "title": "GATA3",
+            "htmlBytes": 25870,
+            "textChars": 6351,
+            "externalLinks": 45
+          },
+          {
+            "path": "Gastroesophageal_reflux_disease",
+            "title": "Gastroesophageal reflux disease",
+            "htmlBytes": 24559,
+            "textChars": 7465,
+            "externalLinks": 21
+          },
+          {
+            "path": "Glioblastoma",
+            "title": "Glioblastoma",
+            "htmlBytes": 43375,
+            "textChars": 10988,
+            "externalLinks": 29
+          },
+          {
+            "path": "Glomangiopericytoma",
+            "title": "Glomangiopericytoma",
+            "htmlBytes": 8884,
+            "textChars": 1842,
+            "externalLinks": 12
+          },
+          {
+            "path": "Identity_testing",
+            "title": "Identity testing",
+            "htmlBytes": 7712,
+            "textChars": 2027,
+            "externalLinks": 10
+          },
+          {
+            "path": "Intestinal_metaplasia_of_the_stomach",
+            "title": "Intestinal metaplasia of the stomach",
+            "htmlBytes": 25216,
+            "textChars": 7129,
+            "externalLinks": 25
+          },
+          {
+            "path": "Intratumoural_lymphocytic_response_in_colorectal_carcinoma",
+            "title": "Intratumoural lymphocytic response in colorectal carcinoma",
+            "htmlBytes": 13103,
+            "textChars": 3340,
+            "externalLinks": 14
+          },
+          {
+            "path": "Joints",
+            "title": "Joints",
+            "htmlBytes": 19635,
+            "textChars": 6531,
+            "externalLinks": 18
+          },
+          {
+            "path": "Lymphocytic_interstitial_pneumonia",
+            "title": "Lymphocytic interstitial pneumonia",
+            "htmlBytes": 13276,
+            "textChars": 2907,
+            "externalLinks": 11
+          },
+          {
+            "path": "Mast_cell",
+            "title": "Mast cell",
+            "htmlBytes": 10831,
+            "textChars": 2558,
+            "externalLinks": 13
+          },
+          {
+            "path": "Medullary_thyroid_carcinoma",
+            "title": "Medullary thyroid carcinoma",
+            "htmlBytes": 28001,
+            "textChars": 6924,
+            "externalLinks": 13
+          },
+          {
+            "path": "Microcystic_adnexal_carcinoma",
+            "title": "Microcystic adnexal carcinoma",
+            "htmlBytes": 14556,
+            "textChars": 3426,
+            "externalLinks": 15
+          },
+          {
+            "path": "Myxofibrosarcoma",
+            "title": "Myxofibrosarcoma",
+            "htmlBytes": 9809,
+            "textChars": 2378,
+            "externalLinks": 10
+          },
+          {
+            "path": "Nasal_polyps",
+            "title": "Nasal polyps",
+            "htmlBytes": 25758,
+            "textChars": 7892,
+            "externalLinks": 26
+          },
+          {
+            "path": "Osmotic_demyelination_syndrome",
+            "title": "Osmotic demyelination syndrome",
+            "htmlBytes": 12244,
+            "textChars": 3000,
+            "externalLinks": 20
+          },
+          {
+            "path": "Ovary",
+            "title": "Ovary",
+            "htmlBytes": 15280,
+            "textChars": 3905,
+            "externalLinks": 15
+          },
+          {
+            "path": "Papillary_urothelial_neoplasm_of_low_malignant_potential",
+            "title": "Papillary urothelial neoplasm of low malignant potential",
+            "htmlBytes": 16525,
+            "textChars": 4713,
+            "externalLinks": 15
+          },
+          {
+            "path": "Parathyroid_carcinoma",
+            "title": "Parathyroid carcinoma",
+            "htmlBytes": 18712,
+            "textChars": 3597,
+            "externalLinks": 15
+          },
+          {
+            "path": "Phyllodes_tumour",
+            "title": "Phyllodes tumour",
+            "htmlBytes": 17889,
+            "textChars": 4908,
+            "externalLinks": 16
+          },
+          {
+            "path": "Portal_hypertensive_gastropathy",
+            "title": "Portal hypertensive gastropathy",
+            "htmlBytes": 11106,
+            "textChars": 3242,
+            "externalLinks": 10
+          },
+          {
+            "path": "Programmed_cell_death_1",
+            "title": "Programmed cell death 1",
+            "htmlBytes": 9267,
+            "textChars": 2531,
+            "externalLinks": 12
+          },
+          {
+            "path": "Serous_tubal_intraepithelial_carcinoma",
+            "title": "Serous tubal intraepithelial carcinoma",
+            "htmlBytes": 24730,
+            "textChars": 4751,
+            "externalLinks": 26
+          },
+          {
+            "path": "Small_cell_carcinoma",
+            "title": "Small cell carcinoma",
+            "htmlBytes": 22245,
+            "textChars": 5030,
+            "externalLinks": 21
+          },
+          {
+            "path": "Small_vessel_leukocytoclastic_vasculitis",
+            "title": "Small vessel leukocytoclastic vasculitis",
+            "htmlBytes": 16222,
+            "textChars": 3615,
+            "externalLinks": 12
+          },
+          {
+            "path": "Squamous_metaplasia_of_the_uterine_cervix",
+            "title": "Squamous metaplasia of the uterine cervix",
+            "htmlBytes": 13298,
+            "textChars": 3737,
+            "externalLinks": 10
+          },
+          {
+            "path": "Subependymal_giant_cell_astrocytoma",
+            "title": "Subependymal giant cell astrocytoma",
+            "htmlBytes": 16900,
+            "textChars": 3868,
+            "externalLinks": 16
+          },
+          {
+            "path": "Succinate_dehydrogenase-deficient_renal_cell_carcinoma",
+            "title": "Succinate dehydrogenase-deficient renal cell carcinoma",
+            "htmlBytes": 23327,
+            "textChars": 4677,
+            "externalLinks": 15
+          },
+          {
+            "path": "Syringoma",
+            "title": "Syringoma",
+            "htmlBytes": 13029,
+            "textChars": 2251,
+            "externalLinks": 14
+          },
+          {
+            "path": "Thymus",
+            "title": "Thymus",
+            "htmlBytes": 20199,
+            "textChars": 5304,
+            "externalLinks": 17
+          },
+          {
+            "path": "Thyroglossal_duct_cyst",
+            "title": "Thyroglossal duct cyst",
+            "htmlBytes": 6884,
+            "textChars": 1796,
+            "externalLinks": 11
+          },
+          {
+            "path": "Tornwaldt_cyst",
+            "title": "Tornwaldt cyst",
+            "htmlBytes": 7540,
+            "textChars": 1499,
+            "externalLinks": 10
+          }
+        ],
+        "readErrors": [],
+        "oversizedHtml": []
+      },
+      "finishedAt": "2026-11-19T02:11:49.270Z"
+    },
+    {
+      "path": "/data/zim/irp.fas.org_en_military-medicine_2026-10.zim",
+      "startedAt": "2026-11-19T02:11:49.292Z",
+      "filename": "/data/zim/irp.fas.org_en_military-medicine_2026-10.zim",
+      "filesize": 64986090,
+      "uuid": "1ef7b3c2-d36f-c9f2-1b6c-79c0358dfd39",
+      "counts": {
+        "allEntriesDeclared": 52,
+        "userEntriesDeclared": 36,
+        "articlesDeclared": 26,
+        "mediaDeclared": 2,
+        "entriesScanned": 36,
+        "redirects": 0,
+        "htmlPages": 2,
+        "htmlReadErrors": 0,
+        "oversizedHtmlSkipped": 0,
+        "titleOnlyPages": 0,
+        "textUnder80": 0,
+        "textUnder250": 1,
+        "textUnder1000": 1,
+        "pagesWithExternalLinks": 1,
+        "externalLinks": 7,
+        "pagesWithRelativeLinks": 2,
+        "relativeLinks": 27
+      },
+      "indexes": {
+        "title": true,
+        "fulltext": true
+      },
+      "checksum": {
+        "present": true,
+        "value": "293656735ead8aec8946bf4ad9ff3f4d",
+        "valid": true
+      },
+      "metadata": {
+        "Title": "Military Medicine",
+        "Description": "Doctrinal and Instructional manuals",
+        "Creator": "-",
+        "Publisher": "openZIM",
+        "Date": "2026-10-31",
+        "Language": "eng",
+        "Tags": "medical;_category:other;_ftindex:yes",
+        "Name": "irp.fas.org_en_military-medicine"
+      },
+      "samples": {
+        "titleOnly": [],
+        "thinUnder80": [],
+        "externalLinkHeavy": [],
+        "readErrors": [],
+        "oversizedHtml": []
+      },
+      "finishedAt": "2026-11-19T02:11:49.457Z"
+    },
+    {
+      "path": "/data/zim/wwwnc.cdc.gov_en_all_2024-11.zim",
+      "startedAt": "2026-11-19T02:11:49.463Z",
+      "filename": "/data/zim/wwwnc.cdc.gov_en_all_2024-11.zim",
+      "filesize": 178326622,
+      "uuid": "b718b4d4-4761-8687-603f-a24511d70783",
+      "counts": {
+        "allEntriesDeclared": 7211,
+        "userEntriesDeclared": 7193,
+        "articlesDeclared": 1883,
+        "mediaDeclared": 4656,
+        "entriesScanned": 7193,
+        "redirects": 423,
+        "htmlPages": 1878,
+        "htmlReadErrors": 0,
+        "oversizedHtmlSkipped": 0,
+        "titleOnlyPages": 1,
+        "textUnder80": 1,
+        "textUnder250": 3,
+        "textUnder1000": 4,
+        "pagesWithExternalLinks": 1876,
+        "externalLinks": 117760,
+        "pagesWithRelativeLinks": 1878,
+        "relativeLinks": 221000
+      },
+      "indexes": {
+        "title": true,
+        "fulltext": true
+      },
+      "checksum": {
+        "present": true,
+        "value": "06dc22cdfb3dafca23d938446d04a704",
+        "valid": true
+      },
+      "metadata": {
+        "Title": "Travelers' Health",
+        "Description": "Advice from the Center for Disease Control and Prevention",
+        "Creator": "-",
+        "Publisher": "openZIM",
+        "Date": "2024-11-14",
+        "Language": "eng",
+        "Tags": "_ftindex:yes;_category:other",
+        "Name": "wwwnc.cdc.gov_en_all"
+      },
+      "samples": {
+        "titleOnly": [
+          {
+            "path": "onemap.cdc.gov/Portal/apps/Embed/index.html?webmap=1c92faa6656f4110a3b0ea1fcb6a63c2&extent=-160.0543,-54.0412,180,73.686&home=true&zoom=true&previewImage=false&scale=true&search=true&searchextent=true&disable_scroll=false&theme=light",
+            "title": "onemap.cdc.gov/Portal/apps/Embed/index.html?webmap=1c92faa6656f4110a3b0ea1fcb6a63c2&extent=-160.0543,-54.0412,180,73.686&home=true&zoom=true&previewImage=false&scale=true&search=true&searchextent=true&disable_scroll=false&theme=light",
+            "htmlBytes": 7633,
+            "textChars": 0
+          }
+        ],
+        "thinUnder80": [
+          {
+            "path": "onemap.cdc.gov/Portal/apps/Embed/index.html?webmap=1c92faa6656f4110a3b0ea1fcb6a63c2&extent=-160.0543,-54.0412,180,73.686&home=true&zoom=true&previewImage=false&scale=true&search=true&searchextent=true&disable_scroll=false&theme=light",
+            "title": "onemap.cdc.gov/Portal/apps/Embed/index.html?webmap=1c92faa6656f4110a3b0ea1fcb6a63c2&extent=-160.0543,-54.0412,180,73.686&home=true&zoom=true&previewImage=false&scale=true&search=true&searchextent=true&disable_scroll=false&theme=light",
+            "htmlBytes": 7633,
+            "textChars": 0
+          }
+        ],
+        "externalLinkHeavy": [
+          {
+            "path": "wwwnc.cdc.gov/travel/",
+            "title": "Travelers",
+            "htmlBytes": 57264,
+            "textChars": 3140,
+            "externalLinks": 55
+          },
+          {
+            "path": "wwwnc.cdc.gov/travel/destinations/list",
+            "title": "Destinations | Travelers",
+            "htmlBytes": 255437,
+            "textChars": 9220,
+            "externalLinks": 55
+          },
+          {
+            "path": "wwwnc.cdc.gov/travel/news-announcements",
+            "title": "Clinical Updates | Travelers",
+            "htmlBytes": 194618,
+            "textChars": 4845,
+            "externalLinks": 52
+          },
+          {
+            "path": "wwwnc.cdc.gov/travel/page/cholera-travel-information",
+            "title": "Cholera Information for Health Care Professionals | Travelers",
+            "htmlBytes": 201516,
+            "textChars": 7364,
+            "externalLinks": 54
+          },
+          {
+            "path": "wwwnc.cdc.gov/travel/page/clinician-information-center",
+            "title": "Clinician Resources | Travelers",
+            "htmlBytes": 194913,
+            "textChars": 3778,
+            "externalLinks": 51
+          },
+          {
+            "path": "wwwnc.cdc.gov/travel/page/faq",
+            "title": "Travelers",
+            "htmlBytes": 202063,
+            "textChars": 11537,
+            "externalLinks": 55
+          },
+          {
+            "path": "wwwnc.cdc.gov/travel/page/find-clinic",
+            "title": "Find a Clinic | Travelers",
+            "htmlBytes": 194787,
+            "textChars": 4647,
+            "externalLinks": 55
+          },
+          {
+            "path": "wwwnc.cdc.gov/travel/page/medical-tourism",
+            "title": "Medical Tourism: Travel to Another Country for Medical Care | Travelers",
+            "htmlBytes": 199358,
+            "textChars": 9918,
+            "externalLinks": 58
+          },
+          {
+            "path": "wwwnc.cdc.gov/travel/page/partners",
+            "title": "Research and Surveillance | Travelers",
+            "htmlBytes": 192404,
+            "textChars": 4640,
+            "externalLinks": 53
+          },
+          {
+            "path": "wwwnc.cdc.gov/travel/page/travel-to-hot-climates",
+            "title": "Heat Illnesses  | Travelers",
+            "htmlBytes": 194974,
+            "textChars": 6234,
+            "externalLinks": 53
+          },
+          {
+            "path": "wwwnc.cdc.gov/travel/page/traveler-information-center",
+            "title": "Traveler Advice | Travelers",
+            "htmlBytes": 200005,
+            "textChars": 5037,
+            "externalLinks": 57
+          },
+          {
+            "path": "wwwnc.cdc.gov/travel/page/yellowbook-home",
+            "title": "CDC Yellow Book 2024 | Travelers",
+            "htmlBytes": 189984,
+            "textChars": 3050,
+            "externalLinks": 55
+          },
+          {
+            "path": "wwwnc.cdc.gov/travel/notices",
+            "title": "Travel Health Notices | Travelers",
+            "htmlBytes": 218169,
+            "textChars": 15851,
+            "externalLinks": 52
+          },
+          {
+            "path": "wwwnc.cdc.gov/travel/notices/level1/dengue-global",
+            "title": "Global Dengue - Level 1 - Level 1 - Practice Usual Precautions - Travel Health Notices | Travelers",
+            "htmlBytes": 201231,
+            "textChars": 6592,
+            "externalLinks": 57
+          },
+          {
+            "path": "wwwnc.cdc.gov/travel/notices/level1/measles-globe",
+            "title": "Measles in Globe - Level 1 - Level 1 - Practice Usual Precautions - Travel Health Notices | Travelers",
+            "htmlBytes": 203647,
+            "textChars": 9456,
+            "externalLinks": 64
+          },
+          {
+            "path": "wwwnc.cdc.gov/travel/notices/level1/oropouche-in-the-americas",
+            "title": "Oropouche in the Americas - Level 1 - Level 1 - Practice Usual Precautions - Travel Health Notices | Travelers",
+            "htmlBytes": 203662,
+            "textChars": 8612,
+            "externalLinks": 68
+          },
+          {
+            "path": "wwwnc.cdc.gov/travel/notices/level2/clade-1-mpox-central-eastern-africa",
+            "title": "Clade I Mpox in Central and Eastern Africa - Level 2 - Level 2 - Practice Enhanced Precautions - Travel Health Notices | Travelers",
+            "htmlBytes": 203694,
+            "textChars": 8857,
+            "externalLinks": 71
+          },
+          {
+            "path": "wwwnc.cdc.gov/travel/notices/level2/oropouche-cuba",
+            "title": "Oropouche in Cuba - Level 2 - Level 2 - Practice Enhanced Precautions - Travel Health Notices | Travelers",
+            "htmlBytes": 202937,
+            "textChars": 8637,
+            "externalLinks": 72
+          },
+          {
+            "path": "wwwnc.cdc.gov/travel/notices/level2/zika-maharashtra-india",
+            "title": "Zika in the state of Maharashtra, India - Level 2 - Level 2 - Practice Enhanced Precautions - Travel Health Notices | Travelers",
+            "htmlBytes": 198815,
+            "textChars": 6059,
+            "externalLinks": 65
+          },
+          {
+            "path": "wwwnc.cdc.gov/travel/notices/level3/marburg-rwanda",
+            "title": "Marburg in Rwanda - Level 3 - Level 3 - Reconsider Nonessential Travel - Travel Health Notices | Travelers",
+            "htmlBytes": 201617,
+            "textChars": 7494,
+            "externalLinks": 64
+          },
+          {
+            "path": "wwwnc.cdc.gov/travel/page/travel-genomic-surveillance",
+            "title": "Traveler-Based Genomic Surveillance for Early Detection of New SARS-CoV-2 Variants  | Travelers",
+            "htmlBytes": 201490,
+            "textChars": 8960,
+            "externalLinks": 52
+          },
+          {
+            "path": "wwwnc.cdc.gov/travel/destinations/traveler/none/afghanistan",
+            "title": "Afghanistan - Traveler view | Travelers",
+            "htmlBytes": 271835,
+            "textChars": 28059,
+            "externalLinks": 102
+          },
+          {
+            "path": "wwwnc.cdc.gov/travel/destinations/traveler/none/albania",
+            "title": "Albania - Traveler view | Travelers",
+            "htmlBytes": 260519,
+            "textChars": 23374,
+            "externalLinks": 94
+          },
+          {
+            "path": "wwwnc.cdc.gov/travel/destinations/traveler/none/algeria",
+            "title": "Algeria - Traveler view | Travelers",
+            "htmlBytes": 265622,
+            "textChars": 25377,
+            "externalLinks": 101
+          },
+          {
+            "path": "wwwnc.cdc.gov/travel/destinations/traveler/none/american-samoa",
+            "title": "American Samoa - Traveler view | Travelers",
+            "htmlBytes": 260069,
+            "textChars": 22980,
+            "externalLinks": 94
+          },
+          {
+            "path": "wwwnc.cdc.gov/travel/destinations/traveler/none/andorra",
+            "title": "Andorra - Traveler view | Travelers",
+            "htmlBytes": 252369,
+            "textChars": 20873,
+            "externalLinks": 90
+          },
+          {
+            "path": "wwwnc.cdc.gov/travel/destinations/traveler/none/angola",
+            "title": "Angola - Traveler view | Travelers",
+            "htmlBytes": 278561,
+            "textChars": 28142,
+            "externalLinks": 105
+          },
+          {
+            "path": "wwwnc.cdc.gov/travel/destinations/traveler/none/british-virgin-islands",
+            "title": "British Virgin Islands - Traveler view | Travelers",
+            "htmlBytes": 263226,
+            "textChars": 23970,
+            "externalLinks": 94
+          },
+          {
+            "path": "wwwnc.cdc.gov/travel/destinations/traveler/none/anguilla",
+            "title": "Anguilla (U.K.) - Traveler view | Travelers",
+            "htmlBytes": 262751,
+            "textChars": 23732,
+            "externalLinks": 94
+          },
+          {
+            "path": "wwwnc.cdc.gov/travel/destinations/traveler/none/antarctica",
+            "title": "Antarctica - Traveler view | Travelers",
+            "htmlBytes": 211419,
+            "textChars": 6126,
+            "externalLinks": 55
+          },
+          {
+            "path": "wwwnc.cdc.gov/travel/destinations/traveler/none/antigua-and-barbuda",
+            "title": "Antigua and Barbuda - Traveler view | Travelers",
+            "htmlBytes": 264150,
+            "textChars": 24130,
+            "externalLinks": 95
+          },
+          {
+            "path": "wwwnc.cdc.gov/travel/destinations/traveler/none/argentina",
+            "title": "Argentina - Traveler view | Travelers",
+            "htmlBytes": 268469,
+            "textChars": 26113,
+            "externalLinks": 100
+          },
+          {
+            "path": "wwwnc.cdc.gov/travel/destinations/traveler/none/armenia",
+            "title": "Armenia - Traveler view | Travelers",
+            "htmlBytes": 261347,
+            "textChars": 24288,
+            "externalLinks": 93
+          },
+          {
+            "path": "wwwnc.cdc.gov/travel/destinations/traveler/none/aruba",
+            "title": "Aruba - Traveler view | Travelers",
+            "htmlBytes": 259357,
+            "textChars": 23272,
+            "externalLinks": 95
+          },
+          {
+            "path": "wwwnc.cdc.gov/travel/destinations/traveler/none/australia",
+            "title": "Australia - Traveler view | Travelers",
+            "htmlBytes": 260116,
+            "textChars": 23103,
+            "externalLinks": 97
+          },
+          {
+            "path": "wwwnc.cdc.gov/travel/destinations/traveler/none/french-polynesia",
+            "title": "French Polynesia, including the island groups of Society Islands (Tahiti, Moorea, and Bora-Bora), Marquesas Islands (Hiva Oa and Ua Huka), and Austral Islands (Tubuai and Rurutu) - Traveler view | Travelers",
+            "htmlBytes": 263644,
+            "textChars": 24776,
+            "externalLinks": 95
+          },
+          {
+            "path": "wwwnc.cdc.gov/travel/destinations/traveler/none/austria",
+            "title": "Austria - Traveler view | Travelers",
+            "htmlBytes": 259463,
+            "textChars": 23954,
+            "externalLinks": 104
+          },
+          {
+            "path": "wwwnc.cdc.gov/travel/destinations/traveler/none/azerbaijan",
+            "title": "Azerbaijan - Traveler view | Travelers",
+            "htmlBytes": 261977,
+            "textChars": 24814,
+            "externalLinks": 93
+          },
+          {
+            "path": "wwwnc.cdc.gov/travel/destinations/traveler/none/azores",
+            "title": "Azores (Portugal) - Traveler view | Travelers",
+            "htmlBytes": 253572,
+            "textChars": 21894,
+            "externalLinks": 91
+          },
+          {
+            "path": "wwwnc.cdc.gov/travel/destinations/traveler/none/bahrain",
+            "title": "Bahrain - Traveler view | Travelers",
+            "htmlBytes": 259468,
+            "textChars": 23759,
+            "externalLinks": 95
+          },
+          {
+            "path": "wwwnc.cdc.gov/travel/destinations/traveler/none/bangladesh",
+            "title": "Bangladesh - Traveler view | Travelers",
+            "htmlBytes": 274188,
+            "textChars": 28456,
+            "externalLinks": 102
+          },
+          {
+            "path": "wwwnc.cdc.gov/travel/destinations/traveler/none/barbados",
+            "title": "Barbados - Traveler view | Travelers",
+            "htmlBytes": 265215,
+            "textChars": 24454,
+            "externalLinks": 98
+          },
+          {
+            "path": "wwwnc.cdc.gov/travel/destinations/traveler/none/belarus",
+            "title": "Belarus - Traveler view | Travelers",
+            "htmlBytes": 258250,
+            "textChars": 24025,
+            "externalLinks": 97
+          },
+          {
+            "path": "wwwnc.cdc.gov/travel/destinations/traveler/none/the-bahamas",
+            "title": "The Bahamas - Traveler view | Travelers",
+            "htmlBytes": 261708,
+            "textChars": 23752,
+            "externalLinks": 95
+          },
+          {
+            "path": "wwwnc.cdc.gov/travel/destinations/traveler/none/belgium",
+            "title": "Belgium - Traveler view | Travelers",
+            "htmlBytes": 256163,
+            "textChars": 22405,
+            "externalLinks": 93
+          },
+          {
+            "path": "wwwnc.cdc.gov/travel/destinations/traveler/none/belize",
+            "title": "Belize - Traveler view | Travelers",
+            "htmlBytes": 267234,
+            "textChars": 25719,
+            "externalLinks": 99
+          },
+          {
+            "path": "wwwnc.cdc.gov/travel/destinations/traveler/none/benin",
+            "title": "Benin - Traveler view | Travelers",
+            "htmlBytes": 276788,
+            "textChars": 28669,
+            "externalLinks": 104
+          },
+          {
+            "path": "wwwnc.cdc.gov/travel/destinations/traveler/none/bermuda",
+            "title": "Bermuda (U.K.) - Traveler view | Travelers",
+            "htmlBytes": 256314,
+            "textChars": 22987,
+            "externalLinks": 93
+          },
+          {
+            "path": "wwwnc.cdc.gov/travel/destinations/traveler/none/bhutan",
+            "title": "Bhutan - Traveler view | Travelers",
+            "htmlBytes": 263424,
+            "textChars": 25464,
+            "externalLinks": 97
+          },
+          {
+            "path": "wwwnc.cdc.gov/travel/destinations/traveler/none/bolivia",
+            "title": "Bolivia - Traveler view | Travelers",
+            "htmlBytes": 271514,
+            "textChars": 27347,
+            "externalLinks": 101
+          }
+        ],
+        "readErrors": [],
+        "oversizedHtml": []
+      },
+      "finishedAt": "2026-11-19T02:11:54.499Z"
+    },
+    {
+      "path": "/data/zim/zimgit-medicine_en_2024-08.zim",
+      "startedAt": "2026-11-19T02:11:54.563Z",
+      "filename": "/data/zim/zimgit-medicine_en_2024-08.zim",
+      "filesize": 70179585,
+      "uuid": "80d8dddf-1ecc-e528-0f08-3193044c6413",
+      "counts": {
+        "allEntriesDeclared": 823,
+        "userEntriesDeclared": 808,
+        "articlesDeclared": 1,
+        "mediaDeclared": 369,
+        "entriesScanned": 808,
+        "redirects": 0,
+        "htmlPages": 2,
+        "htmlReadErrors": 0,
+        "oversizedHtmlSkipped": 0,
+        "titleOnlyPages": 0,
+        "textUnder80": 0,
+        "textUnder250": 2,
+        "textUnder1000": 2,
+        "pagesWithExternalLinks": 0,
+        "externalLinks": 0,
+        "pagesWithRelativeLinks": 2,
+        "relativeLinks": 10
+      },
+      "indexes": {
+        "title": false,
+        "fulltext": true
+      },
+      "checksum": {
+        "present": true,
+        "value": "f568db73bd160f5b655c5def4e1083b9",
+        "valid": true
+      },
+      "metadata": {
+        "Title": "Medical Library",
+        "Description": "A collection of books pertaining to field and emergency medicine.",
+        "Creator": "Various",
+        "Publisher": "openZIM",
+        "Date": "2024-08-29",
+        "Language": "eng",
+        "Tags": "preppers;medical",
+        "Name": "zimgit-medicine_en"
+      },
+      "samples": {
+        "titleOnly": [],
+        "thinUnder80": [],
+        "externalLinkHeavy": [],
+        "readErrors": [],
+        "oversizedHtml": []
+      },
+      "finishedAt": "2026-11-19T02:11:54.773Z"
+    }
+  ]
+}

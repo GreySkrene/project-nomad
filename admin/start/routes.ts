@@ -14,6 +14,7 @@ import DrugReferenceController from '#controllers/drug_reference_controller'
 import DownloadsController from '#controllers/downloads_controller'
 import EasySetupController from '#controllers/easy_setup_controller'
 import HomeController from '#controllers/home_controller'
+import LibrarySearchController from '#controllers/library_search_controller'
 import MapsController from '#controllers/maps_controller'
 import NomadMdController from '#controllers/nomad_md_controller'
 import OllamaController from '#controllers/ollama_controller'
@@ -97,6 +98,8 @@ transmit.registerRoutes()
 
 router.get('/', [HomeController, 'index'])
 router.get('/home', [HomeController, 'home'])
+router.get('/library-search', [LibrarySearchController, 'index'])
+router.get('/api/library-search/spelling', [LibrarySearchController, 'spelling'])
 router.on('/about').renderInertia('about')
 router.get('/chat', [ChatsController, 'inertia'])
 router.get('/maps', [MapsController, 'index'])

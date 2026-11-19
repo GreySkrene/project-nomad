@@ -1,0 +1,813 @@
+{
+  "schemaVersion": 1,
+  "reports": [
+    {
+      "path": "/data/zim/medlineplus.gov_en_all_2025-01.zim",
+      "startedAt": "2026-11-19T02:10:06.866Z",
+      "filename": "/data/zim/medlineplus.gov_en_all_2025-01.zim",
+      "filesize": 1944841111,
+      "uuid": "2a11f796-044c-9468-92ce-429e83a41316",
+      "counts": {
+        "allEntriesDeclared": 28715,
+        "userEntriesDeclared": 28697,
+        "articlesDeclared": 17791,
+        "mediaDeclared": 8318,
+        "entriesScanned": 28697,
+        "redirects": 1360,
+        "htmlPages": 14940,
+        "htmlReadErrors": 0,
+        "oversizedHtmlSkipped": 0,
+        "titleOnlyPages": 0,
+        "textUnder80": 0,
+        "textUnder250": 0,
+        "textUnder1000": 0,
+        "pagesWithExternalLinks": 14931,
+        "externalLinks": 353866,
+        "pagesWithRelativeLinks": 14932,
+        "relativeLinks": 777460
+      },
+      "indexes": {
+        "title": true,
+        "fulltext": true
+      },
+      "checksum": {
+        "present": true,
+        "value": "32c1d7028ed53e35cac5ff0fea67db85",
+        "valid": true
+      },
+      "metadata": {
+        "Title": "MedlinePlus",
+        "Description": "Trusted Health Information for You",
+        "Creator": "-",
+        "Publisher": "openZIM",
+        "Date": "2025-01-04",
+        "Language": "eng",
+        "Tags": "_ftindex:yes;_category:other",
+        "Name": "medlineplus.gov_en_all"
+      },
+      "samples": {
+        "titleOnly": [],
+        "thinUnder80": [],
+        "externalLinkHeavy": [
+          {
+            "path": "medlineplus.gov/",
+            "title": "MedlinePlus - Health Information from the National Library of Medicine",
+            "htmlBytes": 28192,
+            "textChars": 2419,
+            "externalLinks": 16
+          },
+          {
+            "path": "medlineplus.gov/about/",
+            "title": "MedlinePlus: About MedlinePlus",
+            "htmlBytes": 22028,
+            "textChars": 1994,
+            "externalLinks": 13
+          },
+          {
+            "path": "medlineplus.gov/about/using/usingcontent/",
+            "title": "MedlinePlus: Linking to and Using Content from MedlinePlus",
+            "htmlBytes": 28022,
+            "textChars": 6526,
+            "externalLinks": 19
+          },
+          {
+            "path": "medlineplus.gov/all_easytoread.html",
+            "title": "Easy-to-Read Health Information: MedlinePlus",
+            "htmlBytes": 400446,
+            "textChars": 19427,
+            "externalLinks": 298
+          },
+          {
+            "path": "medlineplus.gov/allofus.html",
+            "title": "Health Information for All of Us Research Program Participants",
+            "htmlBytes": 42433,
+            "textChars": 4935,
+            "externalLinks": 63
+          },
+          {
+            "path": "medlineplus.gov/disabilities.html",
+            "title": "Disabilities: MedlinePlus",
+            "htmlBytes": 70254,
+            "textChars": 7449,
+            "externalLinks": 37
+          },
+          {
+            "path": "medlineplus.gov/druginformation.html",
+            "title": "Drugs, Herbs and Supplements: MedlinePlus",
+            "htmlBytes": 28267,
+            "textChars": 2472,
+            "externalLinks": 16
+          },
+          {
+            "path": "medlineplus.gov/encyclopedia.html",
+            "title": "Medical Encyclopedia: MedlinePlus",
+            "htmlBytes": 22542,
+            "textChars": 2217,
+            "externalLinks": 16
+          },
+          {
+            "path": "medlineplus.gov/genetics/",
+            "title": "MedlinePlus: Genetics",
+            "htmlBytes": 24615,
+            "textChars": 2317,
+            "externalLinks": 14
+          },
+          {
+            "path": "medlineplus.gov/healthtopics.html",
+            "title": "Health Topics: MedlinePlus",
+            "htmlBytes": 52797,
+            "textChars": 2682,
+            "externalLinks": 13
+          },
+          {
+            "path": "medlineplus.gov/lab-tests/",
+            "title": "MedlinePlus: Medical Tests",
+            "htmlBytes": 77530,
+            "textChars": 8873,
+            "externalLinks": 13
+          },
+          {
+            "path": "medlineplus.gov/languages/languages.html",
+            "title": "Health Information in Multiple Languages: MedlinePlus",
+            "htmlBytes": 25942,
+            "textChars": 2751,
+            "externalLinks": 12
+          },
+          {
+            "path": "medlineplus.gov/medlineplus-connect/",
+            "title": "MedlinePlus: MedlinePlus Connect",
+            "htmlBytes": 29666,
+            "textChars": 7114,
+            "externalLinks": 27
+          },
+          {
+            "path": "medlineplus.gov/recipes/",
+            "title": "MedlinePlus: Healthy Recipes",
+            "htmlBytes": 28532,
+            "textChars": 2100,
+            "externalLinks": 13
+          },
+          {
+            "path": "medlineplus.gov/rss.html",
+            "title": "RSS Feeds: MedlinePlus",
+            "htmlBytes": 190563,
+            "textChars": 35096,
+            "externalLinks": 15
+          },
+          {
+            "path": "medlineplus.gov/sitemap.html",
+            "title": "MedlinePlus: Site Map",
+            "htmlBytes": 26667,
+            "textChars": 4204,
+            "externalLinks": 16
+          },
+          {
+            "path": "medlineplus.gov/whatsnew/",
+            "title": "What",
+            "htmlBytes": 69055,
+            "textChars": 20048,
+            "externalLinks": 34
+          },
+          {
+            "path": "medlineplus.gov/about/developers/",
+            "title": "MedlinePlus: Information about MedlinePlus for Developers",
+            "htmlBytes": 22754,
+            "textChars": 2031,
+            "externalLinks": 12
+          },
+          {
+            "path": "medlineplus.gov/about/using/criteria/",
+            "title": "MedlinePlus: Guidelines for Links",
+            "htmlBytes": 24900,
+            "textChars": 4803,
+            "externalLinks": 13
+          },
+          {
+            "path": "medlineplus.gov/accessibility.html",
+            "title": "MedlinePlus: Accessibility",
+            "htmlBytes": 19957,
+            "textChars": 1797,
+            "externalLinks": 15
+          },
+          {
+            "path": "medlineplus.gov/antibiotics.html",
+            "title": "Antibiotics: MedlinePlus",
+            "htmlBytes": 92527,
+            "textChars": 7518,
+            "externalLinks": 52
+          },
+          {
+            "path": "medlineplus.gov/antidepressants.html",
+            "title": "Antidepressants: MedlinePlus",
+            "htmlBytes": 116727,
+            "textChars": 12441,
+            "externalLinks": 69
+          },
+          {
+            "path": "medlineplus.gov/druginfo/drug_00.html",
+            "title": "Drugs beginning with 0: MedlinePlus Drug Information",
+            "htmlBytes": 20324,
+            "textChars": 2721,
+            "externalLinks": 14
+          },
+          {
+            "path": "medlineplus.gov/druginfo/drug_Aa.html",
+            "title": "Drugs beginning with A: MedlinePlus Drug Information",
+            "htmlBytes": 98405,
+            "textChars": 33937,
+            "externalLinks": 14
+          },
+          {
+            "path": "medlineplus.gov/druginfo/drug_Ba.html",
+            "title": "Drugs beginning with B: MedlinePlus Drug Information",
+            "htmlBytes": 63431,
+            "textChars": 21156,
+            "externalLinks": 14
+          },
+          {
+            "path": "medlineplus.gov/druginfo/drug_Ca.html",
+            "title": "Drugs beginning with C: MedlinePlus Drug Information",
+            "htmlBytes": 86789,
+            "textChars": 30221,
+            "externalLinks": 14
+          },
+          {
+            "path": "medlineplus.gov/druginfo/drug_Da.html",
+            "title": "Drugs beginning with D: MedlinePlus Drug Information",
+            "htmlBytes": 70089,
+            "textChars": 22734,
+            "externalLinks": 14
+          },
+          {
+            "path": "medlineplus.gov/druginfo/drug_Ea.html",
+            "title": "Drugs beginning with E: MedlinePlus Drug Information",
+            "htmlBytes": 57045,
+            "textChars": 16895,
+            "externalLinks": 14
+          },
+          {
+            "path": "medlineplus.gov/druginfo/drug_Fa.html",
+            "title": "Drugs beginning with F: MedlinePlus Drug Information",
+            "htmlBytes": 43263,
+            "textChars": 10603,
+            "externalLinks": 14
+          },
+          {
+            "path": "medlineplus.gov/druginfo/drug_Ga.html",
+            "title": "Drugs beginning with G: MedlinePlus Drug Information",
+            "htmlBytes": 35698,
+            "textChars": 8663,
+            "externalLinks": 14
+          },
+          {
+            "path": "medlineplus.gov/druginfo/drug_Ha.html",
+            "title": "Drugs beginning with H: MedlinePlus Drug Information",
+            "htmlBytes": 34824,
+            "textChars": 8647,
+            "externalLinks": 14
+          },
+          {
+            "path": "medlineplus.gov/druginfo/drug_Ia.html",
+            "title": "Drugs beginning with I: MedlinePlus Drug Information",
+            "htmlBytes": 38635,
+            "textChars": 9015,
+            "externalLinks": 14
+          },
+          {
+            "path": "medlineplus.gov/druginfo/drug_Ja.html",
+            "title": "Drugs beginning with J: MedlinePlus Drug Information",
+            "htmlBytes": 23316,
+            "textChars": 4222,
+            "externalLinks": 14
+          },
+          {
+            "path": "medlineplus.gov/druginfo/drug_Ka.html",
+            "title": "Drugs beginning with K: MedlinePlus Drug Information",
+            "htmlBytes": 30969,
+            "textChars": 6314,
+            "externalLinks": 14
+          },
+          {
+            "path": "medlineplus.gov/druginfo/drug_La.html",
+            "title": "Drugs beginning with L: MedlinePlus Drug Information",
+            "htmlBytes": 58771,
+            "textChars": 18211,
+            "externalLinks": 14
+          },
+          {
+            "path": "medlineplus.gov/druginfo/drug_Ma.html",
+            "title": "Drugs beginning with M: MedlinePlus Drug Information",
+            "htmlBytes": 66254,
+            "textChars": 20591,
+            "externalLinks": 14
+          },
+          {
+            "path": "medlineplus.gov/druginfo/drug_Na.html",
+            "title": "Drugs beginning with N: MedlinePlus Drug Information",
+            "htmlBytes": 51631,
+            "textChars": 15034,
+            "externalLinks": 14
+          },
+          {
+            "path": "medlineplus.gov/druginfo/drug_Oa.html",
+            "title": "Drugs beginning with O: MedlinePlus Drug Information",
+            "htmlBytes": 39195,
+            "textChars": 9367,
+            "externalLinks": 14
+          },
+          {
+            "path": "medlineplus.gov/druginfo/drug_Pa.html",
+            "title": "Drugs beginning with P: MedlinePlus Drug Information",
+            "htmlBytes": 78076,
+            "textChars": 25928,
+            "externalLinks": 14
+          },
+          {
+            "path": "medlineplus.gov/druginfo/drug_Qa.html",
+            "title": "Drugs beginning with Q: MedlinePlus Drug Information",
+            "htmlBytes": 24767,
+            "textChars": 4800,
+            "externalLinks": 14
+          },
+          {
+            "path": "medlineplus.gov/druginfo/drug_Ra.html",
+            "title": "Drugs beginning with R: MedlinePlus Drug Information",
+            "htmlBytes": 56588,
+            "textChars": 17724,
+            "externalLinks": 14
+          },
+          {
+            "path": "medlineplus.gov/druginfo/drug_Sa.html",
+            "title": "Drugs beginning with S: MedlinePlus Drug Information",
+            "htmlBytes": 72523,
+            "textChars": 24345,
+            "externalLinks": 14
+          },
+          {
+            "path": "medlineplus.gov/druginfo/drug_Ta.html",
+            "title": "Drugs beginning with T: MedlinePlus Drug Information",
+            "htmlBytes": 86999,
+            "textChars": 31746,
+            "externalLinks": 14
+          },
+          {
+            "path": "medlineplus.gov/druginfo/drug_Ua.html",
+            "title": "Drugs beginning with U: MedlinePlus Drug Information",
+            "htmlBytes": 25654,
+            "textChars": 4796,
+            "externalLinks": 14
+          },
+          {
+            "path": "medlineplus.gov/druginfo/drug_Va.html",
+            "title": "Drugs beginning with V: MedlinePlus Drug Information",
+            "htmlBytes": 51259,
+            "textChars": 14857,
+            "externalLinks": 14
+          },
+          {
+            "path": "medlineplus.gov/druginfo/drug_Wa.html",
+            "title": "Drugs beginning with W: MedlinePlus Drug Information",
+            "htmlBytes": 20438,
+            "textChars": 2699,
+            "externalLinks": 14
+          },
+          {
+            "path": "medlineplus.gov/druginfo/drug_Xa.html",
+            "title": "Drugs beginning with X: MedlinePlus Drug Information",
+            "htmlBytes": 24031,
+            "textChars": 4002,
+            "externalLinks": 14
+          },
+          {
+            "path": "medlineplus.gov/druginfo/drug_Ya.html",
+            "title": "Drugs beginning with Y: MedlinePlus Drug Information",
+            "htmlBytes": 19718,
+            "textChars": 2713,
+            "externalLinks": 14
+          },
+          {
+            "path": "medlineplus.gov/druginfo/drug_Za.html",
+            "title": "Drugs beginning with Z: MedlinePlus Drug Information",
+            "htmlBytes": 39850,
+            "textChars": 9834,
+            "externalLinks": 14
+          },
+          {
+            "path": "medlineplus.gov/druginfo/herb_All.html",
+            "title": "Herbs and Supplements: MedlinePlus",
+            "htmlBytes": 114323,
+            "textChars": 12530,
+            "externalLinks": 96
+          }
+        ],
+        "readErrors": [],
+        "oversizedHtml": []
+      },
+      "finishedAt": "2026-11-19T02:10:21.953Z"
+    },
+    {
+      "path": "/data/zim/nhs.uk_en_medicines_2025-12.zim",
+      "startedAt": "2026-11-19T02:10:22.016Z",
+      "filename": "/data/zim/nhs.uk_en_medicines_2025-12.zim",
+      "filesize": 16946183,
+      "uuid": "6281afd5-022e-28f9-18ca-3d2372ab8580",
+      "counts": {
+        "allEntriesDeclared": 2081,
+        "userEntriesDeclared": 2064,
+        "articlesDeclared": 1996,
+        "mediaDeclared": 32,
+        "entriesScanned": 2064,
+        "redirects": 5,
+        "htmlPages": 1996,
+        "htmlReadErrors": 0,
+        "oversizedHtmlSkipped": 0,
+        "titleOnlyPages": 0,
+        "textUnder80": 0,
+        "textUnder250": 0,
+        "textUnder1000": 11,
+        "pagesWithExternalLinks": 1996,
+        "externalLinks": 72344,
+        "pagesWithRelativeLinks": 1996,
+        "relativeLinks": 43013
+      },
+      "indexes": {
+        "title": true,
+        "fulltext": true
+      },
+      "checksum": {
+        "present": true,
+        "value": "6e40a9886dc8fc5d19e5f11f88532dca",
+        "valid": true
+      },
+      "metadata": {
+        "Title": "NHS' Medicines A to Z",
+        "Description": "How medicines work, how and when to take them",
+        "Creator": "-",
+        "Publisher": "openZIM",
+        "Date": "2025-12-14",
+        "Language": "eng",
+        "Tags": "_category:other;_ftindex:yes",
+        "Name": "nhs.uk_en_medicines"
+      },
+      "samples": {
+        "titleOnly": [],
+        "thinUnder80": [],
+        "externalLinkHeavy": [
+          {
+            "path": "www.nhs.uk/medicines/",
+            "title": "Medicines A to Z - NHS",
+            "htmlBytes": 86298,
+            "textChars": 6736,
+            "externalLinks": 33
+          },
+          {
+            "path": "www.nhs.uk/medicines/aciclovir/",
+            "title": "Aciclovir: medicine for cold sores, chickenpox and shingles - NHS",
+            "htmlBytes": 49701,
+            "textChars": 1241,
+            "externalLinks": 38
+          },
+          {
+            "path": "www.nhs.uk/medicines/acrivastine/",
+            "title": "Acrivastine (Benadryl): antihistamine medicine that relieves allergy symptoms - NHS",
+            "htmlBytes": 44279,
+            "textChars": 1210,
+            "externalLinks": 39
+          },
+          {
+            "path": "www.nhs.uk/medicines/adalimumab/",
+            "title": "Adalimumab (Humira) and biosimilars: medicine used for inflammation - NHS",
+            "htmlBytes": 53827,
+            "textChars": 1433,
+            "externalLinks": 43
+          },
+          {
+            "path": "www.nhs.uk/medicines/alendronic-acid/",
+            "title": "Alendronic acid: medicine to treat and prevent osteoporosis - NHS",
+            "htmlBytes": 47095,
+            "textChars": 1068,
+            "externalLinks": 34
+          },
+          {
+            "path": "www.nhs.uk/medicines/allopurinol/",
+            "title": "Allopurinol: a medicine to treat gout - NHS",
+            "htmlBytes": 48382,
+            "textChars": 1068,
+            "externalLinks": 35
+          },
+          {
+            "path": "www.nhs.uk/medicines/alogliptin/",
+            "title": "Alogliptin: medicine to treat type 2 diabetes - NHS",
+            "htmlBytes": 49057,
+            "textChars": 1167,
+            "externalLinks": 36
+          },
+          {
+            "path": "www.nhs.uk/medicines/amitriptyline-for-depression/",
+            "title": "Amitriptyline: an antidepressant medicine - NHS",
+            "htmlBytes": 46441,
+            "textChars": 1237,
+            "externalLinks": 37
+          },
+          {
+            "path": "www.nhs.uk/medicines/amitriptyline-for-pain/",
+            "title": "Amitriptyline: a medicine to treat pain and prevent migraine - NHS",
+            "htmlBytes": 50514,
+            "textChars": 1148,
+            "externalLinks": 35
+          },
+          {
+            "path": "www.nhs.uk/medicines/amlodipine/",
+            "title": "Amlodipine: a medicine to treat high blood pressure - NHS",
+            "htmlBytes": 49622,
+            "textChars": 1174,
+            "externalLinks": 39
+          },
+          {
+            "path": "www.nhs.uk/medicines/amoxicillin/",
+            "title": "Amoxicillin: an antibiotic used to treat bacterial infections - NHS",
+            "htmlBytes": 42223,
+            "textChars": 1083,
+            "externalLinks": 36
+          },
+          {
+            "path": "www.nhs.uk/medicines/anastrozole/",
+            "title": "Anastrozole: a medicine to treat and prevent breast cancer - NHS",
+            "htmlBytes": 50839,
+            "textChars": 1114,
+            "externalLinks": 35
+          },
+          {
+            "path": "www.nhs.uk/medicines/antacids/",
+            "title": "Antacids\n - NHS",
+            "htmlBytes": 36021,
+            "textChars": 4243,
+            "externalLinks": 45
+          },
+          {
+            "path": "www.nhs.uk/medicines/antibiotics/",
+            "title": "Antibiotics\n - NHS",
+            "htmlBytes": 42478,
+            "textChars": 7198,
+            "externalLinks": 41
+          },
+          {
+            "path": "www.nhs.uk/medicines/anticoagulants/",
+            "title": "Anticoagulant medicines\n - NHS",
+            "htmlBytes": 40068,
+            "textChars": 5191,
+            "externalLinks": 46
+          },
+          {
+            "path": "www.nhs.uk/medicines/antidepressants/",
+            "title": "Antidepressants - NHS",
+            "htmlBytes": 58362,
+            "textChars": 8988,
+            "externalLinks": 47
+          },
+          {
+            "path": "www.nhs.uk/medicines/antifungal-medicines/",
+            "title": "Antifungal medicines\n - NHS",
+            "htmlBytes": 36920,
+            "textChars": 4194,
+            "externalLinks": 44
+          },
+          {
+            "path": "www.nhs.uk/medicines/antihistamines/",
+            "title": "Antihistamines\n - NHS",
+            "htmlBytes": 40130,
+            "textChars": 6745,
+            "externalLinks": 49
+          },
+          {
+            "path": "www.nhs.uk/medicines/apixaban/",
+            "title": "Apixaban: a medicine to help prevent blood clots - NHS",
+            "htmlBytes": 53773,
+            "textChars": 1177,
+            "externalLinks": 38
+          },
+          {
+            "path": "www.nhs.uk/medicines/aripiprazole/",
+            "title": "Aripiprazole: a medicine to treat mental health conditions - NHS",
+            "htmlBytes": 56215,
+            "textChars": 1197,
+            "externalLinks": 36
+          },
+          {
+            "path": "www.nhs.uk/medicines/aspirin-for-pain-relief/",
+            "title": "Aspirin for pain relief: painkiller for aches and pains such as headache, toothache and period pain - NHS",
+            "htmlBytes": 51083,
+            "textChars": 1111,
+            "externalLinks": 36
+          },
+          {
+            "path": "www.nhs.uk/medicines/atenolol/",
+            "title": "Atenolol: medicine for high blood pressure and angina - NHS",
+            "htmlBytes": 52533,
+            "textChars": 1347,
+            "externalLinks": 42
+          },
+          {
+            "path": "www.nhs.uk/medicines/atorvastatin/",
+            "title": "Atorvastatin: a medicine to treat high blood cholestesterol - NHS",
+            "htmlBytes": 53295,
+            "textChars": 1210,
+            "externalLinks": 39
+          },
+          {
+            "path": "www.nhs.uk/medicines/azathioprine/",
+            "title": "Azathioprine: a medicine for conditions affecting the immune system - NHS",
+            "htmlBytes": 49477,
+            "textChars": 1438,
+            "externalLinks": 41
+          },
+          {
+            "path": "www.nhs.uk/medicines/azithromycin/",
+            "title": "Azithromycin: antibiotic to treat bacterial infections - NHS",
+            "htmlBytes": 50329,
+            "textChars": 1124,
+            "externalLinks": 38
+          },
+          {
+            "path": "www.nhs.uk/medicines/baclofen/",
+            "title": "Baclofen: muscle relaxant that relieves muscle spasms - NHS",
+            "htmlBytes": 50775,
+            "textChars": 1290,
+            "externalLinks": 39
+          },
+          {
+            "path": "www.nhs.uk/medicines/beclometasone-inhalers/",
+            "title": "Beclometasone inhalers: a steroid medicine to treat asthma and COPD - NHS",
+            "htmlBytes": 53005,
+            "textChars": 1153,
+            "externalLinks": 35
+          },
+          {
+            "path": "www.nhs.uk/medicines/low-dose-aspirin/",
+            "title": "Aspirin: low dose to prevent heart attacks and stroke - NHS",
+            "htmlBytes": 40204,
+            "textChars": 1236,
+            "externalLinks": 36
+          },
+          {
+            "path": "www.nhs.uk/our-policies/cookies-policy/?policy-action=seen",
+            "title": "Cookies on the NHS website - NHS",
+            "htmlBytes": 53894,
+            "textChars": 4645,
+            "externalLinks": 42
+          },
+          {
+            "path": "www.nhs.uk/medicines/beclometasone-nasal-spray/",
+            "title": "Beclometasone nasal spray: a steroid medicine for allergic rhinitis - NHS",
+            "htmlBytes": 46342,
+            "textChars": 1189,
+            "externalLinks": 35
+          },
+          {
+            "path": "www.nhs.uk/medicines/beclometasone-skin-creams/",
+            "title": "Beclometasone skin cream: a medicine to treat itching, swollen and irritated skin - NHS",
+            "htmlBytes": 49825,
+            "textChars": 1209,
+            "externalLinks": 36
+          },
+          {
+            "path": "www.nhs.uk/medicines/bendroflumethiazide/",
+            "title": "Bendroflumethiazide: diuretic to treat high blood pressure and build-up of fluid - NHS",
+            "htmlBytes": 49905,
+            "textChars": 1187,
+            "externalLinks": 36
+          },
+          {
+            "path": "www.nhs.uk/medicines/benzoyl-peroxide/",
+            "title": "Benzoyl peroxide: a medicine to treat acne - NHS",
+            "htmlBytes": 45348,
+            "textChars": 997,
+            "externalLinks": 33
+          },
+          {
+            "path": "www.nhs.uk/medicines/benzydamine/",
+            "title": "Benzydamine: a non-steroidal anti-inflammatory drug (NSAID) to treat sore throats, mouth ulcers and teething - NHS",
+            "htmlBytes": 41647,
+            "textChars": 1107,
+            "externalLinks": 35
+          },
+          {
+            "path": "www.nhs.uk/medicines/beta-blockers/",
+            "title": "Beta blockers\n - NHS",
+            "htmlBytes": 39511,
+            "textChars": 6477,
+            "externalLinks": 46
+          },
+          {
+            "path": "www.nhs.uk/medicines/betahistine/",
+            "title": "Betahistine: a medicine to treat Ménière",
+            "htmlBytes": 44298,
+            "textChars": 1115,
+            "externalLinks": 37
+          },
+          {
+            "path": "www.nhs.uk/medicines/betamethasone-eyes-ears-and-nose/",
+            "title": "Betamethasone for eyes, ears and nose: medicine to treat allergies and inflammation - NHS",
+            "htmlBytes": 50049,
+            "textChars": 1202,
+            "externalLinks": 35
+          },
+          {
+            "path": "www.nhs.uk/medicines/betamethasone-skin/",
+            "title": "Betamethasone for skin: steroid treatment for skin conditions - NHS",
+            "htmlBytes": 56979,
+            "textChars": 1262,
+            "externalLinks": 37
+          },
+          {
+            "path": "www.nhs.uk/medicines/bimatoprost/",
+            "title": "Bimatoprost – a medicine for high pressure inside the eye and glaucoma - NHS",
+            "htmlBytes": 45099,
+            "textChars": 1110,
+            "externalLinks": 34
+          },
+          {
+            "path": "www.nhs.uk/medicines/bisacodyl/",
+            "title": "Bisacodyl: a laxative taken to treat constipation - NHS",
+            "htmlBytes": 44963,
+            "textChars": 1035,
+            "externalLinks": 34
+          },
+          {
+            "path": "www.nhs.uk/medicines/bisoprolol/",
+            "title": "Bisoprolol: medicine to treat high blood pressure (hypertension) - NHS",
+            "htmlBytes": 51492,
+            "textChars": 1308,
+            "externalLinks": 40
+          },
+          {
+            "path": "www.nhs.uk/medicines/brinzolamide/",
+            "title": "Brinzolamide – a medicine for high pressure inside the eye and glaucoma - NHS",
+            "htmlBytes": 42879,
+            "textChars": 1124,
+            "externalLinks": 34
+          },
+          {
+            "path": "www.nhs.uk/medicines/budesonide-inhalers/",
+            "title": "Budesonide inhalers: steroid medicine used for asthma and chronic obstructive pulmonary disease. - NHS",
+            "htmlBytes": 53646,
+            "textChars": 1173,
+            "externalLinks": 34
+          },
+          {
+            "path": "www.nhs.uk/medicines/budesonide-nasal-spray/",
+            "title": "Budesonide nasal spray: a steroid used to treat symptoms of allergic rhinitis - NHS",
+            "htmlBytes": 46492,
+            "textChars": 1168,
+            "externalLinks": 36
+          },
+          {
+            "path": "www.nhs.uk/medicines/budesonide-rectal-foam-and-enemas/",
+            "title": "Budesonide rectal foam and enemas - NHS",
+            "htmlBytes": 52480,
+            "textChars": 1074,
+            "externalLinks": 33
+          },
+          {
+            "path": "www.nhs.uk/medicines/bumetanide/",
+            "title": "Bumetanide: medicine to treat oedema - NHS",
+            "htmlBytes": 49279,
+            "textChars": 1070,
+            "externalLinks": 35
+          },
+          {
+            "path": "www.nhs.uk/medicines/buprenorphine-for-pain/",
+            "title": "Buprenorphine for pain: medicine to treat moderate to severe pain - NHS",
+            "htmlBytes": 60665,
+            "textChars": 1237,
+            "externalLinks": 36
+          },
+          {
+            "path": "www.nhs.uk/medicines/buscopan-hyoscine-butylbromide/",
+            "title": "Buscopan: medicine to treat stomach cramps and IBS - NHS",
+            "htmlBytes": 46522,
+            "textChars": 1149,
+            "externalLinks": 37
+          },
+          {
+            "path": "www.nhs.uk/medicines/calcipotriol/",
+            "title": "Calcipotriol: a medicine to treat plaque psoriasis - NHS",
+            "htmlBytes": 45987,
+            "textChars": 1177,
+            "externalLinks": 35
+          },
+          {
+            "path": "www.nhs.uk/medicines/candesartan/",
+            "title": "Candesartan: medicine to treat high blood pressure (hypertension) - NHS",
+            "htmlBytes": 48974,
+            "textChars": 1209,
+            "externalLinks": 38
+          }
+        ],
+        "readErrors": [],
+        "oversizedHtml": []
+      },
+      "finishedAt": "2026-11-19T02:10:23.214Z"
+    }
+  ]
+}

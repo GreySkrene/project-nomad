@@ -1,0 +1,75 @@
+kind,name,bytes,version_or_id,audit_status,notes
+kiwix_zim,cooking.stackexchange.com_en_all_2026-10.zim,238098128,,pending,Awaiting content-level usefulness and completeness audit
+kiwix_zim,diy.stackexchange.com_en_all_2026-10.zim,2086024326,,pending,Awaiting content-level usefulness and completeness audit
+kiwix_zim,foss.cooking_en_all_2026-11.zim,30424458,,pending,Awaiting content-level usefulness and completeness audit
+kiwix_zim,gardening.stackexchange.com_en_all_2026-10.zim,933097375,,supplemental_only,Healthy Q&A archive; not a coherent guide or plant encyclopedia
+kiwix_zim,gardenology.org_en_all_2026-09.zim,112499438,,in_progress,Structurally validated plant encyclopedia; human usefulness review ongoing
+kiwix_zim,ifixit_en_all_2025-12.zim,3570695757,,pending,Awaiting content-level usefulness and completeness audit
+kiwix_zim,irp.fas.org_en_military-medicine_2026-10.zim,64986090,,historical_supplement_only,Mostly 1957-2007 military manuals; not current civilian clinical guidance
+kiwix_zim,librepathology_en_all_maxi_2026-09.zim,95279611,,low_priority_educational,"Pathology education, not an emergency first-aid guide"
+kiwix_zim,libretexts.org_en_med_2025-01.zim,1192567339,,defect_confirmed,Inconsistent/missing book sections in rendered JavaScript reader
+kiwix_zim,mechanics.stackexchange.com_en_all_2026-10.zim,341672133,,pending,Awaiting content-level usefulness and completeness audit
+kiwix_zim,medlineplus.gov_en_all_2025-01.zim,1944841111,,in_progress,Core medical candidate; structural and emergency-topic review underway
+kiwix_zim,nhs.uk_en_medicines_2025-12.zim,16946183,,in_progress,Core medical candidate; structural and emergency-topic review underway
+kiwix_zim,wikibooks_en_all_maxi_2026-10.zim,4739739728,,pending,Awaiting content-level usefulness and completeness audit
+kiwix_zim,wikipedia_en_all_mini_2026-06.zim,12531679311,,pending,Awaiting content-level usefulness and completeness audit
+kiwix_zim,wikipedia_en_medicine_maxi_2026-10.zim,1864210320,,in_progress,Core medical candidate; structural and emergency-topic review underway
+kiwix_zim,wikipedia_en_top_maxi_2026-06.zim,8357329540,,pending,Awaiting content-level usefulness and completeness audit
+kiwix_zim,woodworking.stackexchange.com_en_all_2026-10.zim,106657287,,pending,Awaiting content-level usefulness and completeness audit
+kiwix_zim,www.ready.gov_en_2024-12.zim,2429921822,,pending,Awaiting content-level usefulness and completeness audit
+kiwix_zim,wwwnc.cdc.gov_en_all_2024-11.zim,178326622,,supplemental_only,Official CDC Travelers' Health snapshot; useful but narrower than general emergency medicine
+kiwix_zim,zimgit-medicine_en_2024-08.zim,70179585,,defect_confirmed,Reader remains blank; bundle includes outdated and unverified medical works
+offline_map,custom-ea2908b0_20261106_z15.pmtiles,33788916131,,pending,Awaiting content-level usefulness and completeness audit
+offline_map,world.pmtiles,15055414,,pending,Awaiting content-level usefulness and completeness audit
+knowledge_document,AHA-2025-CPR-CHOKING-QUICK-REFERENCE.md-01e7565ec421.md,3335,,pending,Awaiting content-level usefulness and completeness audit
+knowledge_document,CDC-Backcountry-Water-Treatment.pdf-ab7ca21247f6.pdf,773187,,pending,Awaiting content-level usefulness and completeness audit
+knowledge_document,CDC-Make-Water-Safe-During-Emergency-2025.pdf-dc4f9d116e89.pdf,730926,,pending,Awaiting content-level usefulness and completeness audit
+knowledge_document,CDC-Radiation-Response-Briefing-Manual-2024.pdf-b87440d757a2.pdf,21067634,,pending,Awaiting content-level usefulness and completeness audit
+knowledge_document,CPSC-Battery-Safety.pdf-4539c78d6e53.pdf,167976,,pending,Awaiting content-level usefulness and completeness audit
+knowledge_document,CPSC-Butane-Tabletop-Cooking-Appliances.pdf-2d16c7f07edf.pdf,1766630,,pending,Awaiting content-level usefulness and completeness audit
+knowledge_document,CPSC-Camping-Equipment-Carbon-Monoxide-Safety.pdf-4f63b5f3cd4c.pdf,419829,,pending,Awaiting content-level usefulness and completeness audit
+knowledge_document,CPSC-Portable-Fuel-Container-Safety.pdf-c680e00ed252.pdf,5264378,,pending,Awaiting content-level usefulness and completeness audit
+knowledge_document,Davis-County-PDM-Adopted-2022.pdf-df0d00f1bc42.pdf,35498839,,pending,Awaiting content-level usefulness and completeness audit
+knowledge_document,EMERGENCY-EQUIPMENT-MAINTENANCE-CHECKLIST.md-623c35ef7b0d.md,2970,,pending,Awaiting content-level usefulness and completeness audit
+knowledge_document,EPA-Emergency-Disinfection-Drinking-Water-2017.pdf-6304a95b3625.pdf,754723,,pending,Awaiting content-level usefulness and completeness audit
+knowledge_document,ER10VP-QUICK-REFERENCE.md-2c478bd37e55.md,3111,,pending,Awaiting content-level usefulness and completeness audit
+knowledge_document,Explorer-600-v2-QUICK-REFERENCE.md-d920d40d8293.md,3429,,pending,Awaiting content-level usefulness and completeness audit
+knowledge_document,FEMA-Family-Communication-Plan-2025.pdf-3d9572ae0984.pdf,640035,,pending,Awaiting content-level usefulness and completeness audit
+knowledge_document,FEMA-Power-Outage-Info-Sheet-2023.pdf-3d80505b7ace.pdf,317550,,pending,Awaiting content-level usefulness and completeness audit
+knowledge_document,FRS-FAMILY-COMMUNICATION-QUICK-REFERENCE.md-981c16e1ef52.md,2562,,pending,Awaiting content-level usefulness and completeness audit
+knowledge_document,INDEX.md-8a4aa73c5837.md,1246,,pending,Awaiting content-level usefulness and completeness audit
+knowledge_document,Idaho-Geologic-Map-Rexburg-2016.pdf-6f2eff6fb577.pdf,8642405,,pending,Awaiting content-level usefulness and completeness audit
+knowledge_document,Idaho-Madison-County-Seismic-Map-2011.pdf-6159f2ece701.pdf,70745750,,pending,Awaiting content-level usefulness and completeness audit
+knowledge_document,Idaho-State-Hazard-Mitigation-Plan-2023.pdf-1c9b2848048e.pdf,52241264,,pending,Awaiting content-level usefulness and completeness audit
+knowledge_document,Jackery-Explorer-600-v2-JE-600A-Official-User-Manual.pdf-4e86f1afadaa.pdf,2607997,,pending,Awaiting content-level usefulness and completeness audit
+knowledge_document,Jackery-Explorer-600-v2-Official-Product-Guide-2026-11-11.pdf-92b5a9eec4ce.pdf,6211263,,pending,Awaiting content-level usefulness and completeness audit
+knowledge_document,Legion-Go-8APU1-Official-User-Guide.pdf-06b9bc078018.pdf,1849089,,pending,Awaiting content-level usefulness and completeness audit
+knowledge_document,Legion-Go-8APU1-PSREF-2025-01-22.pdf-c9254f5bdfc6.pdf,1564426,,pending,Awaiting content-level usefulness and completeness audit
+knowledge_document,Legion-Go-OFFLINE-POWER.md-f5c56c5de5c0.md,1688,,pending,Awaiting content-level usefulness and completeness audit
+knowledge_document,Madison-County-Multi-Hazard-Mitigation-Plan-2019.pdf-b05bd34bb150.pdf,29502362,,pending,Awaiting content-level usefulness and completeness audit
+knowledge_document,Midland-ER10-Owners-Manual-2025.pdf-9e628fca319d.pdf,582902,,pending,Awaiting content-level usefulness and completeness audit
+knowledge_document,Midland-ER10VP-Spec-Sheet.pdf-698b4e260dd6.pdf,1384514,,pending,Awaiting content-level usefulness and completeness audit
+knowledge_document,NOAA-NWR-National-Brochure-2025.pdf-c3a2cce2bf20.pdf,2388138,,pending,Awaiting content-level usefulness and completeness audit
+knowledge_document,NWS-Weather-Preparedness-Schools-2025.pdf-720d1bf4f9b3.pdf,602583,,pending,Awaiting content-level usefulness and completeness audit
+knowledge_document,Putting-Down-Roots-Utah-2nd-Edition-2022.pdf-8e8482836248.pdf,64479845,,pending,Awaiting content-level usefulness and completeness audit
+knowledge_document,Salt-Lake-County-MJHMP-2025.pdf-c347976819c3.pdf,10303250,,pending,Awaiting content-level usefulness and completeness audit
+knowledge_document,Six-County-Region-PDM-Plan-2020.pdf,280257891,,pending,Awaiting content-level usefulness and completeness audit
+knowledge_document,UGS-Landslide-Hazards-PI-98.pdf-e7a0b5dcb8f6.pdf,6960406,,pending,Awaiting content-level usefulness and completeness audit
+knowledge_document,UGS-Liquefaction-Hazards-PI-100.pdf-c1f984697f75.pdf,5564634,,pending,Awaiting content-level usefulness and completeness audit
+knowledge_document,UGS-Rockfall-Hazards-PI-94.pdf-30269ac4abf1.pdf,10945459,,pending,Awaiting content-level usefulness and completeness audit
+knowledge_document,UGS-Shallow-Groundwater-PI-105.pdf-77673f4e562b.pdf,1337293,,pending,Awaiting content-level usefulness and completeness audit
+knowledge_document,UGS-Wildfires-Debris-Flows-PI-90.pdf-618e536ffb76.pdf,4702171,,pending,Awaiting content-level usefulness and completeness audit
+knowledge_document,USDA-Food-Safety-During-Power-Failure.pdf-856164f9e9f5.pdf,58990,,pending,Awaiting content-level usefulness and completeness audit
+knowledge_document,USFA-Portable-Generator-Safety.pdf-5add8083ae2a.pdf,387067,,pending,Awaiting content-level usefulness and completeness audit
+knowledge_document,USGS-Yellowstone-2024-Annual-Report-Circular-1566.pdf-f3b248d6545b.pdf,47290174,,pending,Awaiting content-level usefulness and completeness audit
+knowledge_document,Utah-Enhanced-State-Hazard-Mitigation-Plan-2024.pdf-157b425529c4.pdf,33565637,,pending,Awaiting content-level usefulness and completeness audit
+knowledge_document,WHO-Managing-Complications-Pregnancy-Childbirth-2017.pdf-c835c3002e84.pdf,5110597,,pending,Awaiting content-level usefulness and completeness audit
+knowledge_document,Weber-County-PDM-Plan-2024.pdf-3a17c01b93f5.pdf,37358094,,pending,Awaiting content-level usefulness and completeness audit
+knowledge_document,verification-rag.txt-9408473e71b3.txt,239,,test_artifact_inactive,"239-byte test upload; disabled from retrieval, deletion awaits approval"
+auxiliary,kiwix-smart-search.html,3088351,generated offline UI,verified,Live title-first search and offline spelling correction tested
+kolibri_channel,Blockly Games,,version 10; e409b964366a59219c148f2aaa741f43; 505 nodes,pending,Awaiting content-level usefulness and completeness audit
+kolibri_channel,Khan Academy (English - US curriculum),,version 5; c9d7f950ab6b5a1199e3d6c10d7f0103; 34488 nodes,defect_confirmed,Import log records 370 skipped files and exit status 1
+kolibri_channel,PhET Interactive Simulations,,version 18; 197934f144305350b5820c7c4dd8e194; 1195 nodes,pending,Awaiting content-level usefulness and completeness audit
+kolibri_channel,School of Thought,,version 2; 305b12ea5ea84fa18f933705c23f5ee0; 51 nodes,pending,Awaiting content-level usefulness and completeness audit
+kolibri_channel,Sikana (English),,version 24; 3e464ee12f6a50a781cddf59147b48b1; 3430 nodes,pending,Awaiting content-level usefulness and completeness audit
+derived_index,Qdrant knowledge-base index,865497262,derived from knowledge_document files,pending,"Audit source mapping, duplicates, orphans, and retrieval; not an independent source"

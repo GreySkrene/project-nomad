@@ -1,0 +1,426 @@
+{
+  "schemaVersion": 1,
+  "reports": [
+    {
+      "path": "/app/storage/zim/gardenology.org_en_all_2026-09.zim",
+      "startedAt": "2026-11-19T01:46:02.830Z",
+      "filename": "/app/storage/zim/gardenology.org_en_all_2026-09.zim",
+      "filesize": 112499438,
+      "uuid": "02e5374f-9e77-efb8-792e-8cc9f11a51b1",
+      "counts": {
+        "allEntriesDeclared": 55955,
+        "userEntriesDeclared": 55938,
+        "articlesDeclared": 44083,
+        "mediaDeclared": 11816,
+        "entriesScanned": 55938,
+        "redirects": 21059,
+        "htmlPages": 23024,
+        "htmlReadErrors": 0,
+        "titleOnlyPages": 0,
+        "textUnder80": 3,
+        "textUnder250": 10,
+        "textUnder1000": 3387,
+        "pagesWithExternalLinks": 23021,
+        "externalLinks": 228679,
+        "pagesWithRelativeLinks": 23024,
+        "relativeLinks": 329447
+      },
+      "indexes": {
+        "title": true,
+        "fulltext": true
+      },
+      "checksum": {
+        "present": true,
+        "value": "b83b5fc24bc038992ff8b52639025ed8",
+        "valid": true
+      },
+      "metadata": {
+        "Title": "Gardenology",
+        "Description": "A complete plant and garden encyclopedia",
+        "Creator": "Gardenology",
+        "Publisher": "openZIM",
+        "Date": "2026-09-09",
+        "Language": "eng",
+        "Tags": "gardenology;_details:yes;_ftindex:yes",
+        "Name": "gardenology_en_all"
+      },
+      "samples": {
+        "titleOnly": [],
+        "thinUnder80": [
+          {
+            "path": "Binomial_nomenclature",
+            "title": "Binomial nomenclature",
+            "htmlBytes": 280,
+            "textChars": 43
+          },
+          {
+            "path": "Heartwood",
+            "title": "Heartwood",
+            "htmlBytes": 220,
+            "textChars": 19
+          },
+          {
+            "path": "Nectarine",
+            "title": "Nectarine",
+            "htmlBytes": 200,
+            "textChars": 19
+          }
+        ],
+        "externalLinkHeavy": [
+          {
+            "path": "Abelmoschus_manihot",
+            "title": "Abelmoschus manihot",
+            "htmlBytes": 14170,
+            "textChars": 2049,
+            "externalLinks": 10
+          },
+          {
+            "path": "Abroma_sinuosa",
+            "title": "Abroma sinuosa",
+            "htmlBytes": 14969,
+            "textChars": 1942,
+            "externalLinks": 12
+          },
+          {
+            "path": "Acacia_macradenia",
+            "title": "Acacia macradenia",
+            "htmlBytes": 15284,
+            "textChars": 2738,
+            "externalLinks": 13
+          },
+          {
+            "path": "Achillea_lingulata",
+            "title": "Achillea lingulata",
+            "htmlBytes": 16258,
+            "textChars": 2587,
+            "externalLinks": 13
+          },
+          {
+            "path": "Acrocomia_totai",
+            "title": "Acrocomia totai",
+            "htmlBytes": 15114,
+            "textChars": 2597,
+            "externalLinks": 13
+          },
+          {
+            "path": "Adiantum_lonrentzii",
+            "title": "Adiantum lonrentzii",
+            "htmlBytes": 15281,
+            "textChars": 2126,
+            "externalLinks": 13
+          },
+          {
+            "path": "Adiantum_schmidtchenii",
+            "title": "Adiantum schmidtchenii",
+            "htmlBytes": 15359,
+            "textChars": 2144,
+            "externalLinks": 13
+          },
+          {
+            "path": "Aegle_marmelos",
+            "title": "Aegle marmelos",
+            "htmlBytes": 17539,
+            "textChars": 4991,
+            "externalLinks": 13
+          },
+          {
+            "path": "Aerides_vandarum",
+            "title": "Aerides vandarum",
+            "htmlBytes": 14949,
+            "textChars": 2415,
+            "externalLinks": 13
+          },
+          {
+            "path": "Alfalfa",
+            "title": "Alfalfa",
+            "htmlBytes": 16494,
+            "textChars": 3091,
+            "externalLinks": 13
+          },
+          {
+            "path": "Alstroemeria_ligtu_subsp._simsii",
+            "title": "Alstroemeria ligtu subsp. simsii",
+            "htmlBytes": 15870,
+            "textChars": 2500,
+            "externalLinks": 10
+          },
+          {
+            "path": "Aquilegia_canadensis",
+            "title": "Aquilegia canadensis",
+            "htmlBytes": 16217,
+            "textChars": 3031,
+            "externalLinks": 10
+          },
+          {
+            "path": "Berberis_canadensis",
+            "title": "Berberis canadensis",
+            "htmlBytes": 15705,
+            "textChars": 2545,
+            "externalLinks": 10
+          },
+          {
+            "path": "Berberis_ilicifolia",
+            "title": "Berberis ilicifolia",
+            "htmlBytes": 15591,
+            "textChars": 2435,
+            "externalLinks": 10
+          },
+          {
+            "path": "Berberis_soulieana",
+            "title": "Berberis soulieana",
+            "htmlBytes": 15516,
+            "textChars": 2369,
+            "externalLinks": 10
+          },
+          {
+            "path": "Bignonia_capreolata",
+            "title": "Bignonia capreolata",
+            "htmlBytes": 16073,
+            "textChars": 2908,
+            "externalLinks": 10
+          },
+          {
+            "path": "Bollea_coelestis",
+            "title": "Bollea coelestis",
+            "htmlBytes": 15453,
+            "textChars": 2353,
+            "externalLinks": 10
+          },
+          {
+            "path": "Brier",
+            "title": "Brier",
+            "htmlBytes": 15020,
+            "textChars": 2102,
+            "externalLinks": 10
+          },
+          {
+            "path": "Caladium_Kochii",
+            "title": "Caladium Kochii",
+            "htmlBytes": 14682,
+            "textChars": 2174,
+            "externalLinks": 13
+          },
+          {
+            "path": "Calochortus_amabilis",
+            "title": "Calochortus amabilis",
+            "htmlBytes": 14949,
+            "textChars": 2351,
+            "externalLinks": 13
+          },
+          {
+            "path": "Calodendrum",
+            "title": "Calodendrum",
+            "htmlBytes": 14986,
+            "textChars": 2539,
+            "externalLinks": 13
+          },
+          {
+            "path": "Campanula_Trachelium",
+            "title": "Campanula Trachelium",
+            "htmlBytes": 15371,
+            "textChars": 2771,
+            "externalLinks": 13
+          },
+          {
+            "path": "Carlina_acaulis",
+            "title": "Carlina acaulis",
+            "htmlBytes": 14901,
+            "textChars": 2393,
+            "externalLinks": 13
+          },
+          {
+            "path": "Castilleja_integra",
+            "title": "Castilleja integra",
+            "htmlBytes": 14866,
+            "textChars": 2302,
+            "externalLinks": 13
+          },
+          {
+            "path": "Castilloa",
+            "title": "Castilloa",
+            "htmlBytes": 15016,
+            "textChars": 2616,
+            "externalLinks": 13
+          },
+          {
+            "path": "Ceanothus_sanguineus",
+            "title": "Ceanothus sanguineus",
+            "htmlBytes": 14979,
+            "textChars": 2379,
+            "externalLinks": 13
+          },
+          {
+            "path": "Cercocarpus_ledifolius",
+            "title": "Cercocarpus ledifolius",
+            "htmlBytes": 14955,
+            "textChars": 2320,
+            "externalLinks": 13
+          },
+          {
+            "path": "Chamaecytisus",
+            "title": "Chamaecytisus",
+            "htmlBytes": 14543,
+            "textChars": 1808,
+            "externalLinks": 13
+          },
+          {
+            "path": "Cheiranthus_Marshallii",
+            "title": "Cheiranthus Marshallii",
+            "htmlBytes": 14817,
+            "textChars": 2181,
+            "externalLinks": 13
+          },
+          {
+            "path": "Chenopodium_nitrariaceum",
+            "title": "Chenopodium nitrariaceum",
+            "htmlBytes": 15030,
+            "textChars": 2358,
+            "externalLinks": 13
+          },
+          {
+            "path": "Chive",
+            "title": "Chive",
+            "htmlBytes": 15088,
+            "textChars": 2760,
+            "externalLinks": 13
+          },
+          {
+            "path": "Cistus_heterophyllus",
+            "title": "Cistus heterophyllus",
+            "htmlBytes": 14870,
+            "textChars": 2269,
+            "externalLinks": 13
+          },
+          {
+            "path": "Common_Osier",
+            "title": "Common Osier",
+            "htmlBytes": 14823,
+            "textChars": 2358,
+            "externalLinks": 13
+          },
+          {
+            "path": "Conandron_ramondioides",
+            "title": "Conandron ramondioides",
+            "htmlBytes": 15311,
+            "textChars": 2671,
+            "externalLinks": 13
+          },
+          {
+            "path": "Crataegus_viridis",
+            "title": "Crataegus viridis",
+            "htmlBytes": 15097,
+            "textChars": 2550,
+            "externalLinks": 13
+          },
+          {
+            "path": "Dendrobium_cretaceum",
+            "title": "Dendrobium cretaceum",
+            "htmlBytes": 14989,
+            "textChars": 2390,
+            "externalLinks": 13
+          },
+          {
+            "path": "Dendrobium_nobile",
+            "title": "Dendrobium nobile",
+            "htmlBytes": 17650,
+            "textChars": 5099,
+            "externalLinks": 13
+          },
+          {
+            "path": "Didymosperma",
+            "title": "Didymosperma",
+            "htmlBytes": 16430,
+            "textChars": 3953,
+            "externalLinks": 13
+          },
+          {
+            "path": "Diervilla_praecox",
+            "title": "Diervilla praecox",
+            "htmlBytes": 15130,
+            "textChars": 2583,
+            "externalLinks": 13
+          },
+          {
+            "path": "Echinostachys",
+            "title": "Echinostachys",
+            "htmlBytes": 15575,
+            "textChars": 3101,
+            "externalLinks": 13
+          },
+          {
+            "path": "Elaegnus_macrophylla",
+            "title": "Elaegnus macrophylla",
+            "htmlBytes": 15007,
+            "textChars": 2409,
+            "externalLinks": 13
+          },
+          {
+            "path": "Eucalyptus_microtheca",
+            "title": "Eucalyptus microtheca",
+            "htmlBytes": 15292,
+            "textChars": 2738,
+            "externalLinks": 13
+          },
+          {
+            "path": "Evonymus_obovata",
+            "title": "Evonymus obovata",
+            "htmlBytes": 15024,
+            "textChars": 2552,
+            "externalLinks": 13
+          },
+          {
+            "path": "Gerardia_virginica",
+            "title": "Gerardia virginica",
+            "htmlBytes": 14797,
+            "textChars": 2228,
+            "externalLinks": 13
+          },
+          {
+            "path": "Gordonia",
+            "title": "Gordonia",
+            "htmlBytes": 22059,
+            "textChars": 5969,
+            "externalLinks": 14
+          },
+          {
+            "path": "Green_Ash",
+            "title": "Green Ash",
+            "htmlBytes": 21085,
+            "textChars": 5213,
+            "externalLinks": 18
+          },
+          {
+            "path": "Green_false_hellebore",
+            "title": "Green false hellebore",
+            "htmlBytes": 18158,
+            "textChars": 4483,
+            "externalLinks": 10
+          },
+          {
+            "path": "Habenaria_susannae",
+            "title": "Habenaria susannae",
+            "htmlBytes": 14899,
+            "textChars": 2299,
+            "externalLinks": 10
+          },
+          {
+            "path": "Helleborus_orientalis_Var._caucasicus",
+            "title": "Helleborus orientalis Var. caucasicus",
+            "htmlBytes": 15012,
+            "textChars": 2131,
+            "externalLinks": 10
+          },
+          {
+            "path": "Hippeastrum_forgetii",
+            "title": "Hippeastrum forgetii",
+            "htmlBytes": 14830,
+            "textChars": 2209,
+            "externalLinks": 10
+          }
+        ],
+        "readErrors": []
+      },
+      "finishedAt": "2026-11-19T01:46:07.637Z"
+    }
+  ]
+}

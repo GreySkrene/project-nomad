@@ -1,0 +1,407 @@
+{
+  "schemaVersion": 1,
+  "reports": [
+    {
+      "path": "/app/storage/zim/gardening.stackexchange.com_en_all_2026-10.zim",
+      "startedAt": "2026-11-19T01:42:52.312Z",
+      "filename": "/app/storage/zim/gardening.stackexchange.com_en_all_2026-10.zim",
+      "filesize": 933097375,
+      "uuid": "e6c0cf4d-c610-0ef0-bb79-ebae48c61c63",
+      "counts": {
+        "allEntriesDeclared": 105301,
+        "userEntriesDeclared": 105285,
+        "articlesDeclared": 32508,
+        "mediaDeclared": 23857,
+        "entriesScanned": 105285,
+        "redirects": 45966,
+        "htmlPages": 35431,
+        "htmlReadErrors": 0,
+        "titleOnlyPages": 0,
+        "textUnder80": 0,
+        "textUnder250": 10504,
+        "textUnder1000": 14761,
+        "pagesWithExternalLinks": 15943,
+        "externalLinks": 49415,
+        "pagesWithRelativeLinks": 35431,
+        "relativeLinks": 1227429
+      },
+      "indexes": {
+        "title": true,
+        "fulltext": true
+      },
+      "checksum": {
+        "present": true,
+        "value": "c61986e7fd1fd1455ac1ae0ca84b50a6",
+        "valid": true
+      },
+      "metadata": {
+        "Title": "Gardening & Landscaping Q&A",
+        "Description": "Stack Exchange Q&A for gardeners and landscapers",
+        "Creator": "Stack Exchange",
+        "Publisher": "openZIM",
+        "Date": "2026-10-19",
+        "Language": "eng",
+        "Tags": "_category:stack_exchange;_videos:no;stack_exchange;_details:no;_ftindex:yes",
+        "Name": "gardening.stackexchange.com_en_all"
+      },
+      "samples": {
+        "titleOnly": [],
+        "thinUnder80": [],
+        "externalLinkHeavy": [
+          {
+            "path": "users/200/patridge",
+            "title": "User patridge",
+            "htmlBytes": 14086,
+            "textChars": 840,
+            "externalLinks": 13
+          },
+          {
+            "path": "users/68/dori",
+            "title": "User Dori",
+            "htmlBytes": 15141,
+            "textChars": 1056,
+            "externalLinks": 15
+          },
+          {
+            "path": "users/95/jon-ericson",
+            "title": "User Jon Ericson",
+            "htmlBytes": 16588,
+            "textChars": 1581,
+            "externalLinks": 18
+          },
+          {
+            "path": "users/309/gilles-so-stop-being-evil",
+            "title": "User Gilles 'SO- stop being evil'",
+            "htmlBytes": 14211,
+            "textChars": 872,
+            "externalLinks": 13
+          },
+          {
+            "path": "users/408/sam-saffron",
+            "title": "User Sam Saffron",
+            "htmlBytes": 14303,
+            "textChars": 908,
+            "externalLinks": 11
+          },
+          {
+            "path": "users/419/j-musser",
+            "title": "User J. Musser",
+            "htmlBytes": 16439,
+            "textChars": 1677,
+            "externalLinks": 11
+          },
+          {
+            "path": "users/557/paulo-ebermann",
+            "title": "User Paŭlo Ebermann",
+            "htmlBytes": 14827,
+            "textChars": 1783,
+            "externalLinks": 12
+          },
+          {
+            "path": "users/648/linuxrules94",
+            "title": "User linuxrules94",
+            "htmlBytes": 14820,
+            "textChars": 1335,
+            "externalLinks": 14
+          },
+          {
+            "path": "users/1208/irrational-john",
+            "title": "User irrational John",
+            "htmlBytes": 16271,
+            "textChars": 1384,
+            "externalLinks": 17
+          },
+          {
+            "path": "users/1261/franco-rondini",
+            "title": "User Franco Rondini",
+            "htmlBytes": 15695,
+            "textChars": 1058,
+            "externalLinks": 21
+          },
+          {
+            "path": "users/978/dustin-kirkland",
+            "title": "User Dustin Kirkland",
+            "htmlBytes": 13838,
+            "textChars": 636,
+            "externalLinks": 11
+          },
+          {
+            "path": "users/1402/bitmask",
+            "title": "User bitmask",
+            "htmlBytes": 15015,
+            "textChars": 903,
+            "externalLinks": 17
+          },
+          {
+            "path": "users/2059/andy-aka",
+            "title": "User Andy aka",
+            "htmlBytes": 16074,
+            "textChars": 1354,
+            "externalLinks": 20
+          },
+          {
+            "path": "users/2141/ilmari-karonen",
+            "title": "User Ilmari Karonen",
+            "htmlBytes": 15633,
+            "textChars": 2102,
+            "externalLinks": 13
+          },
+          {
+            "path": "users/2577/aussie-pete",
+            "title": "User Aussie Pete",
+            "htmlBytes": 18159,
+            "textChars": 1831,
+            "externalLinks": 55
+          },
+          {
+            "path": "users/3325/peter-mortensen",
+            "title": "User Peter Mortensen",
+            "htmlBytes": 15156,
+            "textChars": 1044,
+            "externalLinks": 24
+          },
+          {
+            "path": "users/6951/dennis-williamson",
+            "title": "User Dennis Williamson",
+            "htmlBytes": 15587,
+            "textChars": 731,
+            "externalLinks": 13
+          },
+          {
+            "path": "users/8537/cansadadeserfeliz",
+            "title": "User cansadadeserfeliz",
+            "htmlBytes": 13741,
+            "textChars": 305,
+            "externalLinks": 10
+          },
+          {
+            "path": "users/9663/loreno-heer",
+            "title": "User Loreno Heer",
+            "htmlBytes": 12894,
+            "textChars": 750,
+            "externalLinks": 10
+          },
+          {
+            "path": "users/11299/glorfindel",
+            "title": "User Glorfindel",
+            "htmlBytes": 15132,
+            "textChars": 1171,
+            "externalLinks": 15
+          },
+          {
+            "path": "users/14050/tim-malone",
+            "title": "User Tim Malone",
+            "htmlBytes": 17240,
+            "textChars": 1408,
+            "externalLinks": 47
+          },
+          {
+            "path": "users/15205/simbabque",
+            "title": "User simbabque",
+            "htmlBytes": 18366,
+            "textChars": 1746,
+            "externalLinks": 39
+          },
+          {
+            "path": "users/16022/rodrigo-de-azevedo",
+            "title": "User Rodrigo de Azevedo",
+            "htmlBytes": 15118,
+            "textChars": 1768,
+            "externalLinks": 13
+          },
+          {
+            "path": "users/20592/prashanth-sams",
+            "title": "User Prashanth Sams",
+            "htmlBytes": 15681,
+            "textChars": 1080,
+            "externalLinks": 23
+          },
+          {
+            "path": "users/21203/engineer",
+            "title": "User Engineer",
+            "htmlBytes": 13579,
+            "textChars": 1069,
+            "externalLinks": 10
+          },
+          {
+            "path": "users/24695/coeur",
+            "title": "User Cœur",
+            "htmlBytes": 15711,
+            "textChars": 1412,
+            "externalLinks": 19
+          },
+          {
+            "path": "users/25150/saidbakr",
+            "title": "User SaidbakR",
+            "htmlBytes": 16788,
+            "textChars": 958,
+            "externalLinks": 13
+          },
+          {
+            "path": "users/26332/boris-the-spider",
+            "title": "User Boris the Spider",
+            "htmlBytes": 15158,
+            "textChars": 1102,
+            "externalLinks": 19
+          },
+          {
+            "path": "users/29898/rahul-desai",
+            "title": "User Rahul Desai",
+            "htmlBytes": 14397,
+            "textChars": 1219,
+            "externalLinks": 11
+          },
+          {
+            "path": "users/30247/hichem-mg",
+            "title": "User Hichem MG",
+            "htmlBytes": 13110,
+            "textChars": 1109,
+            "externalLinks": 10
+          },
+          {
+            "path": "users/33800/kjetil-b-halvorsen",
+            "title": "User kjetil b halvorsen",
+            "htmlBytes": 15292,
+            "textChars": 1267,
+            "externalLinks": 14
+          },
+          {
+            "path": "users/36323/user21820",
+            "title": "User user21820",
+            "htmlBytes": 15749,
+            "textChars": 1332,
+            "externalLinks": 34
+          },
+          {
+            "path": "users/39943/ciro-santilli-ourbigbook-com",
+            "title": "User Ciro Santilli OurBigBook.com",
+            "htmlBytes": 17745,
+            "textChars": 1623,
+            "externalLinks": 29
+          },
+          {
+            "path": "users/42594/gabriel-staples",
+            "title": "User Gabriel Staples",
+            "htmlBytes": 16498,
+            "textChars": 2391,
+            "externalLinks": 19
+          },
+          {
+            "path": "users/77944/robert-long",
+            "title": "User Robert Long",
+            "htmlBytes": 14485,
+            "textChars": 1377,
+            "externalLinks": 10
+          },
+          {
+            "path": "users/107364/enlico",
+            "title": "User Enlico",
+            "htmlBytes": 16712,
+            "textChars": 1768,
+            "externalLinks": 24
+          },
+          {
+            "path": "questions/107/how-do-i-know-when-and-how-much-to-aerate-my-lawn",
+            "title": "How do I know when and how much to aerate my lawn?",
+            "htmlBytes": 39326,
+            "textChars": 5911,
+            "externalLinks": 11
+          },
+          {
+            "path": "questions/125/how-do-you-safely-and-effectively-stop-a-cat-from-pooping-in-your-yard",
+            "title": "How do you safely and effectively stop a cat from pooping in your yard?",
+            "htmlBytes": 76804,
+            "textChars": 13194,
+            "externalLinks": 10
+          },
+          {
+            "path": "questions/137/how-can-i-identify-and-eradicate-poison-ivy-poison-oak-and-poison-sumac-from-m",
+            "title": "How can I identify and eradicate poison ivy, poison oak, and poison sumac from my yard?",
+            "htmlBytes": 33560,
+            "textChars": 6847,
+            "externalLinks": 15
+          },
+          {
+            "path": "questions/158/how-do-you-identify-a-plant",
+            "title": "How do you identify a plant?",
+            "htmlBytes": 62660,
+            "textChars": 13620,
+            "externalLinks": 22
+          },
+          {
+            "path": "questions/94/how-long-does-chemically-fertilized-grass-remain-poisonous",
+            "title": "How long does chemically fertilized grass remain poisonous?",
+            "htmlBytes": 37149,
+            "textChars": 8219,
+            "externalLinks": 18
+          },
+          {
+            "path": "questions/236/what-kind-of-plants-will-survive-the-heat-from-an-air-conditioner",
+            "title": "What kind of plants will survive the heat from an air conditioner?",
+            "htmlBytes": 50947,
+            "textChars": 9406,
+            "externalLinks": 14
+          },
+          {
+            "path": "questions/320/how-is-manure-tea-made-without-e-coli",
+            "title": "How is manure tea made without E. coli?",
+            "htmlBytes": 47067,
+            "textChars": 15780,
+            "externalLinks": 18
+          },
+          {
+            "path": "questions/398/what-is-eating-my-vegetable-seedlings",
+            "title": "What is eating my vegetable seedlings?",
+            "htmlBytes": 46597,
+            "textChars": 9270,
+            "externalLinks": 15
+          },
+          {
+            "path": "questions/761/how-do-i-get-rid-of-white-flies-on-my-basil",
+            "title": "How do I get rid of white flies on my basil?",
+            "htmlBytes": 38818,
+            "textChars": 7377,
+            "externalLinks": 14
+          },
+          {
+            "path": "questions/902/how-can-i-tell-if-my-lawn-needs-to-be-dethatched",
+            "title": "How can I tell if my lawn needs to be dethatched?",
+            "htmlBytes": 37107,
+            "textChars": 6690,
+            "externalLinks": 18
+          },
+          {
+            "path": "questions/934/what-is-a-good-resource-for-identification-of-useful-weeds-that-grow-in-north-",
+            "title": "What is a good resource for identification of useful weeds that grow in North Central USA?",
+            "htmlBytes": 23368,
+            "textChars": 3085,
+            "externalLinks": 10
+          },
+          {
+            "path": "questions/1027/how-often-should-you-mow-a-growing-lawn",
+            "title": "How often should you mow a growing lawn?",
+            "htmlBytes": 67769,
+            "textChars": 20061,
+            "externalLinks": 10
+          },
+          {
+            "path": "questions/1054/what-is-a-good-variety-of-pomegranate-to-grow-in-pennsylvania-us-hardiness-zon",
+            "title": "What is a good variety of pomegranate to grow in Pennsylvania (US Hardiness Zone 6b/7a)?",
+            "htmlBytes": 22916,
+            "textChars": 3346,
+            "externalLinks": 12
+          },
+          {
+            "path": "questions/1085/what-is-a-good-plum-tree-that-is-self-fertile-disease-resistant-and-a-heavy-cr",
+            "title": "What is a good Plum tree that is self-fertile, disease-resistant and a heavy cropper?",
+            "htmlBytes": 26182,
+            "textChars": 2843,
+            "externalLinks": 12
+          }
+        ],
+        "readErrors": []
+      },
+      "finishedAt": "2026-11-19T01:43:03.653Z"
+    }
+  ]
+}

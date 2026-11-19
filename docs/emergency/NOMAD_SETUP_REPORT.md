@@ -40,7 +40,7 @@ Measured logical storage under `/opt/project-nomad/storage` is approximately **7
 
 | Content | Measured size/state |
 |---|---:|
-| Kiwix ZIM libraries | 19 files; 40,792,676,726 bytes (37.99 GiB) |
+| Kiwix ZIM libraries | 20 files; 40,900,638,382 bytes (38.09 GiB) |
 | Maps | about 32 GiB |
 | Kolibri Gen 2 | about 6.3 GiB |
 | RAG uploads | about 720 MiB |
@@ -53,7 +53,7 @@ No NOMAD download jobs were active or queued at the verified checkpoint. No redu
 
 ## 4. Offline libraries
 
-Kiwix contains 19 installed ZIM files, including compact complete Wikipedia, illustrated Best of Wikipedia, Wikipedia Medicine/WikiMed, MedlinePlus, NHS Medicines, CDC travel health, military medicine, LibreTexts Medicine, LibrePathology, iFixit, Ready.gov, illustrated Wikibooks, and selected repair, cooking, gardening, and vehicle-maintenance references. Installed Kiwix content totals 40,792,676,726 bytes.
+Kiwix contains 20 installed ZIM files, including compact complete Wikipedia, illustrated Best of Wikipedia, Wikipedia Medicine/WikiMed, MedlinePlus, NHS Medicines, CDC travel health, military medicine, LibreTexts Medicine, LibrePathology, iFixit, Ready.gov, illustrated Wikibooks, Gardenology, and selected repair, cooking, Q&A, and vehicle-maintenance references. Installed Kiwix content totals 40,900,638,382 bytes. Presence is not acceptance: `CONTENT_AUDIT.md` records confirmed completeness and usefulness defects in LibreTexts Medicine, the OpenZIM Medical Library, and other supplemental collections.
 
 The two illustrated upgrades were independently validated on 2026-11-18. Kiwix catalog metadata reports `_pictures:yes` and `_details:yes`; each local content route returns a valid redirect; and the locally computed SHA-256 values match Kiwix's published hashes:
 
