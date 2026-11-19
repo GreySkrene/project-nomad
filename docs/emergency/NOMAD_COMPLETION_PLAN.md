@@ -142,8 +142,15 @@ the separate project. Content and UI validation do not require local generation.
 - [x] Verify the live home, maps, docs, Kiwix, and Kolibri endpoints after deployment.
 - [x] Add and deploy a model-independent Browse Library: need-based categories,
   honest source-format notes, common-search shortcuts, real offline Kiwix cover/
-  article/media metadata, and 12 useful document sets with direct original-file access.
+  article/media metadata, and 13 useful document sets with direct original-file access.
 - [ ] Perform hands-on user review and collect any layout/content refinements.
+- [ ] After content acceptance, inspect the presentation of every installed resource
+  in its real offline reader. Improve collection landing pages, backgrounds,
+  typography, spacing, chapter navigation, image treatment, and quick-reference
+  formatting to match Night Operations + Field Manual where technically safe.
+- [ ] Document which presentation layers NOMAD controls directly versus Kiwix,
+  Kolibri, embedded PDFs, and archived-site CSS; prefer maintainable theme adapters
+  and per-source fixes over modifying original authoritative content.
 
 ## K. Public, reproducible personal-project fork
 

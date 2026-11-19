@@ -83,12 +83,14 @@ test('groups a flat official-emergency collection into useful document sets', ()
     document('Jackery-Explorer-600-v2-Official-User-Manual.pdf'),
     document('UGS-Liquefaction-Hazards-PI-100.pdf'),
     document('CDC-Make-Water-Safe-During-Emergency-2025.pdf'),
+    document('CDC-Radiation-Response-Briefing-Manual-2024.pdf'),
   ])
 
   assert.deepEqual(
     groups.map((group) => [group.title, group.files.length]),
     [
       ['Where There Is No Doctor', 2],
+      ['Radiological & severe-weather preparedness', 1],
       ['Utah & Idaho regional hazards', 1],
       ['Emergency water safety', 1],
       ['Jackery Explorer 600 v2', 1],

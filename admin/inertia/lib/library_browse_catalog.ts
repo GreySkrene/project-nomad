@@ -289,6 +289,15 @@ const DOCUMENT_SET_RULES: DocumentSetRule[] = [
     matches: (name) => /^en_wtnd_/i.test(name),
   },
   {
+    id: 'radiological-weather-preparedness',
+    title: 'Radiological & severe-weather preparedness',
+    summary:
+      'CDC radiological-response briefing material and National Weather Service preparedness guidance for protective actions and planning.',
+    topics: ['Radiation', 'Protective actions', 'Severe weather', 'Preparedness'],
+    priority: 1.5,
+    matches: (name) => /radiation-response|weather-preparedness/i.test(name),
+  },
+  {
     id: 'midwifery-maternal-health',
     title: 'Midwifery & maternal health',
     summary:
