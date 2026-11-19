@@ -65,5 +65,6 @@ most recent formal training.
 - American Heart Association, *Part 6: Pediatric Basic Life Support* and *Part
   7: Adult Basic Life Support*, checked 2026-11-11.
 
-Official URLs are retained in `RESOURCE_MANIFEST.csv` for update checks.
+This locally authored summary is the stored offline item; it is not an original
+AHA manual. Re-verify it against the named AHA publications during update passes.
 

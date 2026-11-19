@@ -52,4 +52,5 @@ verification when communications are available.
 
 - 47 CFR Part 95 Subpart B, eCFR current through 2026-11-10.
 - NOAA/NWS Weather Radio national brochure, July 2025.
-- FEMA family emergency communication plan, June 2025.
+- FEMA family emergency communication plan form; saved during the 2025 update
+  pass, but the PDF's embedded creation metadata is 2017-06-26.

@@ -8,8 +8,10 @@ listed as an exact-model manual must match the model printed on the device.
 - Jackery Explorer 600 v2, model JE-600A: complete 46-page official manual,
   manufacturer product guide, operating quick reference, solar-input limits,
   storage, and troubleshooting.
-- Lenovo Legion Go, first generation 8APU1 / type 83E1: official Lenovo user
-  guide and product specifications.
+- Lenovo Legion Go, first generation 8APU1 / type 83E1: Lenovo PSREF product
+  specifications and a locally authored offline/power card. The saved six-page
+  Lenovo "user guide" is only an interactive landing-page capture and must not
+  be treated as a complete manual.
 - Midland ER10/ER10VP: stored separately under
   `../communications/radio/` with an offline quick-reference card.
 

@@ -1,0 +1,1567 @@
+{
+  "database": "/kolibri/db.sqlite3",
+  "channel_tables": [
+    "content_channelmetadata",
+    "content_channelmetadata_included_languages"
+  ],
+  "channels": [
+    {
+      "id": "e409b964366a59219c148f2aaa741f43",
+      "name": "Blockly Games",
+      "version": 10,
+      "last_updated": "2026-11-07 17:20:07.441620(UTC)",
+      "node_count": 505,
+      "available_node_count": 505,
+      "available_node_kinds": {
+        "html5": 448,
+        "topic": 57
+      },
+      "available_topic_samples": [
+        {
+          "level": 0,
+          "title": "Blockly Games"
+        },
+        {
+          "level": 1,
+          "title": "As\u1ee5s\u1ee5 Igbo"
+        },
+        {
+          "level": 1,
+          "title": "Bahasa Indonesia"
+        },
+        {
+          "level": 1,
+          "title": "Bahasa Melayu"
+        },
+        {
+          "level": 1,
+          "title": "Brezhoneg"
+        },
+        {
+          "level": 1,
+          "title": "Dansk"
+        },
+        {
+          "level": 1,
+          "title": "Deutsch"
+        },
+        {
+          "level": 1,
+          "title": "English"
+        },
+        {
+          "level": 1,
+          "title": "Espa\u00f1ol"
+        },
+        {
+          "level": 1,
+          "title": "Esperanto"
+        },
+        {
+          "level": 1,
+          "title": "Euskara"
+        },
+        {
+          "level": 1,
+          "title": "Fran\u00e7ais"
+        },
+        {
+          "level": 1,
+          "title": "F\u00f8royskt"
+        },
+        {
+          "level": 1,
+          "title": "Galego"
+        },
+        {
+          "level": 1,
+          "title": "Hausa"
+        },
+        {
+          "level": 1,
+          "title": "Interlingua"
+        },
+        {
+          "level": 1,
+          "title": "Italiano"
+        },
+        {
+          "level": 1,
+          "title": "Latvie\u0161u"
+        },
+        {
+          "level": 1,
+          "title": "Lietuvi\u0173"
+        },
+        {
+          "level": 1,
+          "title": "Magyar"
+        },
+        {
+          "level": 1,
+          "title": "Nederlands, Vlaams"
+        },
+        {
+          "level": 1,
+          "title": "Norsk Bokm\u00e5l"
+        },
+        {
+          "level": 1,
+          "title": "Polski"
+        },
+        {
+          "level": 1,
+          "title": "Portugu\u00eas"
+        },
+        {
+          "level": 1,
+          "title": "Portugu\u00eas Brasileiro"
+        },
+        {
+          "level": 1,
+          "title": "Rom\u00e2n\u0103"
+        },
+        {
+          "level": 1,
+          "title": "Sardu"
+        },
+        {
+          "level": 1,
+          "title": "Shqip"
+        },
+        {
+          "level": 1,
+          "title": "Sloven\u010dina"
+        },
+        {
+          "level": 1,
+          "title": "Sloven\u0161\u010dina"
+        },
+        {
+          "level": 1,
+          "title": "Suomi"
+        },
+        {
+          "level": 1,
+          "title": "Svenska"
+        },
+        {
+          "level": 1,
+          "title": "Ti\u1ebfng Vi\u1ec7t"
+        },
+        {
+          "level": 1,
+          "title": "T\u00fcrk\u00e7e"
+        },
+        {
+          "level": 1,
+          "title": "\u00c8d\u00e8 Yor\u00f9b\u00e1"
+        },
+        {
+          "level": 1,
+          "title": "\u00cdslenska"
+        },
+        {
+          "level": 1,
+          "title": "\u010cesky"
+        },
+        {
+          "level": 1,
+          "title": "\u0395\u03bb\u03bb\u03b7\u03bd\u03b9\u03ba\u03ac"
+        },
+        {
+          "level": 1,
+          "title": "\u0420\u0443\u0441\u0441\u043a\u0438\u0439"
+        },
+        {
+          "level": 1,
+          "title": "\u0421\u0440\u043f\u0441\u043a\u0438"
+        },
+        {
+          "level": 1,
+          "title": "\u0423\u043a\u0440\u0430\u0457\u043d\u0441\u044c\u043a\u0430"
+        },
+        {
+          "level": 1,
+          "title": "\u0431\u0435\u043b\u0430\u0440\u0443\u0441\u043a\u0456"
+        },
+        {
+          "level": 1,
+          "title": "\u0431\u044a\u043b\u0433\u0430\u0440\u0441\u043a\u0438 \u0435\u0437\u0438\u043a"
+        },
+        {
+          "level": 1,
+          "title": "\u0570\u0561\u0575\u0565\u0580\u0567\u0576"
+        },
+        {
+          "level": 1,
+          "title": "\u05e2\u05d1\u05e8\u05d9\u05ea"
+        },
+        {
+          "level": 1,
+          "title": "\u0627\u0644\u0639\u0631\u0628\u064a\u0629"
+        },
+        {
+          "level": 1,
+          "title": "\u0627\u064f\u0631\u062f\u064f\u0648\u202c"
+        },
+        {
+          "level": 1,
+          "title": "\u0641\u0627\u0631\u0633\u06cc"
+        },
+        {
+          "level": 1,
+          "title": "\u0939\u093f\u0928\u094d\u0926\u0940"
+        },
+        {
+          "level": 1,
+          "title": "\u09ac\u09be\u0982\u09b2\u09be"
+        },
+        {
+          "level": 1,
+          "title": "\u0e20\u0e32\u0e29\u0e32\u0e44\u0e17\u0e22"
+        },
+        {
+          "level": 1,
+          "title": "\u1019\u103c\u1014\u103a\u1019\u102c\u1005\u102c"
+        },
+        {
+          "level": 1,
+          "title": "\u1275\u130d\u122d\u129b"
+        },
+        {
+          "level": 1,
+          "title": "\u65e5\u672c\u8a9e"
+        },
+        {
+          "level": 1,
+          "title": "\u6b63\u9ad4\u4e2d\u6587"
+        },
+        {
+          "level": 1,
+          "title": "\u7b80\u4f53\u4e2d\u6587"
+        },
+        {
+          "level": 1,
+          "title": "\ud55c\uad6d\uc5b4"
+        }
+      ],
+      "total_file_records": 896,
+      "available_file_count": 896,
+      "unavailable_file_count": 0,
+      "available_file_bytes": 310676617,
+      "selected_node_file_records": 896,
+      "selected_node_available_file_count": 896,
+      "selected_node_unavailable_file_count": 0,
+      "physical_file_count": 456
+    },
+    {
+      "id": "c9d7f950ab6b5a1199e3d6c10d7f0103",
+      "name": "Khan Academy (English - US curriculum)",
+      "version": 5,
+      "last_updated": "2026-11-07 17:20:21.192410(UTC)",
+      "node_count": 34488,
+      "available_node_count": 1455,
+      "available_node_kinds": {
+        "exercise": 383,
+        "topic": 324,
+        "video": 748
+      },
+      "available_topic_samples": [
+        {
+          "level": 0,
+          "title": "Khan Academy (English - US curriculum)"
+        },
+        {
+          "level": 1,
+          "title": "Math"
+        },
+        {
+          "level": 1,
+          "title": "Science & Engineering"
+        },
+        {
+          "level": 2,
+          "title": "Arithmetic"
+        },
+        {
+          "level": 2,
+          "title": "Pre-algebra"
+        },
+        {
+          "level": 2,
+          "title": "Physics"
+        },
+        {
+          "level": 2,
+          "title": "Biology"
+        },
+        {
+          "level": 2,
+          "title": "Electrical engineering"
+        },
+        {
+          "level": 3,
+          "title": "Intro to multiplication"
+        },
+        {
+          "level": 3,
+          "title": "1-digit multiplication"
+        },
+        {
+          "level": 3,
+          "title": "Intro to division"
+        },
+        {
+          "level": 3,
+          "title": "Understand fractions"
+        },
+        {
+          "level": 3,
+          "title": "Place value through 1,000,000"
+        },
+        {
+          "level": 3,
+          "title": "Add and subtract through 1,000,000"
+        },
+        {
+          "level": 3,
+          "title": "Multiply 1- and 2-digit numbers"
+        },
+        {
+          "level": 3,
+          "title": "Divide with remainders"
+        },
+        {
+          "level": 3,
+          "title": "Add and subtract fraction (like denominators)"
+        },
+        {
+          "level": 3,
+          "title": "Multiply fractions"
+        },
+        {
+          "level": 3,
+          "title": "Decimals and place value"
+        },
+        {
+          "level": 3,
+          "title": "Add and subtract decimals"
+        },
+        {
+          "level": 3,
+          "title": "Add and subtract fractions (different denominators)"
+        },
+        {
+          "level": 3,
+          "title": "Multiply and divide multi-digit numbers"
+        },
+        {
+          "level": 3,
+          "title": "Divide fractions"
+        },
+        {
+          "level": 3,
+          "title": "Multiply and divide decimals"
+        },
+        {
+          "level": 3,
+          "title": "Exponents and powers of ten"
+        },
+        {
+          "level": 3,
+          "title": "Add and subtract negative numbers"
+        },
+        {
+          "level": 3,
+          "title": "Multiply and divide negative numbers"
+        },
+        {
+          "level": 3,
+          "title": "Factors and multiples"
+        },
+        {
+          "level": 3,
+          "title": "Patterns"
+        },
+        {
+          "level": 3,
+          "title": "Ratios and rates"
+        },
+        {
+          "level": 3,
+          "title": "Percentages"
+        },
+        {
+          "level": 3,
+          "title": "Exponents intro and order of operations"
+        },
+        {
+          "level": 3,
+          "title": "Variables & expressions"
+        },
+        {
+          "level": 3,
+          "title": "Equations & inequalities introduction"
+        },
+        {
+          "level": 3,
+          "title": "Percent & rational number word problems"
+        },
+        {
+          "level": 3,
+          "title": "Proportional relationships"
+        },
+        {
+          "level": 3,
+          "title": "One-step and two-step equations & inequalities"
+        },
+        {
+          "level": 3,
+          "title": "Roots, exponents, & scientific notation"
+        },
+        {
+          "level": 3,
+          "title": "Multi-step equations"
+        },
+        {
+          "level": 3,
+          "title": "Two-variable equations"
+        },
+        {
+          "level": 3,
+          "title": "Functions and linear models"
+        },
+        {
+          "level": 3,
+          "title": "Systems of equations"
+        },
+        {
+          "level": 3,
+          "title": "Forces and Newton's laws of motion"
+        },
+        {
+          "level": 3,
+          "title": "Centripetal force and gravitation"
+        },
+        {
+          "level": 3,
+          "title": "Work and energy"
+        },
+        {
+          "level": 3,
+          "title": "Waves"
+        },
+        {
+          "level": 3,
+          "title": "Discoveries and projects"
+        },
+        {
+          "level": 3,
+          "title": "Energy and enzymes"
+        },
+        {
+          "level": 3,
+          "title": "Structure of a cell"
+        },
+        {
+          "level": 3,
+          "title": "Membranes and transport"
+        },
+        {
+          "level": 3,
+          "title": "Bacteria and archaea"
+        },
+        {
+          "level": 3,
+          "title": "Viruses"
+        },
+        {
+          "level": 3,
+          "title": "Ecology"
+        },
+        {
+          "level": 3,
+          "title": "Human biology"
+        },
+        {
+          "level": 3,
+          "title": "Introduction to electrical engineering"
+        },
+        {
+          "level": 3,
+          "title": "Circuit analysis"
+        },
+        {
+          "level": 3,
+          "title": "Reverse engineering"
+        },
+        {
+          "level": 4,
+          "title": "Multiplication as equal groups"
+        },
+        {
+          "level": 4,
+          "title": "Multiplication on the number line"
+        },
+        {
+          "level": 4,
+          "title": "Multiply using groups of objects"
+        },
+        {
+          "level": 4,
+          "title": "Multiplication with arrays"
+        },
+        {
+          "level": 4,
+          "title": "Commutative property of multiplication"
+        },
+        {
+          "level": 4,
+          "title": "Multiply by 0 or 1"
+        },
+        {
+          "level": 4,
+          "title": "Multiply by 2 or 4"
+        },
+        {
+          "level": 4,
+          "title": "Multiply by 5 or 10"
+        },
+        {
+          "level": 4,
+          "title": "Multiply by 3 or 6"
+        },
+        {
+          "level": 4,
+          "title": "Distributive property"
+        },
+        {
+          "level": 4,
+          "title": "Multiply by 7, 8, or 9"
+        },
+        {
+          "level": 4,
+          "title": "1-digit multiplication"
+        },
+        {
+          "level": 4,
+          "title": "Associative property of multiplication"
+        },
+        {
+          "level": 4,
+          "title": "Comparing with multiplication"
+        },
+        {
+          "level": 4,
+          "title": "Division intro"
+        },
+        {
+          "level": 4,
+          "title": "Relating multiplication and division"
+        },
+        {
+          "level": 4,
+          "title": "Divide by 1, 2, or 4"
+        },
+        {
+          "level": 4,
+          "title": "Divide by 5 or 10"
+        },
+        {
+          "level": 4,
+          "title": "Divide by 3 or 6"
+        },
+        {
+          "level": 4,
+          "title": "Divide by 7, 8, or 9"
+        },
+        {
+          "level": 4,
+          "title": "1-digit division"
+        },
+        {
+          "level": 4,
+          "title": "Multiplication and division word problems"
+        },
+        {
+          "level": 4,
+          "title": "Fractions intro"
+        },
+        {
+          "level": 4,
+          "title": "What fractions mean"
+        },
+        {
+          "level": 4,
+          "title": "Fractions on the number line"
+        },
+        {
+          "level": 4,
+          "title": "Fractions and whole numbers"
+        },
+        {
+          "level": 4,
+          "title": "Equivalent fractions"
+        },
+        {
+          "level": 4,
+          "title": "Intro to place value through 1,000"
+        },
+        {
+          "level": 4,
+          "title": "Numbers in expanded form"
+        },
+        {
+          "level": 4,
+          "title": "Regroup whole numbers"
+        },
+        {
+          "level": 4,
+          "title": "Greater place values"
+        },
+        {
+          "level": 4,
+          "title": "How 10 relates to place value"
+        },
+        {
+          "level": 4,
+          "title": "Visually adding within 1,000"
+        },
+        {
+          "level": 4,
+          "title": "Strategies for adding within 1,000"
+        },
+        {
+          "level": 4,
+          "title": "Strategies for subtracting within 1,000"
+        },
+        {
+          "level": 4,
+          "title": "Adding within 1,000,000"
+        },
+        {
+          "level": 4,
+          "title": "Subtracting within 1,000,000"
+        },
+        {
+          "level": 4,
+          "title": "Multiplication by 10s, 100s, and 1000s"
+        },
+        {
+          "level": 4,
+          "title": "Multi-digit multiplication: place value and area models"
+        },
+        {
+          "level": 4,
+          "title": "Multiply with partial products"
+        },
+        {
+          "level": 4,
+          "title": "Multiply by 10s"
+        },
+        {
+          "level": 4,
+          "title": "Multiply 2-digit numbers with area models"
+        },
+        {
+          "level": 4,
+          "title": "Multiply 2-digit numbers with partial products"
+        },
+        {
+          "level": 4,
+          "title": "Remainders"
+        },
+        {
+          "level": 4,
+          "title": "Divide multiples of 10, 100, and 1,000 by 1-digit numbers"
+        },
+        {
+          "level": 4,
+          "title": "Division with place value"
+        },
+        {
+          "level": 4,
+          "title": "Division with area models"
+        },
+        {
+          "level": 4,
+          "title": "Multi-digit division with partial quotients"
+        },
+        {
+          "level": 4,
+          "title": "Multiplication and division word problems"
+        },
+        {
+          "level": 4,
+          "title": "Multi-step word problems"
+        },
+        {
+          "level": 4,
+          "title": "Equivalent fractions"
+        },
+        {
+          "level": 4,
+          "title": "Common denominators"
+        },
+        {
+          "level": 4,
+          "title": "Decomposing fractions"
+        },
+        {
+          "level": 4,
+          "title": "Adding and subtracting fractions with like denominators"
+        },
+        {
+          "level": 4,
+          "title": "Adding and subtracting fractions: word problems"
+        },
+        {
+          "level": 4,
+          "title": "Mixed numbers"
+        },
+        {
+          "level": 4,
+          "title": "Adding and subtracting mixed numbers"
+        },
+        {
+          "level": 4,
+          "title": "Multiplying fractions and whole numbers visually"
+        },
+        {
+          "level": 4,
+          "title": "Multiplying whole numbers and fractions"
+        },
+        {
+          "level": 4,
+          "title": "Multiplying whole numbers and mixed numbers"
+        },
+        {
+          "level": 4,
+          "title": "Multiplying fractions and whole numbers word problems"
+        },
+        {
+          "level": 4,
+          "title": "Multiplication as scaling"
+        },
+        {
+          "level": 4,
+          "title": "Multiplying fractions and whole numbers"
+        },
+        {
+          "level": 4,
+          "title": "Multiplying fractions"
+        },
+        {
+          "level": 4,
+          "title": "Multiplying mixed numbers"
+        },
+        {
+          "level": 4,
+          "title": "Area of rectangles with fractional side lengths"
+        },
+        {
+          "level": 4,
+          "title": "Multiplying fractions word problems"
+        },
+        {
+          "level": 4,
+          "title": "Decimal fractions"
+        },
+        {
+          "level": 4,
+          "title": "Decimal fractions greater than 1"
+        },
+        {
+          "level": 4,
+          "title": "Writing fractions as decimals"
+        },
+        {
+          "level": 4,
+          "title": "Decimal place value intro"
+        },
+        {
+          "level": 4,
+          "title": "Decimals on the number line"
+        },
+        {
+          "level": 4,
+          "title": "Decimals in expanded form"
+        },
+        {
+          "level": 4,
+          "title": "Regrouping decimals"
+        },
+        {
+          "level": 4,
+          "title": "Adding decimals intro"
+        },
+        {
+          "level": 4,
+          "title": "Adding decimals (tenths and hundredths)"
+        },
+        {
+          "level": 4,
+          "title": "Subtracting decimals intro"
+        },
+        {
+          "level": 4,
+          "title": "Subtracting decimals (tenths and hundredths)"
+        },
+        {
+          "level": 4,
+          "title": "Fractions with denominators of 10 and 100"
+        },
+        {
+          "level": 4,
+          "title": "Visually adding and subtracting fractions"
+        },
+        {
+          "level": 4,
+          "title": "Common denominators"
+        },
+        {
+          "level": 4,
+          "title": "Adding and subtracting fractions with unlike denominators"
+        },
+        {
+          "level": 4,
+          "title": "Adding and subtracting mixed numbers with unlike denominators"
+        },
+        {
+          "level": 4,
+          "title": "Adding and subtracting fractions with unlike denominators word problems"
+        },
+        {
+          "level": 4,
+          "title": "Multiply with multiples of 10, 100, and 1,000"
+        },
+        {
+          "level": 4,
+          "title": "Multi-digit multiplication"
+        },
+        {
+          "level": 4,
+          "title": "Divide with multiples of 10, 100, and 1,000"
+        },
+        {
+          "level": 4,
+          "title": "Multi-digit division"
+        },
+        {
+          "level": 4,
+          "title": "Fractions as division"
+        },
+        {
+          "level": 4,
+          "title": "Dividing unit fractions by whole number"
+        },
+        {
+          "level": 4,
+          "title": "Dividing whole numbers by unit fractions"
+        },
+        {
+          "level": 4,
+          "title": "Dividing fractions and whole numbers word problems"
+        },
+        {
+          "level": 4,
+          "title": "Dividing fractions by fractions"
+        }
+      ],
+      "total_file_records": 228235,
+      "available_file_count": 66274,
+      "unavailable_file_count": 161961,
+      "available_file_bytes": 6476834752,
+      "selected_node_file_records": 11612,
+      "selected_node_available_file_count": 11586,
+      "selected_node_unavailable_file_count": 26,
+      "selected_unavailable_file_samples": [
+        {
+          "title": "Endergonic, exergonic, exothermic, and endothermic",
+          "kind": "video",
+          "preset": "video_subtitle",
+          "local_file_id": "332dfc6ff6605d54fc8a68d012e9dda5"
+        },
+        {
+          "title": "Endergonic, exergonic, exothermic, and endothermic",
+          "kind": "video",
+          "preset": "video_subtitle",
+          "local_file_id": "0b5560500f4695e6bc32cc4caa250e8e"
+        },
+        {
+          "title": "Inductor kickback  (1 of 2)",
+          "kind": "video",
+          "preset": "video_subtitle",
+          "local_file_id": "92648bd7323ce061727c99ec07a4a791"
+        },
+        {
+          "title": "Inductor kickback  (1 of 2)",
+          "kind": "video",
+          "preset": "video_subtitle",
+          "local_file_id": "53e9de3c35dd1f18e30781e2696d5099"
+        },
+        {
+          "title": "Inverse cube law (deflection method)",
+          "kind": "video",
+          "preset": "video_thumbnail",
+          "local_file_id": "93cc476463d2d82c04000cb5ba94ab89"
+        },
+        {
+          "title": "Inverse cube law (deflection method)",
+          "kind": "video",
+          "preset": "video_subtitle",
+          "local_file_id": "6e278774f7373444b1adbd29793b566c"
+        },
+        {
+          "title": "Inverse cube law (deflection method)",
+          "kind": "video",
+          "preset": "video_subtitle",
+          "local_file_id": "c615864010ebb972b9faeebcdc3e3568"
+        },
+        {
+          "title": "Inverse cube law (deflection method)",
+          "kind": "video",
+          "preset": "video_subtitle",
+          "local_file_id": "823ca7673d479e52bd8efcd1dd4d05bc"
+        },
+        {
+          "title": "Kirchhoff's voltage law",
+          "kind": "video",
+          "preset": "video_subtitle",
+          "local_file_id": "b535771d8bf1be4ce2f6f5f043828382"
+        },
+        {
+          "title": "Kirchhoff's voltage law",
+          "kind": "video",
+          "preset": "video_subtitle",
+          "local_file_id": "4cc10960872534a375834426058f2380"
+        },
+        {
+          "title": "Kirchhoff's voltage law",
+          "kind": "video",
+          "preset": "video_subtitle",
+          "local_file_id": "d269d524ab47b7bf37db6f10c66f42b2"
+        },
+        {
+          "title": "Kirchhoff's voltage law",
+          "kind": "video",
+          "preset": "video_subtitle",
+          "local_file_id": "25bc07d9ec7579234ea387d33a582208"
+        },
+        {
+          "title": "More on Newton's second law",
+          "kind": "video",
+          "preset": "video_thumbnail",
+          "local_file_id": "e3875e49c251cf655b378ec56c25be60"
+        },
+        {
+          "title": "More on Newton's second law",
+          "kind": "video",
+          "preset": "video_subtitle",
+          "local_file_id": "7436ac8ea6af68ade1bfe022cce17d30"
+        },
+        {
+          "title": "More on Newton's second law",
+          "kind": "video",
+          "preset": "video_subtitle",
+          "local_file_id": "52f7b43456c235d0c5bc0bdd2f251eea"
+        },
+        {
+          "title": "Scale of cells",
+          "kind": "video",
+          "preset": "video_subtitle",
+          "local_file_id": "67c1817fd8e5a63950b462f4744e3e48"
+        },
+        {
+          "title": "Second Law of Thermodynamics",
+          "kind": "video",
+          "preset": "video_thumbnail",
+          "local_file_id": "fb185833dec6485f526f959d59c4d8be"
+        },
+        {
+          "title": "Second Law of Thermodynamics",
+          "kind": "video",
+          "preset": "video_subtitle",
+          "local_file_id": "17375c36f7787044281d7642412c8e9e"
+        },
+        {
+          "title": "Second Law of Thermodynamics",
+          "kind": "video",
+          "preset": "video_subtitle",
+          "local_file_id": "a1c055627e0e2ea93d159dcedd81bbb0"
+        },
+        {
+          "title": "Second Law of Thermodynamics",
+          "kind": "video",
+          "preset": "video_subtitle",
+          "local_file_id": "e874d4b9d8d24e6fbaa72c21f716df46"
+        },
+        {
+          "title": "Series resistors",
+          "kind": "video",
+          "preset": "video_thumbnail",
+          "local_file_id": "0e7c1f741c6628b575a6b3e1573ee1be"
+        },
+        {
+          "title": "Series resistors",
+          "kind": "video",
+          "preset": "video_subtitle",
+          "local_file_id": "d235e91a2d4de3385ee6b5a80b5922e1"
+        },
+        {
+          "title": "Series resistors",
+          "kind": "video",
+          "preset": "video_subtitle",
+          "local_file_id": "fd93fbf9704e1b05ced8b4e79f5bf215"
+        },
+        {
+          "title": "Volume of a sphere",
+          "kind": "video",
+          "preset": "video_subtitle",
+          "local_file_id": "012cb1516abcdb69a0dcc959468988bf"
+        },
+        {
+          "title": "Volume of a sphere",
+          "kind": "video",
+          "preset": "video_subtitle",
+          "local_file_id": "9aa217d9f502a406eeea92ce78c46dc5"
+        },
+        {
+          "title": "Volume of a sphere",
+          "kind": "video",
+          "preset": "video_subtitle",
+          "local_file_id": "71cfef7f13f824a0a87c18be08087e8c"
+        }
+      ],
+      "physical_file_count": 11000
+    },
+    {
+      "id": "197934f144305350b5820c7c4dd8e194",
+      "name": "PhET Interactive Simulations",
+      "version": 18,
+      "last_updated": "2026-11-07 17:20:05.697657(UTC)",
+      "node_count": 1195,
+      "available_node_count": 1195,
+      "available_node_kinds": {
+        "document": 466,
+        "html5": 466,
+        "topic": 20,
+        "video": 243
+      },
+      "available_topic_samples": [
+        {
+          "level": 0,
+          "title": "PhET Interactive Simulations"
+        },
+        {
+          "level": 1,
+          "title": "By Grade Level"
+        },
+        {
+          "level": 1,
+          "title": "Math & Statistics"
+        },
+        {
+          "level": 1,
+          "title": "Earth & Space"
+        },
+        {
+          "level": 1,
+          "title": "Chemistry"
+        },
+        {
+          "level": 1,
+          "title": "Biology"
+        },
+        {
+          "level": 1,
+          "title": "Physics"
+        },
+        {
+          "level": 2,
+          "title": "University"
+        },
+        {
+          "level": 2,
+          "title": "High School"
+        },
+        {
+          "level": 2,
+          "title": "Middle School"
+        },
+        {
+          "level": 2,
+          "title": "Elementary School"
+        },
+        {
+          "level": 2,
+          "title": "Math Applications"
+        },
+        {
+          "level": 2,
+          "title": "Math Concepts"
+        },
+        {
+          "level": 2,
+          "title": "Electricity, Magnets & Circuits"
+        },
+        {
+          "level": 2,
+          "title": "Light & Radiation"
+        },
+        {
+          "level": 2,
+          "title": "Quantum Phenomena"
+        },
+        {
+          "level": 2,
+          "title": "Heat & Thermo"
+        },
+        {
+          "level": 2,
+          "title": "Work, Energy & Power"
+        },
+        {
+          "level": 2,
+          "title": "Sound & Waves"
+        },
+        {
+          "level": 2,
+          "title": "Motion"
+        }
+      ],
+      "total_file_records": 2369,
+      "available_file_count": 2369,
+      "unavailable_file_count": 0,
+      "available_file_bytes": 4705347030,
+      "selected_node_file_records": 2369,
+      "selected_node_available_file_count": 2369,
+      "selected_node_unavailable_file_count": 0,
+      "physical_file_count": 529
+    },
+    {
+      "id": "305b12ea5ea84fa18f933705c23f5ee0",
+      "name": "School of Thought",
+      "version": 2,
+      "last_updated": "2026-11-07 17:20:09.273137(UTC)",
+      "node_count": 51,
+      "available_node_count": 51,
+      "available_node_kinds": {
+        "html5": 48,
+        "topic": 3
+      },
+      "available_topic_samples": [
+        {
+          "level": 0,
+          "title": "School of Thought"
+        },
+        {
+          "level": 1,
+          "title": "Logical Fallacies"
+        },
+        {
+          "level": 1,
+          "title": "Cognitive Biases"
+        }
+      ],
+      "total_file_records": 98,
+      "available_file_count": 98,
+      "unavailable_file_count": 0,
+      "available_file_bytes": 109236718,
+      "selected_node_file_records": 98,
+      "selected_node_available_file_count": 98,
+      "selected_node_unavailable_file_count": 0,
+      "physical_file_count": 98
+    },
+    {
+      "id": "3e464ee12f6a50a781cddf59147b48b1",
+      "name": "Sikana (English)",
+      "version": 24,
+      "last_updated": "2026-11-07 17:20:23.632465(UTC)",
+      "node_count": 3430,
+      "available_node_count": 505,
+      "available_node_kinds": {
+        "document": 214,
+        "topic": 77,
+        "video": 214
+      },
+      "available_topic_samples": [
+        {
+          "level": 0,
+          "title": "Sikana (English)"
+        },
+        {
+          "level": 1,
+          "title": "Sport"
+        },
+        {
+          "level": 1,
+          "title": "Cooking"
+        },
+        {
+          "level": 1,
+          "title": "DIY"
+        },
+        {
+          "level": 1,
+          "title": "Nature"
+        },
+        {
+          "level": 2,
+          "title": "Learn to Navigate"
+        },
+        {
+          "level": 2,
+          "title": "Learn How to Cook Vegetables"
+        },
+        {
+          "level": 2,
+          "title": "Learn to Cook a Chicken"
+        },
+        {
+          "level": 2,
+          "title": "Learn to Cook"
+        },
+        {
+          "level": 2,
+          "title": "Lower your Energy Bills"
+        },
+        {
+          "level": 2,
+          "title": "Discover Renewable Energy"
+        },
+        {
+          "level": 2,
+          "title": "Household DIY Projects"
+        },
+        {
+          "level": 2,
+          "title": "How to Build Animal Shelters"
+        },
+        {
+          "level": 2,
+          "title": "Electricity for Everyone: Basic Lessons"
+        },
+        {
+          "level": 2,
+          "title": "Making Compost"
+        },
+        {
+          "level": 2,
+          "title": "Small-Scale Sustainable Agriculture"
+        },
+        {
+          "level": 2,
+          "title": "Grow an Organic Garden"
+        },
+        {
+          "level": 2,
+          "title": "Increasing Soil Fertility Using Chipped Wood"
+        },
+        {
+          "level": 3,
+          "title": "How to Use a Compass"
+        },
+        {
+          "level": 3,
+          "title": "Learn the Basics of Navigation On the Trail"
+        },
+        {
+          "level": 3,
+          "title": "How to Read a Map"
+        },
+        {
+          "level": 3,
+          "title": "How to Cut and Prepare Vegetables"
+        },
+        {
+          "level": 3,
+          "title": "Cooking Vegetables"
+        },
+        {
+          "level": 3,
+          "title": "Recettes \u00e0 base de l\u00e9gumes"
+        },
+        {
+          "level": 3,
+          "title": "How to Cook Chicken"
+        },
+        {
+          "level": 3,
+          "title": "How to Carve a Chicken"
+        },
+        {
+          "level": 3,
+          "title": "Making Chicken Stock"
+        },
+        {
+          "level": 3,
+          "title": "Preparing Chicken"
+        },
+        {
+          "level": 3,
+          "title": "World Recipes"
+        },
+        {
+          "level": 3,
+          "title": "Prepare Vegetables"
+        },
+        {
+          "level": 3,
+          "title": "Basic Techniques"
+        },
+        {
+          "level": 3,
+          "title": "Make a Soup"
+        },
+        {
+          "level": 3,
+          "title": "Simple Recipes"
+        },
+        {
+          "level": 3,
+          "title": "Preparing Sauces"
+        },
+        {
+          "level": 3,
+          "title": "Save on your Heating Bills"
+        },
+        {
+          "level": 3,
+          "title": "Know your Energy Consumption"
+        },
+        {
+          "level": 3,
+          "title": "Insulating Your Home"
+        },
+        {
+          "level": 3,
+          "title": "Eco-tips"
+        },
+        {
+          "level": 3,
+          "title": "What is Fuel Poverty?"
+        },
+        {
+          "level": 3,
+          "title": "Install a Solar Panel"
+        },
+        {
+          "level": 3,
+          "title": "Outdoor: Build a Retaining Wall"
+        },
+        {
+          "level": 3,
+          "title": "Household Tools"
+        },
+        {
+          "level": 3,
+          "title": "Bathroom & Plumbing"
+        },
+        {
+          "level": 3,
+          "title": "Decorations - Paint & Wallpaper"
+        },
+        {
+          "level": 3,
+          "title": "Outdoor Work - Preparing your Works"
+        },
+        {
+          "level": 3,
+          "title": "Outdoor Painting"
+        },
+        {
+          "level": 3,
+          "title": "Outdoor Works: Building a Greenhouse"
+        },
+        {
+          "level": 3,
+          "title": "Bathroom & Tiling"
+        },
+        {
+          "level": 3,
+          "title": "Oddjobs & Maintenance"
+        },
+        {
+          "level": 3,
+          "title": "Floors"
+        },
+        {
+          "level": 3,
+          "title": "Walls & Ceilings"
+        },
+        {
+          "level": 3,
+          "title": "Oddjobs & Decoration Ideas"
+        },
+        {
+          "level": 3,
+          "title": "Building Birdhouses"
+        },
+        {
+          "level": 3,
+          "title": "Building Animal Shelters"
+        },
+        {
+          "level": 3,
+          "title": "Making Bird Feeders"
+        },
+        {
+          "level": 3,
+          "title": "Discover Biodiversity"
+        },
+        {
+          "level": 3,
+          "title": "How to Prepare your Work Space"
+        },
+        {
+          "level": 3,
+          "title": "Electrical Boards"
+        },
+        {
+          "level": 3,
+          "title": "Lighting & Connections"
+        },
+        {
+          "level": 3,
+          "title": "An Introduction to Electricity"
+        },
+        {
+          "level": 3,
+          "title": "Making-Of"
+        },
+        {
+          "level": 3,
+          "title": "How to Maintain a Compost Pile"
+        },
+        {
+          "level": 3,
+          "title": "How to Collect and Use Compost"
+        },
+        {
+          "level": 3,
+          "title": "Fabriquer des bacs \u00e0 compost"
+        },
+        {
+          "level": 3,
+          "title": "How to Create a Compost Pile"
+        },
+        {
+          "level": 3,
+          "title": "Interviews GrowBioIntensive"
+        },
+        {
+          "level": 3,
+          "title": "How to Sow and Grow"
+        },
+        {
+          "level": 3,
+          "title": "Interviews GrowBioIntensive"
+        },
+        {
+          "level": 3,
+          "title": "How to Prepare the Soil"
+        },
+        {
+          "level": 3,
+          "title": "Sowing Seeds and Seedlings"
+        },
+        {
+          "level": 3,
+          "title": "Make Your Own Organic Fertilizer"
+        },
+        {
+          "level": 3,
+          "title": "Cultivation Techniques"
+        },
+        {
+          "level": 3,
+          "title": "Soil"
+        },
+        {
+          "level": 3,
+          "title": "Harvesting Seeds and Grains"
+        },
+        {
+          "level": 3,
+          "title": "How to Make RCW"
+        },
+        {
+          "level": 3,
+          "title": "How to use RCW"
+        },
+        {
+          "level": 3,
+          "title": "What is RCW?"
+        }
+      ],
+      "total_file_records": 7050,
+      "available_file_count": 1203,
+      "unavailable_file_count": 5847,
+      "available_file_bytes": 2278386123,
+      "selected_node_file_records": 995,
+      "selected_node_available_file_count": 995,
+      "selected_node_unavailable_file_count": 0,
+      "physical_file_count": 963
+    }
+  ],
+  "schemas": {
+    "content_contentnode": [
+      "accessibility_labels",
+      "accessibility_labels_bitmask_0",
+      "admin_imported",
+      "ancestors",
+      "author",
+      "available",
+      "categories",
+      "categories_bitmask_0",
+      "channel_id",
+      "coach_content",
+      "content_id",
+      "description",
+      "duration",
+      "grade_levels",
+      "grade_levels_bitmask_0",
+      "id",
+      "kind",
+      "lang_id",
+      "learner_needs",
+      "learner_needs_bitmask_0",
+      "learning_activities",
+      "learning_activities_bitmask_0",
+      "level",
+      "lft",
+      "license_description",
+      "license_name",
+      "license_owner",
+      "modality",
+      "num_coach_contents",
+      "on_device_resources",
+      "options",
+      "parent_id",
+      "resource_types",
+      "rght",
+      "sort_order",
+      "title",
+      "tree_id"
+    ],
+    "content_file": [
+      "contentnode_id",
+      "id",
+      "lang_id",
+      "local_file_id",
+      "preset",
+      "priority",
+      "supplementary",
+      "thumbnail"
+    ],
+    "content_localfile": [
+      "available",
+      "extension",
+      "file_size",
+      "id"
+    ]
+  },
+  "channel_table": "content_channelmetadata"
+}

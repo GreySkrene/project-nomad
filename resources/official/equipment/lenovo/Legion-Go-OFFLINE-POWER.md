@@ -8,10 +8,10 @@ S or Legion Go Gen 2.
 - Install stable Windows, Lenovo, Legion Space, BIOS, and driver updates only
   after checking Lenovo's support notes. Keep local copies of critical
   documents and installers.
-- Open NOMAD, Kolibri, Kiwix, maps, and LM Studio once before disconnecting so
-  each application can finish local setup.
-- Download any required local AI model and test that LM Studio can load it with
-  Wi-Fi disabled.
+- Open NOMAD, Kolibri, Kiwix, maps, and stored documents once before
+  disconnecting so each application can finish local setup.
+- Local AI is optional and is currently disabled in this NOMAD setup. Do not
+  start LM Studio merely to use search, maps, Kiwix, Kolibri, or stored PDFs.
 - Keep a local Windows sign-in method that does not depend on internet access.
 
 ## Minimum-power reference mode
@@ -33,5 +33,7 @@ properly rated USB-C cable and power source; the original Lenovo adapter is
 65 W. Lower-power sources may charge slowly or lose battery while the device is
 running.
 
-Source: Lenovo's official Legion Go 8APU1 user guide and PSREF.
+Sources: Lenovo Legion Go 8APU1 PSREF plus Windows power controls. The saved
+six-page Lenovo "user guide" is an incomplete interactive-page capture; replace
+it with a complete official manual if Lenovo publishes a self-contained one.
 

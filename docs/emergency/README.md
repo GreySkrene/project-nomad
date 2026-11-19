@@ -9,6 +9,11 @@ This directory contains the measured reports and test evidence behind the
   project state.
 - [Resource manifest](RESOURCE_MANIFEST.csv) — what was selected, why, source
   or publisher, date, storage estimate, and integration status.
+- [Master content audit](CONTENT_AUDIT.md) and
+  [74-item inventory](CONTENT_INVENTORY.csv) — actual completeness, usefulness,
+  defects, and evidence-backed status for every installed content class.
+- [Installed PDF audit](PDF_CONTENT_AUDIT.md) — all 37 PDFs, 6,068 pages,
+  source dates, emergency roles, and confirmed gaps.
 - [AI/RAG acceptance report](NOMAD_ACCEPTANCE_TEST_REPORT.md) — evidence for
   keeping source search ahead of generated safety instructions.
 - [UI audit](NOMAD_UI_AUDIT.md) — design investigation that led to the Night
@@ -16,8 +21,8 @@ This directory contains the measured reports and test evidence behind the
 - [Emergency prompt](NOMAD_EMERGENCY_SYSTEM_PROMPT.md) and
   [safety prompt](NOMAD_SAFETY_PROMPT.md) — retained for reproducibility; prompt
   rules alone did not make the tested small models safe enough.
-- [`evidence/`](evidence/) — raw fixed-query model outputs used by the acceptance
-  report.
+- [`evidence/`](evidence/) — raw search/model results plus PDF, PMTiles, Kolibri,
+  and Qdrant audit reports.
 - [`images/`](images/) — final interface screenshots used by public docs.
 
 Downloaded PDFs, ZIMs, maps, Kolibri channels, database files, and credentials

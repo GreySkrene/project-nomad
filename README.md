@@ -24,6 +24,9 @@ Project NOMAD is a self-contained, offline-first knowledge and education server 
 > [Family Emergency Library Profile](EMERGENCY_LIBRARY_PROFILE.md), the
 > [measured setup report](docs/emergency/NOMAD_SETUP_REPORT.md), and the
 > [machine-readable library list](collections/emergency-family-library.json).
+> The [74-item content audit](docs/emergency/CONTENT_AUDIT.md) records what is
+> genuinely useful, supplemental, incomplete, or defective; downloaded does not
+> automatically mean accepted.
 
 ![Night Operations emergency dashboard](docs/emergency/images/ui-upgrade-live-final.png)
 
@@ -37,9 +40,12 @@ python3 install/install_emergency_library.py --dry-run
 python3 install/install_emergency_library.py --wait
 ```
 
-The final tested content target is approximately 77 GiB, including a detailed
-USA/Canada/Mexico vector map. Safety-critical answers prioritize original
-official sources; local AI is optional and is not treated as an authority.
+The installed content target is approximately 77 GiB, including a detailed
+USA/Canada/Mexico vector map. A 2026-11-19 audit found missing high-zoom tiles
+around Vancouver/Burnaby; future extraction code is fixed, but the installed
+archive still needs a corrected Canada overlay. Safety-critical answers
+prioritize original official sources; local AI is optional and is not treated
+as an authority.
 
 ## Installation & Quickstart
 Project NOMAD can be installed on any Debian-based operating system (we recommend Ubuntu 26.04 LTS; 24.04 LTS and Debian 12 are also supported). Installation is completely terminal-based, and all tools and resources are designed to be accessed through the browser, so there's no need for a desktop environment if you'd rather setup NOMAD as a "server" and access it through other clients.
@@ -71,7 +77,7 @@ NOMAD is a management UI ("Command Center") and API that orchestrates a collecti
 - **AI Chat with Knowledge Base** — local AI chat powered by [Ollama](https://ollama.com/) or you can use OpenAI API compatible software such as LM Studio or llama.cpp, with document upload and semantic search (RAG via [Qdrant](https://qdrant.tech/))
 - **Information Library** — offline Wikipedia, medical references, ebooks, and more via [Kiwix](https://kiwix.org/)
 - **Education Platform** — Khan Academy courses with progress tracking via [Kolibri](https://learningequality.org/kolibri/)
-- **Offline Maps** — downloadable regional maps via [ProtoMaps](https://protomaps.com)
+- **Offline Maps** — downloadable regional maps via [ProtoMaps](https://protomaps.com) for pan/zoom viewing; no live closures or built-in address routing
 - **Data Tools** — encryption, encoding, and analysis via [CyberChef](https://gchq.github.io/CyberChef/)
 - **Notes** — local note-taking via [FlatNotes](https://github.com/dullage/flatnotes)
 - **System Benchmark** — hardware scoring with a [community leaderboard](https://benchmark.projectnomad.us)
@@ -88,7 +94,7 @@ NOMAD also includes built-in tools like a Wikipedia content selector, ZIM librar
 | Information Library | Kiwix | Offline Wikipedia, medical references, survival guides, ebooks |
 | AI Assistant | Ollama + Qdrant | Built-in chat with document upload and semantic search |
 | Education Platform | Kolibri | Khan Academy courses, progress tracking, multi-user support |
-| Offline Maps | ProtoMaps | Downloadable regional maps for offline viewing and search |
+| Offline Maps | ProtoMaps | Downloadable regional maps for offline pan/zoom viewing and saved-pin search; no address routing |
 | Data Tools | CyberChef | Encryption, encoding, hashing, and data analysis |
 | Notes | FlatNotes | Local note-taking with markdown support |
 | System Benchmark | Built-in | Hardware scoring, Builder Tags, and community leaderboard |

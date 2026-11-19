@@ -1,6 +1,6 @@
 # Project NOMAD completion plan
 
-Last updated: 2026-11-18 (America/Denver)
+Last updated: 2026-11-19 (America/Denver)
 
 Status key: `[x]` verified complete, `[-]` in progress, `[ ]` not started, `[!]` blocked or needs a decision.
 
@@ -12,9 +12,9 @@ Status key: `[x]` verified complete, `[-]` in progress, `[ ]` not started, `[!]`
 - [x] Update `NOMAD_SETUP_REPORT.md` so completed downloads are no longer described as pending.
 - [x] Replace the invalid eCFR access-denied capture with a genuine official FRS regulation source.
 - [ ] Record hashes/validation evidence for the large installed ZIM and PMTiles resources where practical.
-- [-] Perform the content-level usefulness/completeness audit tracked in `CONTENT_AUDIT.md`; downloaded does not mean usable.
+- [x] Perform the content-level usefulness/completeness audit tracked in `CONTENT_AUDIT.md`; all 74 inventory rows now have evidence-based roles/statuses, with final hands-on media playback reserved for offline acceptance.
 - [!] Replace or remove LibreTexts Medicine after confirming its title-only book/chapter routes and validating an alternative.
-- [-] Audit Gardening Stack Exchange against coherent gardening and plant references; do not treat Q&A as an encyclopedia.
+- [x] Audit Gardening Stack Exchange against coherent gardening and plant references; Gardenology is installed/validated as the encyclopedia and Q&A is labeled supplemental.
 
 ## B. Emergency knowledge base and citations
 
@@ -38,7 +38,7 @@ Status key: `[x]` verified complete, `[-]` in progress, `[ ]` not started, `[!]`
 ## D. Equipment library
 
 - [x] Jackery Explorer 600 v2 JE-600A packet.
-- [x] Lenovo Legion Go 8APU1 packet.
+- [!] Lenovo Legion Go 8APU1 packet — PSREF and sourced offline-power card are useful, but the saved six-page "user guide" is only an interactive landing-page capture and needs replacement.
 - [x] Midland ER10VP packet.
 - [x] General butane, battery, generator, carbon-monoxide, and equipment-maintenance guidance.
 - [!] Exact butane stove manual — model confirmation required.
@@ -69,9 +69,10 @@ Status key: `[x]` verified complete, `[-]` in progress, `[ ]` not started, `[!]`
 
 ## G. Maps and navigation
 
-- [x] USA, Canada, and Mexico vector map installed and validated at zoom 15.
+- [!] USA, Canada, and Mexico vector map is valid and detailed through zoom 15 in sampled target areas, but Vancouver/Burnaby detailed tiles are missing from the existing extract.
 - [x] Confirm separate Mountain-region download is redundant; no active duplicate job exists.
-- [ ] Perform a disconnected street-level map test in each target region.
+- [x] Programmatically retrieve offline zoom-15 tiles for West Jordan, Riverton, Ogden, Marysvale, Rexburg, both travel corridors, representative Canada, and Mexico locations; final visual disconnected test remains in section H.
+- [x] Fix future country extracts to retain original land geometry alongside the coastal buffer; regression test passes. Existing archive still needs a corrected Canada overlay/replacement.
 - [ ] Select a separate offline routing/address-search application if desired.
 - [ ] Keep satellite imagery optional; NOMAD's current map interface has no satellite layer.
 
@@ -116,7 +117,7 @@ Status key: `[x]` verified complete, `[-]` in progress, `[ ]` not started, `[!]`
 ## J. Resumable checkpoint — 2026-11-14 14:15 America/Denver
 
 - [x] No NOMAD download jobs are active or queued; no duplicate map jobs needed cancellation.
-- [x] Continental USA/Canada/Mexico map is complete and detailed through zoom 15.
+- [!] Continental map is detailed at all primary Utah/Idaho/Mexico samples, but the 2026-11-19 audit disproved full Canadian completeness at Vancouver/Burnaby; future extraction code is fixed, existing data is not yet repaired.
 - [x] Seven regional plans were downloaded, PDF-signature/EOF checked, SHA-256 recorded, added to `RESOURCE_MANIFEST.csv`, and indexed.
 - [x] `official-emergency` contains 44 intentional indexed files and 3,922 chunks; active jobs: 0; failed jobs: 0.
 - [x] The accidental `robots.txt` upload and its vector were removed through NOMAD's API.

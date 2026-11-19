@@ -1,6 +1,6 @@
 # Offline content usefulness and completeness audit
 
-Last updated: 2026-11-18 (America/Denver)
+Last updated: 2026-11-19 (America/Denver)
 
 > **Audit-tool safety:** `admin/scripts/audit_zim_library.mjs` performs an exhaustive
 > libzim walk. Run it on one archive at a time in an isolated or stopped-service
@@ -56,13 +56,13 @@ sample. Small targeted emergency collections receive a substantially deeper revi
   core gardening resource. Its metadata explicitly calls it Q&A. The exhaustive scan
   found 35,431 HTML pages, 10,504 under 250 text characters, and 15,943 pages with at
   least one external link. Keep, if at all, only as supplemental troubleshooting.
-- [-] **Gardenology replacement candidate** — installed from the official Kiwix
+- [x] **Gardenology replacement candidate** — installed from the official Kiwix
   catalog (112,499,438 bytes). Checksum is valid; all 55,938 user entries scanned with
   zero HTML read errors; 44,083 articles are declared, title and full-text indexes
   work, and representative pages cover plant profiles, vegetable gardening, compost,
   propagation, plant lists, and hardiness zones. Some pages expose old source text or
   template errors, so regional/current USU Extension guides are still required.
-- [-] **MedlinePlus, NHS Medicines, and WikiMed** — core medical candidates. Local
+- [x] **MedlinePlus, NHS Medicines, and WikiMed** — core medical candidates. Local
   searches found directly relevant choking (including infant), burn, dehydration,
   paracetamol, ibuprofen, bleeding, and burn articles. Representative pages contain
   substantial offline text. MedlinePlus and NHS completed exhaustive scans with valid
@@ -78,43 +78,92 @@ sample. Small targeted emergency collections receive a substantially deeper revi
   is present. The 12 PDFs mix useful but dated works with unverified austere medicine
   and a Traditional Chinese Medicine tongue-diagnosis book. This is not acceptable as
   a safety-critical core collection.
-- [-] **CDC Travelers' Health** — valid official CDC snapshot with useful water
+- [x] **CDC Travelers' Health** — valid official CDC snapshot with useful water
   disinfection and infectious-disease pages, but its scope is travel medicine; treat
   it as supplemental rather than comprehensive emergency-health guidance.
-- [ ] **Libre Pathology** — structurally valid (14,426 entries scanned, valid checksum,
+- [x] **Libre Pathology** — structurally valid (14,426 entries scanned, valid checksum,
   zero HTML read errors), but its role is pathology education rather than practical
-  emergency response. Usefulness decision remains pending.
+  emergency response. Retain only as low-priority education.
+- [x] **Ready.gov** — useful official preparedness core. The December 2024 snapshot
+  contains 2,437 articles and 3,573 media items. Local pages for earthquake, flood,
+  wildfire, power outage, emergency water, household chemicals, hazmat, heat, winter,
+  radiation, planning, and kits opened with substantial actionable text. It is static,
+  is not a clinical manual, and cannot supply current alerts or orders.
+- [x] **The two Wikipedias are complementary** — the 2026-06 complete mini archive
+  provides 19,183,502 compact text articles with almost no media; the 2026-06 Best of
+  Wikipedia archive provides a smaller curated set with richer text and images.
+  `Cumulonimbus` was present in both: 2,749 extracted characters/no images in mini
+  versus 14,725 characters/18 images in Best of Wikipedia.
+- [x] **Uploaded PDF structural audit** — all 37 PDFs opened successfully and all
+  6,068 pages were scanned. File-by-file usefulness decisions are in
+  `PDF_CONTENT_AUDIT.md`; evidence is `evidence/content-audit-pdfs.json`. Confirmed
+  defects include a nearly empty Legion Go landing-page capture and filenames that
+  misstate actual document dates.
 
 ## Kiwix archives — 20 installed, 40,900,638,382 bytes
 
-- [ ] `cooking.stackexchange.com_en_all_2026-10.zim` — 238,098,128 bytes
-- [ ] `diy.stackexchange.com_en_all_2026-10.zim` — 2,086,024,326 bytes
-- [ ] `foss.cooking_en_all_2026-11.zim` — 30,424,458 bytes
-- [-] `gardening.stackexchange.com_en_all_2026-10.zim` — 933,097,375 bytes; reported mismatch: Q&A is not a plant encyclopedia or coherent gardening guide
-- [-] `gardenology.org_en_all_2026-09.zim` — 112,499,438 bytes; structurally validated replacement candidate, usefulness review in progress
-- [ ] `ifixit_en_all_2025-12.zim` — 3,570,695,757 bytes
-- [ ] `irp.fas.org_en_military-medicine_2026-10.zim` — 64,986,090 bytes
-- [ ] `librepathology_en_all_maxi_2026-09.zim` — 95,279,611 bytes
-- [!] `libretexts.org_en_med_2025-01.zim` — 1,192,567,339 bytes; title-only book/chapter routes reproduced
-- [ ] `mechanics.stackexchange.com_en_all_2026-10.zim` — 341,672,133 bytes
-- [ ] `medlineplus.gov_en_all_2025-01.zim` — 1,944,841,111 bytes
-- [ ] `nhs.uk_en_medicines_2025-12.zim` — 16,946,183 bytes
-- [ ] `wikibooks_en_all_maxi_2026-10.zim` — 4,739,739,728 bytes
-- [ ] `wikipedia_en_all_mini_2026-06.zim` — 12,531,679,311 bytes
-- [ ] `wikipedia_en_medicine_maxi_2026-10.zim` — 1,864,210,320 bytes
-- [ ] `wikipedia_en_top_maxi_2026-06.zim` — 8,357,329,540 bytes
-- [ ] `woodworking.stackexchange.com_en_all_2026-10.zim` — 106,657,287 bytes
-- [ ] `www.ready.gov_en_2024-12.zim` — 2,429,921,822 bytes
-- [ ] `wwwnc.cdc.gov_en_all_2024-11.zim` — 178,326,622 bytes
-- [ ] `zimgit-medicine_en_2024-08.zim` — 70,179,585 bytes
+- [x] `cooking.stackexchange.com_en_all_2026-10.zim` — healthy searchable Q&A;
+  supplemental troubleshooting, not authoritative food-safety or canning guidance.
+- [x] `diy.stackexchange.com_en_all_2026-10.zim` — substantial frozen-pipe and
+  generator answers verified; secondary advice that requires safety cross-checking.
+- [x] `foss.cooking_en_all_2026-11.zim` — coherent recipes, including working rice
+  and bean pages; useful for shelf-stable cooking, not food-safety authority.
+- [x] `gardening.stackexchange.com_en_all_2026-10.zim` — healthy Q&A but supplemental
+  only; not a plant encyclopedia or coherent growing guide.
+- [x] `gardenology.org_en_all_2026-09.zim` — valid searchable 44,083-article plant
+  encyclopedia; supplement with current Utah State University Extension guidance.
+- [x] `ifixit_en_all_2025-12.zim` — broad illustrated repair reference. The Legion Go
+  result is only device/chip identification, and no Jackery-specific guide was found.
+- [!] `irp.fas.org_en_military-medicine_2026-10.zim` — historical/austere supplement
+  only; dominated by 1957–2007 manuals, not current civilian clinical advice.
+- [x] `librepathology_en_all_maxi_2026-09.zim` — structurally healthy pathology
+  education; low emergency priority and not a first-aid reference.
+- [!] `libretexts.org_en_med_2025-01.zim` — confirmed inconsistent/title-only book
+  sections in its JavaScript reader despite a valid archive checksum.
+- [x] `mechanics.stackexchange.com_en_all_2026-10.zim` — working vehicle
+  troubleshooting; supplemental community advice, not model-specific service data.
+- [x] `medlineplus.gov_en_all_2025-01.zim` — core consumer medical reference; valid
+  checksum, 14,940 HTML pages, zero read errors, and useful emergency-topic pages.
+- [x] `nhs.uk_en_medicines_2025-12.zim` — core medication supplement; valid checksum,
+  1,996 HTML pages, zero read errors, and substantial common-medicine guidance.
+- [x] `wikibooks_en_all_maxi_2026-10.zim` — working illustrated First Aid Training,
+  Wilderness First Aid, Survival Kit, and Outdoor Survival books; variable quality.
+- [x] `wikipedia_en_all_mini_2026-06.zim` — complete broad text encyclopedia with
+  19.18 million compact articles; intentionally almost image-free.
+- [x] `wikipedia_en_medicine_maxi_2026-10.zim` — broad WikiMed snapshot with useful
+  sampled bleeding and burn pages; encyclopedia, not professional medical care.
+- [x] `wikipedia_en_top_maxi_2026-06.zim` — illustrated curated encyclopedia with
+  875,265 articles and 613,801 media items; complements complete mini.
+- [x] `woodworking.stackexchange.com_en_all_2026-10.zim` — functional specialist Q&A,
+  but low emergency priority and no useful `emergency` title hit in the audit sample.
+- [x] `www.ready.gov_en_2024-12.zim` — official preparedness core with locally complete
+  hazard/action pages. Static snapshot; no live alerts.
+- [x] `wwwnc.cdc.gov_en_all_2024-11.zim` — valid CDC Travelers' Health snapshot;
+  useful but narrower than general emergency medicine.
+- [!] `zimgit-medicine_en_2024-08.zim` — normal interface blank after 30 seconds; its
+  12 bundled PDFs mix dated and questionable works. Not safety-critical core material.
 
 ## Maps
 
-- [ ] `custom-ea2908b0_20261106_z15.pmtiles` — 33,788,916,131 bytes; USA,
-  Canada, and Mexico vector extract through zoom 15. Container validity was tested
-  previously; disconnected street/detail sampling across target routes is pending.
-- [ ] `world.pmtiles` — 15,055,414 bytes; low-detail world overview. Audit whether it
-  adds useful fallback coverage or is unnecessary beside the continental extract.
+- [!] `custom-ea2908b0_20261106_z15.pmtiles` — valid PMTiles v3 vector archive with
+  71,881,331 addressed tiles, nine vector layers, and source data timestamped
+  2026-11-06. Zoom-15 tiles were retrieved for West Jordan, Riverton, Ogden,
+  Marysvale, Rexburg, both sampled travel corridors, Toronto, Mexico City, and most
+  additional Canadian/Mexican cities. **Confirmed coverage defect:** downtown
+  Vancouver is present at zoom 10 but absent at zooms 12, 14, and 15; central Burnaby
+  is present at 12 but absent at 14/15, while nearby Victoria, Surrey, Bellingham, and
+  Seattle have detailed tiles. Canada therefore cannot yet be called complete. Root
+  cause was reproduced in `CountriesService`: the approximate coastal buffer excluded
+  Vancouver/Burnaby even though the original Canada polygon contains them. Region
+  generation now retains both original and buffered geometry, with a regression test;
+  the already-downloaded archive still needs a corrected Canada extract or replacement.
+- [x] `world.pmtiles` — valid PMTiles v3 low-detail world overview through zoom 5.
+  All 17 sampled North American locations returned tiles. Keep it as a small global
+  fallback and low-zoom base; it does not replace street-level coverage.
+
+Map evidence: `evidence/content-audit-maps.json`. These are OpenStreetMap-derived
+vector maps, not satellite imagery. NOMAD currently provides offline display/pan/zoom,
+not live closures, live incidents, address search, or turn-by-turn routing.
 
 ## Kolibri education library
 
@@ -122,32 +171,55 @@ sample. Small targeted emergency collections receive a substantially deeper revi
   Blockly Games v10 (505 nodes), Khan Academy US v5 (34,488 nodes), PhET v18
   (1,195 nodes), School of Thought v2 (51 nodes), and Sikana English v24
   (3,430 nodes).
-- [!] Khan Academy is incomplete. The import log records 404s, timeouts, and
-  checksum mismatches, then `370 files are skipped` and exit status 1. The channel
-  requires node-level availability and playback testing before it can be accepted.
-- [ ] Audit every channel's node/file counts, skipped imports, navigation, emergency
-  relevance, and offline playback. Known warning to verify: the Khan import reportedly
-  skipped 370 upstream files.
-- [ ] Decide whether each channel belongs in a 100 GiB emergency system; entertainment
-  or general education alone is not sufficient justification.
+- [x] **Blockly Games** — all 505 nodes are available; 896 selected-node file records
+  are available and zero are unavailable. Physical files exist. Stable programming
+  education, but low emergency priority (310,676,617 available bytes).
+- [!] **Khan Academy selected subset** — 1,455 of the channel's 34,488 catalog nodes
+  are marked available. Of 11,612 file records attached to those selected nodes,
+  11,586 are available and 26 are unavailable; every missing sample is a subtitle or
+  thumbnail, not a primary video. The earlier import still ended with 370 skipped
+  files/status 1, so call this usable partial education, not a complete channel.
+  Installed topics are math, physics, biology, and electrical engineering.
+- [x] **PhET** — all 1,195 nodes available; all 2,369 selected-node file records
+  available, with physical files present. Useful offline science simulations, but low
+  immediate emergency priority (4,705,347,030 available bytes).
+- [x] **School of Thought** — all 51 nodes and all 98 file records available with
+  physical files present. Logical-fallacy/cognitive-bias education; low emergency
+  priority (109,236,718 bytes).
+- [x] **Sikana selected practical subset** — 505 of 3,430 catalog nodes available;
+  all 995 selected-node file records available and physical files present. Actual
+  installed topics include navigation/compass/map reading, cooking, heating/insulation,
+  solar, basic electricity, DIY, compost, small-scale agriculture, and gardening.
+  This is the most directly useful Kolibri channel (2,278,386,123 available bytes).
+- [x] Anonymous Learn mode responds at `/en/learn/`; the bare Kolibri root redirects
+  to the authentication page, so NOMAD must continue linking directly to Learn mode.
+
+Evidence: `evidence/content-audit-kolibri.json`. Physical-file verification checks
+every distinct local file attached to an available node. Hands-on playback of a sample
+from each media type remains part of the final disconnected acceptance test.
 
 ## Authoritative documents and equipment files
 
-- [-] The live master inventory is `CONTENT_INVENTORY.csv`: 74 rows comprising 20
+- [x] The live master inventory is `CONTENT_INVENTORY.csv`: 74 rows comprising 20
   ZIMs, two maps, 45 physical knowledge documents, five Kolibri channels, the Kiwix
   search page, and the derived Qdrant index.
 - [!] The 45th knowledge document is a 239-byte `verification-rag.txt` test artifact
   in its own `verification` collection. It was still active; it is now reversibly
   disabled from retrieval. File/vector deletion awaits explicit approval.
-- [ ] Reconcile all 45 physical files in `/opt/project-nomad/storage/kb_uploads`
+- [x] Reconciled all 45 physical files in `/opt/project-nomad/storage/kb_uploads`
   against `RESOURCE_MANIFEST.csv` and `resources/official/SHA256SUMS.txt`.
-- [ ] Validate every PDF structurally, extract page counts/text coverage, identify
-  image-only or truncated pages, and check that stated publisher/date match the file.
-- [ ] Review emergency usefulness and offline self-containment file by file, including
-  all regional hazard plans, manuals, quick references, and equipment documents.
-- [ ] Verify the 44-file/3,922-chunk Qdrant collection maps to originals without orphan,
-  accidental, or duplicate entries. Qdrant vectors are derived data, not independent
-  information sources.
+- [x] Validated all 37 PDFs: 37 readable, 6,068 pages scanned, per-page text coverage
+  recorded, image/blank-text pages flagged, and source metadata compared with names.
+  See `PDF_CONTENT_AUDIT.md` and `evidence/content-audit-pdfs.json`.
+- [x] Reviewed all seven real Markdown quick references plus the test artifact. The
+  quick cards are useful locally authored summaries; provenance claims were corrected
+  in the repository. Their installed copies/Qdrant chunks still require a later sync
+  because LM Studio is intentionally untouched/off for the user's other project.
+- [x] Verified Qdrant exactly: 44 indexed sources, 3,922 chunks, zero indexed sources
+  missing on disk, and exactly one physical file without chunks — the intentionally
+  disabled 239-byte verification artifact. Evidence:
+  `evidence/content-audit-qdrant.json`. Qdrant remains derived data, not an independent
+  source.
 
 ## Replacement rules
 

@@ -1,6 +1,6 @@
 # Project NOMAD Offline Emergency System — Setup Report
 
-Report date: 2026-11-18 (America/Denver)  
+Report date: 2026-11-19 (America/Denver)
 Status: core services and content are installed; safety acceptance and fully disconnected/reboot testing are not complete
 
 ## 1. Host and installation
@@ -45,9 +45,9 @@ Measured logical storage under `/opt/project-nomad/storage` is approximately **7
 | Kolibri Gen 2 | about 6.3 GiB |
 | RAG uploads | about 720 MiB |
 
-The detailed continental PMTiles file is 33,788,916,131 bytes and covers the USA, Canada, and Mexico through zoom 15. It is a vector road/terrain map, not satellite imagery, and does not provide live closures or turn-by-turn routing.
+The detailed continental PMTiles file is 33,788,916,131 bytes and contains USA, Canada, and Mexico vector data through zoom 15. The audit retrieved detailed tiles at every primary Utah/Idaho/Mexico sample, but confirmed missing zoom 12–15 coverage in downtown Vancouver and zoom 14–15 coverage in central Burnaby. The cause was NOMAD's approximate country-buffer geometry; future extraction code is fixed, but the installed archive still needs a corrected Canada overlay or replacement. It is not satellite imagery and does not provide live closures, address search, or turn-by-turn routing.
 
-Kolibri contains the selected PhET, Blockly Games, School of Thought, Khan Academy, and Sikana material. The Khan import is recorded as partial because 370 upstream files were skipped by the importer.
+Kolibri contains selected PhET, Blockly Games, School of Thought, Khan Academy, and Sikana material. Physical-file checks found zero missing selected files in four channels. Khan is partial: 1,455 nodes are available and 26 of 11,612 attached file records are unavailable; all 26 are subtitles or thumbnails. Sikana's 505-node practical subset includes navigation, cooking, insulation/energy, solar, basic electricity, DIY, agriculture, and gardening.
 
 No NOMAD download jobs were active or queued at the verified checkpoint. No redundant Mountain-region map job remained to cancel. The superseded no-picture Best of Wikipedia archive and tiny Top 100 mini archive were removed only after the illustrated replacement passed metadata, HTTP-serving, and checksum validation.
 
@@ -64,7 +64,7 @@ Kiwix, Kolibri, NOMAD RAG, and maps are separate search interfaces. NOMAD does n
 
 ## 5. Official emergency knowledge base
 
-The `official-emergency` collection contains **44 intentional indexed files**, **3,922 chunks**, and **754,064,249 source bytes**. It includes official medical/first-aid, water, radiological, food/power, generator/CO, radio, equipment, Utah, Idaho, county, earthquake, and Yellowstone documents.
+The `official-emergency` collection contains **44 intentional indexed files**, **3,922 chunks**, and **754,064,249 source bytes**. An exact Qdrant facet/file reconciliation found zero indexed sources missing on disk; the only physical upload without chunks is the intentionally disabled 239-byte verification artifact. It includes official medical/first-aid, water, radiological, food/power, generator/CO, radio, equipment, Utah, Idaho, county, earthquake, and Yellowstone documents.
 
 Seven regional plans were validated as PDFs, hashed, manifested, and indexed:
 
@@ -83,7 +83,8 @@ Original SHA-256 values are in `resources/official/SHA256SUMS.txt`. The invalid 
 Completed and indexed packets:
 
 - Jackery Explorer 600 v2 / JE-600A official manual and quick reference
-- Lenovo Legion Go 8APU1 guide and offline-power reference
+- Lenovo Legion Go 8APU1 PSREF and offline-power reference; the saved six-page
+  "user guide" is an incomplete interactive-page capture and needs replacement
 - Midland ER10VP official material and quick reference
 - General official butane, battery, generator, carbon-monoxide, and maintenance guidance
 

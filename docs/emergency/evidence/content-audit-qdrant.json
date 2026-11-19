@@ -1,0 +1,197 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-19T15:23:33.229Z",
+  "qdrantCollection": "nomad_knowledge_base",
+  "logicalCollection": "official-emergency",
+  "counts": {
+    "physicalFiles": 45,
+    "indexedSources": 44,
+    "chunks": 3922
+  },
+  "indexedSources": [
+    {
+      "source": "/app/storage/kb_uploads/AHA-2025-CPR-CHOKING-QUICK-REFERENCE.md-01e7565ec421.md",
+      "chunks": 2
+    },
+    {
+      "source": "/app/storage/kb_uploads/CDC-Backcountry-Water-Treatment.pdf-ab7ca21247f6.pdf",
+      "chunks": 1
+    },
+    {
+      "source": "/app/storage/kb_uploads/CDC-Make-Water-Safe-During-Emergency-2025.pdf-dc4f9d116e89.pdf",
+      "chunks": 1
+    },
+    {
+      "source": "/app/storage/kb_uploads/CDC-Radiation-Response-Briefing-Manual-2024.pdf-b87440d757a2.pdf",
+      "chunks": 27
+    },
+    {
+      "source": "/app/storage/kb_uploads/CPSC-Battery-Safety.pdf-4539c78d6e53.pdf",
+      "chunks": 3
+    },
+    {
+      "source": "/app/storage/kb_uploads/CPSC-Butane-Tabletop-Cooking-Appliances.pdf-2d16c7f07edf.pdf",
+      "chunks": 26
+    },
+    {
+      "source": "/app/storage/kb_uploads/CPSC-Camping-Equipment-Carbon-Monoxide-Safety.pdf-4f63b5f3cd4c.pdf",
+      "chunks": 1
+    },
+    {
+      "source": "/app/storage/kb_uploads/CPSC-Portable-Fuel-Container-Safety.pdf-c680e00ed252.pdf",
+      "chunks": 2
+    },
+    {
+      "source": "/app/storage/kb_uploads/Davis-County-PDM-Adopted-2022.pdf-df0d00f1bc42.pdf",
+      "chunks": 216
+    },
+    {
+      "source": "/app/storage/kb_uploads/EMERGENCY-EQUIPMENT-MAINTENANCE-CHECKLIST.md-623c35ef7b0d.md",
+      "chunks": 2
+    },
+    {
+      "source": "/app/storage/kb_uploads/EPA-Emergency-Disinfection-Drinking-Water-2017.pdf-6304a95b3625.pdf",
+      "chunks": 3
+    },
+    {
+      "source": "/app/storage/kb_uploads/ER10VP-QUICK-REFERENCE.md-2c478bd37e55.md",
+      "chunks": 2
+    },
+    {
+      "source": "/app/storage/kb_uploads/Explorer-600-v2-QUICK-REFERENCE.md-d920d40d8293.md",
+      "chunks": 2
+    },
+    {
+      "source": "/app/storage/kb_uploads/FEMA-Family-Communication-Plan-2025.pdf-3d9572ae0984.pdf",
+      "chunks": 4
+    },
+    {
+      "source": "/app/storage/kb_uploads/FEMA-Power-Outage-Info-Sheet-2023.pdf-3d80505b7ace.pdf",
+      "chunks": 2
+    },
+    {
+      "source": "/app/storage/kb_uploads/FRS-FAMILY-COMMUNICATION-QUICK-REFERENCE.md-981c16e1ef52.md",
+      "chunks": 1
+    },
+    {
+      "source": "/app/storage/kb_uploads/Idaho-Geologic-Map-Rexburg-2016.pdf-6f2eff6fb577.pdf",
+      "chunks": 15
+    },
+    {
+      "source": "/app/storage/kb_uploads/Idaho-Madison-County-Seismic-Map-2011.pdf-6159f2ece701.pdf",
+      "chunks": 23
+    },
+    {
+      "source": "/app/storage/kb_uploads/Idaho-State-Hazard-Mitigation-Plan-2023.pdf-1c9b2848048e.pdf",
+      "chunks": 848
+    },
+    {
+      "source": "/app/storage/kb_uploads/INDEX.md-8a4aa73c5837.md",
+      "chunks": 1
+    },
+    {
+      "source": "/app/storage/kb_uploads/Jackery-Explorer-600-v2-JE-600A-Official-User-Manual.pdf-4e86f1afadaa.pdf",
+      "chunks": 28
+    },
+    {
+      "source": "/app/storage/kb_uploads/Jackery-Explorer-600-v2-Official-Product-Guide-2026-11-11.pdf-92b5a9eec4ce.pdf",
+      "chunks": 4
+    },
+    {
+      "source": "/app/storage/kb_uploads/Legion-Go-8APU1-Official-User-Guide.pdf-06b9bc078018.pdf",
+      "chunks": 1
+    },
+    {
+      "source": "/app/storage/kb_uploads/Legion-Go-8APU1-PSREF-2025-01-22.pdf-c9254f5bdfc6.pdf",
+      "chunks": 4
+    },
+    {
+      "source": "/app/storage/kb_uploads/Legion-Go-OFFLINE-POWER.md-f5c56c5de5c0.md",
+      "chunks": 1
+    },
+    {
+      "source": "/app/storage/kb_uploads/Madison-County-Multi-Hazard-Mitigation-Plan-2019.pdf-b05bd34bb150.pdf",
+      "chunks": 323
+    },
+    {
+      "source": "/app/storage/kb_uploads/Midland-ER10-Owners-Manual-2025.pdf-9e628fca319d.pdf",
+      "chunks": 3
+    },
+    {
+      "source": "/app/storage/kb_uploads/Midland-ER10VP-Spec-Sheet.pdf-698b4e260dd6.pdf",
+      "chunks": 1
+    },
+    {
+      "source": "/app/storage/kb_uploads/NOAA-NWR-National-Brochure-2025.pdf-c3a2cce2bf20.pdf",
+      "chunks": 15
+    },
+    {
+      "source": "/app/storage/kb_uploads/NWS-Weather-Preparedness-Schools-2025.pdf-720d1bf4f9b3.pdf",
+      "chunks": 13
+    },
+    {
+      "source": "/app/storage/kb_uploads/Putting-Down-Roots-Utah-2nd-Edition-2022.pdf-8e8482836248.pdf",
+      "chunks": 37
+    },
+    {
+      "source": "/app/storage/kb_uploads/Salt-Lake-County-MJHMP-2025.pdf-c347976819c3.pdf",
+      "chunks": 307
+    },
+    {
+      "source": "/app/storage/kb_uploads/Six-County-Region-PDM-Plan-2020.pdf",
+      "chunks": 389
+    },
+    {
+      "source": "/app/storage/kb_uploads/UGS-Landslide-Hazards-PI-98.pdf-e7a0b5dcb8f6.pdf",
+      "chunks": 4
+    },
+    {
+      "source": "/app/storage/kb_uploads/UGS-Liquefaction-Hazards-PI-100.pdf-c1f984697f75.pdf",
+      "chunks": 5
+    },
+    {
+      "source": "/app/storage/kb_uploads/UGS-Rockfall-Hazards-PI-94.pdf-30269ac4abf1.pdf",
+      "chunks": 3
+    },
+    {
+      "source": "/app/storage/kb_uploads/UGS-Shallow-Groundwater-PI-105.pdf-77673f4e562b.pdf",
+      "chunks": 4
+    },
+    {
+      "source": "/app/storage/kb_uploads/UGS-Wildfires-Debris-Flows-PI-90.pdf-618e536ffb76.pdf",
+      "chunks": 3
+    },
+    {
+      "source": "/app/storage/kb_uploads/USDA-Food-Safety-During-Power-Failure.pdf-856164f9e9f5.pdf",
+      "chunks": 1
+    },
+    {
+      "source": "/app/storage/kb_uploads/USFA-Portable-Generator-Safety.pdf-5add8083ae2a.pdf",
+      "chunks": 1
+    },
+    {
+      "source": "/app/storage/kb_uploads/USGS-Yellowstone-2024-Annual-Report-Circular-1566.pdf-f3b248d6545b.pdf",
+      "chunks": 61
+    },
+    {
+      "source": "/app/storage/kb_uploads/Utah-Enhanced-State-Hazard-Mitigation-Plan-2024.pdf-157b425529c4.pdf",
+      "chunks": 560
+    },
+    {
+      "source": "/app/storage/kb_uploads/Weber-County-PDM-Plan-2024.pdf-3a17c01b93f5.pdf",
+      "chunks": 741
+    },
+    {
+      "source": "/app/storage/kb_uploads/WHO-Managing-Complications-Pregnancy-Childbirth-2017.pdf-c835c3002e84.pdf",
+      "chunks": 231
+    }
+  ],
+  "indexedSourcesMissingOnDisk": [],
+  "physicalFilesWithoutChunks": [
+    {
+      "path": "/app/storage/kb_uploads/verification-rag.txt-9408473e71b3.txt",
+      "filename": "verification-rag.txt-9408473e71b3.txt",
+      "bytes": 239
+    }
+  ]
+}
