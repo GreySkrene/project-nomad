@@ -24,9 +24,9 @@ Project NOMAD is a self-contained, offline-first knowledge and education server 
 > [Family Emergency Library Profile](EMERGENCY_LIBRARY_PROFILE.md), the
 > [measured setup report](docs/emergency/NOMAD_SETUP_REPORT.md), and the
 > [machine-readable library list](collections/emergency-family-library.json).
-> The [74-item content audit](docs/emergency/CONTENT_AUDIT.md) records what is
-> genuinely useful, supplemental, incomplete, or defective; downloaded does not
-> automatically mean accepted.
+> The [content audit](docs/emergency/CONTENT_AUDIT.md) records what is genuinely
+> useful, supplemental, incomplete, replaced, or defective; downloaded does not
+> automatically mean accepted. Rejected resources stay out of the public profile.
 
 ![Night Operations emergency dashboard](docs/emergency/images/ui-upgrade-live-final.png)
 
@@ -39,6 +39,17 @@ selection through NOMAD's supported API:
 python3 install/install_emergency_library.py --dry-run
 python3 install/install_emergency_library.py --wait
 ```
+
+The rejected LibreTexts/zimgit medical archives are intentionally absent. To fetch
+the audited Hesperian and WHO replacement set on Windows, use the resumable downloader:
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\install\download_medical_replacements.ps1 -Action Start
+```
+
+`-Action Manifest` regenerates the per-file URL, byte, SHA-256, role, and license
+ledger at `docs/emergency/MEDICAL_REPLACEMENT_FILES.csv`. Downloaded PDFs are excluded
+from Git; the script and reproducibility metadata are public.
 
 The installed content target is approximately 77 GiB, including a detailed
 USA/Canada/Mexico vector map. A 2026-11-19 audit found missing high-zoom tiles

@@ -1,0 +1,238 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-19T17:46:05.836Z",
+  "reports": [
+    {
+      "path": "resources\\official\\equipment\\lenovo\\Legion-Go-8APU1-User-Guide-40-page-2023.pdf",
+      "filename": "Legion-Go-8APU1-User-Guide-40-page-2023.pdf",
+      "bytes": 1714937,
+      "sha256": "a2312fd130eef2690fc8f11dee2c0ac21f5ea3d41fb42c185c7218d30b531bc0",
+      "readable": true,
+      "pageCount": 40,
+      "extractedPages": 40,
+      "textChars": 60698,
+      "textWords": 10818,
+      "emptyTextPages": [],
+      "thinTextPagesUnder80Chars": [
+        1,
+        6
+      ],
+      "pages": [
+        {
+          "page": 1,
+          "textChars": 20,
+          "textWords": 4
+        },
+        {
+          "page": 2,
+          "textChars": 499,
+          "textWords": 76
+        },
+        {
+          "page": 3,
+          "textChars": 4225,
+          "textWords": 1316
+        },
+        {
+          "page": 4,
+          "textChars": 687,
+          "textWords": 207
+        },
+        {
+          "page": 5,
+          "textChars": 1213,
+          "textWords": 180
+        },
+        {
+          "page": 6,
+          "textChars": 14,
+          "textWords": 3
+        },
+        {
+          "page": 7,
+          "textChars": 496,
+          "textWords": 87
+        },
+        {
+          "page": 8,
+          "textChars": 678,
+          "textWords": 119
+        },
+        {
+          "page": 9,
+          "textChars": 1991,
+          "textWords": 326
+        },
+        {
+          "page": 10,
+          "textChars": 1565,
+          "textWords": 243
+        },
+        {
+          "page": 11,
+          "textChars": 1264,
+          "textWords": 231
+        },
+        {
+          "page": 12,
+          "textChars": 128,
+          "textWords": 22
+        },
+        {
+          "page": 13,
+          "textChars": 1149,
+          "textWords": 196
+        },
+        {
+          "page": 14,
+          "textChars": 1739,
+          "textWords": 290
+        },
+        {
+          "page": 15,
+          "textChars": 1150,
+          "textWords": 190
+        },
+        {
+          "page": 16,
+          "textChars": 748,
+          "textWords": 137
+        },
+        {
+          "page": 17,
+          "textChars": 1729,
+          "textWords": 285
+        },
+        {
+          "page": 18,
+          "textChars": 1125,
+          "textWords": 182
+        },
+        {
+          "page": 19,
+          "textChars": 1839,
+          "textWords": 315
+        },
+        {
+          "page": 20,
+          "textChars": 1551,
+          "textWords": 262
+        },
+        {
+          "page": 21,
+          "textChars": 1049,
+          "textWords": 187
+        },
+        {
+          "page": 22,
+          "textChars": 2157,
+          "textWords": 375
+        },
+        {
+          "page": 23,
+          "textChars": 2091,
+          "textWords": 357
+        },
+        {
+          "page": 24,
+          "textChars": 2465,
+          "textWords": 420
+        },
+        {
+          "page": 25,
+          "textChars": 2159,
+          "textWords": 379
+        },
+        {
+          "page": 26,
+          "textChars": 652,
+          "textWords": 109
+        },
+        {
+          "page": 27,
+          "textChars": 475,
+          "textWords": 73
+        },
+        {
+          "page": 28,
+          "textChars": 1642,
+          "textWords": 273
+        },
+        {
+          "page": 29,
+          "textChars": 2123,
+          "textWords": 355
+        },
+        {
+          "page": 30,
+          "textChars": 540,
+          "textWords": 92
+        },
+        {
+          "page": 31,
+          "textChars": 1950,
+          "textWords": 321
+        },
+        {
+          "page": 32,
+          "textChars": 2319,
+          "textWords": 379
+        },
+        {
+          "page": 33,
+          "textChars": 2503,
+          "textWords": 419
+        },
+        {
+          "page": 34,
+          "textChars": 527,
+          "textWords": 88
+        },
+        {
+          "page": 35,
+          "textChars": 2571,
+          "textWords": 436
+        },
+        {
+          "page": 36,
+          "textChars": 1757,
+          "textWords": 258
+        },
+        {
+          "page": 37,
+          "textChars": 2044,
+          "textWords": 328
+        },
+        {
+          "page": 38,
+          "textChars": 2391,
+          "textWords": 373
+        },
+        {
+          "page": 39,
+          "textChars": 3355,
+          "textWords": 521
+        },
+        {
+          "page": 40,
+          "textChars": 1409,
+          "textWords": 204
+        }
+      ],
+      "links": 26,
+      "metadata": {
+        "title": "User Guide",
+        "author": null,
+        "subject": null,
+        "creator": "PTC Arbortext Publishing Engine",
+        "producer": "PDFlib+PDI 9.3.0p1 (C++/Win64)",
+        "creationDate": "2023-09-26T03:19:33.000Z",
+        "modificationDate": "2023-09-26T03:19:33.000Z"
+      },
+      "fingerprints": [
+        "7b1aa604b0304c8ea0d04fa74a0f6a5f",
+        null
+      ]
+    }
+  ]
+}

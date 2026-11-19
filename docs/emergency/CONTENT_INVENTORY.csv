@@ -7,7 +7,6 @@ kiwix_zim,gardenology.org_en_all_2026-09.zim,112499438,,verified_with_gaps,Healt
 kiwix_zim,ifixit_en_all_2025-12.zim,3570695757,,verified_with_gaps,Broad illustrated repair library; does not replace equipment-specific manuals
 kiwix_zim,irp.fas.org_en_military-medicine_2026-10.zim,64986090,,historical_supplement_only,Mostly 1957-2007 military manuals; not current civilian clinical guidance
 kiwix_zim,librepathology_en_all_maxi_2026-09.zim,95279611,,low_priority_educational,"Pathology education, not an emergency first-aid guide"
-kiwix_zim,libretexts.org_en_med_2025-01.zim,1192567339,,defect_confirmed,Inconsistent/missing book sections in rendered JavaScript reader
 kiwix_zim,mechanics.stackexchange.com_en_all_2026-10.zim,341672133,,supplemental_only,Working vehicle Q&A; not model-specific service data
 kiwix_zim,medlineplus.gov_en_all_2025-01.zim,1944841111,,verified_core,Healthy medical reference with working sampled emergency topics
 kiwix_zim,nhs.uk_en_medicines_2025-12.zim,16946183,,verified_core,Healthy medical reference with working sampled emergency topics
@@ -18,7 +17,6 @@ kiwix_zim,wikipedia_en_top_maxi_2026-06.zim,8357329540,,verified,Illustrated cur
 kiwix_zim,woodworking.stackexchange.com_en_all_2026-10.zim,106657287,,low_priority_supplement,Functional specialist Q&A with limited emergency relevance
 kiwix_zim,www.ready.gov_en_2024-12.zim,2429921822,,verified_static_core,Official actionable preparedness pages; static snapshot without live alerts
 kiwix_zim,wwwnc.cdc.gov_en_all_2024-11.zim,178326622,,supplemental_only,Official CDC Travelers' Health snapshot; useful but narrower than general emergency medicine
-kiwix_zim,zimgit-medicine_en_2024-08.zim,70179585,,defect_confirmed,Reader remains blank; bundle includes outdated and unverified medical works
 offline_map,custom-ea2908b0_20261106_z15.pmtiles,33788916131,,coverage_defect_confirmed,"Valid zoom-15 continental map, but Vancouver/Burnaby detailed tiles are missing; extraction geometry bug fixed for future extracts"
 offline_map,world.pmtiles,15055414,,verified_low_detail_fallback,Valid world overview through zoom 5; all sampled locations returned tiles
 knowledge_document,AHA-2025-CPR-CHOKING-QUICK-REFERENCE.md-01e7565ec421.md,3335,,verified_authored_summary,Useful sourced 2025 AHA memory aid; not an original AHA manual
@@ -43,7 +41,7 @@ knowledge_document,Idaho-Madison-County-Seismic-Map-2011.pdf-6159f2ece701.pdf,70
 knowledge_document,Idaho-State-Hazard-Mitigation-Plan-2023.pdf-1c9b2848048e.pdf,52241264,,verified_regional_reference,Readable planning/risk reference; not live alerts or a quick-action guide
 knowledge_document,Jackery-Explorer-600-v2-JE-600A-Official-User-Manual.pdf-4e86f1afadaa.pdf,2607997,,verified,"Readable and page-scanned; see PDF_CONTENT_AUDIT.md for role, dates, and limitations"
 knowledge_document,Jackery-Explorer-600-v2-Official-Product-Guide-2026-11-11.pdf-92b5a9eec4ce.pdf,6211263,,verified,"Readable and page-scanned; see PDF_CONTENT_AUDIT.md for role, dates, and limitations"
-knowledge_document,Legion-Go-8APU1-Official-User-Guide.pdf-06b9bc078018.pdf,1849089,,defect_confirmed,"Six-page interactive landing-page capture; only 1,232 text characters, not a full manual"
+knowledge_document,Legion-Go-8APU1-User-Guide-40-page-2023.pdf,1714937,Lenovo 8APU1 / type 83E1; 2023-09-26,verified_core_equipment,"Complete Lenovo-authored 40-page guide; retrieved from mirror after official download blocked automation; offline UI SHA-256 match passed"
 knowledge_document,Legion-Go-8APU1-PSREF-2025-01-22.pdf-c9254f5bdfc6.pdf,1564426,,verified,"Readable and page-scanned; see PDF_CONTENT_AUDIT.md for role, dates, and limitations"
 knowledge_document,Legion-Go-OFFLINE-POWER.md-f5c56c5de5c0.md,1688,,verified_authored_summary,Offline/power card corrected to disclose incomplete Lenovo guide capture and disabled AI
 knowledge_document,Madison-County-Multi-Hazard-Mitigation-Plan-2019.pdf-b05bd34bb150.pdf,29502362,,verified_regional_reference,Readable planning/risk reference; not live alerts or a quick-action guide
@@ -65,11 +63,15 @@ knowledge_document,USGS-Yellowstone-2024-Annual-Report-Circular-1566.pdf-f3b248d
 knowledge_document,Utah-Enhanced-State-Hazard-Mitigation-Plan-2024.pdf-157b425529c4.pdf,33565637,,verified_regional_reference,Readable planning/risk reference; not live alerts or a quick-action guide
 knowledge_document,WHO-Managing-Complications-Pregnancy-Childbirth-2017.pdf-c835c3002e84.pdf,5110597,,professional_reference_only,"Complete 2017 clinical manual for trained providers, not lay first aid"
 knowledge_document,Weber-County-PDM-Plan-2024.pdf-3a17c01b93f5.pdf,37358094,,verified_regional_reference,Readable planning/risk reference; not live alerts or a quick-action guide
-knowledge_document,verification-rag.txt-9408473e71b3.txt,239,,test_artifact_inactive,"239-byte test upload; disabled from retrieval, deletion awaits approval"
 auxiliary,kiwix-smart-search.html,3088351,generated offline UI,verified,Live title-first search and offline spelling correction tested
 kolibri_channel,Blockly Games,,version 10; e409b964366a59219c148f2aaa741f43; 505 nodes,verified_low_priority_education,All nodes/files available; programming education with low emergency priority
 kolibri_channel,Khan Academy (English - US curriculum),,version 5; c9d7f950ab6b5a1199e3d6c10d7f0103; 34488 nodes,usable_partial,"1,455 nodes available; 26/11,612 selected-node files missing, all sampled as subtitle/thumbnail; prior import skipped 370 files"
 kolibri_channel,PhET Interactive Simulations,,version 18; 197934f144305350b5820c7c4dd8e194; 1195 nodes,verified_low_priority_education,All nodes/files available; substantial simulations but low immediate emergency priority
 kolibri_channel,School of Thought,,version 2; 305b12ea5ea84fa18f933705c23f5ee0; 51 nodes,verified_low_priority_education,All nodes/files available; critical-thinking education with low emergency priority
 kolibri_channel,Sikana (English),,version 24; 3e464ee12f6a50a781cddf59147b48b1; 3430 nodes,verified_practical_subset,"505 practical nodes; all selected-node files available; navigation, cooking, energy, DIY, agriculture and gardening"
-derived_index,Qdrant knowledge-base index,865497262,derived from knowledge_document files,verified_derived_index,"44 physical sources, 3,922 chunks, no indexed orphans; only the disabled verification artifact has no chunks"
+medical_replacement,Oregon-State-Anatomy-Physiology-2e-2025.pdf,133118779,2025; 2070 pages,verified_browse_only,"Complete chapter bodies and figures; Chemical/Cellular/Tissue checked; not indexed because current source terms prohibit LLM ingestion without permission"
+medical_replacement,Hesperian Where There Is No Doctor chapter set,14030592,2025; 32 PDFs; 503 pages,verified_supplemental,"Official Hesperian PDFs; austere supplement; current official clinical guidance takes precedence; per-file ledger in MEDICAL_REPLACEMENT_FILES.csv"
+medical_replacement,Hesperian Where There Is No Dentist chapter set,6039924,2024; 14 PDFs; 248 pages,verified_supplemental,"Official Hesperian PDFs; dental emergency chapters checked; per-file ledger in MEDICAL_REPLACEMENT_FILES.csv"
+medical_replacement,Hesperian A Book for Midwives chapter set,29399795,2026; 31 PDFs; 546 pages,verified_supplemental,"Official Hesperian PDFs; birth danger and transport sections checked; per-file ledger in MEDICAL_REPLACEMENT_FILES.csv"
+medical_replacement,WHO Basic Emergency Care and quick-card set,5003335,2018 manual; 2025/2026 quick cards; 3 PDFs; 255 pages,verified_professional_reference,"Official WHO PDFs; ABCDE/choking/children content checked; per-file ledger in MEDICAL_REPLACEMENT_FILES.csv"
+derived_index,Qdrant knowledge-base index,865497262,derived from indexed knowledge_document files,verified_derived_index,"43 indexed user documents / 3921 chunks / 752215160 source bytes; 82 replacements pending manual indexing and directly browseable; zero active jobs after sync-policy fix"

@@ -100,7 +100,7 @@ sample. Small targeted emergency collections receive a substantially deeper revi
   defects include a nearly empty Legion Go landing-page capture and filenames that
   misstate actual document dates.
 
-## Kiwix archives — 20 installed, 40,900,638,382 bytes
+## Kiwix archives — 18 installed, 39,637,891,458 bytes
 
 - [x] `cooking.stackexchange.com_en_all_2026-10.zim` — healthy searchable Q&A;
   supplemental troubleshooting, not authoritative food-safety or canning guidance.
@@ -118,8 +118,9 @@ sample. Small targeted emergency collections receive a substantially deeper revi
   only; dominated by 1957–2007 manuals, not current civilian clinical advice.
 - [x] `librepathology_en_all_maxi_2026-09.zim` — structurally healthy pathology
   education; low emergency priority and not a first-aid reference.
-- [!] `libretexts.org_en_med_2025-01.zim` — confirmed inconsistent/title-only book
-  sections in its JavaScript reader despite a valid archive checksum.
+- [x] `libretexts.org_en_med_2025-01.zim` — removed after confirmation that 23,160 of
+  23,171 reader pages were redirects/stubs and after its replacement passed offline
+  UI/hash validation.
 - [x] `mechanics.stackexchange.com_en_all_2026-10.zim` — working vehicle
   troubleshooting; supplemental community advice, not model-specific service data.
 - [x] `medlineplus.gov_en_all_2025-01.zim` — core consumer medical reference; valid
@@ -140,8 +141,30 @@ sample. Small targeted emergency collections receive a substantially deeper revi
   hazard/action pages. Static snapshot; no live alerts.
 - [x] `wwwnc.cdc.gov_en_all_2024-11.zim` — valid CDC Travelers' Health snapshot;
   useful but narrower than general emergency medicine.
-- [!] `zimgit-medicine_en_2024-08.zim` — normal interface blank after 30 seconds; its
-  12 bundled PDFs mix dated and questionable works. Not safety-critical core material.
+- [x] `zimgit-medicine_en_2024-08.zim` — removed after its blank reader and mixed
+  dated/unverified 12-title bundle were documented and its replacements passed
+  offline UI/hash validation.
+
+## Validated medical replacements — 82 installed files
+
+- [x] Oregon State *Anatomy & Physiology 2e* (2025) — 133,118,779 bytes and 2,070
+  readable pages. All pages were extracted; the Chemical, Cellular, and Tissue
+  chapters contain substantive bodies and figures. Stored browse-only because the
+  source's current terms do not permit LLM ingestion without permission.
+- [x] Hesperian *Where There Is No Doctor* (2025) — 32 official chapter/section PDFs,
+  503 pages, all readable. Useful austere supplement; official current clinical
+  guidance takes precedence over improvised or older field methods.
+- [x] Hesperian *Where There Is No Dentist* (2024) — 14 official chapter/section PDFs,
+  248 pages, all readable. Toothache, abscess, and bleeding guidance spot-checked.
+- [x] Hesperian *A Book for Midwives* (2026) — 31 official chapter/section PDFs, 546
+  pages, all readable. Birth danger signs, medical help, and transport sections
+  spot-checked; not a substitute for professional obstetric care.
+- [x] WHO *Basic Emergency Care* manual (2018), 2025 quick cards, and 2026 postpartum
+  haemorrhage card — three official PDFs, 255 pages total, all readable. These are
+  professional/first-contact references, not a replacement for emergency services.
+- [x] The 80-file source URL, byte, SHA-256, publisher, role, and license ledger is
+  `MEDICAL_REPLACEMENT_FILES.csv`; structural evidence is in
+  `evidence/medical-replacements-pdf-audit.json`.
 
 ## Maps
 
@@ -200,14 +223,14 @@ from each media type remains part of the final disconnected acceptance test.
 
 ## Authoritative documents and equipment files
 
-- [x] The live master inventory is `CONTENT_INVENTORY.csv`: 74 rows comprising 20
-  ZIMs, two maps, 45 physical knowledge documents, five Kolibri channels, the Kiwix
-  search page, and the derived Qdrant index.
-- [!] The 45th knowledge document is a 239-byte `verification-rag.txt` test artifact
-  in its own `verification` collection. It was still active; it is now reversibly
-  disabled from retrieval. File/vector deletion awaits explicit approval.
-- [x] Reconciled all 45 physical files in `/opt/project-nomad/storage/kb_uploads`
-  against `RESOURCE_MANIFEST.csv` and `resources/official/SHA256SUMS.txt`.
+- [x] The live summary inventory is `CONTENT_INVENTORY.csv` (76 rows). The 80 new
+  chapter-level medical files are individually recorded in
+  `MEDICAL_REPLACEMENT_FILES.csv`, rather than collapsed into an unreviewable label.
+- [x] The 239-byte `verification-rag.txt` test artifact and its vector were deleted
+  after the planned replacement transactions completed.
+- [x] Live RAG storage now contains 43 previously indexed user documents plus 82
+  validated replacements awaiting a manual indexing decision. Manual mode allows
+  all replacements to be opened/downloaded without starting an embedding model.
 - [x] Validated all 37 PDFs: 37 readable, 6,068 pages scanned, per-page text coverage
   recorded, image/blank-text pages flagged, and source metadata compared with names.
   See `PDF_CONTENT_AUDIT.md` and `evidence/content-audit-pdfs.json`.
@@ -215,11 +238,11 @@ from each media type remains part of the final disconnected acceptance test.
   quick cards are useful locally authored summaries; provenance claims were corrected
   in the repository. Their installed copies/Qdrant chunks still require a later sync
   because LM Studio is intentionally untouched/off for the user's other project.
-- [x] Verified Qdrant exactly: 44 indexed sources, 3,922 chunks, zero indexed sources
-  missing on disk, and exactly one physical file without chunks — the intentionally
-  disabled 239-byte verification artifact. Evidence:
-  `evidence/content-audit-qdrant.json`. Qdrant remains derived data, not an independent
-  source.
+- [x] The pre-replacement Qdrant evidence remains in
+  `evidence/content-audit-qdrant.json`. After removal of the incomplete Legion capture
+  and verification artifact, the live user-upload index has 43 files, 3,921 chunks,
+  and 752,215,160 source bytes. The 82 replacements remain unindexed by design while
+  LM Studio is reserved. Qdrant remains derived data, not an independent source.
 
 ## Replacement rules
 

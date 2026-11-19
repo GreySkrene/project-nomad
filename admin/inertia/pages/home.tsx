@@ -1,6 +1,7 @@
 import {
   IconBolt,
   IconBox,
+  IconFiles,
   IconHelp,
   IconMapRoute,
   IconPill,
@@ -37,6 +38,20 @@ const MAPS_ITEM = {
   icon: <IconMapRoute size={48} />,
   installed: true,
   displayOrder: 4,
+  poweredBy: null,
+}
+
+// The file browser is useful even while local generation is paused. Documents
+// can stay in Manual mode and still be opened/downloaded without loading an AI
+// or embedding model.
+const DOCUMENT_LIBRARY_ITEM = {
+  label: 'Document Library',
+  to: '/chat?knowledge_base=true',
+  target: '',
+  description: 'Open saved PDFs and official source files; AI indexing is optional',
+  icon: <IconFiles size={48} />,
+  installed: true,
+  displayOrder: 3,
   poweredBy: null,
 }
 
@@ -214,7 +229,8 @@ export default function Home(props: {
       })
     })
 
-  // Add Maps as a Core Capability
+  // Add model-independent reference tools as Core Capabilities.
+  items.push(DOCUMENT_LIBRARY_ITEM)
   items.push(MAPS_ITEM)
 
   // Add the offline medical-reference tiles only once the FDA drug dataset is

@@ -35,7 +35,7 @@ its name suggests.
 | Idaho State Hazard Mitigation Plan | 1,223 | regional | Readable 2.29-million-character 2023 plan. Seventy-eight pages have no extracted text, largely consistent with graphics/dividers; broad planning reference, not a quick-response manual. |
 | Jackery Explorer 600 v2 JE-600A Manual | 46 | core-equipment | Complete model-specific manual with 74,250 characters. Covers controls, charging, solar limits, storage, troubleshooting, and safety. Highest-value equipment file. |
 | Jackery Explorer 600 v2 Product Guide | 14 | supplement | Complete rendered manufacturer page; useful additional current product/support context but secondary to the 46-page manual. |
-| Lenovo Legion Go User Guide | 6 | weak | Structurally readable but only 1,232 characters. It is a rendered interactive landing page with video placeholders and FAQ titles, not a complete operational manual. |
+| Lenovo Legion Go User Guide | 40 | core-equipment | Complete Lenovo-authored guide for 8APU1 / type 83E1: 60,698 extracted characters and zero empty pages. Verified 65 W charging, battery, Quiet 8 W, thermal/power modes, and troubleshooting. Retrieved from a mirror because Lenovo's official support download blocked automation; official Lenovo support records identify the guide. |
 | Lenovo Legion Go PSREF | 8 | supplement | Complete 10,181-character specification sheet. Useful for hardware and charging specifications, not offline-operation instructions. |
 | Madison County Multi-Hazard Mitigation Plan | 424 | regional | Readable 2019 plan with 872,014 characters. Covers Rexburg/Madison County hazards; not current alerts or evacuation orders. |
 | Midland ER10 Owner's Manual | 2 | core-equipment | Complete compact manual with 6,809 characters: controls, batteries, alert mode, seven NOAA frequencies, clock, scanning, and flashlight. |
@@ -62,8 +62,8 @@ its name suggests.
 - Rename or display dates from source metadata/content rather than treating capture
   dates as publication dates. The CDC water, CDC radiation, and FEMA communication
   filenames currently overstate recency.
-- Replace the six-page Legion Go landing-page capture with a genuinely complete
-  offline manual or a locally authored, source-cited power/offline quick guide.
+- The incomplete six-page Legion Go capture was removed after the complete
+  40-page guide passed content and offline UI/hash validation.
 - Obtain the exact butane-stove model before adding a model-specific operating manual.
   The CPSC report is valuable safety evidence but not operating instructions.
 - Keep regional mitigation plans, but surface concise household action guides ahead

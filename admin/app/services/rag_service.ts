@@ -1943,6 +1943,7 @@ export class RagService {
       )
 
       await this.qdrant!.delete(RagService.CONTENT_COLLECTION_NAME, {
+        wait: true,
         filter: {
           must: [{ key: 'source', match: { value: source } }],
         },
@@ -2083,7 +2084,10 @@ export class RagService {
     }
   }
 
-  public async discoverNomadDocs(force?: boolean): Promise<{ success: boolean; message: string }> {
+  public async discoverNomadDocs(
+    force?: boolean,
+    forceDispatch = false
+  ): Promise<{ success: boolean; message: string }> {
     try {
       const { readmePath: README_PATH, docsDir: DOCS_DIR } = this._nomadDocsRoots()
 
@@ -2111,6 +2115,34 @@ export class RagService {
       }
 
       logger.info(`[RAG] Discovered ${filesToEmbed.length} Nomad doc files to embed`)
+
+      // Bundled README/docs files live outside the normal storage scan, but they
+      // still have to honor the same ingest policy as uploaded files. Previously
+      // this method always dispatched jobs, so a Manual-mode sync could report
+      // `filesQueued: 0` while quietly adding a second batch of jobs here.
+      // Destructive, user-requested rebuild operations pass forceDispatch=true.
+      const policyRaw = await KVStore.getValue('rag.defaultIngestPolicy')
+      const policy: IngestPolicy = policyRaw === 'Manual' ? 'Manual' : 'Always'
+      const shouldDispatch = forceDispatch || policy === 'Always'
+
+      if (!shouldDispatch) {
+        for (const fileInfo of filesToEmbed) {
+          await KbIngestState.firstOrCreate(
+            { file_path: fileInfo.path },
+            {
+              file_path: fileInfo.path,
+              state: 'pending_decision',
+              chunks_embedded: 0,
+            }
+          )
+        }
+
+        await KVStore.setValue('rag.docsEmbedded', true)
+        return {
+          success: true,
+          message: `Nomad docs discovery completed. Registered ${filesToEmbed.length} files for manual indexing; dispatched 0 embedding jobs.`,
+        }
+      }
 
       // Import EmbedFileJob dynamically to avoid circular dependencies
       const { EmbedFileJob } = await import('#jobs/embed_file_job')
@@ -2353,6 +2385,7 @@ export class RagService {
     if (sources.length === 0) return
     await this._ensureCollection(RagService.CONTENT_COLLECTION_NAME, RagService.EMBEDDING_DIMENSION)
     await this.qdrant!.delete(RagService.CONTENT_COLLECTION_NAME, {
+      wait: true,
       filter: { must: [{ key: 'source', match: { any: sources } }] },
     })
   }
@@ -2420,7 +2453,7 @@ export class RagService {
     try {
       logger.info('[RAG] Starting knowledge base sync scan')
 
-      await this.discoverNomadDocs(true).catch((error) => {
+      await this.discoverNomadDocs().catch((error) => {
         logger.error('[RAG] Error during Nomad docs discovery in sync process:', error)
       })
 
@@ -2442,7 +2475,10 @@ export class RagService {
         exact: true,
       })
       for (const hit of facetResult.hits) {
-        if (typeof hit.value === 'string') sourcesInQdrant.add(hit.value)
+        // Qdrant can retain a facet value with count=0 after every matching point
+        // has been deleted. Treating that tombstone as a live source makes the
+        // reverse sweep report and "purge" the same orphan on every sync forever.
+        if (typeof hit.value === 'string' && hit.count > 0) sourcesInQdrant.add(hit.value)
       }
 
       logger.info(`[RAG] Found ${sourcesInQdrant.size} unique sources in Qdrant`)
@@ -2628,7 +2664,7 @@ export class RagService {
 
       logger.info('[RAG] Starting full re-embed (per-file replace)')
 
-      await this.discoverNomadDocs(true).catch((error) => {
+      await this.discoverNomadDocs(true, true).catch((error) => {
         logger.error('[RAG] Error re-running Nomad docs discovery during re-embed:', error)
       })
 
@@ -2752,7 +2788,7 @@ export class RagService {
 
       // Force Nomad docs to be re-dispatched.
       await KVStore.setValue('rag.docsEmbedded', false)
-      await this.discoverNomadDocs(true).catch((error) => {
+      await this.discoverNomadDocs(true, true).catch((error) => {
         logger.error('[RAG] Error re-running Nomad docs discovery after reset:', error)
       })
 

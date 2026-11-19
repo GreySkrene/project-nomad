@@ -33,7 +33,9 @@ properly rated USB-C cable and power source; the original Lenovo adapter is
 65 W. Lower-power sources may charge slowly or lose battery while the device is
 running.
 
-Sources: Lenovo Legion Go 8APU1 PSREF plus Windows power controls. The saved
-six-page Lenovo "user guide" is an incomplete interactive-page capture; replace
-it with a complete official manual if Lenovo publishes a self-contained one.
+Sources: the complete 40-page Lenovo-authored Legion Go 8APU1 user guide, Lenovo
+PSREF, and Windows power controls. Lenovo's support record identifies the PDF;
+the offline copy was retrieved from a third-party mirror after the official
+download blocked automation, then checked for model, metadata, page completeness,
+charging, battery, thermal-mode, and troubleshooting content.
 

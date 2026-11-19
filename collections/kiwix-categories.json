@@ -15,14 +15,6 @@
           "recommended": true,
           "resources": [
             {
-              "id": "zimgit-medicine_en",
-              "version": "2024-08",
-              "title": "Medical Library",
-              "description": "Field and emergency medicine books and guides",
-              "url": "https://download.kiwix.org/zim/other/zimgit-medicine_en_2024-08.zim",
-              "size_mb": 67
-            },
-            {
               "id": "nhs.uk_en_medicines",
               "version": "2025-12",
               "title": "NHS Medicines A to Z",
@@ -87,14 +79,6 @@
               "description": "Curated medical articles from Wikipedia with images",
               "url": "https://download.kiwix.org/zim/wikipedia/wikipedia_en_medicine_maxi_2026-10.zim",
               "size_mb": 1778
-            },
-            {
-              "id": "libretexts.org_en_med",
-              "version": "2025-01",
-              "title": "LibreTexts Medicine",
-              "description": "Open-source medical textbooks and educational content",
-              "url": "https://download.kiwix.org/zim/libretexts/libretexts.org_en_med_2025-01.zim",
-              "size_mb": 1100
             },
             {
               "id": "librepathology_en_all_maxi",

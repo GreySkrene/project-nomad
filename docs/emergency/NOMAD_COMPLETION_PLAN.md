@@ -13,20 +13,23 @@ file/checksum), test it offline through the user interface, update the manifests
 audit records, and only then remove the superseded resource. Ask before any large
 download and show the exact deletion target before deleting data.
 
-1. [ ] **LibreTexts Medicine** — source and validate a complete open anatomy and
-   physiology reference that actually contains its chapter bodies, figures, and
-   navigation. Re-test the Unit 1 Chemical, Cellular, and Tissue chapters offline.
-   Once the replacement passes, remove
-   `libretexts.org_en_med_2025-01.zim` (1,192,567,339 bytes) and its catalog/profile
-   entry. Do not present the current archive as an acceptable medical textbook.
-2. [ ] **OpenZIM Medical Library (`zimgit-medicine`)** — replace its blank reader and
-   mixed outdated/unverified works with authoritative, readable sources. WikiMed,
-   MedlinePlus, NHS Medicines, CDC, and LibrePathology already cover portions of the
-   need but do not by themselves prove equivalent coverage. After a gap comparison
-   and offline validation, remove `zimgit-medicine_en_2024-08.zim` (70,179,585 bytes).
-3. [ ] **Lenovo Legion Go** — obtain a genuinely complete official offline manual.
-   Verify model applicability, page/content completeness, and charging/power sections;
-   then replace the six-page interactive landing-page capture and re-index the PDF.
+1. [x] **LibreTexts Medicine** — replaced with Oregon State's 2025 *Anatomy &
+   Physiology 2e*: 2,070 readable pages, 677,097 extracted words, substantive Chemical,
+   Cellular, and Tissue chapters, and 1,539 figure captions. The 133,118,779-byte PDF
+   passed offline UI download/hash validation. It is browse-only because the source's
+   current terms do not authorize LLM ingestion. The defective 1,192,567,339-byte ZIM
+   and both public catalog/profile entries were removed.
+2. [x] **OpenZIM Medical Library (`zimgit-medicine`)** — replaced with 80 current,
+   readable PDFs from Hesperian and WHO (1,552 pages; 54,473,646 bytes). Every page was
+   extraction-audited; emergency-care, first-aid, dental, childbirth, and transport
+   chapters were spot-checked. Hesperian is labeled austere supplemental guidance;
+   current official clinical guidance takes precedence. The defective 70,179,585-byte
+   ZIM and its catalog/profile entries were removed.
+3. [x] **Lenovo Legion Go** — installed the complete Lenovo-authored 40-page 8APU1 /
+   type 83E1 guide (obtained from a mirror because Lenovo's support download blocked
+   automation). All pages are readable and the 65 W charging, battery, Quiet 8 W, and
+   troubleshooting sections were verified. The six-page landing-page capture was
+   removed after the replacement passed offline UI download/hash validation.
 4. [ ] **Canada detailed map repair** — build a corrected Canada overlay or continental
    replacement using the fixed extraction geometry. Verify zoom-15 Vancouver and
    Burnaby tiles plus the existing Utah/Idaho/Mexico samples before removing the
@@ -34,9 +37,9 @@ download and show the exact deletion target before deleting data.
 5. [ ] **Supplemental/noise review** — decide whether Gardening Stack Exchange and the
    other Q&A archives earn their storage after coherent replacements are in place.
    They are labeled supplemental, not core. Remove only with explicit target review.
-6. [ ] **Cleanup after replacements** — remove the disabled 239-byte RAG verification
-   artifact, regenerate `CONTENT_INVENTORY.csv` and `RESOURCE_MANIFEST.csv`, refresh
-   hashes, reconcile Kiwix/Qdrant, and repeat the disconnected acceptance tests.
+6. [-] **Cleanup after replacements** — the 239-byte verification artifact is removed;
+   inventories, manifests, hashes, Kiwix, and Qdrant are reconciled. The remaining
+   cleanup gate is the physically disconnected/reboot acceptance test.
 
 Do not disturb LM Studio during this work unless the user explicitly releases it from
 the separate project. Content and UI validation do not require local generation.
@@ -50,14 +53,14 @@ the separate project. Content and UI validation do not require local generation.
 - [x] Replace the invalid eCFR access-denied capture with a genuine official FRS regulation source.
 - [ ] Record hashes/validation evidence for the large installed ZIM and PMTiles resources where practical.
 - [x] Perform the content-level usefulness/completeness audit tracked in `CONTENT_AUDIT.md`; all 74 inventory rows now have evidence-based roles/statuses, with final hands-on media playback reserved for offline acceptance.
-- [!] LibreTexts Medicine is proven defective; replacement/removal is queued in the
-  resume section above.
+- [x] LibreTexts Medicine and zimgit-medicine were replaced and removed transactionally;
+  the complete evidence is recorded in the replacement manifests and audit JSON files.
 - [x] Audit Gardening Stack Exchange against coherent gardening and plant references; Gardenology is installed/validated as the encyclopedia and Q&A is labeled supplemental.
 
 ## B. Emergency knowledge base and citations
 
 - [x] Inventory exactly which resources are currently indexed in Qdrant.
-- [x] Import the local authoritative emergency PDFs and guides through NOMAD's supported RAG path (44 intentional files indexed; 3,922 chunks; zero active or failed jobs).
+- [x] Import the original authoritative emergency set through NOMAD's supported RAG path; after cleanup 43 user documents / 3,921 chunks remain indexed and 82 validated replacements are directly browsable in Manual mode.
 - [ ] Index the highest-value authoritative ZIMs that are not already indexed.
 - [ ] Avoid duplicate embeddings for sources already present.
 - [x] Test retrieval with medical, water, winter outage, earthquake, and Rexburg hazard questions.
@@ -76,7 +79,8 @@ the separate project. Content and UI validation do not require local generation.
 ## D. Equipment library
 
 - [x] Jackery Explorer 600 v2 JE-600A packet.
-- [!] Lenovo Legion Go 8APU1 packet — PSREF and sourced offline-power card are useful, but the saved six-page "user guide" is only an interactive landing-page capture and needs replacement.
+- [x] Lenovo Legion Go 8APU1 packet — complete 40-page Lenovo-authored user guide,
+  PSREF, and sourced offline-power card installed; incomplete capture removed.
 - [x] Midland ER10VP packet.
 - [x] General butane, battery, generator, carbon-monoxide, and equipment-maintenance guidance.
 - [!] Exact butane stove manual — model confirmation required.
@@ -141,7 +145,7 @@ the separate project. Content and UI validation do not require local generation.
 ## K. Public, reproducible personal-project fork
 
 - [x] Define the emergency-family Kiwix selection in a machine-readable profile with exact filenames, URLs, sizes, and rationale.
-- [x] Verify/download all 20 current profile archives through the official Kiwix service; Gardenology was added after the content audit exposed the Q&A-only gardening gap.
+- [x] Verify/download the profile archives through the official Kiwix service; Gardenology was added after the content audit exposed the Q&A-only gardening gap. Two rejected medical ZIMs were later removed, leaving 18 accepted/supplemental archives.
 - [x] Add a dependency-free installer that previews, size-gates, queues, and monitors missing ZIMs through NOMAD's supported API.
 - [x] Document storage tradeoffs, map/Kolibri setup, safety boundaries, and content that is intentionally excluded from Git.
 - [x] Update the main README to distinguish this family emergency profile from upstream Project NOMAD.
@@ -157,7 +161,7 @@ the separate project. Content and UI validation do not require local generation.
 - [x] No NOMAD download jobs are active or queued; no duplicate map jobs needed cancellation.
 - [!] Continental map is detailed at all primary Utah/Idaho/Mexico samples, but the 2026-11-19 audit disproved full Canadian completeness at Vancouver/Burnaby; future extraction code is fixed, existing data is not yet repaired.
 - [x] Seven regional plans were downloaded, PDF-signature/EOF checked, SHA-256 recorded, added to `RESOURCE_MANIFEST.csv`, and indexed.
-- [x] `official-emergency` contains 44 intentional indexed files and 3,922 chunks; active jobs: 0; failed jobs: 0.
+- [x] After cleanup the indexed user-document set contains 43 files and 3,921 chunks; 82 validated replacements are pending a Manual decision; active jobs: 0.
 - [x] The accidental `robots.txt` upload and its vector were removed through NOMAD's API.
 - [x] RAG failure root cause fixed: LM Studio now listens on the private WSL adapter and local Nomic Embed Text v1.5 is loaded; a direct request returned a 768-dimension vector.
 - [x] Rebuilt launcher no longer manages LM Studio at all; Start/Stop leave both local and LM Link models untouched.
@@ -165,8 +169,15 @@ the separate project. Content and UI validation do not require local generation.
 - [x] Updated `NOMAD_SETUP_REPORT.md` with current storage/download/index state.
 - [x] Ran the five retrieval/citation test questions and inspected cited Qdrant source passages.
 - [!] Safety decision: deterministic source search, vetted quick references, and original-file access are the emergency core; AI is optional and must be verified.
-- [ ] Next: execute the replacement/removal queue at the top of this plan, beginning
-  with LibreTexts Medicine and `zimgit-medicine`.
+- [x] Completed the first three replacement/removal transactions at the top of this
+  plan, including offline UI/hash checks before deletion.
+- [x] Fixed and deployed the Manual-ingest sync defect: a sync no longer silently
+  queues bundled documentation while reporting zero queued files. Live regression:
+  zero active jobs before and after sync, `filesQueued: 0`.
+- [x] Fixed repeated orphan cleanup caused by zero-count Qdrant facet tombstones;
+  two consecutive live syncs now report clean/in-sync with no jobs.
+- [x] Added a dashboard Document Library entry so stored originals remain directly
+  browsable/downloadable while AI and LM Studio are paused.
 - [ ] After replacements: confirm exact models for equipment manuals still marked
   `[!]`, then perform reboot and physically disconnected acceptance tests.
 - [x] Investigated the current UI, produced six redesign concepts, and recorded the user's Style 2 + Style 3 selection.

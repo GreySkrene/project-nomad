@@ -10,6 +10,7 @@ import { QueueService } from './queue_service.js'
 import { RunDownloadJob } from '#jobs/run_download_job'
 import { zimCategoriesSpecSchema, mapsSpecSchema, wikipediaSpecSchema, creatorPacksSpecSchema } from '#validators/curated_collections'
 import { isGatedResource } from '../utils/hosted_content.js'
+import { filterRejectedEmergencyResources } from '../utils/emergency_profile_catalog.js'
 import {
   ensureDirectoryExists,
   listDirectoryContents,
@@ -85,6 +86,12 @@ export class CollectionManifestService {
   async getCachedSpec<T>(type: ManifestType): Promise<T | null> {
     const manifest = await CollectionManifest.find(type)
     if (!manifest) return null
+    if (type === 'zim_categories') {
+      // The live upstream manifest is refreshed at runtime and can advertise
+      // resources this emergency profile has rejected after content auditing.
+      // Apply the profile policy at every cache read, including offline fallback.
+      return filterRejectedEmergencyResources(manifest.spec_data as ZimCategoriesSpec) as T
+    }
     return manifest.spec_data as T
   }
 

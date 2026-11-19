@@ -5,14 +5,14 @@ periods without internet or cellular service. The build favors trustworthy,
 searchable sources over collecting the largest possible archive.
 
 The profile is designed around a **100 GiB content ceiling**. Its measured
-installed target is approximately **77 GiB**:
+installed target is approximately **76 GiB**:
 
 | Content | Approximate size | Purpose |
 |---|---:|---|
-| Kiwix libraries | 38.09 GiB (20 archives) | Medicine, official preparedness, repair, gardening, food, and general reference |
+| Kiwix libraries | 36.92 GiB (18 archives) | Medicine, official preparedness, repair, gardening, food, and general reference |
 | USA/Canada/Mexico vector map | 32 GiB | Detailed offline road and terrain viewing through zoom 15 |
 | Kolibri education | 6.3 GiB | Selected science, practical-skills, and Khan Academy material |
-| Authoritative source documents | 0.7 GiB | Official emergency plans, manuals, and quick references |
+| Authoritative/source documents | 0.9 GiB | Official emergency plans, manuals, quick references, and validated medical replacements |
 
 The exact Kiwix selection, URLs, byte sizes, and rationale are stored in
 [`collections/emergency-family-library.json`](collections/emergency-family-library.json).
@@ -80,7 +80,8 @@ not automate them.
 ## Authoritative documents
 
 The local installation has a curated `official-emergency` collection containing
-44 intentional files and 3,922 indexed passages. It covers first aid, water,
+43 files and 3,921 indexed passages after cleanup, plus 82 directly browsable
+replacement documents awaiting a Manual indexing decision. It covers first aid, water,
 power outages, generator and carbon-monoxide safety, radiological incidents,
 communications, equipment, Utah, Idaho, and county hazard plans.
 
@@ -89,12 +90,13 @@ source-specific reuse terms, and public Git repositories are a poor update
 channel for emergency guidance. The manifest records what was selected and why;
 obtain current copies from the named primary agency before relying on them.
 
-The installed Kiwix profile is currently 40,900,638,382 bytes across 20 archives.
+The installed Kiwix profile is currently 39,637,891,458 bytes across 18 archives.
 Downloading successfully is only the first gate: the item-level usefulness and
 completeness review is tracked in
 [`CONTENT_AUDIT.md`](docs/emergency/CONTENT_AUDIT.md). That review has already
-identified defective or supplemental-only collections that must not be presented as
-core emergency guidance. The JSON profile records the published SHA-256 values for the two illustrated upgrades;
+removed defective LibreTexts and zimgit medical collections after validated PDF
+replacements were installed. Supplemental collections remain clearly labeled and must
+not be presented as core emergency guidance. The JSON profile records the published SHA-256 values for the two illustrated upgrades;
 the local Best of Wikipedia and Wikibooks files matched those hashes before
 their smaller superseded copies were removed.
 

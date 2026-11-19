@@ -51,15 +51,6 @@
     {
       "priority": 1,
       "category": "medical",
-      "title": "LibreTexts Medicine",
-      "filename": "libretexts.org_en_med_2025-01.zim",
-      "url": "https://download.kiwix.org/zim/libretexts/libretexts.org_en_med_2025-01.zim",
-      "size_bytes": 1192567339,
-      "why": "Detailed educational medical texts that complement concise consumer references."
-    },
-    {
-      "priority": 1,
-      "category": "medical",
       "title": "Libre Pathology",
       "filename": "librepathology_en_all_maxi_2026-09.zim",
       "url": "https://download.kiwix.org/zim/other/librepathology_en_all_maxi_2026-09.zim",
@@ -74,15 +65,6 @@
       "url": "https://download.kiwix.org/zim/zimit/irp.fas.org_en_military-medicine_2026-10.zim",
       "size_bytes": 64986090,
       "why": "Field and austere-medicine material kept as a secondary reference, not a substitute for current civilian clinical guidance."
-    },
-    {
-      "priority": 1,
-      "category": "medical",
-      "title": "OpenZIM Medicine Collection",
-      "filename": "zimgit-medicine_en_2024-08.zim",
-      "url": "https://download.kiwix.org/zim/other/zimgit-medicine_en_2024-08.zim",
-      "size_bytes": 70179585,
-      "why": "Small additional medicine collection retained for breadth and redundancy."
     },
     {
       "priority": 1,

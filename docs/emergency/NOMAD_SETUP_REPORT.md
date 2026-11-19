@@ -36,14 +36,14 @@ All ten NOMAD containers were running when checked; five reported healthy and th
 
 ## 3. Storage and downloaded content
 
-Measured logical storage under `/opt/project-nomad/storage` is approximately **77 GiB**, below the requested 100 GB ceiling:
+Measured logical storage under `/opt/project-nomad/storage` remains approximately **76 GiB**, below the requested 100 GB ceiling:
 
 | Content | Measured size/state |
 |---|---:|
-| Kiwix ZIM libraries | 20 files; 40,900,638,382 bytes (38.09 GiB) |
+| Kiwix ZIM libraries | 18 files; 39,637,891,458 bytes (36.92 GiB) |
 | Maps | about 32 GiB |
 | Kolibri Gen 2 | about 6.3 GiB |
-| RAG uploads | about 720 MiB |
+| RAG uploads / directly browsable documents | about 905 MiB after validated replacements |
 
 The detailed continental PMTiles file is 33,788,916,131 bytes and contains USA, Canada, and Mexico vector data through zoom 15. The audit retrieved detailed tiles at every primary Utah/Idaho/Mexico sample, but confirmed missing zoom 12–15 coverage in downtown Vancouver and zoom 14–15 coverage in central Burnaby. The cause was NOMAD's approximate country-buffer geometry; future extraction code is fixed, but the installed archive still needs a corrected Canada overlay or replacement. It is not satellite imagery and does not provide live closures, address search, or turn-by-turn routing.
 
@@ -53,7 +53,7 @@ No NOMAD download jobs were active or queued at the verified checkpoint. No redu
 
 ## 4. Offline libraries
 
-Kiwix contains 20 installed ZIM files, including compact complete Wikipedia, illustrated Best of Wikipedia, Wikipedia Medicine/WikiMed, MedlinePlus, NHS Medicines, CDC travel health, military medicine, LibreTexts Medicine, LibrePathology, iFixit, Ready.gov, illustrated Wikibooks, Gardenology, and selected repair, cooking, Q&A, and vehicle-maintenance references. Installed Kiwix content totals 40,900,638,382 bytes. Presence is not acceptance: `CONTENT_AUDIT.md` records confirmed completeness and usefulness defects in LibreTexts Medicine, the OpenZIM Medical Library, and other supplemental collections.
+Kiwix contains 18 installed ZIM files, including compact complete Wikipedia, illustrated Best of Wikipedia, Wikipedia Medicine/WikiMed, MedlinePlus, NHS Medicines, CDC travel health, military medicine, LibrePathology, iFixit, Ready.gov, illustrated Wikibooks, Gardenology, and selected repair, cooking, Q&A, and vehicle-maintenance references. Installed Kiwix content totals 39,637,891,458 bytes. The defective LibreTexts and zimgit-medicine archives were removed only after their replacements passed content, offline UI, and hash validation. `CONTENT_AUDIT.md` records the role and limitations of every remaining archive.
 
 The two illustrated upgrades were independently validated on 2026-11-18. Kiwix catalog metadata reports `_pictures:yes` and `_details:yes`; each local content route returns a valid redirect; and the locally computed SHA-256 values match Kiwix's published hashes:
 
@@ -64,7 +64,7 @@ Kiwix, Kolibri, NOMAD RAG, and maps are separate search interfaces. NOMAD does n
 
 ## 5. Official emergency knowledge base
 
-The `official-emergency` collection contains **44 intentional indexed files**, **3,922 chunks**, and **754,064,249 source bytes**. An exact Qdrant facet/file reconciliation found zero indexed sources missing on disk; the only physical upload without chunks is the intentionally disabled 239-byte verification artifact. It includes official medical/first-aid, water, radiological, food/power, generator/CO, radio, equipment, Utah, Idaho, county, earthquake, and Yellowstone documents.
+The existing indexed user-document set now contains **43 files**, **3,921 chunks**, and **752,215,160 source bytes** after the incomplete Legion capture and the 239-byte verification artifact were deleted. Eighty-two validated replacements are directly browsable and await a Manual indexing decision; no embedding was attempted while LM Studio is reserved. The indexed set includes official medical/first-aid, water, radiological, food/power, generator/CO, radio, equipment, Utah, Idaho, county, earthquake, and Yellowstone documents.
 
 Seven regional plans were validated as PDFs, hashed, manifested, and indexed:
 
@@ -78,13 +78,47 @@ Seven regional plans were validated as PDFs, hashed, manifested, and indexed:
 
 Original SHA-256 values are in `resources/official/SHA256SUMS.txt`. The invalid access-denied eCFR capture was quarantined and replaced by a validated official FRS XML snapshot plus an indexed family-radio quick reference.
 
+### 5A. Medical replacement transaction — 2026-11-19
+
+Three rejected/incomplete resources were replaced without using LM Studio:
+
+- Oregon State's 2025 *Anatomy & Physiology 2e* (133,118,779 bytes; 2,070
+  pages) replaces the defective LibreTexts reader. Chemical, Cellular, and Tissue
+  chapters and figure content are substantive. It remains browse-only because the
+  source's current terms prohibit LLM ingestion without permission.
+- Eighty official Hesperian/WHO PDFs (54,473,646 bytes; 1,552 pages) replace the
+  blank mixed-content zimgit medical bundle. All files and all pages were extraction-
+  audited. Hesperian works are labeled austere supplements; WHO/current official
+  clinical guidance takes precedence.
+- A complete Lenovo-authored 40-page Legion Go 8APU1 guide replaces the six-page
+  interactive landing-page capture. Lenovo's support record identifies the guide;
+  the copy was retrieved from a mirror after the official download blocked automation.
+
+NOMAD's own file-download endpoint returned exact SHA-256 matches for the anatomy
+text, Legion guide, a first-aid chapter, and WHO quick cards. Only then were the two
+defective ZIMs (1,262,746,924 bytes total) and incomplete Legion capture removed.
+The 80-file source/hash/license ledger is `MEDICAL_REPLACEMENT_FILES.csv`.
+
+The replacement files are visible in the Document Library with Manual ingest state;
+no embedding model is required to open or download them. A sync defect was also fixed:
+bundled NOMAD docs previously bypassed Manual mode and silently queued jobs while the
+API reported `filesQueued: 0`. After deploying the correction, a live sync showed zero
+active jobs before and after and reported `filesQueued: 0`. LM Studio was not started,
+queried, loaded, or unloaded during this work.
+
+Cleanup also exposed Qdrant facet tombstones: deleted sources remained as facet labels
+with a count of zero, causing NOMAD to claim it had purged the same three orphans on
+every sync. The scanner now ignores zero-count facet hits and deletion requests wait
+for Qdrant completion. Two consecutive live syncs now report simply “already in sync,”
+with `filesQueued: 0` and no active jobs.
+
 ## 6. Equipment library
 
 Completed and indexed packets:
 
 - Jackery Explorer 600 v2 / JE-600A official manual and quick reference
-- Lenovo Legion Go 8APU1 PSREF and offline-power reference; the saved six-page
-  "user guide" is an incomplete interactive-page capture and needs replacement
+- Lenovo Legion Go 8APU1 complete 40-page Lenovo-authored user guide, PSREF, and
+  offline-power reference; the incomplete six-page capture was removed
 - Midland ER10VP official material and quick reference
 - General official butane, battery, generator, carbon-monoxide, and maintenance guidance
 
@@ -94,7 +128,7 @@ Exact manuals remain blocked on model/ownership confirmation for the butane stov
 
 Locally installed models include Qwen3 4B/8B variants, Gemma 4 variants, Granite 4.1 8B, Qwen VL, and Nomic Embed Text v1.5. LM Link also exposes models on two larger peers when those machines are available.
 
-The local RAG import failure was traced to two verified conditions: LM Studio listened only on Windows loopback, which the WSL container could not reach, and the installed Nomic model was not loaded under NOMAD's expected identifier. A direct embedding request later returned a 768-dimension vector, and the 44-file queue completed. On 2026-11-14, NOMAD's LM Studio integration was deliberately paused so LM Studio can be used by a separate project. The NOMAD-local Qwen and Nomic models were unloaded; the user's remote LM Link model was left untouched.
+The earlier local RAG import failure was traced to two verified conditions: LM Studio listened only on Windows loopback, which the WSL container could not reach, and the installed Nomic model was not loaded under NOMAD's expected identifier. A direct embedding request later returned a 768-dimension vector, and the original queue completed. On 2026-11-14, NOMAD's LM Studio integration was deliberately paused so LM Studio can be used by a separate project. The NOMAD-local Qwen and Nomic models were unloaded; the user's remote LM Link model was left untouched.
 
 `launcher/NOMAD Launcher.exe` provides Start, Open, status, and Stop Everything. It keeps WSL alive while open. Its LM Studio controls are disabled, and Start/Stop explicitly leave the LM Studio server and every local or LM Link model untouched. The rebuilt executable has the NOMAD application icon. Windows may require unpinning and re-pinning the taskbar item to refresh the cached icon.
 
@@ -134,6 +168,12 @@ NOMAD citations identify the stored title/file/path. PDF page numbers are not pr
 On 2026-11-16 the selected Night Operations + Field Manual interface was compiled into the local Docker image `project-nomad-local:night-manual-20261116` and assigned only to the `admin` service. The existing MySQL database, Redis, storage mount, Kiwix, Kolibri, maps, Qdrant, FlatNotes, and downloaded content were not replaced.
 
 The upgraded interface provides a compact dark operations header, responsive command tiles, Night Ops as the default for new browsers, a retained Day Ops toggle, paper-style documentation panels, and clearer source-record styling. Because NOMAD AI is paused and did not pass safety acceptance, the dashboard no longer offers an actionable AI tile or floating chat button; it shows a disabled status card instead.
+
+On 2026-11-19 the same pinned local image was rebuilt with a **Document Library**
+dashboard tile. It opens stored source files directly and explicitly states that AI
+indexing is optional, so the emergency document workflow remains usable while LM
+Studio is reserved for another project. The production build and TypeScript check
+passed, and the deployed Manual-ingest sync regression check queued zero jobs.
 
 The production Docker build completed its Vite and TypeScript compilation. Live HTTP checks returned 200 for the home page, maps, documentation, Kiwix, and Kolibri; `/api/health` returned `{"status":"ok"}`. Rendered browser QA was performed for both the dashboard and Field Manual documentation in dark mode. A rollback copy of the prior Compose file is stored at `/opt/project-nomad/compose.yml.pre-night-manual-20261116`.
 
