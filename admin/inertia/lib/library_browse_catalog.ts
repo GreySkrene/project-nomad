@@ -18,6 +18,13 @@ export type BrowseProfile = {
   priority: number
 }
 
+export type ReaderDetails = {
+  format: string
+  visualCoverage: string
+  presentation: string
+  entryPath?: string
+}
+
 export type DocumentBrowseSet = {
   id: string
   title: string
@@ -250,6 +257,56 @@ export function displayTitle(file: ZimFileWithMetadata): string {
   if (file.name.includes('wikipedia_en_medicine')) return 'Wikipedia Medicine'
   if (file.name.includes('gardenology.org_en_all')) return 'Gardenology plant encyclopedia'
   return file.title || file.name.replace(/\.zim$/i, '').replaceAll('_', ' ')
+}
+
+/**
+ * Explain what opens after leaving NOMAD's curated library surface. Kiwix serves
+ * the original archived HTML and CSS, so naming that reader is more honest than
+ * making every collection look as though it has one uniform NOMAD document view.
+ */
+export function readerDetails(file: ZimFileWithMetadata): ReaderDetails {
+  const name = file.name.toLowerCase()
+  let format = 'Archived reference site'
+  let presentation = 'Original archived site layout'
+  let entryPath: string | undefined
+
+  if (name.includes('stackexchange.com')) {
+    format = 'Community Q&A archive'
+  } else if (name.includes('ifixit')) {
+    format = 'Step-by-step repair manuals'
+  } else if (name.includes('wikipedia_en_all_mini')) {
+    format = 'Compact encyclopedia'
+    presentation = 'Original Wikipedia article layout'
+    // The archive metadata currently points at an obscure user page. The real
+    // Main Page is present and is a substantially better browse entry point.
+    entryPath = 'Main_Page'
+  } else if (name.includes('wikipedia') || name.includes('gardenology')) {
+    format = 'Illustrated encyclopedia'
+    presentation = 'Original wiki article layout'
+  } else if (name.includes('wikibooks')) {
+    format = 'Chapter-based open textbooks'
+    presentation = 'Original Wikibooks chapter layout'
+  } else if (name.includes('foss.cooking')) {
+    format = 'Recipe collection'
+  } else if (name.includes('medlineplus') || name.includes('nhs.uk')) {
+    format = 'Consumer health reference'
+  } else if (name.includes('ready.gov') || name.includes('cdc.gov')) {
+    format = 'Official guidance archive'
+  } else if (name.includes('librepathology')) {
+    format = 'Clinical study reference'
+    presentation = 'Original wiki article layout'
+  } else if (name.includes('irp.fas.org')) {
+    format = 'Military medical document index'
+  }
+
+  let visualCoverage = 'Text-first collection'
+  if (name.includes('_mini_')) {
+    visualCoverage = 'Limited images to save space'
+  } else if ((file.media_count ?? 0) > 0) {
+    visualCoverage = 'Offline images or media included'
+  }
+
+  return { format, visualCoverage, presentation, entryPath }
 }
 
 export function formatBytes(bytes: number | null): string {

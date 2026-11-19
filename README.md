@@ -27,6 +27,10 @@ Project NOMAD is a self-contained, offline-first knowledge and education server 
 > The [content audit](docs/emergency/CONTENT_AUDIT.md) records what is genuinely
 > useful, supplemental, incomplete, replaced, or defective; downloaded does not
 > automatically mean accepted. Rejected resources stay out of the public profile.
+> The model-independent Browse Library groups the installed sources by practical
+> need, shows summaries and honest format limitations, and links to the original
+> offline reader. The [reader presentation audit](docs/emergency/READER_PRESENTATION_AUDIT.md)
+> records the live entry-page check for every installed Kiwix archive.
 
 ![Night Operations emergency dashboard](docs/emergency/images/ui-upgrade-live-final.png)
 

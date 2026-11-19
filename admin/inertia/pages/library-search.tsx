@@ -20,6 +20,7 @@ import {
   formatBytes,
   groupDocumentsForBrowse,
   LIBRARY_CATEGORIES,
+  readerDetails,
   type LibraryCategory,
 } from '~/lib/library_browse_catalog'
 import { getServiceLink } from '~/lib/navigation'
@@ -415,7 +416,11 @@ export default function LibrarySearch({ kiwixService }: { kiwixService: ServiceS
               <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
                 {visibleLibraries.map((file) => {
                   const profile = browseProfile(file)
+                  const reader = readerDetails(file)
                   const sourceId = sourceName(file.name)
+                  const browseHref = reader.entryPath
+                    ? articleUrl(kiwixBase, sourceId, reader.entryPath)
+                    : `${kiwixBase}/content/${encodeURIComponent(sourceId)}/`
                   return (
                     <article
                       key={file.name}
@@ -457,6 +462,20 @@ export default function LibrarySearch({ kiwixService }: { kiwixService: ServiceS
                         <p className="text-sm leading-6 text-text-secondary">
                           {profile.description}
                         </p>
+                        <dl className="mt-4 grid gap-2 rounded-lg border border-border-default bg-surface-secondary p-3 text-xs sm:grid-cols-2">
+                          <div>
+                            <dt className="font-semibold uppercase tracking-wide text-text-muted">
+                              Reader format
+                            </dt>
+                            <dd className="mt-1 text-text-secondary">{reader.format}</dd>
+                          </div>
+                          <div>
+                            <dt className="font-semibold uppercase tracking-wide text-text-muted">
+                              Visual coverage
+                            </dt>
+                            <dd className="mt-1 text-text-secondary">{reader.visualCoverage}</dd>
+                          </div>
+                        </dl>
                         <div className="mt-4 flex flex-wrap gap-1.5">
                           {profile.topics.map((topic) => (
                             <span
@@ -493,7 +512,8 @@ export default function LibrarySearch({ kiwixService }: { kiwixService: ServiceS
                         )}
                         <div className="mt-auto flex gap-2 pt-5">
                           <a
-                            href={`${kiwixBase}/content/${encodeURIComponent(sourceId)}/`}
+                            href={browseHref}
+                            title={`Opens in Kiwix using the ${reader.presentation.toLowerCase()}`}
                             className="inline-flex items-center gap-1.5 rounded-lg bg-desert-green px-3 py-2 text-sm font-semibold text-white"
                           >
                             Browse contents <IconExternalLink size={14} />

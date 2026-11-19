@@ -6,6 +6,7 @@ import {
   displayTitle,
   formatBytes,
   groupDocumentsForBrowse,
+  readerDetails,
 } from '../../inertia/lib/library_browse_catalog.js'
 import type { StoredFileInfo } from '../../types/rag.js'
 import type { ZimFileWithMetadata } from '../../types/zim.js'
@@ -60,6 +61,24 @@ test('uses known friendly titles and preserves unknown ZIM metadata', () => {
 test('formats installed resource sizes for scanning', () => {
   assert.equal(formatBytes(null), 'Size unavailable')
   assert.equal(formatBytes(1024 ** 3), '1.0 GB')
+})
+
+test('describes the real offline reader and repairs the compact Wikipedia entry point', () => {
+  const compactWikipedia = readerDetails(
+    zim('wikipedia_en_all_mini_2026-06.zim', { media_count: 33777 })
+  )
+  assert.equal(compactWikipedia.format, 'Compact encyclopedia')
+  assert.equal(compactWikipedia.visualCoverage, 'Limited images to save space')
+  assert.equal(compactWikipedia.entryPath, 'Main_Page')
+
+  const repair = readerDetails(zim('ifixit_en_all_2025-12.zim', { media_count: 575002 }))
+  assert.equal(repair.format, 'Step-by-step repair manuals')
+  assert.equal(repair.visualCoverage, 'Offline images or media included')
+
+  assert.equal(
+    readerDetails(zim('gardening.stackexchange.com_en_all_2026-10.zim')).format,
+    'Community Q&A archive'
+  )
 })
 
 function document(fileName: string): StoredFileInfo {

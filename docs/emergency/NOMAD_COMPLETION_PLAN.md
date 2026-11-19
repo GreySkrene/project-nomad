@@ -143,14 +143,19 @@ the separate project. Content and UI validation do not require local generation.
 - [x] Add and deploy a model-independent Browse Library: need-based categories,
   honest source-format notes, common-search shortcuts, real offline Kiwix cover/
   article/media metadata, and 13 useful document sets with direct original-file access.
-- [ ] Perform hands-on user review and collect any layout/content refinements.
-- [ ] After content acceptance, inspect the presentation of every installed resource
+- [x] Perform hands-on user review and collect any layout/content refinements; the
+  Browse Library was reviewed and accepted on 2026-11-19.
+- [-] After content acceptance, inspect the presentation of every installed resource
   in its real offline reader. Improve collection landing pages, backgrounds,
   typography, spacing, chapter navigation, image treatment, and quick-reference
-  formatting to match Night Operations + Field Manual where technically safe.
-- [ ] Document which presentation layers NOMAD controls directly versus Kiwix,
+  formatting to match Night Operations + Field Manual where technically safe. All
+  18 Kiwix entry pages return 200; seven representative reader families were
+  render-inspected; NOMAD now labels reader/visual formats and repairs compact
+  Wikipedia's poor default entry point. Original source CSS remains unchanged.
+- [x] Document which presentation layers NOMAD controls directly versus Kiwix,
   Kolibri, embedded PDFs, and archived-site CSS; prefer maintainable theme adapters
-  and per-source fixes over modifying original authoritative content.
+  and per-source fixes over modifying original authoritative content. See
+  `READER_PRESENTATION_AUDIT.md`.
 
 ## K. Public, reproducible personal-project fork
 
@@ -191,6 +196,9 @@ the separate project. Content and UI validation do not require local generation.
 - [x] Replaced the search-only information lookup with Browse + Search views. Live
   verification: 18/18 Kiwix archives expose titles, covers, and media metadata;
   125 saved documents are available to the browse UI; original-file download returned 200.
+- [x] Audited the real entry page for all 18 installed Kiwix archives (18/18 HTTP
+  200), visually checked seven representative reader families, added reader-format
+  and visual-coverage cues, and repaired the compact Wikipedia browse landing page.
 - [ ] After replacements: confirm exact models for equipment manuals still marked
   `[!]`, then perform reboot and physically disconnected acceptance tests.
 - [x] Investigated the current UI, produced six redesign concepts, and recorded the user's Style 2 + Style 3 selection.
