@@ -30,10 +30,13 @@ download and show the exact deletion target before deleting data.
    automation). All pages are readable and the 65 W charging, battery, Quiet 8 W, and
    troubleshooting sections were verified. The six-page landing-page capture was
    removed after the replacement passed offline UI download/hash validation.
-4. [ ] **Canada detailed map repair** — build a corrected Canada overlay or continental
-   replacement using the fixed extraction geometry. Verify zoom-15 Vancouver and
-   Burnaby tiles plus the existing Utah/Idaho/Mexico samples before removing the
-   current 33,788,916,131-byte map. This is a large download and requires approval.
+4. [~] **Canada detailed map repair** — a Canada-only zoom-15 overlay from the
+   2026-11-18 Protomaps build is actively extracting as
+   `ca_20261118_z15.pmtiles` (preflight: 49,946,872 tiles / about 16 GB). The first
+   attempt was interrupted when the admin container was redeployed for the search
+   fix; its staging file was safely discarded and the job was restarted after the
+   final deployment. The existing 33,788,916,131-byte continental map remains
+   installed. Completion still requires Vancouver/Burnaby and regression samples.
 5. [ ] **Supplemental/noise review** — decide whether Gardening Stack Exchange and the
    other Q&A archives earn their storage after coherent replacements are in place.
    They are labeled supplemental, not core. Remove only with explicit target review.
@@ -73,7 +76,13 @@ the separate project. Content and UI validation do not require local generation.
 - [x] Audit official material for Davis and Weber counties; add the current published Davis plan and Weber 2024 plan.
 - [x] Audit official material for Marysvale and Piute County; add the Six County 2020 plan plus state hazard material.
 - [x] Audit official material for Rexburg and Madison County; add the Madison County 2019 plan and Idaho 2023 state plan.
-- [ ] Add official corridor, flood, wildfire, landslide, earthquake, liquefaction, and evacuation-planning documents that are genuinely downloadable.
+- [~] Add official corridor, flood, wildfire, landslide, earthquake, liquefaction,
+  and evacuation-planning documents that are genuinely downloadable. Added and
+  hash-validated the official Idaho highway map, ITD I-15 eastern Idaho corridor
+  fact sheet, and 2026 Davis County wildfire evacuation presentation. They remain
+  live Document Library as browseable `pending_decision` originals. Manual sync
+  queued zero embedding jobs, so LM Studio remained untouched and indexing is
+  deliberately deferred.
 - [x] Label live-only road, fire, evacuation, volcano, weather, outbreak, recall,
   and contamination information clearly on the offline library and map surfaces.
 
@@ -115,7 +124,9 @@ the separate project. Content and UI validation do not require local generation.
 - [!] USA, Canada, and Mexico vector map is valid and detailed through zoom 15 in sampled target areas, but Vancouver/Burnaby detailed tiles are missing from the existing extract.
 - [x] Confirm separate Mountain-region download is redundant; no active duplicate job exists.
 - [x] Programmatically retrieve offline zoom-15 tiles for West Jordan, Riverton, Ogden, Marysvale, Rexburg, both travel corridors, representative Canada, and Mexico locations; final visual disconnected test remains in section H.
-- [x] Fix future country extracts to retain original land geometry alongside the coastal buffer; regression test passes. Existing archive still needs a corrected Canada overlay/replacement.
+- [x] Fix country extracts to retain original land geometry alongside the coastal
+  buffer; regression test passes. A corrected Canada overlay is actively extracting;
+  the existing archive remains installed until the overlay passes coverage checks.
 - [ ] Select a separate offline routing/address-search application if desired.
 - [ ] Keep satellite imagery optional; NOMAD's current map interface has no satellite layer.
 
@@ -200,6 +211,13 @@ the separate project. Content and UI validation do not require local generation.
 - [x] Audited the real entry page for all 18 installed Kiwix archives (18/18 HTTP
   200), visually checked seven representative reader families, added reader-format
   and visual-coverage cues, and repaired the compact Wikipedia browse landing page.
+- [x] Fixed the unsafe single-archive title-search default. Search now queries every
+  installed Kiwix archive, ranks literal medical/title matches first, limits source
+  crowding, labels each result's source, and survives an individual archive failure.
+  A headless live regression for `splint` returned WikiMed's `Splint (medical)` and
+  MedlinePlus's `How to make a splint` instead of the previous unrelated Best-of-
+  Wikipedia names. Ten focused tests, TypeScript, formatting, production build,
+  health check, and live browser behavior passed.
 - [ ] After replacements: confirm exact models for equipment manuals still marked
   `[!]`, then perform reboot and physically disconnected acceptance tests.
 - [x] Investigated the current UI, produced six redesign concepts, and recorded the user's Style 2 + Style 3 selection.

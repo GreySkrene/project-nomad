@@ -178,8 +178,9 @@ sample. Small targeted emergency collections receive a substantially deeper revi
   Seattle have detailed tiles. Canada therefore cannot yet be called complete. Root
   cause was reproduced in `CountriesService`: the approximate coastal buffer excluded
   Vancouver/Burnaby even though the original Canada polygon contains them. Region
-  generation now retains both original and buffered geometry, with a regression test;
-  the already-downloaded archive still needs a corrected Canada extract or replacement.
+  generation now retains both original and buffered geometry, with a regression test.
+  A corrected Canada-only zoom-15 overlay from the 2026-11-18 source build is actively
+  extracting; the original continental archive remains installed until validation.
 - [x] `world.pmtiles` — valid PMTiles v3 low-detail world overview through zoom 5.
   All 17 sampled North American locations returned tiles. Keep it as a small global
   fallback and low-zoom base; it does not replace street-level coverage.
@@ -223,7 +224,17 @@ from each media type remains part of the final disconnected acceptance test.
 
 ## Authoritative documents and equipment files
 
-- [x] The live summary inventory is `CONTENT_INVENTORY.csv` (76 rows). The 80 new
+- [x] Added three official regional originals on 2026-11-19: the current ITD-linked
+  Idaho highway-map file, ITD's two-page eastern Idaho I-15 corridor fact sheet, and
+  Davis County's 2026 wildfire evacuation-zone presentation. All have valid PDF
+  headers/EOF markers and recorded SHA-256 hashes. The highway map is image-based;
+  the corridor sheet is an older static reference; evacuation orders, closures, and
+  conditions must always be verified live when communications are available.
+- [x] These three originals are registered in the live Document Library as
+  `pending_decision`; all three download endpoints return HTTP 200. Manual-mode
+  sync queued zero embedding jobs, so LM Studio remained untouched.
+
+- [x] The live summary inventory is `CONTENT_INVENTORY.csv` (79 rows). The 80 new
   chapter-level medical files are individually recorded in
   `MEDICAL_REPLACEMENT_FILES.csv`, rather than collapsed into an unreviewable label.
 - [x] The 239-byte `verification-rag.txt` test artifact and its vector were deleted

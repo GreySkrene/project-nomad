@@ -57,10 +57,17 @@ from Git; the script and reproducibility metadata are public.
 
 The installed content target is approximately 77 GiB, including a detailed
 USA/Canada/Mexico vector map. A 2026-11-19 audit found missing high-zoom tiles
-around Vancouver/Burnaby; future extraction code is fixed, but the installed
-archive still needs a corrected Canada overlay. Safety-critical answers
+around Vancouver/Burnaby; extraction geometry is fixed and a corrected Canada-only
+zoom-15 overlay is currently downloading while the original map remains installed.
+Safety-critical answers
 prioritize original official sources; local AI is optional and is not treated
 as an authority.
+
+The Information Lookup page now searches article titles across every installed
+Kiwix archive by default, labels the source, favors literal and medical matches,
+and limits one archive from crowding out the rest. The regression query `splint`
+is covered by automated tests and a deployed browser test against WikiMed and
+MedlinePlus.
 
 ## Installation & Quickstart
 Project NOMAD can be installed on any Debian-based operating system (we recommend Ubuntu 26.04 LTS; 24.04 LTS and Debian 12 are also supported). Installation is completely terminal-based, and all tools and resources are designed to be accessed through the browser, so there's no need for a desktop environment if you'd rather setup NOMAD as a "server" and access it through other clients.

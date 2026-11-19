@@ -25,6 +25,7 @@ import {
   type LibraryCategory,
 } from '~/lib/library_browse_catalog'
 import { getServiceLink } from '~/lib/navigation'
+import { selectDiverseTitleSuggestions } from '~/lib/library_search_rank'
 import type { StoredFileInfo } from '../../types/rag'
 import type { ServiceSlim } from '../../types/services'
 import type { ZimFileWithMetadata } from '../../types/zim'
@@ -34,6 +35,8 @@ type KiwixSuggestion = {
   label: string
   kind: 'path' | 'pattern'
   path?: string
+  source: string
+  sourceTitle: string
 }
 
 type ViewMode = 'browse' | 'search'
@@ -58,7 +61,7 @@ function friendlyDocumentName(fileName: string) {
 export default function LibrarySearch({ kiwixService }: { kiwixService: ServiceSlim | null }) {
   const [view, setView] = useState<ViewMode>('browse')
   const [query, setQuery] = useState('')
-  const [source, setSource] = useState('')
+  const [source, setSource] = useState('all')
   const [libraries, setLibraries] = useState<ZimFileWithMetadata[]>([])
   const [documents, setDocuments] = useState<StoredFileInfo[]>([])
   const [category, setCategory] = useState<'All' | LibraryCategory>('All')
@@ -66,9 +69,10 @@ export default function LibrarySearch({ kiwixService }: { kiwixService: ServiceS
   const [expandedCollections, setExpandedCollections] = useState<Set<string>>(new Set())
   const [suggestions, setSuggestions] = useState<KiwixSuggestion[]>([])
   const [correctedFrom, setCorrectedFrom] = useState<string | null>(null)
-  const [status, setStatus] = useState('Start typing to find article titles.')
+  const [status, setStatus] = useState('Searches article titles across every installed library.')
   const [loading, setLoading] = useState(false)
   const searchInput = useRef<HTMLInputElement>(null)
+  const searchRequest = useRef(0)
 
   const kiwixBase = useMemo(
     () =>
@@ -88,8 +92,6 @@ export default function LibrarySearch({ kiwixService }: { kiwixService: ServiceS
         )
       })
       setLibraries(ordered)
-      const preferred = ordered.find((file) => file.name.includes('wikipedia_en_top_maxi'))
-      setSource((current) => current || sourceName(preferred?.name || ordered[0]?.name || 'all'))
     })
 
     api.getStoredRAGFiles().then((files) => setDocuments(files || []))
@@ -118,24 +120,57 @@ export default function LibrarySearch({ kiwixService }: { kiwixService: ServiceS
 
   async function lookupTitles(term: string, selectedSource = source) {
     const trimmed = term.trim()
-    if (!trimmed || !kiwixBase || !selectedSource || selectedSource === 'all') {
+    const requestId = ++searchRequest.current
+    if (!trimmed || !kiwixBase || !selectedSource) {
       setSuggestions([])
       return []
     }
-    const url = new URL('/suggest', kiwixBase)
-    url.searchParams.set('content', selectedSource)
-    url.searchParams.set('term', trimmed)
-    url.searchParams.set('count', '12')
-    const response = await fetch(url)
-    if (!response.ok) throw new Error(`Kiwix title search returned ${response.status}`)
-    const results = (await response.json()) as KiwixSuggestion[]
-    const paths = results.filter((result) => result.kind === 'path' && result.path)
-    setSuggestions(paths)
+
+    async function fromLibrary(file: ZimFileWithMetadata) {
+      const librarySource = sourceName(file.name)
+      const url = new URL('/suggest', kiwixBase)
+      url.searchParams.set('content', librarySource)
+      url.searchParams.set('term', trimmed)
+      url.searchParams.set('count', selectedSource === 'all' ? '8' : '12')
+      const response = await fetch(url)
+      if (!response.ok) throw new Error(`Kiwix title search returned ${response.status}`)
+      const results = (await response.json()) as Array<
+        Omit<KiwixSuggestion, 'source' | 'sourceTitle'>
+      >
+      return results
+        .filter((result) => result.kind === 'path' && result.path)
+        .map((result) => ({
+          ...result,
+          source: librarySource,
+          sourceTitle: displayTitle(file),
+        }))
+    }
+
+    const selectedLibraries =
+      selectedSource === 'all'
+        ? libraries
+        : libraries.filter((file) => sourceName(file.name) === selectedSource)
+    const settled = await Promise.allSettled(selectedLibraries.map(fromLibrary))
+    const successful = settled.filter((result) => result.status === 'fulfilled')
+    if (successful.length === 0 && selectedLibraries.length > 0) {
+      throw new Error('Every Kiwix title search failed')
+    }
+    const combined = successful.flatMap((result) => result.value)
+    const seen = new Set<string>()
+    const unique = combined.filter((result) => {
+      const key = `${result.source}\0${result.value.toLocaleLowerCase()}`
+      if (seen.has(key)) return false
+      seen.add(key)
+      return true
+    })
+    const paths = selectDiverseTitleSuggestions(trimmed, unique)
+    if (requestId === searchRequest.current) setSuggestions(paths)
     return paths
   }
 
   useEffect(() => {
-    if (view !== 'search' || !query.trim() || !source || source === 'all') {
+    searchRequest.current += 1
+    if (view !== 'search' || !query.trim() || !source) {
       setSuggestions([])
       return
     }
@@ -143,10 +178,10 @@ export default function LibrarySearch({ kiwixService }: { kiwixService: ServiceS
       lookupTitles(query).catch(() => setStatus('Title suggestions are temporarily unavailable.'))
     }, 180)
     return () => window.clearTimeout(timer)
-  }, [query, source, kiwixBase, view])
+  }, [query, source, kiwixBase, view, libraries])
 
   function openArticle(result: KiwixSuggestion) {
-    if (result.path) window.location.href = articleUrl(kiwixBase, source, result.path)
+    if (result.path) window.location.href = articleUrl(kiwixBase, result.source, result.path)
   }
 
   function openFullText(term = query, selectedSource = source) {
@@ -176,7 +211,7 @@ export default function LibrarySearch({ kiwixService }: { kiwixService: ServiceS
       const exact = titleResults.find(
         (result) => result.value.toLowerCase() === original.toLowerCase()
       )
-      if (exact) return openArticle(exact)
+      if (exact && source !== 'all') return openArticle(exact)
 
       const response = await fetch(`/api/library-search/spelling?q=${encodeURIComponent(original)}`)
       const spelling = (await response.json()) as { suggestion: string | null }
@@ -295,12 +330,12 @@ export default function LibrarySearch({ kiwixService }: { kiwixService: ServiceS
                 }}
                 className="w-full rounded-lg border border-border-default bg-surface-secondary px-4 py-3 text-text-primary focus:border-desert-green focus:outline-none"
               >
+                <option value="all">All installed article libraries</option>
                 {libraries.map((file) => (
                   <option key={file.name} value={sourceName(file.name)}>
                     {displayTitle(file)}
                   </option>
                 ))}
-                <option value="all">All installed article libraries — full text only</option>
               </select>
 
               <label className="block text-sm font-medium" htmlFor="library-query">
@@ -354,13 +389,15 @@ export default function LibrarySearch({ kiwixService }: { kiwixService: ServiceS
               <div className="mt-4 grid gap-2 sm:grid-cols-2">
                 {suggestions.map((result) => (
                   <button
-                    key={`${result.path}-${result.value}`}
+                    key={`${result.source}-${result.path}-${result.value}`}
                     type="button"
                     onClick={() => openArticle(result)}
                     className="rounded-lg border border-border-default bg-surface-secondary px-4 py-3 text-left hover:border-desert-green hover:bg-surface-tertiary"
                   >
                     <span className="font-medium">{result.value}</span>
-                    <span className="mt-1 block text-xs text-text-muted">Open article</span>
+                    <span className="mt-1 block text-xs text-text-muted">
+                      {result.sourceTitle} · Open article
+                    </span>
                   </button>
                 ))}
               </div>
