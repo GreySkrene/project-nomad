@@ -132,7 +132,62 @@ the separate project. Content and UI validation do not require local generation.
   CDN connection resets, so the completed British Columbia overlay was verified with
   exact Vancouver, Burnaby, Victoria, and Kelowna zoom-15 tile reads. The original
   archive remains installed for continental coverage.
-- [ ] Select a separate offline routing/address-search application if desired.
+- [x] Investigate offline routing feasibility. NOMAD already has persistent pins,
+  coordinate entry, MapLibre route-display capability, and local APIs, but PMTiles
+  are rendering tiles rather than a connected routing graph. A separate local routing
+  engine and separate address index are therefore required. Valhalla is the preferred
+  engine because its run-time costing supports driving/walking/cycling, alternatives,
+  turn instructions, and preferences for highways, tolls, ferries, tracks, and
+  unpaved roads without rebuilding a profile for each request.
+- [ ] **Routing phase 1 — bounded proof of concept (no large download without
+  approval):** preflight current free space and estimate the Utah + Idaho OSM PBF,
+  Valhalla graph, temporary build space, container image, and update headroom. Keep
+  the installed library under the requested 100 GB ceiling and preserve enough free
+  disk for Windows/Docker operation.
+- [ ] Add Valhalla as an optional, local-only Docker service with pinned image/version,
+  persistent routing-data storage, health check, restart policy, and a documented
+  start/stop path through the NOMAD launcher. It must not require internet after its
+  data build and must not run the GPU or LM Studio.
+- [ ] Build and integrity-check a Utah + Idaho routing graph first. Confirm routes for
+  West Jordan/Riverton to Marysvale and Salt Lake Valley to Rexburg, including a route
+  that crosses the state boundary. Record source date, PBF bytes, graph bytes, build
+  duration, peak RAM, and idle/query power impact before expanding coverage.
+- [ ] Add validated backend proxy endpoints for route requests and routing health.
+  Limit coordinates, waypoint counts, route length, timeouts, and accepted options;
+  keep the routing container private to NOMAD's Docker network rather than exposing
+  it directly to the LAN.
+- [ ] Add a map route planner that can choose saved pins, clicked points, or entered
+  coordinates as start/destination/waypoints. Draw the selected and alternate routes,
+  fit the map to the result, and show distance, estimated time, and a readable
+  turn-by-turn list.
+- [ ] Add route modes and controls: driving, walking, cycling; fastest versus shorter;
+  avoid/prefer highways; avoid tolls, ferries, unpaved roads, and tracks. Label
+  avoidance settings as preferences rather than guarantees and explain when no route
+  is available within the installed graph.
+- [ ] Make routes useful during outages: save named routes and route settings locally,
+  export/print directions and GPX where practical, preserve the last successful route,
+  and display the routing-data snapshot date. Never imply that the result includes
+  live closures, evacuation orders, traffic, fires, weather, or road damage.
+- [ ] **Routing phase 2 — measured regional expansion:** after the Utah/Idaho proof
+  passes, preflight a western-state graph that covers practical alternate corridors.
+  Show exact download/build/storage estimates and obtain approval before expanding.
+  Do not build all of North America while the current 100 GB ceiling applies: current
+  raw OSM extracts alone are about 18.2 GB before routing graphs and temporary files.
+- [ ] **Address-search phase 3:** evaluate a prebuilt regional Photon index first for
+  autocomplete, typo tolerance, forward address search, and reverse geocoding. Measure
+  its compressed, installed, update, RAM, and idle-power costs on this 16 GB laptop.
+  If a suitable regional index is unavailable or too large, compare a Utah/Idaho
+  Nominatim import with a deliberately limited local place/street index; do not add a
+  full-country geocoder by assumption.
+- [ ] Integrate address suggestions only after offline tests prove that house numbers,
+  streets, cities, landmarks, misspellings, duplicate place names, and out-of-coverage
+  queries behave honestly. Let a selected result become a pin or route endpoint, and
+  retain coordinate/pin routing as the reliable fallback when an address is absent.
+- [ ] Add automated tests for request validation, routing-option translation, route
+  geometry, unavailable-service behavior, no-route/out-of-region responses, and stale
+  snapshot warnings. Then perform a physically disconnected UI test, Windows reboot,
+  launcher Start/Stop test, and realistic corridor/avoid-highway comparisons before
+  marking routing dependable.
 - [ ] Keep satellite imagery optional; NOMAD's current map interface has no satellite layer.
 
 ## H. Final offline acceptance test
@@ -191,7 +246,9 @@ the separate project. Content and UI validation do not require local generation.
 ## J. Resumable checkpoint — 2026-11-19 America/Denver
 
 - [x] No NOMAD download jobs are active or queued; no duplicate map jobs needed cancellation.
-- [!] Continental map is detailed at all primary Utah/Idaho/Mexico samples, but the 2026-11-19 audit disproved full Canadian completeness at Vancouver/Burnaby; future extraction code is fixed, existing data is not yet repaired.
+- [x] Continental map is detailed at all primary Utah/Idaho/Mexico samples; the
+  Vancouver/Burnaby defect found on 2026-11-19 is repaired by the verified British
+  Columbia zoom-15 overlay.
 - [x] Seven regional plans were downloaded, PDF-signature/EOF checked, SHA-256 recorded, added to `RESOURCE_MANIFEST.csv`, and indexed.
 - [x] After cleanup the indexed user-document set contains 43 files and 3,921 chunks; 82 validated replacements are pending a Manual decision; active jobs: 0.
 - [x] The accidental `robots.txt` upload and its vector were removed through NOMAD's API.
