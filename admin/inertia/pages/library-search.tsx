@@ -3,6 +3,7 @@ import { Head, Link } from '@inertiajs/react'
 import {
   IconBook2,
   IconBooks,
+  IconClockExclamation,
   IconChevronDown,
   IconChevronUp,
   IconExternalLink,
@@ -269,6 +270,15 @@ export default function LibrarySearch({ kiwixService }: { kiwixService: ServiceS
             </button>
           ))}
         </div>
+
+        <aside className="mb-7 flex gap-3 rounded-lg border border-amber-500/40 bg-amber-500/10 px-4 py-3 text-sm">
+          <IconClockExclamation className="mt-0.5 shrink-0 text-amber-500" size={20} />
+          <p className="leading-6 text-text-secondary">
+            <strong className="text-text-primary">Stored offline snapshots:</strong> use these for
+            preparedness and background. Current road closures, evacuation orders, fires, weather,
+            outbreaks, recalls, and contamination notices still require live verification.
+          </p>
+        </aside>
 
         {view === 'search' ? (
           <section className="rounded-xl border border-border-default bg-surface-primary p-5 shadow-sm sm:p-7">

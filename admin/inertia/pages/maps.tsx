@@ -4,7 +4,13 @@ import { Head, Link, router } from '@inertiajs/react'
 import MapsLayout from '~/layouts/MapsLayout'
 import MapComponent from '~/components/maps/MapComponent'
 import StyledButton from '~/components/StyledButton'
-import { IconArrowLeft, IconCrosshair, IconMapPin, IconPlaneTilt } from '@tabler/icons-react'
+import {
+  IconAlertTriangle,
+  IconArrowLeft,
+  IconCrosshair,
+  IconMapPin,
+  IconPlaneTilt,
+} from '@tabler/icons-react'
 import { FileEntry } from '../../types/files'
 import Alert from '~/components/Alert'
 
@@ -57,10 +63,10 @@ export default function Maps(props: {
   const alertMessage = !props.maps.baseAssetsExist
     ? 'The base map assets have not been installed. Please download them first to enable map functionality.'
     : !props.maps.worldBasemapExists
-    ? 'The world base map has not been downloaded yet, so the map may appear blank outside downloaded regions. Connect this NOMAD to the internet and download it (~15 MB) from Map Settings.'
-    : props.maps.regionFiles.length === 0
-    ? 'No map regions have been downloaded yet. Please download some regions to enable map functionality.'
-    : null
+      ? 'The world base map has not been downloaded yet, so the map may appear blank outside downloaded regions. Connect this NOMAD to the internet and download it (~15 MB) from Map Settings.'
+      : props.maps.regionFiles.length === 0
+        ? 'No map regions have been downloaded yet. Please download some regions to enable map functionality.'
+        : null
 
   return (
     <MapsLayout>
@@ -96,7 +102,7 @@ export default function Maps(props: {
               className="rounded border border-border-default bg-surface-primary p-2 text-text-secondary hover:bg-surface-secondary"
               title="Fly to coordinates"
             >
-              <IconPlaneTilt size={18}/>
+              <IconPlaneTilt size={18} />
             </button>
 
             <button
@@ -105,7 +111,7 @@ export default function Maps(props: {
               className="rounded border border-border-default bg-surface-primary p-2 text-text-secondary hover:bg-surface-secondary"
               title="Add marker at coordinates"
             >
-              <IconMapPin size={18}/>
+              <IconMapPin size={18} />
             </button>
 
             <button
@@ -118,7 +124,7 @@ export default function Maps(props: {
               }`}
               title={showCoordinatesEnabled ? 'Hide coordinates' : 'Show coordinates'}
             >
-              <IconCrosshair size={18}/>
+              <IconCrosshair size={18} />
             </button>
 
             <Link href="/settings/maps" className="mr-4">
@@ -160,6 +166,22 @@ export default function Maps(props: {
             showCoordinatesEnabled={showCoordinatesEnabled}
           />
         </div>
+
+        <aside
+          className="absolute bottom-8 left-4 z-40 flex max-w-md gap-3 rounded-lg border border-amber-500/50 bg-surface-primary/95 px-4 py-3 text-sm shadow-lg backdrop-blur-sm"
+          onMouseEnter={() => setIsHoveringUI(true)}
+          onMouseLeave={() => setIsHoveringUI(false)}
+          aria-label="Offline map limitation"
+        >
+          <IconAlertTriangle className="mt-0.5 shrink-0 text-amber-500" size={20} />
+          <div>
+            <strong className="text-text-primary">Offline map snapshot</strong>
+            <p className="mt-0.5 leading-5 text-text-secondary">
+              No live road closures, evacuation orders, fires, weather, or traffic. Verify current
+              conditions by radio or local authorities when possible.
+            </p>
+          </div>
+        </aside>
       </div>
     </MapsLayout>
   )

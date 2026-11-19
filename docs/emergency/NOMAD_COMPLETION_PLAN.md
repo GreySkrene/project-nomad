@@ -74,7 +74,8 @@ the separate project. Content and UI validation do not require local generation.
 - [x] Audit official material for Marysvale and Piute County; add the Six County 2020 plan plus state hazard material.
 - [x] Audit official material for Rexburg and Madison County; add the Madison County 2019 plan and Idaho 2023 state plan.
 - [ ] Add official corridor, flood, wildfire, landslide, earthquake, liquefaction, and evacuation-planning documents that are genuinely downloadable.
-- [ ] Label live-only road, fire, evacuation, volcano, and weather information clearly.
+- [x] Label live-only road, fire, evacuation, volcano, weather, outbreak, recall,
+  and contamination information clearly on the offline library and map surfaces.
 
 ## D. Equipment library
 
