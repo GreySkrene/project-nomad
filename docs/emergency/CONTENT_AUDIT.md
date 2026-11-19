@@ -68,6 +68,14 @@ sample. Small targeted emergency collections receive a substantially deeper revi
   substantial offline text. MedlinePlus and NHS completed exhaustive scans with valid
   checksums and zero HTML read errors; WikiMed is being reviewed through Kiwix because
   direct node-libzim enumeration destabilized WSL.
+- [x] **Splint/basic fracture discoverability** — the content was not absent: local
+  title searches found MedlinePlus's *How to make a splint*, WikiMed's *Splint
+  (medical)* and related splint entries, complete compact Wikipedia's medical splint
+  entries, and Wikibooks first-aid splint chapters. The observed failure came from the
+  UI defaulting to illustrated Best of Wikipedia, whose matching titles were
+  irrelevant. The deployed all-archive search now ranks the medical and task-oriented
+  results first. Missing core guidance and present-but-undiscoverable core guidance
+  are both classified as critical audit failures.
 - [!] **Military Medicine** — the archive opens, but its landing page is a historical
   list dominated by 1957–2007 military manuals (including 1957 bandaging/splinting,
   1970 emergency childbirth, and a 1982 Special Forces handbook). Keep only as clearly
@@ -168,7 +176,9 @@ sample. Small targeted emergency collections receive a substantially deeper revi
 
 ## Maps
 
-- [!] `custom-ea2908b0_20261106_z15.pmtiles` — valid PMTiles v3 vector archive with
+- [x] `custom-ea2908b0_20261106_z15.pmtiles` plus
+  `ca-british-columbia_20261118_z15.pmtiles` — the original is a valid PMTiles v3
+  vector archive with
   71,881,331 addressed tiles, nine vector layers, and source data timestamped
   2026-11-06. Zoom-15 tiles were retrieved for West Jordan, Riverton, Ogden,
   Marysvale, Rexburg, both sampled travel corridors, Toronto, Mexico City, and most
@@ -179,13 +189,20 @@ sample. Small targeted emergency collections receive a substantially deeper revi
   cause was reproduced in `CountriesService`: the approximate coastal buffer excluded
   Vancouver/Burnaby even though the original Canada polygon contains them. Region
   generation now retains both original and buffered geometry, with a regression test.
-  A corrected Canada-only zoom-15 overlay from the 2026-11-18 source build is actively
-  extracting; the original continental archive remains installed until validation.
+  Repeated nationwide repairs failed at different progress points because the source
+  CDN reset range-request connections. Since exact zoom-15 samples elsewhere in Canada
+  already passed, a targeted British Columbia overlay was extracted instead. It is
+  2,617,262,221 bytes, PMTiles verification passed, and exact zoom-15 reads passed for
+  Vancouver (75,205 bytes), Burnaby (18,272), Victoria (54,861), and Kelowna (28,961).
+  NOMAD's live style references the overlay, its HTTP endpoint supports byte ranges,
+  and no download jobs remain active. The source OSM replication timestamp is
+  2026-11-18T04:00:00Z.
 - [x] `world.pmtiles` — valid PMTiles v3 low-detail world overview through zoom 5.
   All 17 sampled North American locations returned tiles. Keep it as a small global
   fallback and low-zoom base; it does not replace street-level coverage.
 
-Map evidence: `evidence/content-audit-maps.json`. These are OpenStreetMap-derived
+Map evidence: `evidence/content-audit-maps.json` and
+`evidence/british-columbia-map-repair.json`. These are OpenStreetMap-derived
 vector maps, not satellite imagery. NOMAD currently provides offline display/pan/zoom,
 not live closures, live incidents, address search, or turn-by-turn routing.
 

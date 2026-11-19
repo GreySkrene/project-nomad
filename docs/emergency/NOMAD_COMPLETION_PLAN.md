@@ -30,13 +30,14 @@ download and show the exact deletion target before deleting data.
    automation). All pages are readable and the 65 W charging, battery, Quiet 8 W, and
    troubleshooting sections were verified. The six-page landing-page capture was
    removed after the replacement passed offline UI download/hash validation.
-4. [~] **Canada detailed map repair** — a Canada-only zoom-15 overlay from the
-   2026-11-18 Protomaps build is actively extracting as
-   `ca_20261118_z15.pmtiles` (preflight: 49,946,872 tiles / about 16 GB). The first
-   attempt was interrupted when the admin container was redeployed for the search
-   fix; its staging file was safely discarded and the job was restarted after the
-   final deployment. The existing 33,788,916,131-byte continental map remains
-   installed. Completion still requires Vancouver/Burnaby and regression samples.
+4. [x] **Canada detailed map repair** — repeated nationwide overlay attempts were
+   stopped after the source CDN reset range-request connections at different points.
+   The original map already passed zoom-15 samples across the rest of Canada, so a
+   targeted British Columbia overlay was the smaller reliable repair. The verified
+   `ca-british-columbia_20261118_z15.pmtiles` archive is 2,617,262,221 bytes, serves
+   through NOMAD with range requests, and returns zoom-15 tiles for Vancouver,
+   Burnaby, Victoria, and Kelowna. The existing 33,788,916,131-byte continental map
+   remains installed and no download job remains active.
 5. [ ] **Supplemental/noise review** — decide whether Gardening Stack Exchange and the
    other Q&A archives earn their storage after coherent replacements are in place.
    They are labeled supplemental, not core. Remove only with explicit target review.
@@ -121,12 +122,16 @@ the separate project. Content and UI validation do not require local generation.
 
 ## G. Maps and navigation
 
-- [!] USA, Canada, and Mexico vector map is valid and detailed through zoom 15 in sampled target areas, but Vancouver/Burnaby detailed tiles are missing from the existing extract.
+- [x] USA, Canada, and Mexico vector coverage is valid through zoom 15 in sampled
+  target areas. The original extract's Vancouver/Burnaby gap is repaired by the
+  verified British Columbia zoom-15 overlay.
 - [x] Confirm separate Mountain-region download is redundant; no active duplicate job exists.
 - [x] Programmatically retrieve offline zoom-15 tiles for West Jordan, Riverton, Ogden, Marysvale, Rexburg, both travel corridors, representative Canada, and Mexico locations; final visual disconnected test remains in section H.
 - [x] Fix country extracts to retain original land geometry alongside the coastal
-  buffer; regression test passes. A corrected Canada overlay is actively extracting;
-  the existing archive remains installed until the overlay passes coverage checks.
+  buffer; regression test passes. Full-country extraction then exposed intermittent
+  CDN connection resets, so the completed British Columbia overlay was verified with
+  exact Vancouver, Burnaby, Victoria, and Kelowna zoom-15 tile reads. The original
+  archive remains installed for continental coverage.
 - [ ] Select a separate offline routing/address-search application if desired.
 - [ ] Keep satellite imagery optional; NOMAD's current map interface has no satellite layer.
 
@@ -218,6 +223,13 @@ the separate project. Content and UI validation do not require local generation.
   MedlinePlus's `How to make a splint` instead of the previous unrelated Best-of-
   Wikipedia names. Ten focused tests, TypeScript, formatting, production build,
   health check, and live browser behavior passed.
+- [x] Treat basic emergency-topic discoverability as a release gate, not merely file
+  presence. The first regression topic, `splint`, is independently covered by
+  MedlinePlus, WikiMed, complete compact Wikipedia, and Wikibooks. Both exact-title
+  and task-oriented results are now reachable from the default search. Apply the same
+  content-plus-discoverability check to CPR, choking, bleeding, burns, fractures,
+  shock, wound care, water purification, carbon monoxide, and emergency heat during
+  the final disconnected acceptance test.
 - [ ] After replacements: confirm exact models for equipment manuals still marked
   `[!]`, then perform reboot and physically disconnected acceptance tests.
 - [x] Investigated the current UI, produced six redesign concepts, and recorded the user's Style 2 + Style 3 selection.

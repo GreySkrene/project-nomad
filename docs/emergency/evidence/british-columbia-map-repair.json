@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-11-19T13:56:28-07:00",
+  "archive": {
+    "name": "ca-british-columbia_20261118_z15.pmtiles",
+    "bytes": 2617262221,
+    "bounds": [-139, 48, -114, 60],
+    "maxZoom": 15,
+    "osmReplicationTime": "2026-11-18T04:00:00Z",
+    "numAddressedTiles": 5698643,
+    "numTileEntries": 3813051,
+    "numTileContents": 3569243,
+    "pmtilesVerify": "passed"
+  },
+  "liveIntegration": {
+    "health": "ok",
+    "listedByRegionsApi": true,
+    "referencedByStyleApi": true,
+    "httpStatus": 200,
+    "acceptRanges": "bytes",
+    "rangeRequestStatus": 206,
+    "activeDownloadJobs": 0
+  },
+  "zoom15Samples": [
+    { "name": "Vancouver", "z": 15, "x": 5177, "y": 11213, "bytes": 75205 },
+    { "name": "Burnaby", "z": 15, "x": 5190, "y": 11218, "bytes": 18272 },
+    { "name": "Victoria", "z": 15, "x": 5154, "y": 11332, "bytes": 54861 },
+    { "name": "Kelowna", "z": 15, "x": 5507, "y": 11128, "bytes": 28961 }
+  ],
+  "limitations": [
+    "OpenStreetMap-derived vector data, not satellite imagery",
+    "No live road closures or incident information",
+    "NOMAD does not currently provide address search or turn-by-turn routing"
+  ]
+}

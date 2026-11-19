@@ -17,7 +17,8 @@ kiwix_zim,wikipedia_en_top_maxi_2026-06.zim,8357329540,,verified,Illustrated cur
 kiwix_zim,woodworking.stackexchange.com_en_all_2026-10.zim,106657287,,low_priority_supplement,Functional specialist Q&A with limited emergency relevance
 kiwix_zim,www.ready.gov_en_2024-12.zim,2429921822,,verified_static_core,Official actionable preparedness pages; static snapshot without live alerts
 kiwix_zim,wwwnc.cdc.gov_en_all_2024-11.zim,178326622,,supplemental_only,Official CDC Travelers' Health snapshot; useful but narrower than general emergency medicine
-offline_map,custom-ea2908b0_20261106_z15.pmtiles,33788916131,,coverage_defect_confirmed,"Valid zoom-15 continental map, but Vancouver/Burnaby detailed tiles are missing; extraction geometry bug fixed for future extracts"
+offline_map,custom-ea2908b0_20261106_z15.pmtiles,33788916131,OSM replication 2026-11-06,verified_with_repair_overlay,"Valid zoom-15 continental map; original Vancouver/Burnaby gap is supplied by the verified British Columbia overlay"
+offline_map,ca-british-columbia_20261118_z15.pmtiles,2617262221,OSM replication 2026-11-18T04:00:00Z,verified,"PMTiles verification passed; live style and HTTP range serving confirmed; exact zoom-15 tiles passed for Vancouver Burnaby Victoria and Kelowna"
 offline_map,world.pmtiles,15055414,,verified_low_detail_fallback,Valid world overview through zoom 5; all sampled locations returned tiles
 knowledge_document,AHA-2025-CPR-CHOKING-QUICK-REFERENCE.md-01e7565ec421.md,3335,,verified_authored_summary,Useful sourced 2025 AHA memory aid; not an original AHA manual
 knowledge_document,CDC-Backcountry-Water-Treatment.pdf-ab7ca21247f6.pdf,773187,,verified,"Readable and page-scanned; see PDF_CONTENT_AUDIT.md for role, dates, and limitations"

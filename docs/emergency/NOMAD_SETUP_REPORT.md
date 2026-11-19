@@ -36,16 +36,16 @@ All ten NOMAD containers were running when checked; five reported healthy and th
 
 ## 3. Storage and downloaded content
 
-Measured logical storage under `/opt/project-nomad/storage` remains approximately **76 GiB**, below the requested 100 GB ceiling:
+Measured logical storage under `/opt/project-nomad/storage` is approximately **79 GiB**, below the requested 100 GB ceiling:
 
 | Content | Measured size/state |
 |---|---:|
 | Kiwix ZIM libraries | 18 files; 39,637,891,458 bytes (36.92 GiB) |
-| Maps | about 32 GiB |
+| Maps | about 34 GiB, including the 2.44 GiB British Columbia repair overlay |
 | Kolibri Gen 2 | about 6.3 GiB |
 | RAG uploads / directly browsable documents | about 905 MiB after validated replacements |
 
-The detailed continental PMTiles file is 33,788,916,131 bytes and contains USA, Canada, and Mexico vector data through zoom 15. The audit retrieved detailed tiles at every primary Utah/Idaho/Mexico sample, but confirmed missing zoom 12–15 coverage in downtown Vancouver and zoom 14–15 coverage in central Burnaby. The cause was NOMAD's approximate country-buffer geometry. The extraction code is fixed and a Canada-only zoom-15 overlay from the 2026-11-18 source build is actively extracting; the original continental map remains installed until the overlay passes Vancouver/Burnaby and regression checks. It is not satellite imagery and does not provide live closures, address search, or turn-by-turn routing.
+The detailed continental PMTiles file is 33,788,916,131 bytes and contains USA, Canada, and Mexico vector data through zoom 15. The audit retrieved detailed tiles at every primary Utah/Idaho/Mexico sample, but confirmed missing high-zoom coverage in Vancouver and Burnaby. The extraction geometry is fixed. Repeated full-Canada repair attempts encountered source-CDN connection resets, so the known gap was repaired with a smaller 2,617,262,221-byte British Columbia overlay from the 2026-11-18 source build. PMTiles verification, live HTTP range serving, style integration, and exact zoom-15 reads for Vancouver, Burnaby, Victoria, and Kelowna passed. There are no active download jobs. These are vector maps, not satellite imagery, and they do not provide live closures, address search, or turn-by-turn routing.
 
 Kolibri contains selected PhET, Blockly Games, School of Thought, Khan Academy, and Sikana material. Physical-file checks found zero missing selected files in four channels. Khan is partial: 1,455 nodes are available and 26 of 11,612 attached file records are unavailable; all 26 are subtitles or thumbnails. Sikana's 505-node practical subset includes navigation, cooking, insulation/energy, solar, basic electricity, DIY, agriculture, and gardening.
 

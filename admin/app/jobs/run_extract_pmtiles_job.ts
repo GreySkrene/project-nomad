@@ -87,6 +87,7 @@ export class RunExtractPmtilesJob {
     let userCancelled = false
     let proc: ChildProcess | null = null
     let lastReportedBytes = -1
+    let stderrTail = ''
 
     // One 2s tick polls the Redis cancel signal and reads file-size for progress. pmtiles
     // writes incrementally but rewrites directories near the end so progress isn't strictly
@@ -130,7 +131,9 @@ export class RunExtractPmtilesJob {
         outputFilepath: stagingPath,
         regionFilepath,
         maxzoom,
-        downloadThreads: 8,
+        // Large, complex regions can issue millions of range requests. Four workers are
+        // gentler on the snapshot CDN and proved more reliable than eight for Canada.
+        downloadThreads: 4,
         overfetch: 0.2,
       })
       proc = spawn(PMTILES_BINARY_PATH, args, { stdio: ['ignore', 'pipe', 'pipe'] })
@@ -140,7 +143,11 @@ export class RunExtractPmtilesJob {
         logger.debug(`[RunExtractPmtilesJob:${job.id}] ${chunk.toString().trimEnd()}`)
       })
       proc.stderr?.on('data', (chunk) => {
-        logger.debug(`[RunExtractPmtilesJob:${job.id}] ${chunk.toString().trimEnd()}`)
+        const text = chunk.toString()
+        // Keep enough stderr to diagnose a terminal CDN/PMTiles failure without
+        // retaining an unbounded multi-hour progress stream in memory.
+        stderrTail = (stderrTail + text).slice(-8192)
+        logger.debug(`[RunExtractPmtilesJob:${job.id}] ${text.trimEnd()}`)
       })
 
       const exitCode: number = await new Promise((resolve, reject) => {
@@ -153,7 +160,10 @@ export class RunExtractPmtilesJob {
         if (userCancelled) {
           throw new UnrecoverableError(`Extract cancelled by user (exit ${exitCode})`)
         }
-        throw new Error(`pmtiles extract exited with code ${exitCode}`)
+        const detail = stderrTail.trim()
+        throw new Error(
+          `pmtiles extract exited with code ${exitCode}${detail ? `: ${detail}` : ''}`
+        )
       }
 
       // Only a finished extract replaces the served file (a re-extract can share its name)
@@ -283,6 +293,12 @@ export class RunExtractPmtilesJob {
         // Already gone or locked — add() below will still report a meaningful error
       }
     }
+
+    // A user cancel sets a short-lived cross-process signal under this deterministic
+    // job id. If the same extract is started again before that key expires, the new
+    // child otherwise sees the old signal and immediately cancels itself.
+    const client = await queue.client
+    await client.del(this.cancelKey(jobId))
 
     // Fewer attempts than HTTP downloads — a failed extract usually means the source URL
     // rotated or the CDN is throttling, and resuming mid-extract isn't supported by the CLI

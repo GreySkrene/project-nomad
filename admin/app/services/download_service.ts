@@ -5,7 +5,11 @@ import { RunExtractPmtilesJob } from '#jobs/run_extract_pmtiles_job'
 import type { RunExtractPmtilesJobParams } from '#jobs/run_extract_pmtiles_job'
 import { DownloadModelJob } from '#jobs/download_model_job'
 import { DownloadDrugDataJob } from '#jobs/download_drug_data_job'
-import { DownloadJobWithProgress, DownloadProgressData, RunDownloadJobParams } from '../../types/downloads.js'
+import {
+  DownloadJobWithProgress,
+  DownloadProgressData,
+  RunDownloadJobParams,
+} from '../../types/downloads.js'
 import type { Job, Queue } from 'bullmq'
 import { normalize } from 'path'
 import { deleteFileIfExists } from '../utils/fs.js'
@@ -19,7 +23,12 @@ type TaggedJob = { job: Job; state: FileJobState }
 export class DownloadService {
   constructor(private queueService: QueueService) {}
 
-  private parseProgress(progress: any): { percent: number; downloadedBytes?: number; totalBytes?: number; lastProgressTime?: number } {
+  private parseProgress(progress: any): {
+    percent: number
+    downloadedBytes?: number
+    totalBytes?: number
+    lastProgressTime?: number
+  } {
     if (typeof progress === 'object' && progress !== null && 'percent' in progress) {
       const p = progress as DownloadProgressData
       return {
@@ -76,7 +85,9 @@ export class DownloadService {
         totalBytes: parsed.totalBytes || job.data.totalBytes || undefined,
         lastProgressTime: parsed.lastProgressTime,
         status: state,
-        failedReason: job.failedReason || undefined,
+        // BullMQ retains the previous attempt's failedReason while a retry is active.
+        failedReason:
+          state === 'active' || state === 'waiting' ? undefined : job.failedReason || undefined,
       }
     })
 
@@ -93,7 +104,8 @@ export class DownloadService {
         totalBytes: parsed.totalBytes || job.data.estimatedBytes || undefined,
         lastProgressTime: parsed.lastProgressTime,
         status: state,
-        failedReason: job.failedReason || undefined,
+        failedReason:
+          state === 'active' || state === 'waiting' ? undefined : job.failedReason || undefined,
       }
     })
 
@@ -140,7 +152,12 @@ export class DownloadService {
         })
       : []
 
-    const allDownloads = [...fileDownloads, ...extractDownloads, ...modelDownloads, ...drugDownloads]
+    const allDownloads = [
+      ...fileDownloads,
+      ...extractDownloads,
+      ...modelDownloads,
+      ...drugDownloads,
+    ]
     const filtered = allDownloads.filter((job) => !filetype || job.filetype === filetype)
 
     return filtered.sort((a, b) => {
