@@ -213,7 +213,10 @@ the separate project. Content and UI validation do not require local generation.
   launcher Start/Stop test, and realistic corridor/avoid-highway comparisons before
   marking routing dependable. Unit tests and connected browser QA now cover validation,
   option translation, geometry, persistence/export helpers, the cross-state route,
-  and avoid-highway behavior. Snapshots more than 180 days old now produce an amber
+  avoid-highway behavior, unavailable health checks, upstream outages, and
+  out-of-coverage/no-edge responses. Engine failures now return a truthful 503 while
+  no-route results explain the installed Utah/Idaho boundary and suggest checking the
+  point or relaxing preferences. Snapshots more than 180 days old produce an amber
   warning and deterministic boundary tests pass; disconnected reboot QA remains.
 - [ ] Keep satellite imagery optional; NOMAD's current map interface has no satellite layer.
 
@@ -338,6 +341,13 @@ the separate project. Content and UI validation do not require local generation.
   focused routing/browse tests, TypeScript, production build, live API checks, and
   rendered browser QA pass. The UI displayed the 258.5-mile cross-state route and all
   37 maneuvers without console errors.
+- [x] **Routing failure behavior:** direct service tests cover an unavailable engine,
+  upstream server failures, and out-of-coverage/no-edge responses. NOMAD distinguishes
+  a temporary engine outage (HTTP 503) from a request that cannot be resolved inside
+  the installed Utah/Idaho graph (HTTP 422 with actionable local-coverage guidance).
+  The admin-only deployment is healthy; a live Las Vegas out-of-coverage request
+  returned the expected 422 guidance, while West Jordan-to-Marysvale still returned
+  a 181.3-mile primary route plus one alternate.
 - [x] **Resource usefulness in Browse:** installed article-library cards now expose an
   explicit role (Emergency core, Practical reference, Background reference, or
   Supplemental). Community Q&A archives are visibly supplemental rather than presented

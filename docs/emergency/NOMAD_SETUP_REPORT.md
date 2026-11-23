@@ -216,11 +216,26 @@ non-selected route as a muted dashed line, lets the user select either summary, 
 persists that selection across reloads. Text and GPX exports use the selected route.
 A dedicated print view adds route endpoints, mode/preferences, snapshot date, the
 no-live-conditions warning, and full turn-by-turn directions without printing the map
-application chrome. Thirteen focused routing tests, TypeScript, and the production
+application chrome. Seventeen focused routing tests, TypeScript, and the production
 Vite/Adonis build passed. Deployed headless-Edge QA selected the alternate, rendered
 the paper view from page one, hid the map chrome, generated a 57,456-byte PDF, and
 reported no browser console errors. Physically disconnected printing remains part of
 final acceptance.
+
+Routing failures are separated by cause. If the private engine is down or returns a
+server failure, NOMAD reports a temporary outage with HTTP 503. If Valhalla cannot
+attach a point to the installed graph or find a connected path, NOMAD returns HTTP 422
+with an explicit Utah/Idaho coverage explanation and suggests checking that points are
+near mapped roads or trails or relaxing route preferences. This prevents an engine
+outage from looking like bad user input and prevents raw Valhalla wording from implying
+nationwide routing coverage.
+
+The deployed regression used a Las Vegas coordinate pair outside the installed graph
+and received the expected HTTP 422 local-coverage guidance. A following in-coverage
+West Jordan-to-Marysvale request still succeeded with a 181.2968-mile primary route,
+one alternate, the 2026-11-23 snapshot label, and `liveConditionsIncluded: false`.
+Only `nomad_admin` was recreated for this update; the routing engine and stored content
+services remained running.
 
 Address-search preflight found that the official Photon service has no Utah/Idaho or
 western-state prebuilt database. The smallest applicable Photon 1.x dump is the whole

@@ -3,6 +3,7 @@ import test from 'node:test'
 
 import {
   normalizeValhallaResponse,
+  RoutingService,
   toValhallaRouteRequest,
   validateRouteSpan,
 } from '../../app/services/routing_service.js'
@@ -87,4 +88,52 @@ test('normalizes only the response fields exposed to the browser', () => {
   assert.equal(result.alternates.length, 1)
   assert.equal(result.alternates[0].summary.distanceMiles, 14.25)
   assert.equal(result.alternates[0].legs[0].maneuvers[0].instruction, 'Bear left.')
+})
+
+test('reports an unavailable routing engine without throwing from health checks', async (context) => {
+  context.mock.method(globalThis, 'fetch', async () => {
+    throw new TypeError('fetch failed')
+  })
+
+  const health = await new RoutingService().health()
+  assert.equal(health.available, false)
+  assert.equal(health.coverage, 'Utah and Idaho')
+  assert.equal(health.liveConditionsIncluded, false)
+})
+
+test('turns out-of-coverage engine wording into an actionable local-data message', async (context) => {
+  context.mock.method(globalThis, 'fetch', async () =>
+    new Response(JSON.stringify({ error: 'No suitable edges near location' }), {
+      status: 400,
+      headers: { 'content-type': 'application/json' },
+    })
+  )
+
+  await assert.rejects(
+    () => new RoutingService().route(baseRequest),
+    (error: unknown) => {
+      assert.equal((error as { responseStatus?: unknown }).responseStatus, 422)
+      assert.match((error as Error).message, /installed Utah and Idaho map data/)
+      assert.match((error as Error).message, /near a mapped road or trail/)
+      return true
+    }
+  )
+})
+
+test('classifies routing-engine server failures as temporarily unavailable', async (context) => {
+  context.mock.method(globalThis, 'fetch', async () =>
+    new Response(JSON.stringify({ error: 'Internal Server Error' }), {
+      status: 500,
+      headers: { 'content-type': 'application/json' },
+    })
+  )
+
+  await assert.rejects(
+    () => new RoutingService().route(baseRequest),
+    (error: unknown) => {
+      assert.equal((error as { responseStatus?: unknown }).responseStatus, 503)
+      assert.equal((error as Error).message, 'Offline routing engine is temporarily unavailable.')
+      return true
+    }
+  )
 })

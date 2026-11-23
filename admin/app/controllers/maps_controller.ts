@@ -16,7 +16,7 @@ import {
 import { inject } from '@adonisjs/core'
 import type { HttpContext } from '@adonisjs/core/http'
 import vine from '@vinejs/vine'
-import { RoutingService } from '#services/routing_service'
+import { RoutingService, RoutingServiceError } from '#services/routing_service'
 import { offlineRouteValidator } from '#validators/routing'
 
 @inject()
@@ -310,6 +310,7 @@ export default class MapsController {
     } catch (error) {
       const message = error instanceof Error ? error.message : 'Offline route calculation failed.'
       const unavailable =
+        (error instanceof RoutingServiceError && error.responseStatus === 503) ||
         error instanceof TypeError ||
         (error instanceof Error &&
           (error.name === 'AbortError' || /fetch failed/i.test(error.message)))

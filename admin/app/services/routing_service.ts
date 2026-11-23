@@ -33,6 +33,45 @@ const DEFAULT_ROUTING_URL = 'http://routing:8002'
 const MAX_DIRECT_DISTANCE_MILES = 1_000
 const REQUEST_TIMEOUT_MS = 30_000
 
+export class RoutingServiceError extends Error {
+  constructor(
+    message: string,
+    public readonly responseStatus: 422 | 503
+  ) {
+    super(message)
+    this.name = 'RoutingServiceError'
+  }
+}
+
+const upstreamErrorMessage = (body: unknown, status: number) => {
+  const rawMessage =
+    body &&
+    typeof body === 'object' &&
+    typeof (body as { error?: unknown }).error === 'string'
+      ? (body as { error: string }).error
+      : ''
+
+  if (status >= 500) {
+    return new RoutingServiceError('Offline routing engine is temporarily unavailable.', 503)
+  }
+
+  if (
+    /no suitable edges|no path could be found|unconnected regions|outside.*(tile|region|coverage)/i.test(
+      rawMessage
+    )
+  ) {
+    return new RoutingServiceError(
+      'No route was found within the installed Utah and Idaho map data. Check that each point is inside coverage and near a mapped road or trail, or relax the route preferences.',
+      422
+    )
+  }
+
+  return new RoutingServiceError(
+    rawMessage || `Routing engine rejected the request (HTTP ${status}).`,
+    422
+  )
+}
+
 const finiteNumber = (value: unknown, fallback = 0) =>
   typeof value === 'number' && Number.isFinite(value) ? value : fallback
 
@@ -199,13 +238,7 @@ export class RoutingService {
       })
       const body = await response.json().catch(() => null)
       if (!response.ok) {
-        const message =
-          body &&
-          typeof body === 'object' &&
-          typeof (body as { error?: unknown }).error === 'string'
-            ? (body as { error: string }).error
-            : `Routing engine returned HTTP ${response.status}.`
-        throw new Error(message)
+        throw upstreamErrorMessage(body, response.status)
       }
       return normalizeValhallaResponse(body, this.snapshotDate)
     } finally {
