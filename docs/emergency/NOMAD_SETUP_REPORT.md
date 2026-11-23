@@ -218,6 +218,15 @@ the paper view from page one, hid the map chrome, generated a 57,456-byte PDF, a
 reported no browser console errors. Physically disconnected printing remains part of
 final acceptance.
 
+Address-search preflight found that the official Photon service has no Utah/Idaho or
+western-state prebuilt database. The smallest applicable Photon 1.x dump is the whole
+USA at 10,615,473,970 compressed bytes, and Photon requires overlapping old/new
+databases for safe updates. It was not downloaded. The laptop measured 15.2 GiB RAM,
+2.9 GiB currently free, and 165.2 GiB free on C:. The safer next experiment is a
+measured Utah-only Nominatim `address` import using the retained 172,200,193-byte PBF,
+with the 130,765,499-byte Idaho extract added only after the pilot passes. Exact gates
+and sources are in `GEOCODER_PREFLIGHT.md`; address search is still unavailable today.
+
 The production Docker build completed its Vite and TypeScript compilation. Live HTTP checks returned 200 for the home page, maps, documentation, Kiwix, and Kolibri; `/api/health` returned `{"status":"ok"}`. Rendered browser QA was performed for both the dashboard and Field Manual documentation in dark mode. A rollback copy of the prior Compose file is stored at `/opt/project-nomad/compose.yml.pre-night-manual-20261116`.
 
 The local image is intentionally pinned with `pull_policy: never`. A future official NOMAD update may replace or bypass the customized image, so rebuild/review this interface against the new upstream version before changing that pin.

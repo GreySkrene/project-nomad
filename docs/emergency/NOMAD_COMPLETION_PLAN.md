@@ -187,12 +187,16 @@ the separate project. Content and UI validation do not require local generation.
   Show exact download/build/storage estimates and obtain approval before expanding.
   Do not build all of North America while the current 100 GB ceiling applies: current
   raw OSM extracts alone are about 18.2 GB before routing graphs and temporary files.
-- [ ] **Address-search phase 3:** evaluate a prebuilt regional Photon index first for
+- [-] **Address-search phase 3:** evaluate a prebuilt regional Photon index first for
   autocomplete, typo tolerance, forward address search, and reverse geocoding. Measure
   its compressed, installed, update, RAM, and idle-power costs on this 16 GB laptop.
   If a suitable regional index is unavailable or too large, compare a Utah/Idaho
   Nominatim import with a deliberately limited local place/street index; do not add a
-  full-country geocoder by assumption.
+  full-country geocoder by assumption. The official dump inventory has now been
+  checked: no Utah/Idaho Photon database exists, while the USA Photon 1.x archive is
+  10,615,473,970 compressed bytes and needs overlapping old/new data for safe updates.
+  `GEOCODER_PREFLIGHT.md` therefore recommends a measured Utah-only Nominatim
+  address-style pilot using the retained PBF; no geocoder has been installed yet.
 - [ ] Integrate address suggestions only after offline tests prove that house numbers,
   streets, cities, landmarks, misspellings, duplicate place names, and out-of-coverage
   queries behave honestly. Let a selected result become a pin or route endpoint, and
