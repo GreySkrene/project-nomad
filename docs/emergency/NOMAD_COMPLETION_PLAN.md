@@ -139,11 +139,12 @@ the separate project. Content and UI validation do not require local generation.
   engine because its run-time costing supports driving/walking/cycling, alternatives,
   turn instructions, and preferences for highways, tolls, ferries, tracks, and
   unpaved roads without rebuilding a profile for each request.
-- [ ] **Routing phase 1 — bounded proof of concept (no large download without
+- [x] **Routing phase 1 — bounded proof-of-concept preflight (no large download without
   approval):** preflight current free space and estimate the Utah + Idaho OSM PBF,
   Valhalla graph, temporary build space, container image, and update headroom. Keep
   the installed library under the requested 100 GB ceiling and preserve enough free
-  disk for Windows/Docker operation.
+  disk for Windows/Docker operation. Measurements and conservative allowances are in
+  `ROUTING_PREFLIGHT.md`; no routing download or graph build was started.
 - [ ] Add Valhalla as an optional, local-only Docker service with pinned image/version,
   persistent routing-data storage, health check, restart policy, and a documented
   start/stop path through the NOMAD launcher. It must not require internet after its
