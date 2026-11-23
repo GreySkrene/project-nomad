@@ -23,6 +23,8 @@ import {
   resolveRouteEndpoint,
   routeResultToGpx,
   routeResultToText,
+  routingSnapshotAgeDays,
+  routingSnapshotIsStale,
 } from '~/lib/route_planner'
 import type {
   RouteDraft,
@@ -224,6 +226,8 @@ export default function RoutePlannerPanel({
     [routeResult]
   )
   const selectedRoute = routeOptions[selectedRouteIndex] ?? routeOptions[0] ?? null
+  const snapshotIsStale = routingSnapshotIsStale(routingHealth?.snapshotDate ?? null)
+  const snapshotAgeDays = routingSnapshotAgeDays(routingHealth?.snapshotDate ?? null)
 
   useEffect(() => {
     let cancelled = false
@@ -460,12 +464,12 @@ export default function RoutePlannerPanel({
       <div className="nomad-route-panel-content max-h-[calc(100vh-9rem)] space-y-4 overflow-y-auto p-4">
         <div
           className={`flex gap-2 rounded border p-3 text-xs leading-5 text-text-secondary ${
-            routingHealth?.available
+            routingHealth?.available && !snapshotIsStale
               ? 'border-desert-green/50 bg-desert-green/10'
               : 'border-amber-500/50 bg-amber-500/10'
           }`}
         >
-          {routingHealth?.available ? (
+          {routingHealth?.available && !snapshotIsStale ? (
             <IconCheck className="mt-0.5 shrink-0 text-desert-green" size={18} />
           ) : (
             <IconAlertTriangle className="mt-0.5 shrink-0 text-amber-500" size={18} />
@@ -473,13 +477,19 @@ export default function RoutePlannerPanel({
           <p>
             <strong className="block text-text-primary">
               {routingHealth?.available
-                ? `Offline routing ready — ${routingHealth.coverage}`
+                ? snapshotIsStale
+                  ? 'Offline routing ready — snapshot needs updating'
+                  : `Offline routing ready — ${routingHealth.coverage}`
                 : routingHealth
                   ? 'Offline routing service is unavailable.'
                   : 'Checking the offline routing service…'}
             </strong>
             {routingHealth?.available
-              ? `OSM snapshot ${routingHealth.snapshotDate ?? 'date unavailable'}. No live traffic, closures, fires, weather, or road damage.`
+              ? `${
+                  snapshotIsStale
+                    ? `Warning: this OSM snapshot is ${snapshotAgeDays} days old. `
+                    : ''
+                }OSM snapshot ${routingHealth.snapshotDate ?? 'date unavailable'}. No live traffic, closures, fires, weather, or road damage.`
               : 'Saved route setups remain usable, but calculation requires the local Utah/Idaho graph.'}
           </p>
         </div>

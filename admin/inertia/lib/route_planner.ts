@@ -68,6 +68,22 @@ export type OfflineRouteResult = OfflineRouteOption & {
   alternates: OfflineRouteOption[]
 }
 
+export const ROUTING_SNAPSHOT_STALE_DAYS = 180
+
+export const routingSnapshotAgeDays = (snapshotDate: string | null, now = new Date()) => {
+  if (!snapshotDate) return null
+  const snapshot = new Date(`${snapshotDate}T00:00:00Z`)
+  if (Number.isNaN(snapshot.getTime()) || Number.isNaN(now.getTime())) return null
+
+  const ageDays = Math.floor((now.getTime() - snapshot.getTime()) / 86_400_000)
+  return ageDays >= 0 ? ageDays : 0
+}
+
+export const routingSnapshotIsStale = (snapshotDate: string | null, now = new Date()) => {
+  const ageDays = routingSnapshotAgeDays(snapshotDate, now)
+  return ageDays !== null && ageDays > ROUTING_SNAPSHOT_STALE_DAYS
+}
+
 const normalizeOfflineRouteOption = (value: unknown): OfflineRouteOption | null => {
   if (!value || typeof value !== 'object') return null
   const result = value as Record<string, unknown>

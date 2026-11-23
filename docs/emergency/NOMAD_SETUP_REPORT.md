@@ -3,6 +3,10 @@
 Report date: 2026-11-23 (America/Denver)
 Status: core services and content are installed; safety acceptance and fully disconnected/reboot testing are not complete
 
+Large-archive integrity baseline: all 18 installed ZIMs and three PMTiles archives
+have exact sizes and full-file SHA-256 values in `INSTALLED_ARCHIVE_HASHES.csv`
+(verified 2026-11-23; 70.84 GiB total).
+
 ## 1. Host and installation
 
 | Item | Verified value |

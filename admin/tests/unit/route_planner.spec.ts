@@ -12,6 +12,8 @@ import {
   resolveRouteEndpoint,
   routeResultToGpx,
   routeResultToText,
+  routingSnapshotAgeDays,
+  routingSnapshotIsStale,
 } from '../../inertia/lib/route_planner.js'
 
 test('accepts bounded latitude and longitude and rejects malformed coordinates', () => {
@@ -149,4 +151,15 @@ test('normalizes named route setups and rejects malformed storage entries', () =
   assert.equal(plans[0].name, 'Home to Rexburg')
   assert.equal(plans[0].draft.mode, 'walking')
   assert.deepEqual(plans[0].draft.waypoints, [])
+})
+
+test('warns only when an offline routing snapshot is more than 180 days old', () => {
+  const now = new Date('2026-11-23T18:00:00Z')
+  assert.equal(routingSnapshotAgeDays('2026-11-23', now), 0)
+  assert.equal(routingSnapshotAgeDays('2026-05-27', now), 180)
+  assert.equal(routingSnapshotAgeDays('2026-05-26', now), 181)
+  assert.equal(routingSnapshotIsStale('2026-05-27', now), false)
+  assert.equal(routingSnapshotIsStale('2026-05-26', now), true)
+  assert.equal(routingSnapshotIsStale(null, now), false)
+  assert.equal(routingSnapshotAgeDays('not-a-date', now), null)
 })

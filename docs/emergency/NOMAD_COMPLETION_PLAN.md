@@ -57,7 +57,11 @@ the separate project. Content and UI validation do not require local generation.
 - [x] Reconcile `RESOURCE_MANIFEST.csv` with files actually installed in Kiwix, maps, and Kolibri.
 - [x] Update `NOMAD_SETUP_REPORT.md` so completed downloads are no longer described as pending.
 - [x] Replace the invalid eCFR access-denied capture with a genuine official FRS regulation source.
-- [ ] Record hashes/validation evidence for the large installed ZIM and PMTiles resources where practical.
+- [x] Record hashes/validation evidence for the large installed ZIM and PMTiles
+  resources. `INSTALLED_ARCHIVE_HASHES.csv` now holds full-file SHA-256 values and
+  exact sizes for all 18 ZIMs and three PMTiles archives (70.84 GiB total); the two
+  available published Kiwix hashes match, and structural/content evidence remains
+  linked through `CONTENT_AUDIT.md`.
 - [x] Perform the content-level usefulness/completeness audit tracked in `CONTENT_AUDIT.md`; all 74 inventory rows now have evidence-based roles/statuses, with final hands-on media playback reserved for offline acceptance.
 - [x] LibreTexts Medicine and zimgit-medicine were replaced and removed transactionally;
   the complete evidence is recorded in the replacement manifests and audit JSON files.
@@ -207,7 +211,8 @@ the separate project. Content and UI validation do not require local generation.
   launcher Start/Stop test, and realistic corridor/avoid-highway comparisons before
   marking routing dependable. Unit tests and connected browser QA now cover validation,
   option translation, geometry, persistence/export helpers, the cross-state route,
-  and avoid-highway behavior; disconnected reboot and stale-snapshot QA remain.
+  and avoid-highway behavior. Snapshots more than 180 days old now produce an amber
+  warning and deterministic boundary tests pass; disconnected reboot QA remains.
 - [ ] Keep satellite imagery optional; NOMAD's current map interface has no satellite layer.
 
 ## H. Final offline acceptance test
