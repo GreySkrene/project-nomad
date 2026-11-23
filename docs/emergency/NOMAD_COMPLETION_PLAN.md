@@ -201,6 +201,8 @@ the separate project. Content and UI validation do not require local generation.
   10,615,473,970 compressed bytes and needs overlapping old/new data for safe updates.
   `GEOCODER_PREFLIGHT.md` therefore recommends a measured Utah-only Nominatim
   address-style pilot using the retained PBF; no geocoder has been installed yet.
+  The apparent root/`source/` PBF duplicates are verified hard links that consume one
+  set of blocks and must remain for the installer/Valhalla path.
 - [ ] Integrate address suggestions only after offline tests prove that house numbers,
   streets, cities, landmarks, misspellings, duplicate place names, and out-of-coverage
   queries behave honestly. Let a selected result become a pin or route endpoint, and

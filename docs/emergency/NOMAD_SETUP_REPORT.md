@@ -230,6 +230,9 @@ databases for safe updates. It was not downloaded. The laptop measured 15.2 GiB 
 measured Utah-only Nominatim `address` import using the retained 172,200,193-byte PBF,
 with the 130,765,499-byte Idaho extract added only after the pilot passes. Exact gates
 and sources are in `GEOCODER_PREFLIGHT.md`; address search is still unavailable today.
+The root and `source/` PBF names are verified hard links, not duplicate storage; keep
+both names because the routing installer and Valhalla entry path intentionally use
+them, while a geocoder pilot can reuse the `source/` name.
 
 The production Docker build completed its Vite and TypeScript compilation. Live HTTP checks returned 200 for the home page, maps, documentation, Kiwix, and Kolibri; `/api/health` returned `{"status":"ok"}`. Rendered browser QA was performed for both the dashboard and Field Manual documentation in dark mode. A rollback copy of the prior Compose file is stored at `/opt/project-nomad/compose.yml.pre-night-manual-20261116`.
 

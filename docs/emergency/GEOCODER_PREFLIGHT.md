@@ -73,9 +73,13 @@ Measured immediately before this decision:
 - retained Utah PBF: **172,200,193 bytes**;
 - retained Idaho PBF: **130,765,499 bytes**.
 
-The routing directory contains both `source/` copies and root-level copies of those
-PBFs. They are a later cleanup candidate, not permission to delete them: the routing
-installer/update path must be checked first.
+The routing directory exposes both `source/` and root-level names for those PBFs, but
+they are **hard links, not duplicate data**. On 2026-11-23 each pair had the same inode
+and a link count of two; `du` charged only the `source/` name. The installer creates
+these links deliberately because the verified originals live under `source/` while
+the Valhalla entry script searches the routing root. Removing a name would recover
+zero allocated bytes and could break a rebuild, so neither name is a cleanup target.
+The Utah Nominatim pilot can read the retained `source/utah-latest.osm.pbf` directly.
 
 ## Pilot acceptance gates
 
