@@ -272,7 +272,13 @@ the separate project. Content and UI validation do not require local generation.
 - [x] Run a clean production build, TypeScript typecheck, and focused sparse-PMTiles progress tests on the rebased branch.
 - [x] Finish and validate the illustrated Wikibooks and Best of Wikipedia upgrades; verify published SHA-256 hashes, image/detail metadata, local serving, and removal of the two superseded Wikipedia archives.
 - [x] Audit the public diff for credentials, personal paths, oversized payloads, and source/licensing concerns.
-- [!] Current upstream's production dependency tree reports 60 npm advisories (3 critical, 21 high); exploitability in NOMAD has not been triaged. Keep the service LAN-only and do not apply `npm audit fix --force` without compatibility testing.
+- [x] Triage and remediate the production dependency audit without `--force`. The
+  current production result is 20 package rows (0 critical, 2 high, 18 moderate),
+  down from 59 (3 critical, 20 high, 29 moderate, 7 low). MapLibre v6, Sharp, tar,
+  systeminformation, libzim, and other safe fixes passed type-check, production build,
+  native-container, live route, and rendered-map checks. The two remaining high rows
+  are the paired Lucid/Faker finding whose published fix requires a dedicated Adonis/
+  Lucid major migration. See `DEPENDENCY_SECURITY_AUDIT.md`; keep the service LAN-only.
 - [x] Publish the reviewed work to the public GitHub fork at `https://github.com/GreySkrene/project-nomad`.
 
 ## J. Resumable checkpoint — 2026-11-19 America/Denver

@@ -8,7 +8,8 @@ import Map, {
   Source,
 } from 'react-map-gl/maplibre'
 import type { MapLayerMouseEvent, MapRef } from 'react-map-gl/maplibre'
-import maplibregl from 'maplibre-gl'
+import * as maplibregl from 'maplibre-gl'
+import maplibreWorkerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url'
 import 'maplibre-gl/dist/maplibre-gl.css'
 
 import { Protocol } from 'pmtiles'
@@ -26,6 +27,10 @@ import RoutePlannerPanel from './RoutePlannerPanel'
 import type { RoutePickTarget } from '~/lib/route_planner'
 import { decodeValhallaPolyline6 } from '~/lib/route_planner'
 import type { OfflineRouteOption } from '~/lib/route_planner'
+
+// MapLibre v6 is ESM-only. Vite must emit the worker as its own versioned asset;
+// relying on a package-relative runtime URL breaks in a bundled offline build.
+maplibregl.setWorkerUrl(maplibreWorkerUrl)
 
 type ScaleUnit = 'imperial' | 'metric' | 'nautical'
 

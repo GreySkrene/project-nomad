@@ -42,6 +42,13 @@ checked. NOMAD admin and routing reported healthy; the remaining previously inst
 services retained their verified state. Kiwix 3.8.2, Kolibri 0.19.5, and FlatNotes
 5.5.5 were shown as available updates; they have not been applied or compatibility-tested.
 
+The 2026-11-23 production dependency hardening pass reduced `npm audit --omit=dev`
+from 59 package rows (3 critical and 20 high) to 20 (0 critical and 2 high), without
+using `npm audit fix --force`. MapLibre 6.19.0, Sharp 0.35.5, libzim 4.7.0, tar 7.5.23,
+systeminformation 5.33.24, and the other pinned fixes passed the Linux image build and
+live checks. The remaining paired Lucid/Faker high finding requires a dedicated Adonis/
+Lucid major migration; details are in `DEPENDENCY_SECURITY_AUDIT.md`.
+
 ## 3. Storage and downloaded content
 
 Measured logical storage under `/opt/project-nomad/storage` is approximately **80.4 GiB**, below the requested 100 GB ceiling:
