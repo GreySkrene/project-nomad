@@ -158,10 +158,11 @@ the separate project. Content and UI validation do not require local generation.
   Limit coordinates, waypoint counts, route length, timeouts, and accepted options;
   keep the routing container private to NOMAD's Docker network rather than exposing
   it directly to the LAN.
-- [-] Add a map route planner that can choose saved pins, clicked points, or entered
+- [x] Add a map route planner that can choose saved pins, clicked points, or entered
   coordinates as start/destination/waypoints. Draw the selected and alternate routes,
   fit the map to the result, and show distance, estimated time, and a readable
-  turn-by-turn list. The selected route is complete; alternate-route display remains.
+  turn-by-turn list. The backend now preserves Valhalla's alternate result; the UI
+  displays both routes, distinguishes the selected route, and lets the user switch.
 - [x] Add route modes and controls: driving, walking, cycling; fastest versus shorter;
   avoid/prefer highways; avoid tolls, ferries, unpaved roads, and tracks. Label
   avoidance settings as preferences rather than guarantees and explain when no route
@@ -173,11 +174,11 @@ the separate project. Content and UI validation do not require local generation.
   loaded, and deleted locally and are explicitly distinguished from calculated
   directions. The installed local graph now calculates and draws routes; browser QA
   confirmed the 258.5-mile Riverton-to-Rexburg route and all 37 maneuvers.
-- [-] Make routes useful during outages: save named routes and route settings locally,
+- [x] Make routes useful during outages: save named routes and route settings locally,
   export/print directions and GPX where practical, preserve the last successful route,
   and display the routing-data snapshot date. Named setups, the last successful route,
-  readable direction export, GPX export, and the snapshot label are implemented;
-  a dedicated print layout remains. Never imply that the result includes
+  selected alternate, readable direction export, GPX export, snapshot label, and a
+  dedicated paper directions layout are implemented. Never imply that the result includes
   live closures, evacuation orders, traffic, fires, weather, or road damage.
 - [ ] **Routing phase 2 — measured regional expansion:** after the Utah/Idaho proof
   passes, preflight a western-state graph that covers practical alternate corridors.

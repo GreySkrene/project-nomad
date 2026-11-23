@@ -50,10 +50,18 @@ const routeResult = {
   warnings: [],
   snapshotDate: '2026-11-23',
   liveConditionsIncluded: false as const,
+  alternates: [],
 }
 
 test('validates persisted route results before restoring them', () => {
   assert.deepEqual(normalizeOfflineRouteResult(routeResult), routeResult)
+  assert.deepEqual(
+    normalizeOfflineRouteResult({
+      ...routeResult,
+      alternates: [{ ...routeResult, alternates: [] }],
+    })?.alternates[0].summary,
+    routeResult.summary
+  )
   assert.equal(normalizeOfflineRouteResult({ summary: {}, legs: [] }), null)
 })
 

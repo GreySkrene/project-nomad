@@ -295,3 +295,82 @@ body {
 .themed-scrollbar:focus::-webkit-scrollbar-thumb:hover {
   background-color: var(--color-text-muted);
 }
+
+@media print {
+  @page {
+    margin: 0.55in;
+  }
+
+  body * {
+    visibility: hidden !important;
+  }
+
+  body > *:not(.nomad-route-print) {
+    display: none !important;
+  }
+
+  .nomad-route-print,
+  .nomad-route-print * {
+    visibility: visible !important;
+  }
+
+  .nomad-route-print {
+    display: block !important;
+    position: static;
+    width: 100%;
+    color: #111827;
+    background: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.35;
+  }
+
+  .nomad-route-print header {
+    margin-bottom: 18pt;
+    padding-bottom: 10pt;
+    border-bottom: 2pt solid #c2410c;
+  }
+
+  .nomad-route-print header > p:first-child {
+    margin: 0 0 5pt;
+    color: #9a3412;
+    font-size: 8.5pt;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+  }
+
+  .nomad-route-print h1 {
+    margin: 0 0 4pt;
+    font-size: 20pt;
+  }
+
+  .nomad-route-print h2 {
+    margin: 15pt 0 7pt;
+    font-size: 12pt;
+  }
+
+  .nomad-route-print p {
+    margin: 3pt 0;
+  }
+
+  .nomad-route-print-warning {
+    margin: 14pt 0;
+    padding: 8pt 10pt;
+    border: 1pt solid #b45309;
+    background: #fffbeb;
+  }
+
+  .nomad-route-print ol {
+    margin: 0;
+    padding-left: 22pt;
+  }
+
+  .nomad-route-print li {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 10pt;
+    padding: 5pt 0;
+    border-bottom: 0.5pt solid #d1d5db;
+    break-inside: avoid;
+  }
+}

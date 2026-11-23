@@ -64,6 +64,19 @@ test('normalizes only the response fields exposed to the browser', () => {
           },
         ],
       },
+      alternates: [
+        {
+          trip: {
+            summary: { length: 14.25, time: 1_020, has_highway: false },
+            legs: [
+              {
+                shape: 'alternate-encoded',
+                maneuvers: [{ instruction: 'Bear left.', length: 2.1, time: 90 }],
+              },
+            ],
+          },
+        },
+      ],
     },
     '2026-11-23'
   )
@@ -71,4 +84,7 @@ test('normalizes only the response fields exposed to the browser', () => {
   assert.equal(result.legs[0].maneuvers[0].instruction, 'Turn right.')
   assert.equal(result.snapshotDate, '2026-11-23')
   assert.equal(result.liveConditionsIncluded, false)
+  assert.equal(result.alternates.length, 1)
+  assert.equal(result.alternates[0].summary.distanceMiles, 14.25)
+  assert.equal(result.alternates[0].legs[0].maneuvers[0].instruction, 'Bear left.')
 })

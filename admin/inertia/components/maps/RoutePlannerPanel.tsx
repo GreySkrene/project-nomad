@@ -1,10 +1,12 @@
 import { useEffect, useMemo, useState } from 'react'
+import { createPortal } from 'react-dom'
 import {
   IconAlertTriangle,
   IconArrowsExchange,
   IconCheck,
   IconDownload,
   IconLoader2,
+  IconPrinter,
   IconRoute,
   IconX,
 } from '@tabler/icons-react'
@@ -26,6 +28,7 @@ import type {
   RouteDraft,
   RouteEndpoint,
   OfflineRouteHealth,
+  OfflineRouteOption,
   OfflineRouteResult,
   RoutePickTarget,
   SavedRoutePlan,
@@ -34,6 +37,7 @@ import type {
 const ROUTE_DRAFT_KEY = 'nomad:route-draft'
 const SAVED_ROUTE_PLANS_KEY = 'nomad:saved-route-plans'
 const LAST_ROUTE_RESULT_KEY = 'nomad:last-route-result'
+const LAST_ROUTE_SELECTION_KEY = 'nomad:last-route-selection'
 
 const downloadTextFile = (contents: string, filename: string, type: string) => {
   const url = URL.createObjectURL(new Blob([contents], { type }))
@@ -178,7 +182,7 @@ export default function RoutePlannerPanel({
     longitude: number
     latitude: number
   } | null
-  onRouteResult: (result: OfflineRouteResult | null) => void
+  onRouteResult: (result: OfflineRouteOption | null, alternates: OfflineRouteOption[]) => void
 }) {
   const [open, setOpen] = useState(false)
   const [draft, setDraft] = useState<RouteDraft>(() => {
@@ -210,6 +214,16 @@ export default function RoutePlannerPanel({
   })
   const [routingError, setRoutingError] = useState<string | null>(null)
   const [isCalculating, setIsCalculating] = useState(false)
+  const [selectedRouteIndex, setSelectedRouteIndex] = useState(() => {
+    const stored = Number(localStorage.getItem(LAST_ROUTE_SELECTION_KEY))
+    return Number.isInteger(stored) && stored >= 0 ? stored : 0
+  })
+
+  const routeOptions = useMemo(
+    () => (routeResult ? [routeResult, ...routeResult.alternates] : []),
+    [routeResult]
+  )
+  const selectedRoute = routeOptions[selectedRouteIndex] ?? routeOptions[0] ?? null
 
   useEffect(() => {
     let cancelled = false
@@ -261,8 +275,20 @@ export default function RoutePlannerPanel({
     } catch {
       // The last result remains available for this session if browser storage fails.
     }
-    onRouteResult(routeResult)
-  }, [routeResult, onRouteResult])
+    if (selectedRouteIndex >= routeOptions.length && routeOptions.length > 0) {
+      setSelectedRouteIndex(0)
+      return
+    }
+    try {
+      localStorage.setItem(LAST_ROUTE_SELECTION_KEY, String(selectedRouteIndex))
+    } catch {
+      // Selection still works for this session if browser storage fails.
+    }
+    onRouteResult(
+      selectedRoute,
+      routeOptions.filter((_, index) => index !== selectedRouteIndex)
+    )
+  }, [routeResult, routeOptions, selectedRoute, selectedRouteIndex, onRouteResult])
 
   useEffect(() => {
     if (!pickedMapPoint) return
@@ -326,7 +352,9 @@ export default function RoutePlannerPanel({
           'message' in body && body.message ? body.message : 'Route calculation failed.'
         )
       }
-      const result = body as OfflineRouteResult
+      const result = normalizeOfflineRouteResult(body)
+      if (!result) throw new Error('Routing engine returned an unreadable route response.')
+      setSelectedRouteIndex(0)
       setRouteResult(result)
     } catch (error) {
       setRoutingError(error instanceof Error ? error.message : 'Route calculation failed.')
@@ -407,7 +435,7 @@ export default function RoutePlannerPanel({
   }
 
   return (
-    <section className="absolute right-4 top-[72px] z-40 w-[min(24rem,calc(100vw-2rem))] overflow-hidden rounded-lg border border-border-subtle bg-surface-primary/95 shadow-xl backdrop-blur-sm">
+    <section className="nomad-route-panel absolute right-4 top-[72px] z-40 w-[min(24rem,calc(100vw-2rem))] overflow-hidden rounded-lg border border-border-subtle bg-surface-primary/95 shadow-xl backdrop-blur-sm">
       <header className="flex items-center justify-between border-b border-border-subtle px-4 py-3">
         <div className="flex items-center gap-2">
           <IconRoute size={20} className="text-desert-orange" />
@@ -429,7 +457,7 @@ export default function RoutePlannerPanel({
         </button>
       </header>
 
-      <div className="max-h-[calc(100vh-9rem)] space-y-4 overflow-y-auto p-4">
+      <div className="nomad-route-panel-content max-h-[calc(100vh-9rem)] space-y-4 overflow-y-auto p-4">
         <div
           className={`flex gap-2 rounded border p-3 text-xs leading-5 text-text-secondary ${
             routingHealth?.available
@@ -723,15 +751,50 @@ export default function RoutePlannerPanel({
           </div>
         )}
 
-        {routeResult && (
+        {selectedRoute && (
           <section className="space-y-3 rounded border border-desert-green/40 bg-surface-secondary/70 p-3">
+            {routeOptions.length > 1 && (
+              <div className="grid grid-cols-2 gap-2" aria-label="Available offline routes">
+                {routeOptions.map((option, index) => {
+                  const extraMinutes = Math.max(
+                    0,
+                    Math.round(
+                      (option.summary.timeSeconds - routeOptions[0].summary.timeSeconds) / 60
+                    )
+                  )
+                  return (
+                    <button
+                      key={`${index}-${option.summary.distanceMiles}-${option.summary.timeSeconds}`}
+                      type="button"
+                      onClick={() => setSelectedRouteIndex(index)}
+                      aria-pressed={selectedRouteIndex === index}
+                      className={`rounded border px-2.5 py-2 text-left transition-colors ${
+                        selectedRouteIndex === index
+                          ? 'border-desert-orange bg-desert-orange/10 text-text-primary'
+                          : 'border-border-default bg-surface-primary text-text-secondary hover:border-desert-orange/60'
+                      }`}
+                    >
+                      <span className="block text-xs font-bold">
+                        {index === 0 ? 'Primary route' : `Alternate ${index}`}
+                      </span>
+                      <span className="block text-[11px] text-text-muted">
+                        {option.summary.distanceMiles.toFixed(1)} mi ·{' '}
+                        {Math.max(1, Math.round(option.summary.timeSeconds / 60))} min
+                        {index > 0 && extraMinutes > 0 ? ` · +${extraMinutes} min` : ''}
+                      </span>
+                    </button>
+                  )
+                })}
+              </div>
+            )}
             <div>
               <h3 className="text-sm font-bold text-text-primary">
-                {routeResult.summary.distanceMiles.toFixed(1)} miles ·{' '}
-                {Math.max(1, Math.round(routeResult.summary.timeSeconds / 60))} minutes
+                {selectedRoute.summary.distanceMiles.toFixed(1)} miles ·{' '}
+                {Math.max(1, Math.round(selectedRoute.summary.timeSeconds / 60))} minutes
               </h3>
               <p className="text-[11px] text-text-muted">
-                Calculated from the offline {routeResult.snapshotDate ?? 'installed'} snapshot.
+                {selectedRouteIndex === 0 ? 'Primary' : `Alternate ${selectedRouteIndex}`} route ·
+                calculated from the offline {selectedRoute.snapshotDate ?? 'installed'} snapshot.
               </p>
             </div>
             <div className="flex flex-wrap gap-2">
@@ -740,7 +803,7 @@ export default function RoutePlannerPanel({
                 onClick={() =>
                   downloadTextFile(
                     routeResultToText(
-                      routeResult,
+                      selectedRoute,
                       routeName.trim() || 'Project NOMAD offline route'
                     ),
                     'nomad-offline-route.txt',
@@ -756,7 +819,7 @@ export default function RoutePlannerPanel({
                 onClick={() =>
                   downloadTextFile(
                     routeResultToGpx(
-                      routeResult,
+                      selectedRoute,
                       routeName.trim() || 'Project NOMAD offline route'
                     ),
                     'nomad-offline-route.gpx',
@@ -769,14 +832,24 @@ export default function RoutePlannerPanel({
               </button>
               <button
                 type="button"
-                onClick={() => setRouteResult(null)}
+                onClick={() => window.print()}
+                className="flex items-center gap-1.5 rounded border border-border-default px-2.5 py-1.5 text-xs font-semibold text-text-secondary hover:bg-surface-primary"
+              >
+                <IconPrinter size={14} /> Print
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setSelectedRouteIndex(0)
+                  setRouteResult(null)
+                }}
                 className="ml-auto rounded px-2 py-1 text-xs font-semibold text-text-muted hover:text-desert-red"
               >
                 Clear route
               </button>
             </div>
             <ol className="max-h-56 space-y-2 overflow-y-auto border-t border-border-subtle pt-2 text-xs text-text-secondary">
-              {routeResult.legs
+              {selectedRoute.legs
                 .flatMap((leg) => leg.maneuvers)
                 .map((maneuver, index) => (
                   <li key={`${index}-${maneuver.beginShapeIndex}`} className="flex gap-2">
@@ -792,6 +865,70 @@ export default function RoutePlannerPanel({
                   </li>
                 ))}
             </ol>
+            {createPortal(
+              <article className="nomad-route-print hidden" aria-hidden="true">
+                <header>
+                  <p>PROJECT NOMAD · OFFLINE DIRECTIONS</p>
+                  <h1>{routeName.trim() || 'Emergency route'}</h1>
+                  <p>
+                    {selectedRoute.summary.distanceMiles.toFixed(1)} miles ·{' '}
+                    {Math.max(1, Math.round(selectedRoute.summary.timeSeconds / 60))} minutes ·{' '}
+                    {selectedRouteIndex === 0 ? 'Primary route' : `Alternate ${selectedRouteIndex}`}
+                  </p>
+                </header>
+                <section>
+                  <h2>Route setup</h2>
+                  <p>
+                    <strong>Start:</strong>{' '}
+                    {draft.start.kind === 'pin'
+                      ? markers.find((marker) => marker.id === Number(draft.start.value))?.name ||
+                        'Missing saved pin'
+                      : draft.start.value}
+                  </p>
+                  {draft.waypoints.map((waypoint, index) => (
+                    <p key={waypoint.id}>
+                      <strong>Stop {index + 1}:</strong>{' '}
+                      {waypoint.endpoint.kind === 'pin'
+                        ? markers.find((marker) => marker.id === Number(waypoint.endpoint.value))
+                            ?.name || 'Missing saved pin'
+                        : waypoint.endpoint.value}
+                    </p>
+                  ))}
+                  <p>
+                    <strong>Destination:</strong>{' '}
+                    {draft.destination.kind === 'pin'
+                      ? markers.find((marker) => marker.id === Number(draft.destination.value))
+                          ?.name || 'Missing saved pin'
+                      : draft.destination.value}
+                  </p>
+                  <p>
+                    <strong>Mode:</strong> {draft.mode} · <strong>Priority:</strong>{' '}
+                    {draft.priority} · <strong>Highways:</strong> {draft.highwayPreference}
+                  </p>
+                </section>
+                <section className="nomad-route-print-warning">
+                  <strong>
+                    Offline snapshot: {selectedRoute.snapshotDate ?? 'date unavailable'}.
+                  </strong>{' '}
+                  No live traffic, closures, evacuation orders, fires, weather, or road damage are
+                  included. Verify conditions when live information is available.
+                </section>
+                <h2>Turn-by-turn directions</h2>
+                <ol>
+                  {selectedRoute.legs
+                    .flatMap((leg) => leg.maneuvers)
+                    .map((maneuver, index) => (
+                      <li key={`print-${index}-${maneuver.beginShapeIndex}`}>
+                        <span>{maneuver.instruction}</span>
+                        {maneuver.distanceMiles > 0 && (
+                          <strong>{maneuver.distanceMiles.toFixed(1)} mi</strong>
+                        )}
+                      </li>
+                    ))}
+                </ol>
+              </article>,
+              document.body
+            )}
           </section>
         )}
 

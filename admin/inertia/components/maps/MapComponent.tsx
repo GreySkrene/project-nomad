@@ -25,7 +25,7 @@ import ScaleUnitToggle from './ScaleUnitSelector'
 import RoutePlannerPanel from './RoutePlannerPanel'
 import type { RoutePickTarget } from '~/lib/route_planner'
 import { decodeValhallaPolyline6 } from '~/lib/route_planner'
-import type { OfflineRouteResult } from '~/lib/route_planner'
+import type { OfflineRouteOption } from '~/lib/route_planner'
 
 type ScaleUnit = 'imperial' | 'metric' | 'nautical'
 
@@ -162,6 +162,9 @@ export default function MapComponent({
     latitude: number
   } | null>(null)
   const [routeCoordinates, setRouteCoordinates] = useState<[number, number][]>([])
+  const [alternateRouteCoordinates, setAlternateRouteCoordinates] = useState<[number, number][][]>(
+    []
+  )
 
   const getInitialScaleUnit = (): ScaleUnit => {
     const stored = localStorage.getItem('nomad:map-scale-unit')
@@ -359,25 +362,34 @@ export default function MapComponent({
     mapRef.current?.flyTo({ center: [longitude, latitude], zoom: 12, duration: 1500 })
   }, [])
 
-  const handleRouteResult = useCallback((result: OfflineRouteResult | null) => {
-    if (!result) {
-      setRouteCoordinates([])
-      return
-    }
-    try {
-      const coordinates = result.legs.flatMap((leg) => decodeValhallaPolyline6(leg.shape))
-      setRouteCoordinates(coordinates)
-      if (coordinates.length > 1) {
-        const bounds = coordinates.reduce(
-          (current, coordinate) => current.extend(coordinate),
-          new maplibregl.LngLatBounds(coordinates[0], coordinates[0])
-        )
-        mapRef.current?.fitBounds(bounds, { padding: 70, duration: 1_000, maxZoom: 14 })
+  const handleRouteResult = useCallback(
+    (result: OfflineRouteOption | null, alternates: OfflineRouteOption[]) => {
+      if (!result) {
+        setRouteCoordinates([])
+        setAlternateRouteCoordinates([])
+        return
       }
-    } catch {
-      setRouteCoordinates([])
-    }
-  }, [])
+      try {
+        const coordinates = result.legs.flatMap((leg) => decodeValhallaPolyline6(leg.shape))
+        const decodedAlternates = alternates
+          .map((alternate) => alternate.legs.flatMap((leg) => decodeValhallaPolyline6(leg.shape)))
+          .filter((alternate) => alternate.length > 1)
+        setRouteCoordinates(coordinates)
+        setAlternateRouteCoordinates(decodedAlternates)
+        if (coordinates.length > 1) {
+          const bounds = coordinates.reduce(
+            (current, coordinate) => current.extend(coordinate),
+            new maplibregl.LngLatBounds(coordinates[0], coordinates[0])
+          )
+          mapRef.current?.fitBounds(bounds, { padding: 70, duration: 1_000, maxZoom: 14 })
+        }
+      } catch {
+        setRouteCoordinates([])
+        setAlternateRouteCoordinates([])
+      }
+    },
+    []
+  )
 
   const handleDeleteMarker = useCallback(
     (id: number) => {
@@ -456,6 +468,30 @@ export default function MapComponent({
           <NavigationControl style={{ marginTop: '110px', marginRight: '36px' }} />
           <FullscreenControl style={{ marginTop: '30px', marginRight: '36px' }} />
           <ScaleControl position="bottom-left" maxWidth={150} unit={scaleUnit} />
+
+          {alternateRouteCoordinates.map((coordinates, index) => (
+            <Source
+              key={`offline-route-alternate-${index}`}
+              id={`offline-route-alternate-${index}`}
+              type="geojson"
+              data={{
+                type: 'Feature',
+                properties: {},
+                geometry: { type: 'LineString', coordinates },
+              }}
+            >
+              <Layer
+                id={`offline-route-alternate-line-${index}`}
+                type="line"
+                paint={{
+                  'line-color': '#94a3b8',
+                  'line-width': 4,
+                  'line-opacity': 0.75,
+                  'line-dasharray': [2, 2],
+                }}
+              />
+            </Source>
+          ))}
 
           {routeCoordinates.length > 1 && (
             <Source

@@ -112,27 +112,46 @@ const normalizeManeuvers = (value: unknown) => {
 export const normalizeValhallaResponse = (value: unknown, snapshotDate: string | null) => {
   if (!value || typeof value !== 'object') throw new Error('Routing engine returned invalid data.')
   const root = value as { trip?: unknown; alternates?: unknown }
-  const trip = root.trip as ValhallaTrip | undefined
-  if (!trip || !Array.isArray(trip.legs)) throw new Error('Routing engine returned no route legs.')
+  const normalizeTrip = (rawTrip: unknown) => {
+    const trip = rawTrip as ValhallaTrip | undefined
+    if (!trip || !Array.isArray(trip.legs))
+      throw new Error('Routing engine returned no route legs.')
 
-  const legs = (trip.legs as ValhallaLeg[]).map((leg) => {
-    if (typeof leg.shape !== 'string') throw new Error('Routing engine omitted route geometry.')
-    return { shape: leg.shape, maneuvers: normalizeManeuvers(leg.maneuvers) }
-  })
-  const summary = trip.summary ?? {}
+    const legs = (trip.legs as ValhallaLeg[]).map((leg) => {
+      if (typeof leg.shape !== 'string') throw new Error('Routing engine omitted route geometry.')
+      return { shape: leg.shape, maneuvers: normalizeManeuvers(leg.maneuvers) }
+    })
+    const summary = trip.summary ?? {}
+
+    return {
+      summary: {
+        distanceMiles: finiteNumber(summary.length),
+        timeSeconds: finiteNumber(summary.time),
+        hasHighway: summary.has_highway === true,
+        hasToll: summary.has_toll === true,
+        hasFerry: summary.has_ferry === true,
+      },
+      legs,
+      warnings: Array.isArray(trip.warnings) ? trip.warnings : [],
+      snapshotDate,
+      liveConditionsIncluded: false as const,
+    }
+  }
+
+  const primary = normalizeTrip(root.trip)
+  const alternates = Array.isArray(root.alternates)
+    ? root.alternates
+        .map((alternate) =>
+          alternate && typeof alternate === 'object'
+            ? normalizeTrip((alternate as { trip?: unknown }).trip)
+            : null
+        )
+        .filter((alternate): alternate is NonNullable<typeof alternate> => alternate !== null)
+    : []
 
   return {
-    summary: {
-      distanceMiles: finiteNumber(summary.length),
-      timeSeconds: finiteNumber(summary.time),
-      hasHighway: summary.has_highway === true,
-      hasToll: summary.has_toll === true,
-      hasFerry: summary.has_ferry === true,
-    },
-    legs,
-    warnings: Array.isArray(trip.warnings) ? trip.warnings : [],
-    snapshotDate,
-    liveConditionsIncluded: false,
+    ...primary,
+    alternates,
   }
 }
 

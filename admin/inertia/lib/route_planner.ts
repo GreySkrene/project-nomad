@@ -41,7 +41,7 @@ export type OfflineRouteHealth = {
   liveConditionsIncluded: false
 }
 
-export type OfflineRouteResult = {
+export type OfflineRouteOption = {
   summary: {
     distanceMiles: number
     timeSeconds: number
@@ -64,7 +64,11 @@ export type OfflineRouteResult = {
   liveConditionsIncluded: false
 }
 
-export const normalizeOfflineRouteResult = (value: unknown): OfflineRouteResult | null => {
+export type OfflineRouteResult = OfflineRouteOption & {
+  alternates: OfflineRouteOption[]
+}
+
+const normalizeOfflineRouteOption = (value: unknown): OfflineRouteOption | null => {
   if (!value || typeof value !== 'object') return null
   const result = value as Record<string, unknown>
   const summary = result.summary as Record<string, unknown> | undefined
@@ -80,7 +84,7 @@ export const normalizeOfflineRouteResult = (value: unknown): OfflineRouteResult 
     return null
   }
 
-  const legs = result.legs.filter((leg): leg is OfflineRouteResult['legs'][number] => {
+  const legs = result.legs.filter((leg): leg is OfflineRouteOption['legs'][number] => {
     if (!leg || typeof leg !== 'object') return false
     const candidate = leg as Record<string, unknown>
     return (
@@ -102,11 +106,26 @@ export const normalizeOfflineRouteResult = (value: unknown): OfflineRouteResult 
   if (legs.length !== result.legs.length) return null
 
   return {
-    summary: summary as OfflineRouteResult['summary'],
+    summary: summary as OfflineRouteOption['summary'],
     legs,
     warnings: Array.isArray(result.warnings) ? result.warnings : [],
     snapshotDate: typeof result.snapshotDate === 'string' ? result.snapshotDate : null,
     liveConditionsIncluded: false,
+  }
+}
+
+export const normalizeOfflineRouteResult = (value: unknown): OfflineRouteResult | null => {
+  const primary = normalizeOfflineRouteOption(value)
+  if (!primary || !value || typeof value !== 'object') return null
+  const rawAlternates = (value as Record<string, unknown>).alternates
+  const alternates = Array.isArray(rawAlternates)
+    ? rawAlternates.map(normalizeOfflineRouteOption)
+    : []
+  if (alternates.some((alternate) => alternate === null)) return null
+
+  return {
+    ...primary,
+    alternates: alternates as OfflineRouteOption[],
   }
 }
 
@@ -273,7 +292,7 @@ const xmlEscape = (value: string) =>
     return entities[character]
   })
 
-export const routeResultToGpx = (result: OfflineRouteResult, name: string) => {
+export const routeResultToGpx = (result: OfflineRouteOption, name: string) => {
   const points = result.legs.flatMap((leg, legIndex) => {
     const decoded = decodeValhallaPolyline6(leg.shape)
     return legIndex === 0 ? decoded : decoded.slice(1)
@@ -294,7 +313,7 @@ ${track}
 `
 }
 
-export const routeResultToText = (result: OfflineRouteResult, name: string) => {
+export const routeResultToText = (result: OfflineRouteOption, name: string) => {
   const minutes = Math.max(1, Math.round(result.summary.timeSeconds / 60))
   const directions = result.legs
     .flatMap((leg) => leg.maneuvers)

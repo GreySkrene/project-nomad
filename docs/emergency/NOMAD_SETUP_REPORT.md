@@ -203,6 +203,21 @@ produced both `.txt` directions and a `.gpx` track download. The Information Loo
 18 Kiwix libraries and 158 stored documents; delayed browser QA then rendered all 18
 library cards and six visible Supplemental labels.
 
+The 2026-11-23 follow-up traced a missing UI capability to the backend response
+normalizer: the request already asked Valhalla for one alternate, and the live engine
+returned it, but NOMAD discarded the top-level `alternates` array. The verified
+West-Jordan-area-to-Rexburg sample returned a 250.745-mile primary route and a
+262.9084-mile alternate. NOMAD now validates and preserves both, displays the
+non-selected route as a muted dashed line, lets the user select either summary, and
+persists that selection across reloads. Text and GPX exports use the selected route.
+A dedicated print view adds route endpoints, mode/preferences, snapshot date, the
+no-live-conditions warning, and full turn-by-turn directions without printing the map
+application chrome. Thirteen focused routing tests, TypeScript, and the production
+Vite/Adonis build passed. Deployed headless-Edge QA selected the alternate, rendered
+the paper view from page one, hid the map chrome, generated a 57,456-byte PDF, and
+reported no browser console errors. Physically disconnected printing remains part of
+final acceptance.
+
 The production Docker build completed its Vite and TypeScript compilation. Live HTTP checks returned 200 for the home page, maps, documentation, Kiwix, and Kolibri; `/api/health` returned `{"status":"ok"}`. Rendered browser QA was performed for both the dashboard and Field Manual documentation in dark mode. A rollback copy of the prior Compose file is stored at `/opt/project-nomad/compose.yml.pre-night-manual-20261116`.
 
 The local image is intentionally pinned with `pull_policy: never`. A future official NOMAD update may replace or bypass the customized image, so rebuild/review this interface against the new upstream version before changing that pin.
