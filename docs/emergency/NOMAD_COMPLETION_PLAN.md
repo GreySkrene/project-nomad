@@ -38,9 +38,11 @@ download and show the exact deletion target before deleting data.
    through NOMAD with range requests, and returns zoom-15 tiles for Vancouver,
    Burnaby, Victoria, and Kelowna. The existing 33,788,916,131-byte continental map
    remains installed and no download job remains active.
-5. [ ] **Supplemental/noise review** — decide whether Gardening Stack Exchange and the
-   other Q&A archives earn their storage after coherent replacements are in place.
-   They are labeled supplemental, not core. Remove only with explicit target review.
+5. [!] **Supplemental/noise review** — the evidence-backed storage decision is complete
+   in `SUPPLEMENTAL_STORAGE_REVIEW.md`. Keep DIY, Mechanics, and Cooking Q&A as visibly
+   supplemental. Gardening and Woodworking Q&A are exact removal candidates totaling
+   1,039,754,662 bytes (0.97 GiB). Their live paths and post-delete reconciliation steps
+   are recorded; deletion still requires explicit approval of those exact targets.
 6. [-] **Cleanup after replacements** — the 239-byte verification artifact is removed;
    inventories, manifests, hashes, Kiwix, and Qdrant are reconciled. The remaining
    cleanup gate is the physically disconnected/reboot acceptance test.

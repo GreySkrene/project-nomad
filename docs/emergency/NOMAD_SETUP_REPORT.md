@@ -222,6 +222,18 @@ The production Docker build completed its Vite and TypeScript compilation. Live 
 
 The local image is intentionally pinned with `pull_policy: never`. A future official NOMAD update may replace or bypass the customized image, so rebuild/review this interface against the new upstream version before changing that pin.
 
+### Supplemental Q&A storage decision
+
+The 2026-11-23 storage review reconciled the five installed Stack Exchange archives
+against their content-level audit rather than their download status. They total
+3,705,549,249 bytes (3.45 GiB). Home Improvement, Mechanics, and Cooking remain useful
+as clearly labeled secondary troubleshooting sources. Gardening Q&A and Woodworking
+Q&A are removal candidates totaling 1,039,754,662 bytes (0.97 GiB): Gardenology now
+covers the encyclopedia role much more compactly, and Woodworking had little direct
+emergency value. No archive was deleted. Exact paths, rationale, and post-removal
+checks are in `SUPPLEMENTAL_STORAGE_REVIEW.md`; explicit target approval remains the
+cleanup gate.
+
 Kolibri's supported device setting `allow_guest_access` is enabled. NOMAD's Education Platform tile opens `/en/learn/` directly, bypassing Kolibri's optional sign-in landing page for normal use. The existing Kolibri administrator account was deliberately preserved for future content and facility administration.
 
 ## 10. Tests still required
