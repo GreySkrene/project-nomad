@@ -164,6 +164,11 @@ the separate project. Content and UI validation do not require local generation.
   avoid/prefer highways; avoid tolls, ferries, unpaved roads, and tracks. Label
   avoidance settings as preferences rather than guarantees and explain when no route
   is available within the installed graph.
+- [x] Add the truthful route-planner UI foundation: saved-pin or validated-coordinate
+  endpoints, endpoint swapping, driving/walking/cycling modes, fastest/shorter and
+  highway/toll preferences, and durable browser-local draft state. Route calculation
+  remains visibly disabled until the separate local routing graph/service is installed;
+  clicked points, waypoints, results, directions, and additional avoidances remain unfinished.
 - [ ] Make routes useful during outages: save named routes and route settings locally,
   export/print directions and GPX where practical, preserve the last successful route,
   and display the routing-data snapshot date. Never imply that the result includes
@@ -217,13 +222,15 @@ the separate project. Content and UI validation do not require local generation.
   article/media metadata, and 13 useful document sets with direct original-file access.
 - [x] Perform hands-on user review and collect any layout/content refinements; the
   Browse Library was reviewed and accepted on 2026-11-19.
-- [-] After content acceptance, inspect the presentation of every installed resource
+- [x] After content acceptance, inspect the presentation of every installed resource
   in its real offline reader. Improve collection landing pages, backgrounds,
   typography, spacing, chapter navigation, image treatment, and quick-reference
   formatting to match Night Operations + Field Manual where technically safe. All
   18 Kiwix entry pages return 200; seven representative reader families were
   render-inspected; NOMAD now labels reader/visual formats and repairs compact
-  Wikipedia's poor default entry point. Original source CSS remains unchanged.
+  Wikipedia's poor default entry point. Original source CSS remains unchanged. The
+  audit concluded that blanket reader CSS injection would be brittle and could obscure
+  authoritative warnings or diagrams, so the maintainable presentation pass is complete.
 - [x] Document which presentation layers NOMAD controls directly versus Kiwix,
   Kolibri, embedded PDFs, and archived-site CSS; prefer maintainable theme adapters
   and per-source fixes over modifying original authoritative content. See

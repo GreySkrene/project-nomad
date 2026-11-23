@@ -158,7 +158,7 @@ NOMAD citations identify the stored title/file/path. PDF page numbers are not pr
 | PDF page citations | Not supported |
 | Safety-critical generated answers | Not accepted; source verification required |
 | Map pan/zoom | Installed; final disconnected regional visual check pending |
-| Map routing/address search | Not implemented in NOMAD |
+| Map routing/address search | Route setup UI is installed for saved pins/coordinates and preferences; calculation and address search remain unavailable until a local routing graph/geocoder is installed |
 | Satellite map layer | Not present |
 | Live alerts/closures/fires/volcano status | Cannot be supplied by offline data; live verification required |
 | Authentication | NOMAD has no built-in authentication; do not expose it to the internet |
@@ -175,6 +175,13 @@ indexing is optional, so the emergency document workflow remains usable while LM
 Studio is reserved for another project. The production build and TypeScript check
 passed, and the deployed Manual-ingest sync regression check queued zero jobs.
 
+On 2026-11-23 the Maps page gained a truthful offline route-planner foundation. It
+stores start/destination choices and route preferences in the browser and can use
+saved NOMAD pins or validated coordinates. Calculation remains visibly disabled:
+the installed PMTiles provide map rendering, not the connected road graph required
+for directions. The prior admin image is retained locally as
+`project-nomad-local:pre-route-ui-20261123` for rollback.
+
 The production Docker build completed its Vite and TypeScript compilation. Live HTTP checks returned 200 for the home page, maps, documentation, Kiwix, and Kolibri; `/api/health` returned `{"status":"ok"}`. Rendered browser QA was performed for both the dashboard and Field Manual documentation in dark mode. A rollback copy of the prior Compose file is stored at `/opt/project-nomad/compose.yml.pre-night-manual-20261116`.
 
 The local image is intentionally pinned with `pull_policy: never`. A future official NOMAD update may replace or bypass the customized image, so rebuild/review this interface against the new upstream version before changing that pin.
@@ -188,7 +195,8 @@ Kolibri's supported device setting `allow_guest_access` is enabled. NOMAD's Educ
 3. Test street-level map rendering in Salt Lake Valley, Davis/Weber, Marysvale/Piute, Rexburg/Madison, and connecting corridors.
 4. Confirm local embedding/search with both LM Link peers unavailable.
 5. Measure library-only, 4B, and 8B power draw.
-6. Decide on a separate offline navigation application for address search and routing.
+6. Build and validate the planned Utah/Idaho local routing graph, then connect it to
+   the installed route-planner UI; address search remains a later measured phase.
 7. Test restricted iPhone LAN access only after explicit approval; NOMAD has no authentication.
 
 ## 10A. Public fork verification

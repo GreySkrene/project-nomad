@@ -20,6 +20,7 @@ import CoordinateOverlay from './CoordinateOverlay'
 import ViewMapMarkerPopup from './ViewMapMarkerPopup'
 import MapMarkerFormPopup from './MapMarkerFormPopup'
 import ScaleUnitToggle from './ScaleUnitSelector'
+import RoutePlannerPanel from './RoutePlannerPanel'
 
 type ScaleUnit = 'imperial' | 'metric' | 'nautical'
 
@@ -131,10 +132,10 @@ const isValidMarkerCoordinate = (marker: { longitude: number; latitude: number }
   marker.latitude >= -90 &&
   marker.latitude <= 90
 export default function MapComponent({
-                                       mapCommand,
-                                       isHoveringUI = false,
-                                       showCoordinatesEnabled = true,
-                                     }: MapComponentProps) {
+  mapCommand,
+  isHoveringUI = false,
+  showCoordinatesEnabled = true,
+}: MapComponentProps) {
   const mapRef = useRef<MapRef>(null)
   const animationFrameRef = useRef<number | null>(null)
   const handledMapCommandIdRef = useRef<number | null>(null)
@@ -152,9 +153,7 @@ export default function MapComponent({
   const getInitialScaleUnit = (): ScaleUnit => {
     const stored = localStorage.getItem('nomad:map-scale-unit')
 
-    return stored === 'metric' || stored === 'imperial' || stored === 'nautical'
-      ? stored
-      : 'metric'
+    return stored === 'metric' || stored === 'imperial' || stored === 'nautical' ? stored : 'metric'
   }
 
   const [scaleUnit, setScaleUnit] = useState<ScaleUnit>(getInitialScaleUnit)
@@ -320,7 +319,6 @@ export default function MapComponent({
     },
     [hideCoordinates, isHoveringUI, isDraggingMap, showCoordinatesEnabled]
   )
-
 
   const handleFlyTo = useCallback((longitude: number, latitude: number) => {
     setTargetIndicator(null)
@@ -554,6 +552,9 @@ export default function MapComponent({
           selectedMarkerId={selectedMarkerId}
           onToggleVisibility={(id, visible) => updateMarker(id, { visible })}
         />
+      </div>
+      <div onMouseEnter={hideCoordinates}>
+        <RoutePlannerPanel markers={markers} onFlyTo={handleFlyTo} />
       </div>
     </MapProvider>
   )
