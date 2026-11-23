@@ -166,9 +166,11 @@ the separate project. Content and UI validation do not require local generation.
   is available within the installed graph.
 - [x] Add the truthful route-planner UI foundation: saved-pin or validated-coordinate
   endpoints, endpoint swapping, driving/walking/cycling modes, fastest/shorter and
-  highway/toll preferences, and durable browser-local draft state. Route calculation
-  remains visibly disabled until the separate local routing graph/service is installed;
-  clicked points, waypoints, results, directions, and additional avoidances remain unfinished.
+  all planned avoidance preferences, clicked-map selection, up to three ordered
+  waypoints, and durable browser-local draft state. Named route setups can be saved,
+  loaded, and deleted locally and are explicitly distinguished from calculated
+  directions. Route calculation remains visibly disabled until the separate local
+  routing graph/service is installed; results, directions, and exports remain unfinished.
 - [ ] Make routes useful during outages: save named routes and route settings locally,
   export/print directions and GPX where practical, preserve the last successful route,
   and display the routing-data snapshot date. Never imply that the result includes

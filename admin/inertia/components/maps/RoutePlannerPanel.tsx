@@ -5,12 +5,20 @@ import type { MapMarker } from '~/hooks/useMapMarkers'
 import {
   EMPTY_ROUTE_DRAFT,
   endpointIsReady,
+  formatRouteCoordinates,
   normalizeRouteDraft,
+  normalizeSavedRoutePlans,
   parseRouteCoordinates,
 } from '~/lib/route_planner'
-import type { RouteDraft, RouteEndpoint } from '~/lib/route_planner'
+import type {
+  RouteDraft,
+  RouteEndpoint,
+  RoutePickTarget,
+  SavedRoutePlan,
+} from '~/lib/route_planner'
 
 const ROUTE_DRAFT_KEY = 'nomad:route-draft'
+const SAVED_ROUTE_PLANS_KEY = 'nomad:saved-route-plans'
 
 type EndpointEditorProps = {
   label: string
@@ -18,9 +26,19 @@ type EndpointEditorProps = {
   markers: MapMarker[]
   onChange: (endpoint: RouteEndpoint) => void
   onShow: (longitude: number, latitude: number) => void
+  onPickFromMap: () => void
+  pickingFromMap: boolean
 }
 
-function EndpointEditor({ label, endpoint, markers, onChange, onShow }: EndpointEditorProps) {
+function EndpointEditor({
+  label,
+  endpoint,
+  markers,
+  onChange,
+  onShow,
+  onPickFromMap,
+  pickingFromMap,
+}: EndpointEditorProps) {
   const coordinate = endpoint.kind === 'coordinates' ? parseRouteCoordinates(endpoint.value) : null
   const pin =
     endpoint.kind === 'pin'
@@ -88,17 +106,31 @@ function EndpointEditor({ label, endpoint, markers, onChange, onShow }: Endpoint
               ? 'Create a map pin first, or use coordinates.'
               : 'Stored on this device for offline use.'}
         </span>
-        {(coordinate || pin) && (
+        <span className="flex shrink-0 items-center gap-2">
           <button
             type="button"
-            onClick={() =>
-              onShow(coordinate?.longitude ?? pin!.longitude, coordinate?.latitude ?? pin!.latitude)
-            }
-            className="shrink-0 font-semibold text-desert-orange hover:underline"
+            onClick={onPickFromMap}
+            className={`font-semibold hover:underline ${
+              pickingFromMap ? 'text-amber-500' : 'text-desert-orange'
+            }`}
           >
-            Show
+            {pickingFromMap ? 'Cancel pick' : 'Pick on map'}
           </button>
-        )}
+          {(coordinate || pin) && (
+            <button
+              type="button"
+              onClick={() =>
+                onShow(
+                  coordinate?.longitude ?? pin!.longitude,
+                  coordinate?.latitude ?? pin!.latitude
+                )
+              }
+              className="font-semibold text-desert-orange hover:underline"
+            >
+              Show
+            </button>
+          )}
+        </span>
       </div>
     </fieldset>
   )
@@ -107,9 +139,20 @@ function EndpointEditor({ label, endpoint, markers, onChange, onShow }: Endpoint
 export default function RoutePlannerPanel({
   markers,
   onFlyTo,
+  onRequestMapPick,
+  mapPickTarget,
+  pickedMapPoint,
 }: {
   markers: MapMarker[]
   onFlyTo: (longitude: number, latitude: number) => void
+  onRequestMapPick: (target: RoutePickTarget | null) => void
+  mapPickTarget: RoutePickTarget | null
+  pickedMapPoint: {
+    id: number
+    target: RoutePickTarget
+    longitude: number
+    latitude: number
+  } | null
 }) {
   const [open, setOpen] = useState(false)
   const [draft, setDraft] = useState<RouteDraft>(() => {
@@ -118,6 +161,16 @@ export default function RoutePlannerPanel({
       return saved ? normalizeRouteDraft(JSON.parse(saved)) : EMPTY_ROUTE_DRAFT
     } catch {
       return EMPTY_ROUTE_DRAFT
+    }
+  })
+  const [routeName, setRouteName] = useState('')
+  const [selectedPlanId, setSelectedPlanId] = useState('')
+  const [savedPlans, setSavedPlans] = useState<SavedRoutePlan[]>(() => {
+    try {
+      const saved = localStorage.getItem(SAVED_ROUTE_PLANS_KEY)
+      return saved ? normalizeSavedRoutePlans(JSON.parse(saved)) : []
+    } catch {
+      return []
     }
   })
 
@@ -129,13 +182,85 @@ export default function RoutePlannerPanel({
     }
   }, [draft])
 
+  useEffect(() => {
+    try {
+      localStorage.setItem(SAVED_ROUTE_PLANS_KEY, JSON.stringify(savedPlans))
+    } catch {
+      // Saved plans remain available for this session if browser storage fails.
+    }
+  }, [savedPlans])
+
+  useEffect(() => {
+    if (!pickedMapPoint) return
+    const endpoint: RouteEndpoint = {
+      kind: 'coordinates',
+      value: formatRouteCoordinates(pickedMapPoint.latitude, pickedMapPoint.longitude),
+    }
+    if (pickedMapPoint.target.startsWith('waypoint:')) {
+      updateWaypoint(pickedMapPoint.target.slice('waypoint:'.length), endpoint)
+    } else {
+      updateEndpoint(pickedMapPoint.target, endpoint)
+    }
+  }, [pickedMapPoint])
+
   const availablePinIds = useMemo(() => new Set(markers.map((marker) => marker.id)), [markers])
   const endpointsReady =
     endpointIsReady(draft.start, availablePinIds) &&
-    endpointIsReady(draft.destination, availablePinIds)
+    endpointIsReady(draft.destination, availablePinIds) &&
+    draft.waypoints.every((waypoint) => endpointIsReady(waypoint.endpoint, availablePinIds))
 
   const updateEndpoint = (key: 'start' | 'destination', endpoint: RouteEndpoint) => {
     setDraft((current) => ({ ...current, [key]: endpoint }))
+  }
+
+  const updateWaypoint = (id: string, endpoint: RouteEndpoint) => {
+    setDraft((current) => ({
+      ...current,
+      waypoints: current.waypoints.map((waypoint) =>
+        waypoint.id === id ? { ...waypoint, endpoint } : waypoint
+      ),
+    }))
+  }
+
+  const addWaypoint = () => {
+    if (draft.waypoints.length >= 3) return
+    const id = `${Date.now()}-${draft.waypoints.length}`
+    setDraft((current) => ({
+      ...current,
+      waypoints: [...current.waypoints, { id, endpoint: { kind: 'coordinates', value: '' } }],
+    }))
+  }
+
+  const saveNamedPlan = () => {
+    const name = routeName.trim()
+    if (!name) return
+    const existing = savedPlans.find((plan) => plan.name.toLowerCase() === name.toLowerCase())
+    const plan: SavedRoutePlan = {
+      id: existing?.id ?? `${Date.now()}`,
+      name: name.slice(0, 80),
+      draft,
+      savedAt: new Date().toISOString(),
+    }
+    setSavedPlans((current) =>
+      [plan, ...current.filter((item) => item.id !== plan.id)].slice(0, 20)
+    )
+    setSelectedPlanId(plan.id)
+    setRouteName(plan.name)
+  }
+
+  const loadSelectedPlan = () => {
+    const plan = savedPlans.find((item) => item.id === selectedPlanId)
+    if (!plan) return
+    onRequestMapPick(null)
+    setDraft(plan.draft)
+    setRouteName(plan.name)
+  }
+
+  const deleteSelectedPlan = () => {
+    const plan = savedPlans.find((item) => item.id === selectedPlanId)
+    if (!plan || !window.confirm(`Delete saved route setup "${plan.name}"?`)) return
+    setSavedPlans((current) => current.filter((item) => item.id !== plan.id))
+    setSelectedPlanId('')
   }
 
   if (!open) {
@@ -167,7 +292,10 @@ export default function RoutePlannerPanel({
         </div>
         <button
           type="button"
-          onClick={() => setOpen(false)}
+          onClick={() => {
+            onRequestMapPick(null)
+            setOpen(false)
+          }}
           className="rounded p-1 text-text-muted hover:bg-surface-secondary hover:text-text-primary"
           aria-label="Close route planner"
         >
@@ -187,12 +315,76 @@ export default function RoutePlannerPanel({
           </p>
         </div>
 
+        <section className="space-y-2 rounded border border-border-subtle bg-surface-secondary/70 p-3">
+          <div>
+            <h3 className="text-xs font-bold uppercase tracking-[0.12em] text-text-secondary">
+              Saved route setups
+            </h3>
+            <p className="text-[11px] text-text-muted">
+              Endpoints and preferences only; these are not calculated directions.
+            </p>
+          </div>
+          <div className="flex gap-2">
+            <input
+              value={routeName}
+              maxLength={80}
+              onChange={(event) => setRouteName(event.target.value)}
+              placeholder="Example: Home to Marysvale"
+              className="min-w-0 flex-1 rounded border border-border-default bg-surface-primary px-2 py-1.5 text-sm text-text-primary placeholder:text-text-muted"
+              aria-label="Route setup name"
+            />
+            <button
+              type="button"
+              onClick={saveNamedPlan}
+              disabled={!routeName.trim()}
+              className="rounded bg-desert-green px-3 py-1.5 text-xs font-bold text-white hover:bg-btn-green-hover disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              Save
+            </button>
+          </div>
+          {savedPlans.length > 0 && (
+            <div className="grid grid-cols-[1fr_auto_auto] gap-2">
+              <select
+                value={selectedPlanId}
+                onChange={(event) => setSelectedPlanId(event.target.value)}
+                className="min-w-0 rounded border border-border-default bg-surface-primary px-2 py-1.5 text-xs text-text-primary"
+                aria-label="Saved route setup"
+              >
+                <option value="">Choose saved setup</option>
+                {savedPlans.map((plan) => (
+                  <option key={plan.id} value={plan.id}>
+                    {plan.name}
+                  </option>
+                ))}
+              </select>
+              <button
+                type="button"
+                onClick={loadSelectedPlan}
+                disabled={!selectedPlanId}
+                className="rounded border border-border-default px-2 py-1 text-xs font-semibold text-text-secondary hover:bg-surface-primary disabled:opacity-50"
+              >
+                Load
+              </button>
+              <button
+                type="button"
+                onClick={deleteSelectedPlan}
+                disabled={!selectedPlanId}
+                className="rounded border border-desert-red/50 px-2 py-1 text-xs font-semibold text-desert-red hover:bg-desert-red/10 disabled:opacity-50"
+              >
+                Delete
+              </button>
+            </div>
+          )}
+        </section>
+
         <EndpointEditor
           label="Start"
           endpoint={draft.start}
           markers={markers}
           onChange={(endpoint) => updateEndpoint('start', endpoint)}
           onShow={onFlyTo}
+          onPickFromMap={() => onRequestMapPick(mapPickTarget === 'start' ? null : 'start')}
+          pickingFromMap={mapPickTarget === 'start'}
         />
 
         <button
@@ -202,6 +394,7 @@ export default function RoutePlannerPanel({
               ...current,
               start: current.destination,
               destination: current.start,
+              waypoints: [...current.waypoints].reverse(),
             }))
           }
           className="mx-auto flex items-center gap-1.5 rounded border border-border-default px-3 py-1.5 text-xs font-semibold text-text-secondary hover:bg-surface-secondary"
@@ -210,12 +403,70 @@ export default function RoutePlannerPanel({
           Swap endpoints
         </button>
 
+        <div className="space-y-3 border-y border-border-subtle py-3">
+          <div className="flex items-center justify-between">
+            <div>
+              <h3 className="text-xs font-bold uppercase tracking-[0.12em] text-text-secondary">
+                Waypoints
+              </h3>
+              <p className="text-[11px] text-text-muted">Optional stops, in travel order.</p>
+            </div>
+            <button
+              type="button"
+              onClick={addWaypoint}
+              disabled={draft.waypoints.length >= 3}
+              className="rounded border border-border-default px-2 py-1 text-xs font-semibold text-text-secondary hover:bg-surface-secondary disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              Add stop
+            </button>
+          </div>
+
+          {draft.waypoints.length === 0 ? (
+            <p className="rounded border border-dashed border-border-default px-3 py-2 text-xs text-text-muted">
+              No intermediate stops.
+            </p>
+          ) : (
+            draft.waypoints.map((waypoint, index) => {
+              const target: RoutePickTarget = `waypoint:${waypoint.id}`
+              return (
+                <div key={waypoint.id} className="rounded border border-border-subtle p-2">
+                  <EndpointEditor
+                    label={`Stop ${index + 1}`}
+                    endpoint={waypoint.endpoint}
+                    markers={markers}
+                    onChange={(endpoint) => updateWaypoint(waypoint.id, endpoint)}
+                    onShow={onFlyTo}
+                    onPickFromMap={() => onRequestMapPick(mapPickTarget === target ? null : target)}
+                    pickingFromMap={mapPickTarget === target}
+                  />
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setDraft((current) => ({
+                        ...current,
+                        waypoints: current.waypoints.filter((item) => item.id !== waypoint.id),
+                      }))
+                    }
+                    className="mt-1 text-xs font-semibold text-desert-red hover:underline"
+                  >
+                    Remove stop
+                  </button>
+                </div>
+              )
+            })
+          )}
+        </div>
+
         <EndpointEditor
           label="Destination"
           endpoint={draft.destination}
           markers={markers}
           onChange={(endpoint) => updateEndpoint('destination', endpoint)}
           onShow={onFlyTo}
+          onPickFromMap={() =>
+            onRequestMapPick(mapPickTarget === 'destination' ? null : 'destination')
+          }
+          pickingFromMap={mapPickTarget === 'destination'}
         />
 
         <div className="grid grid-cols-2 gap-3 border-t border-border-subtle pt-4">
@@ -254,15 +505,40 @@ export default function RoutePlannerPanel({
           </label>
         </div>
 
+        <label className="block space-y-1 text-xs font-semibold text-text-secondary">
+          Highway use
+          <select
+            value={draft.highwayPreference}
+            onChange={(event) =>
+              setDraft((current) => ({
+                ...current,
+                highwayPreference: event.target.value as RouteDraft['highwayPreference'],
+              }))
+            }
+            className="block w-full rounded border border-border-default bg-surface-primary px-2 py-2 text-sm font-normal text-text-primary"
+          >
+            <option value="neutral">No preference</option>
+            <option value="avoid">Prefer routes without highways</option>
+            <option value="prefer">Prefer highways</option>
+          </select>
+          <small className="block font-normal text-text-muted">
+            Preference, not a safety guarantee.
+          </small>
+        </label>
+
         <div className="space-y-2">
           {[
-            ['avoidHighways', 'Prefer routes without highways'],
             ['avoidTolls', 'Prefer routes without tolls'],
+            ['avoidFerries', 'Prefer routes without ferries'],
+            ['avoidUnpaved', 'Prefer paved roads'],
+            ['avoidTracks', 'Prefer routes without tracks'],
           ].map(([key, label]) => (
             <label key={key} className="flex items-start gap-2 text-sm text-text-secondary">
               <input
                 type="checkbox"
-                checked={draft[key as 'avoidHighways' | 'avoidTolls']}
+                checked={
+                  draft[key as 'avoidTolls' | 'avoidFerries' | 'avoidUnpaved' | 'avoidTracks']
+                }
                 onChange={(event) =>
                   setDraft((current) => ({ ...current, [key]: event.target.checked }))
                 }

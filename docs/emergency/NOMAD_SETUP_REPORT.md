@@ -177,7 +177,10 @@ passed, and the deployed Manual-ingest sync regression check queued zero jobs.
 
 On 2026-11-23 the Maps page gained a truthful offline route-planner foundation. It
 stores start/destination choices and route preferences in the browser and can use
-saved NOMAD pins or validated coordinates. Calculation remains visibly disabled:
+saved NOMAD pins, validated coordinates, or direct map clicks. It supports up to
+three ordered waypoints and locally saved named route setups, plus the planned
+travel modes and avoidance preferences. Saved setups are clearly labeled as endpoint
+and preference records rather than directions. Calculation remains visibly disabled:
 the installed PMTiles provide map rendering, not the connected road graph required
 for directions. The prior admin image is retained locally as
 `project-nomad-local:pre-route-ui-20261123` for rollback.

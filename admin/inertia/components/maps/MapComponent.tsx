@@ -21,6 +21,7 @@ import ViewMapMarkerPopup from './ViewMapMarkerPopup'
 import MapMarkerFormPopup from './MapMarkerFormPopup'
 import ScaleUnitToggle from './ScaleUnitSelector'
 import RoutePlannerPanel from './RoutePlannerPanel'
+import type { RoutePickTarget } from '~/lib/route_planner'
 
 type ScaleUnit = 'imperial' | 'metric' | 'nautical'
 
@@ -149,6 +150,13 @@ export default function MapComponent({
   const [editingMarkerId, setEditingMarkerId] = useState<number | null>(null)
   const [hasUnsavedMarkerChanges, setHasUnsavedMarkerChanges] = useState(false)
   const [showCoordinates, setShowCoordinates] = useState(false)
+  const [routeMapPickTarget, setRouteMapPickTarget] = useState<RoutePickTarget | null>(null)
+  const [pickedRouteMapPoint, setPickedRouteMapPoint] = useState<{
+    id: number
+    target: RoutePickTarget
+    longitude: number
+    latitude: number
+  } | null>(null)
 
   const getInitialScaleUnit = (): ScaleUnit => {
     const stored = localStorage.getItem('nomad:map-scale-unit')
@@ -267,6 +275,15 @@ export default function MapComponent({
     }
   }, [markers, selectedMarkerId])
 
+  useEffect(() => {
+    if (!routeMapPickTarget) return
+    const cancelPick = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setRouteMapPickTarget(null)
+    }
+    window.addEventListener('keydown', cancelPick)
+    return () => window.removeEventListener('keydown', cancelPick)
+  }, [routeMapPickTarget])
+
   const handleScaleUnitChange = useCallback((unit: ScaleUnit) => {
     setScaleUnit(unit)
     localStorage.setItem('nomad:map-scale-unit', unit)
@@ -278,6 +295,18 @@ export default function MapComponent({
 
   const handleMapClick = useCallback(
     (e: MapLayerMouseEvent) => {
+      if (routeMapPickTarget) {
+        setPickedRouteMapPoint({
+          id: Date.now(),
+          target: routeMapPickTarget,
+          longitude: e.lngLat.lng,
+          latitude: e.lngLat.lat,
+        })
+        setTargetIndicator({ lng: e.lngLat.lng, lat: e.lngLat.lat })
+        setRouteMapPickTarget(null)
+        return
+      }
+
       if (!confirmDiscardMarkerChanges()) return
 
       setPlacingMarker({ lng: e.lngLat.lng, lat: e.lngLat.lat })
@@ -286,7 +315,7 @@ export default function MapComponent({
       setHasUnsavedMarkerChanges(false)
       setTargetIndicator(null)
     },
-    [confirmDiscardMarkerChanges]
+    [confirmDiscardMarkerChanges, routeMapPickTarget]
   )
 
   const handleMouseMove = useCallback(
@@ -554,8 +583,21 @@ export default function MapComponent({
         />
       </div>
       <div onMouseEnter={hideCoordinates}>
-        <RoutePlannerPanel markers={markers} onFlyTo={handleFlyTo} />
+        <RoutePlannerPanel
+          markers={markers}
+          onFlyTo={handleFlyTo}
+          onRequestMapPick={setRouteMapPickTarget}
+          mapPickTarget={routeMapPickTarget}
+          pickedMapPoint={pickedRouteMapPoint}
+        />
       </div>
+      {routeMapPickTarget && (
+        <div className="pointer-events-none absolute left-1/2 top-20 z-40 -translate-x-1/2 rounded-lg border border-amber-500/60 bg-surface-primary/95 px-4 py-2 text-sm font-semibold text-text-primary shadow-lg backdrop-blur-sm">
+          Click the map to set the route{' '}
+          {routeMapPickTarget.startsWith('waypoint:') ? 'waypoint' : routeMapPickTarget}. Press Esc
+          to cancel.
+        </div>
+      )}
     </MapProvider>
   )
 }
