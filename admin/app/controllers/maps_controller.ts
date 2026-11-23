@@ -16,10 +16,15 @@ import {
 import { inject } from '@adonisjs/core'
 import type { HttpContext } from '@adonisjs/core/http'
 import vine from '@vinejs/vine'
+import { RoutingService } from '#services/routing_service'
+import { offlineRouteValidator } from '#validators/routing'
 
 @inject()
 export default class MapsController {
-  constructor(private mapService: MapService) {}
+  constructor(
+    private mapService: MapService,
+    private routingService: RoutingService
+  ) {}
 
   async index({ inertia }: HttpContext) {
     const baseAssetsCheck = await this.mapService.ensureBaseAssets()
@@ -173,11 +178,13 @@ export default class MapsController {
       })
     }
 
-    const forwardedProto = request.headers()['x-forwarded-proto'];
+    const forwardedProto = request.headers()['x-forwarded-proto']
 
     const protocol: string = forwardedProto
-      ? (typeof forwardedProto === 'string' ? forwardedProto : request.protocol())
-      : request.protocol();
+      ? typeof forwardedProto === 'string'
+        ? forwardedProto
+        : request.protocol()
+      : request.protocol()
 
     const styles = await this.mapService.generateStylesJSON(request.host(), protocol)
     return response.json(styles)
@@ -290,5 +297,23 @@ export default class MapsController {
     }
     await marker.delete()
     return { message: 'Marker deleted' }
+  }
+
+  async routingHealth({}: HttpContext) {
+    return this.routingService.health()
+  }
+
+  async calculateRoute({ request, response }: HttpContext) {
+    const payload = await request.validateUsing(offlineRouteValidator)
+    try {
+      return await this.routingService.route(payload)
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'Offline route calculation failed.'
+      const unavailable =
+        error instanceof TypeError ||
+        (error instanceof Error &&
+          (error.name === 'AbortError' || /fetch failed/i.test(error.message)))
+      return response.status(unavailable ? 503 : 422).send({ message })
+    }
   }
 }

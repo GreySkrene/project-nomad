@@ -1,0 +1,41 @@
+# Optional Project NOMAD offline routing overlay.
+#
+# Install beside /opt/project-nomad/compose.yml and start with:
+#   docker compose -p project-nomad -f compose.yml -f compose.routing.yml up -d routing admin
+# The Windows NOMAD Launcher subsequently starts/stops the nomad_routing container
+# along with the rest of the nomad_* stack.
+services:
+  admin:
+    environment:
+      - ROUTING_URL=http://routing:8002
+      - ROUTING_SNAPSHOT_DATE=2026-11-23
+
+  routing:
+    image: ghcr.io/valhalla/valhalla-scripted:3.9.1@sha256:6238809f9dc3057743d70a20efd3911ec38e458bfa13a0601909b58f68dfd956
+    container_name: nomad_routing
+    restart: unless-stopped
+    volumes:
+      - /opt/project-nomad/storage/routing:/custom_files
+    environment:
+      # The 3.9.1 entry script references this documented optional variable under
+      # `set -u`; define it explicitly even though local PBFs are used.
+      - tile_urls=
+      - server_threads=4
+      - serve_tiles=True
+      - use_tiles_ignore_pbf=True
+      - force_rebuild=False
+      - build_elevation=False
+      - build_admins=True
+      - build_time_zones=True
+      - build_transit=False
+      - build_tar=True
+      - tileset_name=utah_idaho
+      - use_default_speeds_config=False
+    mem_limit: 6g
+    cpus: 4.0
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "--silent", "http://localhost:8002/status"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 10m

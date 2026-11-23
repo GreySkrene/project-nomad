@@ -107,6 +107,7 @@ export default function LibrarySearch({ kiwixService }: { kiwixService: ServiceS
         displayTitle(file),
         profile.description,
         profile.category,
+        profile.role ?? '',
         ...profile.topics,
         ...profile.commonSearches,
       ]
@@ -489,6 +490,19 @@ export default function LibrarySearch({ kiwixService }: { kiwixService: ServiceS
                           <span className="text-xs font-semibold uppercase tracking-wide text-desert-green">
                             {profile.category}
                           </span>
+                          {profile.role && (
+                            <span
+                              className={`ml-2 rounded-full border px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide ${
+                                profile.role === 'Emergency core'
+                                  ? 'border-desert-green/50 bg-desert-green/10 text-desert-green'
+                                  : profile.role === 'Supplemental'
+                                    ? 'border-amber-500/50 bg-amber-500/10 text-amber-600'
+                                    : 'border-border-default bg-surface-primary text-text-muted'
+                              }`}
+                            >
+                              {profile.role}
+                            </span>
+                          )}
                           <h3 className="mt-1 text-lg font-semibold leading-tight">
                             {displayTitle(file)}
                           </h3>

@@ -1,6 +1,6 @@
 # Project NOMAD Offline Emergency System — Setup Report
 
-Report date: 2026-11-19 (America/Denver)
+Report date: 2026-11-23 (America/Denver)
 Status: core services and content are installed; safety acceptance and fully disconnected/reboot testing are not complete
 
 ## 1. Host and installation
@@ -30,13 +30,17 @@ NOMAD is reached at `http://localhost:8080`. On 2026-11-13 its health endpoint r
 | Kolibri Gen 2 | 0.19.4 | Running on ports 8310/8311; guest access enabled | Offline education without a required learner login |
 | FlatNotes | 5.5.4 | Running on port 8200 | Offline notes |
 | Offline maps | Protomaps/PMTiles | Installed | Pan/zoom vector map |
+| Offline routing | Valhalla 3.9.1, immutable image digest | Healthy; private Docker port only | Utah/Idaho driving, walking, and cycling routes |
 | LM Studio | Windows port 1234 | Connected from NOMAD | Local and LM Link inference/embeddings |
 
-All ten NOMAD containers were running when checked; five reported healthy and the remaining service containers reported up. Kiwix 3.8.2, Kolibri 0.19.5, and FlatNotes 5.5.5 were shown as available updates; they have not been applied or compatibility-tested.
+All eleven NOMAD containers, including the private routing service, were running when
+checked. NOMAD admin and routing reported healthy; the remaining previously installed
+services retained their verified state. Kiwix 3.8.2, Kolibri 0.19.5, and FlatNotes
+5.5.5 were shown as available updates; they have not been applied or compatibility-tested.
 
 ## 3. Storage and downloaded content
 
-Measured logical storage under `/opt/project-nomad/storage` is approximately **79 GiB**, below the requested 100 GB ceiling:
+Measured logical storage under `/opt/project-nomad/storage` is approximately **80.4 GiB**, below the requested 100 GB ceiling:
 
 | Content | Measured size/state |
 |---|---:|
@@ -44,8 +48,9 @@ Measured logical storage under `/opt/project-nomad/storage` is approximately **7
 | Maps | about 34 GiB, including the 2.44 GiB British Columbia repair overlay |
 | Kolibri Gen 2 | about 6.3 GiB |
 | RAG uploads / directly browsable documents | about 905 MiB after validated replacements |
+| Utah/Idaho routing source, graph, and support databases | 1,500,639,490 bytes (about 1.40 GiB) |
 
-The detailed continental PMTiles file is 33,788,916,131 bytes and contains USA, Canada, and Mexico vector data through zoom 15. The audit retrieved detailed tiles at every primary Utah/Idaho/Mexico sample, but confirmed missing high-zoom coverage in Vancouver and Burnaby. The extraction geometry is fixed. Repeated full-Canada repair attempts encountered source-CDN connection resets, so the known gap was repaired with a smaller 2,617,262,221-byte British Columbia overlay from the 2026-11-18 source build. PMTiles verification, live HTTP range serving, style integration, and exact zoom-15 reads for Vancouver, Burnaby, Victoria, and Kelowna passed. There are no active download jobs. These are vector maps, not satellite imagery, and they do not provide live closures, address search, or turn-by-turn routing.
+The detailed continental PMTiles file is 33,788,916,131 bytes and contains USA, Canada, and Mexico vector data through zoom 15. The audit retrieved detailed tiles at every primary Utah/Idaho/Mexico sample, but confirmed missing high-zoom coverage in Vancouver and Burnaby. The extraction geometry is fixed. Repeated full-Canada repair attempts encountered source-CDN connection resets, so the known gap was repaired with a smaller 2,617,262,221-byte British Columbia overlay from the 2026-11-18 source build. PMTiles verification, live HTTP range serving, style integration, and exact zoom-15 reads for Vancouver, Burnaby, Victoria, and Kelowna passed. There are no active download jobs. These are vector maps, not satellite imagery, and they do not provide live closures or address search. A separate local Valhalla graph now provides Utah/Idaho turn-by-turn routes from pins, map clicks, or coordinates.
 
 Kolibri contains selected PhET, Blockly Games, School of Thought, Khan Academy, and Sikana material. Physical-file checks found zero missing selected files in four channels. Khan is partial: 1,455 nodes are available and 26 of 11,612 attached file records are unavailable; all 26 are subtitles or thumbnails. Sikana's 505-node practical subset includes navigation, cooking, insulation/energy, solar, basic electricity, DIY, agriculture, and gardening.
 
@@ -61,6 +66,10 @@ The two illustrated upgrades were independently validated on 2026-11-18. Kiwix c
 - Wikibooks maxi: `835014cde2c385f80a6388847fb8962429966a3a64a03b58552f1684cc83e7c8`
 
 Kiwix, Kolibri, NOMAD RAG, and maps are separate search interfaces. NOMAD does not currently provide one universal search across all four.
+
+The Browse Library now labels each article collection as Emergency core, Practical
+reference, Background reference, or Supplemental. Stack Exchange archives are visibly
+supplemental community Q&A rather than being presented as coherent emergency manuals.
 
 ## 5. Official emergency knowledge base
 
@@ -158,7 +167,7 @@ NOMAD citations identify the stored title/file/path. PDF page numbers are not pr
 | PDF page citations | Not supported |
 | Safety-critical generated answers | Not accepted; source verification required |
 | Map pan/zoom | Installed; final disconnected regional visual check pending |
-| Map routing/address search | Route setup UI is installed for saved pins/coordinates and preferences; calculation and address search remain unavailable until a local routing graph/geocoder is installed |
+| Map routing/address search | Utah/Idaho calculation is installed for pins, map clicks, coordinates, waypoints, modes, and preferences; address search remains unavailable until a separate offline geocoder is measured and installed |
 | Satellite map layer | Not present |
 | Live alerts/closures/fires/volcano status | Cannot be supplied by offline data; live verification required |
 | Authentication | NOMAD has no built-in authentication; do not expose it to the internet |
@@ -175,15 +184,24 @@ indexing is optional, so the emergency document workflow remains usable while LM
 Studio is reserved for another project. The production build and TypeScript check
 passed, and the deployed Manual-ingest sync regression check queued zero jobs.
 
-On 2026-11-23 the Maps page gained a truthful offline route-planner foundation. It
+On 2026-11-23 the Maps page gained a truthful offline route planner. It
 stores start/destination choices and route preferences in the browser and can use
 saved NOMAD pins, validated coordinates, or direct map clicks. It supports up to
 three ordered waypoints and locally saved named route setups, plus the planned
-travel modes and avoidance preferences. Saved setups are clearly labeled as endpoint
-and preference records rather than directions. Calculation remains visibly disabled:
-the installed PMTiles provide map rendering, not the connected road graph required
-for directions. The prior admin image is retained locally as
-`project-nomad-local:pre-route-ui-20261123` for rollback.
+travel modes and avoidance preferences. A pinned private Valhalla 3.9.1 service now
+calculates the route, draws it on the map, fits the view, and returns distance, time,
+and turn-by-turn maneuvers with the installed snapshot date. The last successful
+route survives a browser reload and can be saved as readable directions or a GPX
+track. The backend limits
+coordinates, waypoints, route span, and request time and does not expose Valhalla to
+the host or LAN. Avoidance controls are explicitly preferences: the test route to
+Rexburg still required highway segments with `use_highways=0`. The prior Compose file
+is retained at `/opt/project-nomad/compose.yml.pre-routing-20261123` for rollback.
+Connected browser QA displayed the 258.5-mile Riverton-to-Rexburg route and all 37
+maneuvers with no console errors, restored that route after a browser reload, and
+produced both `.txt` directions and a `.gpx` track download. The Information Lookup APIs simultaneously returned
+18 Kiwix libraries and 158 stored documents; delayed browser QA then rendered all 18
+library cards and six visible Supplemental labels.
 
 The production Docker build completed its Vite and TypeScript compilation. Live HTTP checks returned 200 for the home page, maps, documentation, Kiwix, and Kolibri; `/api/health` returned `{"status":"ok"}`. Rendered browser QA was performed for both the dashboard and Field Manual documentation in dark mode. A rollback copy of the prior Compose file is stored at `/opt/project-nomad/compose.yml.pre-night-manual-20261116`.
 
@@ -198,8 +216,8 @@ Kolibri's supported device setting `allow_guest_access` is enabled. NOMAD's Educ
 3. Test street-level map rendering in Salt Lake Valley, Davis/Weber, Marysvale/Piute, Rexburg/Madison, and connecting corridors.
 4. Confirm local embedding/search with both LM Link peers unavailable.
 5. Measure library-only, 4B, and 8B power draw.
-6. Build and validate the planned Utah/Idaho local routing graph, then connect it to
-   the installed route-planner UI; address search remains a later measured phase.
+6. Repeat the installed route-planner tests after a Windows reboot with networking
+   physically disconnected; address search remains a later measured phase.
 7. Test restricted iPhone LAN access only after explicit approval; NOMAD has no authentication.
 
 ## 10A. Public fork verification

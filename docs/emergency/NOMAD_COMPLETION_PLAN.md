@@ -1,6 +1,6 @@
 # Project NOMAD completion plan
 
-Last updated: 2026-11-19 (America/Denver)
+Last updated: 2026-11-23 (America/Denver)
 
 Status key: `[x]` verified complete, `[-]` in progress, `[ ]` not started, `[!]` blocked or needs a decision.
 
@@ -145,23 +145,24 @@ the separate project. Content and UI validation do not require local generation.
   the installed library under the requested 100 GB ceiling and preserve enough free
   disk for Windows/Docker operation. Measurements and conservative allowances are in
   `ROUTING_PREFLIGHT.md`; no routing download or graph build was started.
-- [ ] Add Valhalla as an optional, local-only Docker service with pinned image/version,
+- [x] Add Valhalla as an optional, local-only Docker service with pinned image/version,
   persistent routing-data storage, health check, restart policy, and a documented
   start/stop path through the NOMAD launcher. It must not require internet after its
   data build and must not run the GPU or LM Studio.
-- [ ] Build and integrity-check a Utah + Idaho routing graph first. Confirm routes for
+- [-] Build and integrity-check a Utah + Idaho routing graph first. Confirm routes for
   West Jordan/Riverton to Marysvale and Salt Lake Valley to Rexburg, including a route
   that crosses the state boundary. Record source date, PBF bytes, graph bytes, build
-  duration, peak RAM, and idle/query power impact before expanding coverage.
-- [ ] Add validated backend proxy endpoints for route requests and routing health.
+  duration, peak RAM, and idle resource use are recorded; a physical watt measurement
+  remains outstanding before regional expansion.
+- [x] Add validated backend proxy endpoints for route requests and routing health.
   Limit coordinates, waypoint counts, route length, timeouts, and accepted options;
   keep the routing container private to NOMAD's Docker network rather than exposing
   it directly to the LAN.
-- [ ] Add a map route planner that can choose saved pins, clicked points, or entered
+- [-] Add a map route planner that can choose saved pins, clicked points, or entered
   coordinates as start/destination/waypoints. Draw the selected and alternate routes,
   fit the map to the result, and show distance, estimated time, and a readable
-  turn-by-turn list.
-- [ ] Add route modes and controls: driving, walking, cycling; fastest versus shorter;
+  turn-by-turn list. The selected route is complete; alternate-route display remains.
+- [x] Add route modes and controls: driving, walking, cycling; fastest versus shorter;
   avoid/prefer highways; avoid tolls, ferries, unpaved roads, and tracks. Label
   avoidance settings as preferences rather than guarantees and explain when no route
   is available within the installed graph.
@@ -170,11 +171,13 @@ the separate project. Content and UI validation do not require local generation.
   all planned avoidance preferences, clicked-map selection, up to three ordered
   waypoints, and durable browser-local draft state. Named route setups can be saved,
   loaded, and deleted locally and are explicitly distinguished from calculated
-  directions. Route calculation remains visibly disabled until the separate local
-  routing graph/service is installed; results, directions, and exports remain unfinished.
-- [ ] Make routes useful during outages: save named routes and route settings locally,
+  directions. The installed local graph now calculates and draws routes; browser QA
+  confirmed the 258.5-mile Riverton-to-Rexburg route and all 37 maneuvers.
+- [-] Make routes useful during outages: save named routes and route settings locally,
   export/print directions and GPX where practical, preserve the last successful route,
-  and display the routing-data snapshot date. Never imply that the result includes
+  and display the routing-data snapshot date. Named setups, the last successful route,
+  readable direction export, GPX export, and the snapshot label are implemented;
+  a dedicated print layout remains. Never imply that the result includes
   live closures, evacuation orders, traffic, fires, weather, or road damage.
 - [ ] **Routing phase 2 — measured regional expansion:** after the Utah/Idaho proof
   passes, preflight a western-state graph that covers practical alternate corridors.
@@ -191,11 +194,13 @@ the separate project. Content and UI validation do not require local generation.
   streets, cities, landmarks, misspellings, duplicate place names, and out-of-coverage
   queries behave honestly. Let a selected result become a pin or route endpoint, and
   retain coordinate/pin routing as the reliable fallback when an address is absent.
-- [ ] Add automated tests for request validation, routing-option translation, route
+- [-] Add automated tests for request validation, routing-option translation, route
   geometry, unavailable-service behavior, no-route/out-of-region responses, and stale
   snapshot warnings. Then perform a physically disconnected UI test, Windows reboot,
   launcher Start/Stop test, and realistic corridor/avoid-highway comparisons before
-  marking routing dependable.
+  marking routing dependable. Unit tests and connected browser QA now cover validation,
+  option translation, geometry, persistence/export helpers, the cross-state route,
+  and avoid-highway behavior; disconnected reboot and stale-snapshot QA remain.
 - [ ] Keep satellite imagery optional; NOMAD's current map interface has no satellite layer.
 
 ## H. Final offline acceptance test
@@ -301,3 +306,25 @@ the separate project. Content and UI validation do not require local generation.
   `[!]`, then perform reboot and physically disconnected acceptance tests.
 - [x] Investigated the current UI, produced six redesign concepts, and recorded the user's Style 2 + Style 3 selection.
 - [x] 2026-11-16: deployed the selected Night Operations + Field Manual hybrid and verified the production build and live endpoints.
+
+## L. Active checkpoint — 2026-11-23 America/Denver
+
+- [x] **Offline routing:** official Geofabrik Utah and Idaho extracts were downloaded
+  resumably (172,200,193 and 130,765,499 bytes), publisher MD5 checks passed, and
+  local SHA-256 hashes were recorded. The official Valhalla scripted 3.9.1 image is
+  pinned by immutable digest, private to Docker, CPU-only, and capped at four CPUs / 6
+  GiB RAM. The first start exposed the image's unbound optional `tile_urls` variable;
+  the overlay now defines it explicitly. The 997-tile graph built in about 112 seconds,
+  retained 1.40 GiB, and passed same-state and cross-state routes. Source plus build
+  data remains under the 8 GiB proof-of-concept cap.
+- [x] **Routing application path:** guarded health/route endpoints, request limits,
+  costing-option translation, route geometry decoding/drawing, turn-by-turn results,
+  and honest snapshot/live-condition labels are deployed. The last successful result
+  persists locally and can be exported as readable directions or a GPX track. Nineteen
+  focused routing/browse tests, TypeScript, production build, live API checks, and
+  rendered browser QA pass. The UI displayed the 258.5-mile cross-state route and all
+  37 maneuvers without console errors.
+- [x] **Resource usefulness in Browse:** installed article-library cards now expose an
+  explicit role (Emergency core, Practical reference, Background reference, or
+  Supplemental). Community Q&A archives are visibly supplemental rather than presented
+  as coherent manuals or emergency authority. No installed archive was deleted.

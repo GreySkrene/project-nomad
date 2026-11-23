@@ -16,6 +16,7 @@ export type BrowseProfile = {
   commonSearches: string[]
   formatNote?: string
   priority: number
+  role?: 'Emergency core' | 'Practical reference' | 'Background reference' | 'Supplemental'
 }
 
 export type ReaderDetails = {
@@ -45,6 +46,7 @@ const CATALOG_RULES: CatalogRule[] = [
     topics: ['Disaster plans', 'Power outages', 'Floods', 'Wildfires', 'Radiation'],
     commonSearches: ['power outage', 'earthquake', 'radiation emergency', 'family emergency plan'],
     priority: 0,
+    role: 'Emergency core',
   },
   {
     matches: ['wikipedia_en_medicine'],
@@ -54,6 +56,7 @@ const CATALOG_RULES: CatalogRule[] = [
     topics: ['Conditions', 'First aid', 'Anatomy', 'Medicines', 'Public health'],
     commonSearches: ['choking', 'dehydration', 'burn', 'carbon monoxide poisoning'],
     priority: 1,
+    role: 'Practical reference',
   },
   {
     matches: ['medlineplus.gov'],
@@ -63,6 +66,7 @@ const CATALOG_RULES: CatalogRule[] = [
     topics: ['Symptoms', 'Treatments', 'Medical tests', 'Drugs', 'Wellness'],
     commonSearches: ['fever in children', 'wound care', 'medicine safety', 'dehydration'],
     priority: 2,
+    role: 'Emergency core',
   },
   {
     matches: ['nhs.uk_medicines', 'nhs.uk-medicines'],
@@ -72,6 +76,7 @@ const CATALOG_RULES: CatalogRule[] = [
     topics: ['Medicine uses', 'Side effects', 'Who can take it', 'Interactions'],
     commonSearches: ['paracetamol', 'ibuprofen', 'antibiotics', 'missed dose'],
     priority: 3,
+    role: 'Practical reference',
   },
   {
     matches: ['wwwnc.cdc.gov'],
@@ -86,6 +91,7 @@ const CATALOG_RULES: CatalogRule[] = [
       'infection prevention',
     ],
     priority: 4,
+    role: 'Practical reference',
   },
   {
     matches: ['librepathology'],
@@ -95,6 +101,7 @@ const CATALOG_RULES: CatalogRule[] = [
     topics: ['Pathology', 'Microscopy', 'Disease mechanisms', 'Medical study'],
     commonSearches: ['inflammation', 'cell injury', 'infection pathology'],
     priority: 8,
+    role: 'Background reference',
   },
   {
     matches: ['irp.fas.org', 'military_medicine'],
@@ -105,6 +112,7 @@ const CATALOG_RULES: CatalogRule[] = [
     commonSearches: ['field sanitation', 'bleeding control', 'heat injury', 'cold injury'],
     formatNote: 'Advanced reference; verify dates and civilian applicability.',
     priority: 9,
+    role: 'Supplemental',
   },
   {
     matches: ['ifixit'],
@@ -114,6 +122,7 @@ const CATALOG_RULES: CatalogRule[] = [
     topics: ['Electronics', 'Appliances', 'Tools', 'Parts', 'Troubleshooting'],
     commonSearches: ['battery replacement', 'charging port', 'flashlight repair', 'laptop repair'],
     priority: 1,
+    role: 'Practical reference',
   },
   {
     matches: ['diy.stackexchange.com'],
@@ -124,6 +133,7 @@ const CATALOG_RULES: CatalogRule[] = [
     commonSearches: ['shut off water', 'frozen pipe', 'circuit breaker', 'toilet repair'],
     formatNote: 'Community Q&A; compare answers and follow safety codes.',
     priority: 3,
+    role: 'Supplemental',
   },
   {
     matches: ['mechanics.stackexchange.com'],
@@ -134,6 +144,7 @@ const CATALOG_RULES: CatalogRule[] = [
     commonSearches: ['car will not start', 'dead battery', 'overheating engine', 'flat tire'],
     formatNote: 'Community Q&A; advice varies by vehicle and author.',
     priority: 4,
+    role: 'Supplemental',
   },
   {
     matches: ['woodworking.stackexchange.com'],
@@ -144,6 +155,7 @@ const CATALOG_RULES: CatalogRule[] = [
     commonSearches: ['repair broken wood', 'hand saw', 'wood joint', 'tool sharpening'],
     formatNote: 'Community Q&A rather than a structured manual.',
     priority: 7,
+    role: 'Supplemental',
   },
   {
     matches: ['foss.cooking'],
@@ -153,6 +165,7 @@ const CATALOG_RULES: CatalogRule[] = [
     topics: ['Recipes', 'Ingredients', 'Meal ideas', 'Cooking methods'],
     commonSearches: ['rice', 'beans', 'bread', 'soup'],
     priority: 2,
+    role: 'Practical reference',
   },
   {
     matches: ['cooking.stackexchange.com'],
@@ -168,6 +181,7 @@ const CATALOG_RULES: CatalogRule[] = [
     ],
     formatNote: 'Community Q&A; use official sources for safety-critical limits.',
     priority: 4,
+    role: 'Supplemental',
   },
   {
     matches: ['gardenology.org'],
@@ -177,6 +191,7 @@ const CATALOG_RULES: CatalogRule[] = [
     topics: ['Plant encyclopedia', 'Identification', 'Cultivation', 'Garden reference'],
     commonSearches: ['tomato', 'potato', 'apple tree', 'plant hardiness'],
     priority: 1,
+    role: 'Practical reference',
   },
   {
     matches: ['gardening.stackexchange.com'],
@@ -187,6 +202,7 @@ const CATALOG_RULES: CatalogRule[] = [
     commonSearches: ['yellow leaves', 'compost', 'seed starting', 'garden pests'],
     formatNote: 'Problem-solving Q&A, not a complete plant encyclopedia.',
     priority: 5,
+    role: 'Supplemental',
   },
   {
     matches: ['wikipedia_en_top_maxi'],
@@ -196,6 +212,7 @@ const CATALOG_RULES: CatalogRule[] = [
     topics: ['Science', 'History', 'Geography', 'Technology', 'Culture'],
     commonSearches: ['cloud', 'weather', 'electricity', 'navigation'],
     priority: 1,
+    role: 'Background reference',
   },
   {
     matches: ['wikipedia_en_all_mini'],
@@ -206,6 +223,7 @@ const CATALOG_RULES: CatalogRule[] = [
     commonSearches: ['cumulonimbus cloud', 'earthquake', 'water purification', 'radio'],
     formatNote: 'Compact edition; images are reduced or omitted.',
     priority: 2,
+    role: 'Background reference',
   },
   {
     matches: ['wikibooks'],
@@ -215,6 +233,7 @@ const CATALOG_RULES: CatalogRule[] = [
     topics: ['Textbooks', 'How-to guides', 'Languages', 'Computing', 'Practical skills'],
     commonSearches: ['first aid', 'cookbook', 'electronics', 'outdoor skills'],
     priority: 4,
+    role: 'Background reference',
   },
 ]
 

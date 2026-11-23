@@ -38,6 +38,10 @@ test('classifies installed emergency sources by their real use', () => {
 })
 
 test('labels community Q&A and compact image tradeoffs honestly', () => {
+  assert.equal(
+    browseProfile(zim('gardening.stackexchange.com_en_all_2026-01.zim')).role,
+    'Supplemental'
+  )
   assert.match(
     browseProfile(zim('gardening.stackexchange.com_en_all_2026-01.zim')).formatNote ?? '',
     /Q&A/

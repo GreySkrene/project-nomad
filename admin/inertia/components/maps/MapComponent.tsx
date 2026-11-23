@@ -1,9 +1,11 @@
 import Map, {
   FullscreenControl,
+  Layer,
   Marker,
   MapProvider,
   NavigationControl,
   ScaleControl,
+  Source,
 } from 'react-map-gl/maplibre'
 import type { MapLayerMouseEvent, MapRef } from 'react-map-gl/maplibre'
 import maplibregl from 'maplibre-gl'
@@ -22,6 +24,8 @@ import MapMarkerFormPopup from './MapMarkerFormPopup'
 import ScaleUnitToggle from './ScaleUnitSelector'
 import RoutePlannerPanel from './RoutePlannerPanel'
 import type { RoutePickTarget } from '~/lib/route_planner'
+import { decodeValhallaPolyline6 } from '~/lib/route_planner'
+import type { OfflineRouteResult } from '~/lib/route_planner'
 
 type ScaleUnit = 'imperial' | 'metric' | 'nautical'
 
@@ -157,6 +161,7 @@ export default function MapComponent({
     longitude: number
     latitude: number
   } | null>(null)
+  const [routeCoordinates, setRouteCoordinates] = useState<[number, number][]>([])
 
   const getInitialScaleUnit = (): ScaleUnit => {
     const stored = localStorage.getItem('nomad:map-scale-unit')
@@ -354,6 +359,26 @@ export default function MapComponent({
     mapRef.current?.flyTo({ center: [longitude, latitude], zoom: 12, duration: 1500 })
   }, [])
 
+  const handleRouteResult = useCallback((result: OfflineRouteResult | null) => {
+    if (!result) {
+      setRouteCoordinates([])
+      return
+    }
+    try {
+      const coordinates = result.legs.flatMap((leg) => decodeValhallaPolyline6(leg.shape))
+      setRouteCoordinates(coordinates)
+      if (coordinates.length > 1) {
+        const bounds = coordinates.reduce(
+          (current, coordinate) => current.extend(coordinate),
+          new maplibregl.LngLatBounds(coordinates[0], coordinates[0])
+        )
+        mapRef.current?.fitBounds(bounds, { padding: 70, duration: 1_000, maxZoom: 14 })
+      }
+    } catch {
+      setRouteCoordinates([])
+    }
+  }, [])
+
   const handleDeleteMarker = useCallback(
     (id: number) => {
       if (selectedMarkerId === id) setSelectedMarkerId(null)
@@ -431,6 +456,37 @@ export default function MapComponent({
           <NavigationControl style={{ marginTop: '110px', marginRight: '36px' }} />
           <FullscreenControl style={{ marginTop: '30px', marginRight: '36px' }} />
           <ScaleControl position="bottom-left" maxWidth={150} unit={scaleUnit} />
+
+          {routeCoordinates.length > 1 && (
+            <Source
+              id="offline-route"
+              type="geojson"
+              data={{
+                type: 'Feature',
+                properties: {},
+                geometry: { type: 'LineString', coordinates: routeCoordinates },
+              }}
+            >
+              <Layer
+                id="offline-route-shadow"
+                type="line"
+                paint={{
+                  'line-color': '#111827',
+                  'line-width': 8,
+                  'line-opacity': 0.65,
+                }}
+              />
+              <Layer
+                id="offline-route-line"
+                type="line"
+                paint={{
+                  'line-color': '#f97316',
+                  'line-width': 5,
+                  'line-opacity': 0.95,
+                }}
+              />
+            </Source>
+          )}
 
           {showCoordinates && cursorLngLat && (
             <CoordinateOverlay
@@ -589,6 +645,7 @@ export default function MapComponent({
           onRequestMapPick={setRouteMapPickTarget}
           mapPickTarget={routeMapPickTarget}
           pickedMapPoint={pickedRouteMapPoint}
+          onRouteResult={handleRouteResult}
         />
       </div>
       {routeMapPickTarget && (

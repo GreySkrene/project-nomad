@@ -33,6 +33,83 @@ export type SavedRoutePlan = {
   savedAt: string
 }
 
+export type OfflineRouteHealth = {
+  available: boolean
+  version: string | null
+  snapshotDate: string | null
+  coverage: string
+  liveConditionsIncluded: false
+}
+
+export type OfflineRouteResult = {
+  summary: {
+    distanceMiles: number
+    timeSeconds: number
+    hasHighway: boolean
+    hasToll: boolean
+    hasFerry: boolean
+  }
+  legs: Array<{
+    shape: string
+    maneuvers: Array<{
+      instruction: string
+      distanceMiles: number
+      timeSeconds: number
+      beginShapeIndex: number
+      endShapeIndex: number
+    }>
+  }>
+  warnings: unknown[]
+  snapshotDate: string | null
+  liveConditionsIncluded: false
+}
+
+export const normalizeOfflineRouteResult = (value: unknown): OfflineRouteResult | null => {
+  if (!value || typeof value !== 'object') return null
+  const result = value as Record<string, unknown>
+  const summary = result.summary as Record<string, unknown> | undefined
+  if (
+    !summary ||
+    typeof summary.distanceMiles !== 'number' ||
+    typeof summary.timeSeconds !== 'number' ||
+    typeof summary.hasHighway !== 'boolean' ||
+    typeof summary.hasToll !== 'boolean' ||
+    typeof summary.hasFerry !== 'boolean' ||
+    !Array.isArray(result.legs)
+  ) {
+    return null
+  }
+
+  const legs = result.legs.filter((leg): leg is OfflineRouteResult['legs'][number] => {
+    if (!leg || typeof leg !== 'object') return false
+    const candidate = leg as Record<string, unknown>
+    return (
+      typeof candidate.shape === 'string' &&
+      Array.isArray(candidate.maneuvers) &&
+      candidate.maneuvers.every((maneuver) => {
+        if (!maneuver || typeof maneuver !== 'object') return false
+        const item = maneuver as Record<string, unknown>
+        return (
+          typeof item.instruction === 'string' &&
+          typeof item.distanceMiles === 'number' &&
+          typeof item.timeSeconds === 'number' &&
+          typeof item.beginShapeIndex === 'number' &&
+          typeof item.endShapeIndex === 'number'
+        )
+      })
+    )
+  })
+  if (legs.length !== result.legs.length) return null
+
+  return {
+    summary: summary as OfflineRouteResult['summary'],
+    legs,
+    warnings: Array.isArray(result.warnings) ? result.warnings : [],
+    snapshotDate: typeof result.snapshotDate === 'string' ? result.snapshotDate : null,
+    liveConditionsIncluded: false,
+  }
+}
+
 export const EMPTY_ROUTE_DRAFT: RouteDraft = {
   start: { kind: 'coordinates', value: '' },
   waypoints: [],
@@ -144,4 +221,96 @@ export const endpointIsReady = (endpoint: RouteEndpoint, availablePinIds: Readon
   if (endpoint.kind === 'coordinates') return parseRouteCoordinates(endpoint.value) !== null
   const pinId = Number(endpoint.value)
   return Number.isInteger(pinId) && availablePinIds.has(pinId)
+}
+
+export const resolveRouteEndpoint = (
+  endpoint: RouteEndpoint,
+  pins: ReadonlyMap<number, { latitude: number; longitude: number }>
+) => {
+  if (endpoint.kind === 'coordinates') return parseRouteCoordinates(endpoint.value)
+  const pin = pins.get(Number(endpoint.value))
+  return pin ? { latitude: pin.latitude, longitude: pin.longitude } : null
+}
+
+// Valhalla emits encoded polylines with six decimal digits, not Google's common
+// five-digit variant. Return MapLibre's [longitude, latitude] coordinate order.
+export const decodeValhallaPolyline6 = (encoded: string): [number, number][] => {
+  const coordinates: [number, number][] = []
+  let index = 0
+  let latitude = 0
+  let longitude = 0
+
+  const decodeValue = () => {
+    let result = 0
+    let shift = 0
+    let byte = 0
+    do {
+      if (index >= encoded.length) throw new Error('Invalid route geometry')
+      byte = encoded.charCodeAt(index++) - 63
+      result |= (byte & 0x1f) << shift
+      shift += 5
+    } while (byte >= 0x20)
+    return result & 1 ? ~(result >> 1) : result >> 1
+  }
+
+  while (index < encoded.length) {
+    latitude += decodeValue()
+    longitude += decodeValue()
+    coordinates.push([longitude / 1e6, latitude / 1e6])
+  }
+  return coordinates
+}
+
+const xmlEscape = (value: string) =>
+  value.replace(/[&<>"']/g, (character) => {
+    const entities: Record<string, string> = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&apos;',
+    }
+    return entities[character]
+  })
+
+export const routeResultToGpx = (result: OfflineRouteResult, name: string) => {
+  const points = result.legs.flatMap((leg, legIndex) => {
+    const decoded = decodeValhallaPolyline6(leg.shape)
+    return legIndex === 0 ? decoded : decoded.slice(1)
+  })
+  const track = points
+    .map(([longitude, latitude]) => `      <trkpt lat="${latitude}" lon="${longitude}" />`)
+    .join('\n')
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.1" creator="Project NOMAD" xmlns="http://www.topografix.com/GPX/1/1">
+  <metadata><name>${xmlEscape(name)}</name></metadata>
+  <trk>
+    <name>${xmlEscape(name)}</name>
+    <trkseg>
+${track}
+    </trkseg>
+  </trk>
+</gpx>
+`
+}
+
+export const routeResultToText = (result: OfflineRouteResult, name: string) => {
+  const minutes = Math.max(1, Math.round(result.summary.timeSeconds / 60))
+  const directions = result.legs
+    .flatMap((leg) => leg.maneuvers)
+    .map(
+      (maneuver, index) =>
+        `${index + 1}. ${maneuver.instruction}${
+          maneuver.distanceMiles > 0 ? ` (${maneuver.distanceMiles.toFixed(1)} mi)` : ''
+        }`
+    )
+    .join('\n')
+  return `${name}
+${result.summary.distanceMiles.toFixed(1)} miles · ${minutes} minutes
+Offline map snapshot: ${result.snapshotDate ?? 'date unavailable'}
+
+IMPORTANT: This route contains no live closures, traffic, evacuation orders, fires, weather, or road damage. Verify conditions when live information is available.
+
+${directions}
+`
 }

@@ -3,10 +3,15 @@ import test from 'node:test'
 
 import {
   endpointIsReady,
+  decodeValhallaPolyline6,
   formatRouteCoordinates,
+  normalizeOfflineRouteResult,
   normalizeRouteDraft,
   normalizeSavedRoutePlans,
   parseRouteCoordinates,
+  resolveRouteEndpoint,
+  routeResultToGpx,
+  routeResultToText,
 } from '../../inertia/lib/route_planner.js'
 
 test('accepts bounded latitude and longitude and rejects malformed coordinates', () => {
@@ -18,6 +23,67 @@ test('accepts bounded latitude and longitude and rejects malformed coordinates',
   assert.equal(parseRouteCoordinates('91, -111'), null)
   assert.equal(parseRouteCoordinates('40, -181'), null)
   assert.equal(parseRouteCoordinates(', 0'), null)
+})
+
+const routeResult = {
+  summary: {
+    distanceMiles: 12.34,
+    timeSeconds: 1800,
+    hasHighway: false,
+    hasToll: false,
+    hasFerry: false,
+  },
+  legs: [
+    {
+      shape: '_izlhA~rlgdF_{geC~ywl@_kwzCn`{nI',
+      maneuvers: [
+        {
+          instruction: 'Head north & stay left',
+          distanceMiles: 2.5,
+          timeSeconds: 300,
+          beginShapeIndex: 0,
+          endShapeIndex: 1,
+        },
+      ],
+    },
+  ],
+  warnings: [],
+  snapshotDate: '2026-11-23',
+  liveConditionsIncluded: false as const,
+}
+
+test('validates persisted route results before restoring them', () => {
+  assert.deepEqual(normalizeOfflineRouteResult(routeResult), routeResult)
+  assert.equal(normalizeOfflineRouteResult({ summary: {}, legs: [] }), null)
+})
+
+test('exports an offline route as GPX and readable directions', () => {
+  const gpx = routeResultToGpx(routeResult, 'Home & shelter')
+  assert.match(gpx, /<name>Home &amp; shelter<\/name>/)
+  assert.match(gpx, /<trkpt lat="38.5" lon="-120.2" \/>/)
+
+  const directions = routeResultToText(routeResult, 'Home to shelter')
+  assert.match(directions, /12\.3 miles · 30 minutes/)
+  assert.match(directions, /1\. Head north & stay left \(2\.5 mi\)/)
+  assert.match(directions, /no live closures/i)
+})
+
+test('decodes Valhalla six-digit geometry in MapLibre longitude-latitude order', () => {
+  // Known polyline6 sample: [38.5, -120.2], [40.7, -120.95], [43.252, -126.453].
+  assert.deepEqual(decodeValhallaPolyline6('_izlhA~rlgdF_{geC~ywl@_kwzCn`{nI'), [
+    [-120.2, 38.5],
+    [-120.95, 40.7],
+    [-126.453, 43.252],
+  ])
+})
+
+test('resolves coordinate and saved-pin endpoints without accepting missing pins', () => {
+  const pins = new Map([[7, { latitude: 40.1, longitude: -111.9 }]])
+  assert.deepEqual(resolveRouteEndpoint({ kind: 'pin', value: '7' }, pins), {
+    latitude: 40.1,
+    longitude: -111.9,
+  })
+  assert.equal(resolveRouteEndpoint({ kind: 'pin', value: '8' }, pins), null)
 })
 
 test('restores safe route-draft fields and discards invalid persisted values', () => {

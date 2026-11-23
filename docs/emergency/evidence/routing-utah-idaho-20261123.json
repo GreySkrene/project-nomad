@@ -1,0 +1,118 @@
+{
+  "measured_at": "2026-11-23T09:10:00-07:00",
+  "scope": "Utah and Idaho bounded offline-routing proof of concept",
+  "status": "installed_and_live_tested",
+  "sources": [
+    {
+      "publisher": "Geofabrik",
+      "url": "https://download.geofabrik.de/north-america/us/utah-latest.osm.pbf",
+      "file": "utah-latest.osm.pbf",
+      "bytes": 172200193,
+      "publisher_md5_passed": true,
+      "sha256": "36ff52fbff25d740c9ce99c8151f8795d73b2d96449ead70987b12c911443f49"
+    },
+    {
+      "publisher": "Geofabrik",
+      "url": "https://download.geofabrik.de/north-america/us/idaho-latest.osm.pbf",
+      "file": "idaho-latest.osm.pbf",
+      "bytes": 130765499,
+      "publisher_md5_passed": true,
+      "sha256": "5492daeaf6993aff969e961187cd19f74259c35ee4c78cb08d7a976c94ca7635"
+    }
+  ],
+  "engine": {
+    "name": "Valhalla scripted container",
+    "version": "3.9.1",
+    "image": "ghcr.io/valhalla/valhalla-scripted:3.9.1",
+    "index_digest": "sha256:6238809f9dc3057743d70a20efd3911ec38e458bfa13a0601909b58f68dfd956",
+    "runtime_image_bytes": 673581738,
+    "published_host_ports": [],
+    "cpu_limit": 4,
+    "memory_limit_bytes": 6442450944,
+    "gpu_or_lm_studio_required": false
+  },
+  "graph": {
+    "snapshot_label": "2026-11-23",
+    "tile_count": 997,
+    "graph_directory_apparent_bytes": 533167480,
+    "tile_archive_bytes": 534968320,
+    "tile_archive_sha256": "f9e1806dbc51f5902df1ecadec00d43f47f5741a9fbb1684b3020fc85df8624f",
+    "admin_database_bytes": 7049216,
+    "admin_database_sha256": "b5d39356156b21bdc1b406b6571422131fa52882c0c9a4da5daad4dcffeab662",
+    "timezone_database_bytes": 122478592,
+    "timezone_database_sha256": "3bf1ff9d4944122e8b0c5c9d65d229d8d7f65c6a75bd29f1010129d0dc62b254",
+    "retained_routing_tree_bytes": 1500639490,
+    "build_wall_seconds_approximate": 112,
+    "peak_memory_observed_gib": 2.647,
+    "idle_memory_observed_mib": 400.8,
+    "idle_cpu_observed_percent": 0.18,
+    "power_watts_measured": false,
+    "notes": [
+      "The graph was built from two adjacent extracts. Valhalla warns that multiple extracts are discouraged, so the cross-border route was treated as a release gate.",
+      "The official 3.9.1 scripted image exits when the documented optional tile_urls variable is omitted under nounset; the Compose overlay explicitly defines it as empty.",
+      "Traffic-tile warnings are expected because live traffic is intentionally absent. Elevation data was not downloaded."
+    ]
+  },
+  "live_route_tests": [
+    {
+      "name": "West Jordan to Marysvale",
+      "start": [40.6097, -111.9391],
+      "destination": [38.4494, -112.2291],
+      "result": "Found route between points",
+      "miles": 181.2968,
+      "seconds": 9518.25,
+      "maneuvers": 15
+    },
+    {
+      "name": "Riverton to Rexburg cross-state",
+      "start": [40.5219, -111.9391],
+      "destination": [43.826, -111.7897],
+      "result": "Found route between points",
+      "miles": 258.5268,
+      "seconds": 12511.954,
+      "maneuvers": 37,
+      "nomad_proxy_verified": true
+    },
+    {
+      "name": "Riverton to Rexburg prefer without highways",
+      "preference": { "use_highways": 0 },
+      "result": "Found route between points",
+      "miles": 297.158,
+      "seconds": 21503.603,
+      "maneuvers": 71,
+      "still_reports_highway_segments": true,
+      "interpretation": "Avoidance is a preference, not a guarantee, matching the UI warning."
+    }
+  ],
+  "negative_tests": [
+    {
+      "case": "Salt Lake City to Miami exceeds regional span limit",
+      "http_status": 422
+    },
+    {
+      "case": "latitude greater than 90",
+      "http_status": 422
+    }
+  ],
+  "launcher_test": {
+    "container_stopped_then_started_by_nomad_name_filter": true,
+    "routing_health_after_restart": true
+  },
+  "connected_browser_qa": {
+    "route_summary_visible": true,
+    "route_miles_displayed": 258.5,
+    "maneuver_count_displayed": 37,
+    "console_errors": [],
+    "last_route_survived_browser_reload": true,
+    "download_filenames": [
+      "nomad-offline-route.txt",
+      "nomad-offline-route.gpx"
+    ],
+    "directions_and_gpx_contents_tested_by_unit": true
+  },
+  "offline_caveats": [
+    "No address search is installed; use saved pins, map clicks, or coordinates.",
+    "No live traffic, closures, evacuation orders, fires, weather, or road damage are included.",
+    "A physically disconnected Windows reboot test remains outstanding."
+  ]
+}

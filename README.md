@@ -60,6 +60,26 @@ USA/Canada/Mexico vector map. A 2026-11-19 audit found missing high-zoom tiles
 around Vancouver/Burnaby in the original extract. A verified 2,617,262,221-byte
 British Columbia zoom-15 overlay from the 2026-11-18 source build now supplies those
 tiles while preserving the original continental map.
+
+The family profile also includes an optional, CPU-only Valhalla 3.9.1 routing
+overlay for Utah and Idaho. It calculates driving, walking, and cycling routes from
+saved pins or coordinates without internet access, including turn-by-turn directions,
+route preferences, last-route recovery, readable direction export, and GPX export.
+The verified graph occupies about 1.4 GB and is private to
+NOMAD's Docker network. It does **not** provide address search, live traffic, closures,
+fires, weather, evacuation orders, or road-damage awareness. Reproduction details,
+hashes, and corridor tests are in the
+[routing installation evidence](docs/emergency/evidence/routing-utah-idaho-20261123.json).
+After this fork's NOMAD image is installed, reproduce the bounded graph with:
+
+```bash
+sudo bash install/install_offline_routing.sh
+```
+
+The installer resumes the two official downloads, checks publisher MD5 and local
+SHA-256 values, enforces an 8 GiB build ceiling, pins the routing image, waits for
+health, and leaves the service private to NOMAD. Review its output before replacing
+an existing graph; route snapshots are not live road-condition data.
 Safety-critical answers
 prioritize original official sources; local AI is optional and is not treated
 as an authority.
@@ -101,7 +121,7 @@ NOMAD is a management UI ("Command Center") and API that orchestrates a collecti
 - **AI Chat with Knowledge Base** — local AI chat powered by [Ollama](https://ollama.com/) or you can use OpenAI API compatible software such as LM Studio or llama.cpp, with document upload and semantic search (RAG via [Qdrant](https://qdrant.tech/))
 - **Information Library** — offline Wikipedia, medical references, ebooks, and more via [Kiwix](https://kiwix.org/)
 - **Education Platform** — Khan Academy courses with progress tracking via [Kolibri](https://learningequality.org/kolibri/)
-- **Offline Maps** — downloadable regional maps via [ProtoMaps](https://protomaps.com) for pan/zoom viewing; no live closures or built-in address routing
+- **Offline Maps** — downloadable regional maps via [ProtoMaps](https://protomaps.com) for pan/zoom viewing; this fork can optionally add private Utah/Idaho coordinate-and-pin routing, but not address search or live closures
 - **Data Tools** — encryption, encoding, and analysis via [CyberChef](https://gchq.github.io/CyberChef/)
 - **Notes** — local note-taking via [FlatNotes](https://github.com/dullage/flatnotes)
 - **System Benchmark** — hardware scoring with a [community leaderboard](https://benchmark.projectnomad.us)
@@ -118,7 +138,7 @@ NOMAD also includes built-in tools like a Wikipedia content selector, ZIM librar
 | Information Library | Kiwix | Offline Wikipedia, medical references, survival guides, ebooks |
 | AI Assistant | Ollama + Qdrant | Built-in chat with document upload and semantic search |
 | Education Platform | Kolibri | Khan Academy courses, progress tracking, multi-user support |
-| Offline Maps | ProtoMaps | Downloadable regional maps for offline pan/zoom viewing and saved-pin search; no address routing |
+| Offline Maps | ProtoMaps + optional Valhalla | Downloadable maps for offline pan/zoom and saved pins; this fork's verified Utah/Idaho graph adds coordinate-and-pin routes, but not address search or live conditions |
 | Data Tools | CyberChef | Encryption, encoding, hashing, and data analysis |
 | Notes | FlatNotes | Local note-taking with markdown support |
 | System Benchmark | Built-in | Hardware scoring, Builder Tags, and community leaderboard |

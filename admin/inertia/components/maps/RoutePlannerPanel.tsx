@@ -1,5 +1,13 @@
 import { useEffect, useMemo, useState } from 'react'
-import { IconAlertTriangle, IconArrowsExchange, IconRoute, IconX } from '@tabler/icons-react'
+import {
+  IconAlertTriangle,
+  IconArrowsExchange,
+  IconCheck,
+  IconDownload,
+  IconLoader2,
+  IconRoute,
+  IconX,
+} from '@tabler/icons-react'
 
 import type { MapMarker } from '~/hooks/useMapMarkers'
 import {
@@ -7,18 +15,34 @@ import {
   endpointIsReady,
   formatRouteCoordinates,
   normalizeRouteDraft,
+  normalizeOfflineRouteResult,
   normalizeSavedRoutePlans,
   parseRouteCoordinates,
+  resolveRouteEndpoint,
+  routeResultToGpx,
+  routeResultToText,
 } from '~/lib/route_planner'
 import type {
   RouteDraft,
   RouteEndpoint,
+  OfflineRouteHealth,
+  OfflineRouteResult,
   RoutePickTarget,
   SavedRoutePlan,
 } from '~/lib/route_planner'
 
 const ROUTE_DRAFT_KEY = 'nomad:route-draft'
 const SAVED_ROUTE_PLANS_KEY = 'nomad:saved-route-plans'
+const LAST_ROUTE_RESULT_KEY = 'nomad:last-route-result'
+
+const downloadTextFile = (contents: string, filename: string, type: string) => {
+  const url = URL.createObjectURL(new Blob([contents], { type }))
+  const link = document.createElement('a')
+  link.href = url
+  link.download = filename
+  link.click()
+  URL.revokeObjectURL(url)
+}
 
 type EndpointEditorProps = {
   label: string
@@ -142,6 +166,7 @@ export default function RoutePlannerPanel({
   onRequestMapPick,
   mapPickTarget,
   pickedMapPoint,
+  onRouteResult,
 }: {
   markers: MapMarker[]
   onFlyTo: (longitude: number, latitude: number) => void
@@ -153,6 +178,7 @@ export default function RoutePlannerPanel({
     longitude: number
     latitude: number
   } | null
+  onRouteResult: (result: OfflineRouteResult | null) => void
 }) {
   const [open, setOpen] = useState(false)
   const [draft, setDraft] = useState<RouteDraft>(() => {
@@ -173,6 +199,44 @@ export default function RoutePlannerPanel({
       return []
     }
   })
+  const [routingHealth, setRoutingHealth] = useState<OfflineRouteHealth | null>(null)
+  const [routeResult, setRouteResult] = useState<OfflineRouteResult | null>(() => {
+    try {
+      const saved = localStorage.getItem(LAST_ROUTE_RESULT_KEY)
+      return saved ? normalizeOfflineRouteResult(JSON.parse(saved)) : null
+    } catch {
+      return null
+    }
+  })
+  const [routingError, setRoutingError] = useState<string | null>(null)
+  const [isCalculating, setIsCalculating] = useState(false)
+
+  useEffect(() => {
+    let cancelled = false
+    const checkHealth = async () => {
+      try {
+        const response = await fetch('/api/maps/routing/health')
+        const result = (await response.json()) as OfflineRouteHealth
+        if (!cancelled) setRoutingHealth(result)
+      } catch {
+        if (!cancelled) {
+          setRoutingHealth({
+            available: false,
+            version: null,
+            snapshotDate: null,
+            coverage: 'Utah and Idaho',
+            liveConditionsIncluded: false,
+          })
+        }
+      }
+    }
+    void checkHealth()
+    const interval = window.setInterval(checkHealth, 30_000)
+    return () => {
+      cancelled = true
+      window.clearInterval(interval)
+    }
+  }, [])
 
   useEffect(() => {
     try {
@@ -189,6 +253,16 @@ export default function RoutePlannerPanel({
       // Saved plans remain available for this session if browser storage fails.
     }
   }, [savedPlans])
+
+  useEffect(() => {
+    try {
+      if (routeResult) localStorage.setItem(LAST_ROUTE_RESULT_KEY, JSON.stringify(routeResult))
+      else localStorage.removeItem(LAST_ROUTE_RESULT_KEY)
+    } catch {
+      // The last result remains available for this session if browser storage fails.
+    }
+    onRouteResult(routeResult)
+  }, [routeResult, onRouteResult])
 
   useEffect(() => {
     if (!pickedMapPoint) return
@@ -208,6 +282,58 @@ export default function RoutePlannerPanel({
     endpointIsReady(draft.start, availablePinIds) &&
     endpointIsReady(draft.destination, availablePinIds) &&
     draft.waypoints.every((waypoint) => endpointIsReady(waypoint.endpoint, availablePinIds))
+  const pinCoordinates = useMemo(
+    () =>
+      new Map(
+        markers.map((marker) => [
+          marker.id,
+          { latitude: marker.latitude, longitude: marker.longitude },
+        ])
+      ),
+    [markers]
+  )
+
+  const calculateRoute = async () => {
+    if (!endpointsReady || !routingHealth?.available || isCalculating) return
+    const endpoints = [
+      draft.start,
+      ...draft.waypoints.map((item) => item.endpoint),
+      draft.destination,
+    ]
+    const locations = endpoints.map((endpoint) => resolveRouteEndpoint(endpoint, pinCoordinates))
+    if (locations.some((location) => !location)) return
+
+    setIsCalculating(true)
+    setRoutingError(null)
+    try {
+      const response = await fetch('/api/maps/routing/route', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({
+          locations,
+          mode: draft.mode,
+          priority: draft.priority,
+          highwayPreference: draft.highwayPreference,
+          avoidTolls: draft.avoidTolls,
+          avoidFerries: draft.avoidFerries,
+          avoidUnpaved: draft.avoidUnpaved,
+          avoidTracks: draft.avoidTracks,
+        }),
+      })
+      const body = (await response.json()) as OfflineRouteResult | { message?: string }
+      if (!response.ok) {
+        throw new Error(
+          'message' in body && body.message ? body.message : 'Route calculation failed.'
+        )
+      }
+      const result = body as OfflineRouteResult
+      setRouteResult(result)
+    } catch (error) {
+      setRoutingError(error instanceof Error ? error.message : 'Route calculation failed.')
+    } finally {
+      setIsCalculating(false)
+    }
+  }
 
   const updateEndpoint = (key: 'start' | 'destination', endpoint: RouteEndpoint) => {
     setDraft((current) => ({ ...current, [key]: endpoint }))
@@ -304,14 +430,29 @@ export default function RoutePlannerPanel({
       </header>
 
       <div className="max-h-[calc(100vh-9rem)] space-y-4 overflow-y-auto p-4">
-        <div className="flex gap-2 rounded border border-amber-500/50 bg-amber-500/10 p-3 text-xs leading-5 text-text-secondary">
-          <IconAlertTriangle className="mt-0.5 shrink-0 text-amber-500" size={18} />
+        <div
+          className={`flex gap-2 rounded border p-3 text-xs leading-5 text-text-secondary ${
+            routingHealth?.available
+              ? 'border-desert-green/50 bg-desert-green/10'
+              : 'border-amber-500/50 bg-amber-500/10'
+          }`}
+        >
+          {routingHealth?.available ? (
+            <IconCheck className="mt-0.5 shrink-0 text-desert-green" size={18} />
+          ) : (
+            <IconAlertTriangle className="mt-0.5 shrink-0 text-amber-500" size={18} />
+          )}
           <p>
             <strong className="block text-text-primary">
-              Route calculation is not installed yet.
+              {routingHealth?.available
+                ? `Offline routing ready — ${routingHealth.coverage}`
+                : routingHealth
+                  ? 'Offline routing service is unavailable.'
+                  : 'Checking the offline routing service…'}
             </strong>
-            You can prepare endpoints and preferences now. Calculated roads, turns, and distances
-            require the planned local routing graph; map tiles alone cannot provide them.
+            {routingHealth?.available
+              ? `OSM snapshot ${routingHealth.snapshotDate ?? 'date unavailable'}. No live traffic, closures, fires, weather, or road damage.`
+              : 'Saved route setups remain usable, but calculation requires the local Utah/Idaho graph.'}
           </p>
         </div>
 
@@ -554,12 +695,105 @@ export default function RoutePlannerPanel({
 
         <button
           type="button"
-          disabled
-          className="w-full cursor-not-allowed rounded bg-text-muted/25 px-4 py-2.5 text-sm font-bold text-text-muted"
-          title="Install and validate the local routing service to enable calculation"
+          disabled={!endpointsReady || !routingHealth?.available || isCalculating}
+          onClick={calculateRoute}
+          className="flex w-full items-center justify-center gap-2 rounded bg-desert-green px-4 py-2.5 text-sm font-bold text-white hover:bg-btn-green-hover disabled:cursor-not-allowed disabled:bg-text-muted/25 disabled:text-text-muted"
+          title={
+            routingHealth?.available
+              ? 'Calculate entirely offline'
+              : 'Offline routing service unavailable'
+          }
         >
-          {endpointsReady ? 'Routing engine required' : 'Choose valid endpoints'}
+          {isCalculating && <IconLoader2 className="animate-spin" size={17} />}
+          {isCalculating
+            ? 'Calculating…'
+            : !endpointsReady
+              ? 'Choose valid endpoints'
+              : routingHealth?.available
+                ? 'Calculate offline route'
+                : 'Routing engine unavailable'}
         </button>
+
+        {routingError && (
+          <div
+            role="alert"
+            className="rounded border border-desert-red/50 bg-desert-red/10 p-3 text-xs text-desert-red"
+          >
+            {routingError}
+          </div>
+        )}
+
+        {routeResult && (
+          <section className="space-y-3 rounded border border-desert-green/40 bg-surface-secondary/70 p-3">
+            <div>
+              <h3 className="text-sm font-bold text-text-primary">
+                {routeResult.summary.distanceMiles.toFixed(1)} miles ·{' '}
+                {Math.max(1, Math.round(routeResult.summary.timeSeconds / 60))} minutes
+              </h3>
+              <p className="text-[11px] text-text-muted">
+                Calculated from the offline {routeResult.snapshotDate ?? 'installed'} snapshot.
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              <button
+                type="button"
+                onClick={() =>
+                  downloadTextFile(
+                    routeResultToText(
+                      routeResult,
+                      routeName.trim() || 'Project NOMAD offline route'
+                    ),
+                    'nomad-offline-route.txt',
+                    'text/plain;charset=utf-8'
+                  )
+                }
+                className="flex items-center gap-1.5 rounded border border-border-default px-2.5 py-1.5 text-xs font-semibold text-text-secondary hover:bg-surface-primary"
+              >
+                <IconDownload size={14} /> Directions
+              </button>
+              <button
+                type="button"
+                onClick={() =>
+                  downloadTextFile(
+                    routeResultToGpx(
+                      routeResult,
+                      routeName.trim() || 'Project NOMAD offline route'
+                    ),
+                    'nomad-offline-route.gpx',
+                    'application/gpx+xml;charset=utf-8'
+                  )
+                }
+                className="flex items-center gap-1.5 rounded border border-border-default px-2.5 py-1.5 text-xs font-semibold text-text-secondary hover:bg-surface-primary"
+              >
+                <IconDownload size={14} /> GPX track
+              </button>
+              <button
+                type="button"
+                onClick={() => setRouteResult(null)}
+                className="ml-auto rounded px-2 py-1 text-xs font-semibold text-text-muted hover:text-desert-red"
+              >
+                Clear route
+              </button>
+            </div>
+            <ol className="max-h-56 space-y-2 overflow-y-auto border-t border-border-subtle pt-2 text-xs text-text-secondary">
+              {routeResult.legs
+                .flatMap((leg) => leg.maneuvers)
+                .map((maneuver, index) => (
+                  <li key={`${index}-${maneuver.beginShapeIndex}`} className="flex gap-2">
+                    <span className="font-mono text-text-muted">{index + 1}.</span>
+                    <span>
+                      {maneuver.instruction}
+                      {maneuver.distanceMiles > 0 && (
+                        <small className="ml-1 text-text-muted">
+                          ({maneuver.distanceMiles.toFixed(1)} mi)
+                        </small>
+                      )}
+                    </span>
+                  </li>
+                ))}
+            </ol>
+          </section>
+        )}
 
         <p className="text-center text-[11px] leading-4 text-text-muted">
           Draft saves automatically on this browser. No live traffic, closures, evacuation orders,
