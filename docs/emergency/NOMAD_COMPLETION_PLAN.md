@@ -279,6 +279,10 @@ the separate project. Content and UI validation do not require local generation.
   native-container, live route, and rendered-map checks. The two remaining high rows
   are the paired Lucid/Faker finding whose published fix requires a dedicated Adonis/
   Lucid major migration. See `DEPENDENCY_SECURITY_AUDIT.md`; keep the service LAN-only.
+- [ ] Migrate and regression-test the Adonis/Lucid framework family that remains behind
+  the final two high production audit rows. Treat this as a planned framework upgrade,
+  not an `npm audit fix --force`: verify database migrations, sessions/auth, downloads,
+  ZIM inspection, maps, documents, launcher startup, and rollback before deployment.
 - [x] Publish the reviewed work to the public GitHub fork at `https://github.com/GreySkrene/project-nomad`.
 
 ## J. Resumable checkpoint — 2026-11-19 America/Denver
