@@ -37,7 +37,7 @@ const MAPS_ITEM = {
   description: 'View offline maps',
   icon: <IconMapRoute size={48} />,
   installed: true,
-  displayOrder: 4,
+  displayOrder: 3,
   poweredBy: null,
 }
 
@@ -46,12 +46,12 @@ const MAPS_ITEM = {
 // or embedding model.
 const DOCUMENT_LIBRARY_ITEM = {
   label: 'Document Library',
-  to: '/chat?knowledge_base=true',
+  to: '/library-search',
   target: '',
   description: 'Open saved PDFs and official source files; AI indexing is optional',
   icon: <IconFiles size={48} />,
   installed: true,
-  displayOrder: 3,
+  displayOrder: 2,
   poweredBy: null,
 }
 
@@ -65,7 +65,7 @@ const DRUG_REFERENCE_ITEM = {
   description: 'Offline FDA drug labels. Search by drug name or by symptom',
   icon: <IconPill size={48} />,
   installed: true,
-  displayOrder: 5,
+  displayOrder: 4,
   poweredBy: null,
 }
 
@@ -75,8 +75,7 @@ const SYSTEM_ITEMS = [
     label: 'Easy Setup',
     to: '/easy-setup',
     target: '',
-    description:
-      'Not sure where to start? Use the setup wizard to quickly configure your NOMAD!',
+    description: 'Not sure where to start? Use the setup wizard to quickly configure your NOMAD!',
     icon: <IconBolt size={48} />,
     installed: true,
     displayOrder: 50,
@@ -137,10 +136,13 @@ export default function Home(props: {
   drugReferenceInstalled: boolean
 }) {
   const items: DashboardItem[] = []
-  const updateInfo = useUpdateAvailable();
+  const updateInfo = useUpdateAvailable()
   const rerunBanner = useBenchmarkRerunBanner()
   const queryClient = useQueryClient()
   const { aiAssistantName } = usePage<{ aiAssistantName: string }>().props
+  const localLibraryRunning = props.system.services.some(
+    (service) => service.service_name === SERVICE_NAMES.KIWIX && service.status === 'running'
+  )
 
   // Link tile management. `editingTile` null with the modal open means "create".
   const [linkModalOpen, setLinkModalOpen] = useState(false)
@@ -162,7 +164,6 @@ export default function Home(props: {
     refreshServices()
   }
 
-
   const handleDismissRerunBanner = async () => {
     await api.updateSetting('benchmark.rerunBannerDismissed', true)
     queryClient.invalidateQueries({ queryKey: BENCHMARK_RERUN_BANNER_QUERY_KEY })
@@ -170,9 +171,11 @@ export default function Home(props: {
 
   // Check if user has visited Easy Setup
   const { data: easySetupVisited } = useSystemSetting({
-    key: 'ui.hasVisitedEasySetup'
+    key: 'ui.hasVisitedEasySetup',
   })
-  const shouldHighlightEasySetup = easySetupVisited?.value ? String(easySetupVisited.value) !== 'true' : false
+  const shouldHighlightEasySetup = easySetupVisited?.value
+    ? String(easySetupVisited.value) !== 'true'
+    : false
 
   // Add installed services (non-dependency services only). Link tiles are user-added
   // shortcuts with no container behind them, so they are collected separately below
@@ -189,14 +192,18 @@ export default function Home(props: {
       const serviceLink = getServiceLink(service.ui_location || '', service.custom_url)
       items.push({
         // Inject custom AI Assistant name if this is the chat service
-        label: service.service_name === SERVICE_NAMES.OLLAMA && aiAssistantName ? aiAssistantName : (service.friendly_name || service.service_name),
+        label:
+          service.service_name === SERVICE_NAMES.OLLAMA && aiAssistantName
+            ? aiAssistantName
+            : service.friendly_name || service.service_name,
         // Guest access is enabled for Kolibri. Link directly to Learn so the normal
         // emergency-library path does not stop at Kolibri's optional sign-in screen.
-        to: service.service_name === SERVICE_NAMES.KOLIBRI_GEN2
-          ? new URL('/en/learn/', serviceLink).href
-          : service.service_name === SERVICE_NAMES.KIWIX
-            ? '/library-search'
-            : serviceLink,
+        to:
+          service.service_name === SERVICE_NAMES.KOLIBRI_GEN2
+            ? new URL('/en/learn/', serviceLink).href
+            : service.service_name === SERVICE_NAMES.KIWIX
+              ? '/library-search'
+              : serviceLink,
         target: service.service_name === SERVICE_NAMES.KIWIX ? '' : '_blank',
         description:
           service.description ||
@@ -207,7 +214,14 @@ export default function Home(props: {
           <IconWifiOff size={48} />
         ),
         installed: service.installed,
-        displayOrder: service.display_order ?? 100,
+        displayOrder:
+          service.service_name === SERVICE_NAMES.KIWIX
+            ? 1
+            : service.service_name === SERVICE_NAMES.KOLIBRI_GEN2
+              ? 20
+              : service.service_name === SERVICE_NAMES.FLATNOTES
+                ? 21
+                : (service.display_order ?? 100),
         poweredBy: service.powered_by ?? null,
       })
     })
@@ -249,57 +263,61 @@ export default function Home(props: {
   return (
     <AppLayout>
       <Head title="Command Center" />
-      {
-        updateInfo?.updateAvailable && (
-          <div className='flex justify-center items-center p-4 w-full'>
-            <Alert
-              title="An update is available for Project NOMAD!"
-              type="info-inverted"
-              variant="solid"
-              className="w-full"
-              buttonProps={{
-                variant: 'primary',
-                children: 'Go to Settings',
-                icon: 'IconSettings',
-                onClick: () => router.visit('/settings/update'),
-              }}
-            />
-          </div>
-        )
-      }
+      {updateInfo?.updateAvailable && (
+        <div className="flex justify-center items-center p-4 w-full">
+          <Alert
+            title="An update is available for Project NOMAD!"
+            type="info-inverted"
+            variant="solid"
+            className="w-full"
+            buttonProps={{
+              variant: 'primary',
+              children: 'Go to Settings',
+              icon: 'IconSettings',
+              onClick: () => router.visit('/settings/update'),
+            }}
+          />
+        </div>
+      )}
       <WhatsNewBanner />
-      {
-        rerunBanner?.show && (
-          <div className='flex justify-center items-center px-4 pt-4 w-full'>
-            <Alert
-              title="Your benchmark can be re-scored with Score v2"
-              message="We've upgraded the benchmark scoring system. Re-run your benchmark to get an updated Score v2 result on the community leaderboard."
-              type="info-inverted"
-              variant="solid"
-              className="w-full"
-              dismissible
-              onDismiss={handleDismissRerunBanner}
-              buttonProps={{
-                variant: 'primary',
-                children: 'Re-run benchmark',
-                icon: 'IconRefresh',
-                onClick: () => router.visit('/settings/benchmark'),
-              }}
-            />
-          </div>
-        )
-      }
+      {rerunBanner?.show && (
+        <div className="flex justify-center items-center px-4 pt-4 w-full">
+          <Alert
+            title="Your benchmark can be re-scored with Score v2"
+            message="We've upgraded the benchmark scoring system. Re-run your benchmark to get an updated Score v2 result on the community leaderboard."
+            type="info-inverted"
+            variant="solid"
+            className="w-full"
+            dismissible
+            onDismiss={handleDismissRerunBanner}
+            buttonProps={{
+              variant: 'primary',
+              children: 'Re-run benchmark',
+              icon: 'IconRefresh',
+              onClick: () => router.visit('/settings/benchmark'),
+            }}
+          />
+        </div>
+      )}
       <section className="nomad-dashboard-intro">
         <div>
           <p className="nomad-kicker">FIELD SYSTEM / LOCAL ACCESS</p>
           <h1>What do you need?</h1>
           <p>Open a trusted offline library, map, manual, or system tool.</p>
         </div>
-        <div className="nomad-readiness-card">
-          <span className="nomad-status-dot" />
+        <div className="nomad-readiness-card" role="status">
+          <span
+            className={`nomad-status-dot ${localLibraryRunning ? '' : 'nomad-status-dot--limited'}`}
+          />
           <span>
-            <strong>Local emergency library</strong>
-            <small>Built for offline access</small>
+            <strong>
+              {localLibraryRunning ? 'Local library ready' : 'Library needs attention'}
+            </strong>
+            <small>
+              {localLibraryRunning
+                ? 'Information Library service is running'
+                : 'Restart NOMAD or check Supply Depot'}
+            </small>
           </span>
         </div>
       </section>
@@ -419,10 +437,15 @@ export default function Home(props: {
           )
         })}
 
-        <div className="nomad-command-tile nomad-command-tile--paused relative border-2 h-48 flex flex-col items-center justify-center text-center px-4" aria-disabled="true">
+        <div
+          className="nomad-command-tile nomad-command-tile--paused relative border-2 h-48 flex flex-col items-center justify-center text-center px-4"
+          aria-disabled="true"
+        >
           <IconWifiOff size={40} />
           <h3 className="font-bold text-xl mt-2">AI Assistant Paused</h3>
-          <p className="text-sm mt-1">Direct libraries, maps, and official sources remain available</p>
+          <p className="text-sm mt-1">
+            Direct libraries, maps, and official sources remain available
+          </p>
         </div>
 
         {/* Add-a-link affordance, last in the grid so it never displaces an app. */}

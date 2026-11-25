@@ -6,6 +6,7 @@ import {
   IconBook2,
   IconBookmark,
   IconExternalLink,
+  IconRefresh,
   IconSearch,
   IconShieldCheck,
   IconX,
@@ -55,9 +56,12 @@ export default function LibraryReader({ kiwixService }: { kiwixService: ServiceS
   const [searchOpen, setSearchOpen] = useState(false)
   const [searching, setSearching] = useState(false)
   const [saved, setSaved] = useState(false)
+  const [frameNavigationUntracked, setFrameNavigationUntracked] = useState(false)
+  const [frameRevision, setFrameRevision] = useState(0)
   const [searchStatus, setSearchStatus] = useState('Search article titles in your offline library.')
   const searchRequest = useRef(0)
   const searchInput = useRef<HTMLInputElement>(null)
+  const frameHasLoaded = useRef(false)
 
   const kiwixBase = useMemo(
     () =>
@@ -100,7 +104,9 @@ export default function LibraryReader({ kiwixService }: { kiwixService: ServiceS
   }
 
   useEffect(() => {
-    api.listZimFiles().then((response) => setLibraries(response.data.files))
+    api.listZimFiles().then((response) => {
+      if (response) setLibraries(response.data.files)
+    })
     const onPopState = () => setLocation(readLocation())
     window.addEventListener('popstate', onPopState)
     return () => window.removeEventListener('popstate', onPopState)
@@ -112,6 +118,11 @@ export default function LibraryReader({ kiwixService }: { kiwixService: ServiceS
     recordRecentReference(reference)
     setSaved(isReferenceSaved(reference.url))
   }, [referenceUrl, pageTitle, sourceTitle])
+
+  useEffect(() => {
+    frameHasLoaded.current = false
+    setFrameNavigationUntracked(false)
+  }, [frameUrl])
 
   useEffect(() => {
     if (searchOpen) window.setTimeout(() => searchInput.current?.focus(), 0)
@@ -299,10 +310,17 @@ export default function LibraryReader({ kiwixService }: { kiwixService: ServiceS
                 const reference = currentReference()
                 if (reference) setSaved(toggleSavedReference(reference))
               }}
-              className={`inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-sm font-semibold ${saved ? 'border-desert-green bg-desert-green/10 text-desert-green' : 'border-border-default text-text-secondary hover:bg-surface-secondary'}`}
+              disabled={frameNavigationUntracked}
+              className={`inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-50 ${saved ? 'border-desert-green bg-desert-green/10 text-desert-green' : 'border-border-default text-text-secondary hover:bg-surface-secondary'}`}
               aria-pressed={saved}
+              title={
+                frameNavigationUntracked
+                  ? 'Open an article through NOMAD search before saving so the bookmark has an exact address.'
+                  : undefined
+              }
             >
-              <IconBookmark size={17} /> {saved ? 'Saved' : 'Save reference'}
+              <IconBookmark size={17} />{' '}
+              {frameNavigationUntracked ? 'Save unavailable' : saved ? 'Saved' : 'Save reference'}
             </button>
             <button
               type="button"
@@ -411,15 +429,42 @@ export default function LibraryReader({ kiwixService }: { kiwixService: ServiceS
           contamination notices, verify live information when possible.
         </aside>
 
+        {frameNavigationUntracked && (
+          <aside
+            className="flex flex-wrap items-center justify-center gap-3 border-b border-amber-500/40 bg-amber-500/15 px-4 py-3 text-center text-sm text-text-secondary"
+            role="alert"
+          >
+            <span>
+              This source followed an internal link that NOMAD cannot identify across the offline
+              reader boundary. Saving is paused so it cannot create a bookmark to the wrong article.
+            </span>
+            <button
+              type="button"
+              onClick={() => {
+                frameHasLoaded.current = false
+                setFrameNavigationUntracked(false)
+                setFrameRevision((revision) => revision + 1)
+              }}
+              className="inline-flex items-center gap-2 rounded-lg border border-border-default bg-surface-primary px-3 py-1.5 font-semibold text-text-primary"
+            >
+              <IconRefresh size={16} /> Return to tracked article
+            </button>
+          </aside>
+        )}
+
         <div className="relative min-h-[65vh] flex-1 bg-white">
           {/* Kiwix is cross-origin and applies its own CSP sandbox. A second iframe sandbox
               prevents some valid archives from rendering in Chromium. */}
           <iframe
-            key={frameUrl}
+            key={`${frameUrl}-${frameRevision}`}
             src={frameUrl}
             title={`${pageTitle} — original offline source`}
             className="absolute inset-0 h-full min-h-[65vh] w-full border-0"
             referrerPolicy="no-referrer"
+            onLoad={() => {
+              if (frameHasLoaded.current) setFrameNavigationUntracked(true)
+              frameHasLoaded.current = true
+            }}
           />
         </div>
       </main>

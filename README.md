@@ -102,17 +102,37 @@ copyable page citations. The original download remains available. Kolibri remain
 separate, and no claim is made that maps, course content, Kiwix, and documents share
 one universal index.
 
-The Library Search tab also searches passages already stored in the local knowledge
-index for saved manuals. This is deterministic lexical matching: it does not call an
-LLM, LM Studio, or an embedding model at query time. It returns one best passage per
-original document, keeps the source link beside the excerpt, and falls back to title
-matches if the local knowledge index is unavailable. Kiwix article full-text search
-remains a separate, clearly labelled action.
+The Library Search tab searches passages in both the local knowledge index and a
+bounded, page-aware index of saved PDF/Markdown originals that remain in Manual
+ingest state. This is deterministic lexical matching: it does not call an LLM, LM
+Studio, or an embedding model at query time, and building the disk index does not
+change a document's ingest/license decision. It returns one best passage per
+original document, keeps the source link beside the excerpt, and deep-links PDFs to
+the matching page. Matching uses normalized words and controlled plural forms, so
+`splint` can match `splints` without treating `splinter` as medical guidance. Files
+without extractable text remain findable by title. Rebuild or resume the local index
+inside the deployed admin container with:
+
+```bash
+docker exec nomad_admin node /app/scripts/build_document_lexical_index.js
+```
+
+Kiwix article full-text search remains a separate, clearly labelled action.
+Run `npm run audit:emergency-search` from `admin/` while NOMAD is running to verify
+that ten core emergency topics still surface both an accepted Kiwix article and a
+trusted saved original; the audit fails if either search surface is missing or the
+document index is partial.
 
 Opened articles and manuals are recorded in a device-local Recent list, and either
 reader can save a reference for one-click return from the Library Browse screen.
 These lists live in browser storage, contain only internal NOMAD reader links, and
-remain available offline without an account or AI service.
+remain available offline without an account or AI service. Because Kiwix article
+content is cross-origin, following an internal article link pauses Save reference
+until the tracked article is restored; this prevents NOMAD from silently bookmarking
+the prior article under the wrong title. Library inventory waits and failures are
+shown separately from a genuinely empty library, with local retry controls. The
+Command Center readiness label is based on the running local Kiwix service rather
+than an unconditional offline-ready claim.
 
 ## Installation & Quickstart
 Project NOMAD can be installed on any Debian-based operating system (we recommend Ubuntu 26.04 LTS; 24.04 LTS and Debian 12 are also supported). Installation is completely terminal-based, and all tools and resources are designed to be accessed through the browser, so there's no need for a desktop environment if you'd rather setup NOMAD as a "server" and access it through other clients.

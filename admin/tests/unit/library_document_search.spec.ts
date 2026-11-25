@@ -21,6 +21,21 @@ test('removes upload hashes and extensions from stored document titles', () => {
   )
 })
 
+test('gives split Hesperian books recognizable source and part names', () => {
+  assert.equal(
+    friendlyStoredDocumentName('en_wtnd_2025_10.pdf'),
+    'Where There Is No Doctor (2025) — Part 10'
+  )
+  assert.equal(
+    friendlyStoredDocumentName('en_midw_2026_gloss.pdf'),
+    'A Book for Midwives (2026) — Glossary'
+  )
+  assert.equal(
+    friendlyStoredDocumentName('en_dent_2024_fm.pdf'),
+    'Where There Is No Dentist (2024) — Front matter'
+  )
+})
+
 test('ranks an exact passage above a filename-only match and keeps one result per file', () => {
   const results = rankStoredDocuments(
     'solar input',
@@ -29,6 +44,7 @@ test('ranks an exact passage above a filename-only match and keeps one result pe
       {
         source: documents[0].source,
         chunkIndex: 3,
+        pageNumber: 8,
         text: 'Connect a compatible solar input cable and confirm charging wattage on the display.',
       },
       {
@@ -42,6 +58,7 @@ test('ranks an exact passage above a filename-only match and keeps one result pe
   assert.equal(results.length, 1)
   assert.equal(results[0].matchKind, 'content')
   assert.equal(results[0].chunkIndex, 3)
+  assert.equal(results[0].pageNumber, 8)
   assert.match(results[0].excerpt, /solar input/i)
 })
 
@@ -58,6 +75,42 @@ test('uses AND semantics so unrelated single-term passages do not crowd results'
     results.map((result) => result.source),
     [documents[1].source]
   )
+})
+
+test('matches controlled plurals without matching longer unrelated words', () => {
+  const sources = [
+    { source: '/uploads/first-aid.pdf', fileName: 'AHA-First-Aid.pdf' },
+    { source: '/uploads/earthquake.pdf', fileName: 'Earthquake-Safety.pdf' },
+  ]
+  const results = rankStoredDocuments('splint', sources, [
+    {
+      source: sources[0].source,
+      chunkIndex: 1,
+      text: 'Use splints only when trained and follow the original first-aid guidance.',
+    },
+    {
+      source: sources[1].source,
+      chunkIndex: 2,
+      text: 'Wear shoes to avoid splinters and broken glass after an earthquake.',
+    },
+  ])
+
+  assert.deepEqual(
+    results.map((result) => result.source),
+    [sources[0].source]
+  )
+})
+
+test('normalizes common y and es plurals for exact-word matching', () => {
+  const results = rankStoredDocuments('battery box', documents, [
+    {
+      source: documents[0].source,
+      chunkIndex: 4,
+      text: 'Store batteries away from damaged boxes and inspect them regularly.',
+    },
+  ])
+  assert.equal(results.length, 1)
+  assert.equal(results[0].source, documents[0].source)
 })
 
 test('prefers an authoritative original over a library index with the same phrase', () => {

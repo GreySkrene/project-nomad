@@ -11,6 +11,7 @@ import {
   IconExternalLink,
   IconFileText,
   IconPhoto,
+  IconRefresh,
   IconSearch,
   IconSparkles,
   IconTrash,
@@ -51,6 +52,7 @@ type KiwixSuggestion = {
 }
 
 type ViewMode = 'browse' | 'search'
+type InventoryState = 'loading' | 'ready' | 'error'
 
 function friendlyDocumentName(fileName: string) {
   return fileName
@@ -66,6 +68,8 @@ export default function LibrarySearch({ kiwixService }: { kiwixService: ServiceS
   const [source, setSource] = useState('all')
   const [libraries, setLibraries] = useState<ZimFileWithMetadata[]>([])
   const [documents, setDocuments] = useState<StoredFileInfo[]>([])
+  const [libraryInventoryState, setLibraryInventoryState] = useState<InventoryState>('loading')
+  const [documentInventoryState, setDocumentInventoryState] = useState<InventoryState>('loading')
   const [category, setCategory] = useState<'All' | LibraryCategory>('All')
   const [browseFilter, setBrowseFilter] = useState('')
   const [expandedCollections, setExpandedCollections] = useState<Set<string>>(new Set())
@@ -90,15 +94,11 @@ export default function LibrarySearch({ kiwixService }: { kiwixService: ServiceS
     [kiwixService]
   )
 
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search)
-    if (params.get('view') === 'search') setView('search')
-    const initialQuery = params.get('q')?.trim()
-    const initialSource = params.get('source')?.trim()
-    if (initialQuery) setQuery(initialQuery.slice(0, 120))
-    if (initialSource) setSource(initialSource)
-
-    api.listZimFiles().then((response) => {
+  async function loadLibraries() {
+    setLibraryInventoryState('loading')
+    try {
+      const response = await api.listZimFiles()
+      if (!response) throw new Error('No library inventory response')
       const ordered = [...response.data.files].sort((a, b) => {
         const aProfile = browseProfile(a)
         const bProfile = browseProfile(b)
@@ -107,9 +107,36 @@ export default function LibrarySearch({ kiwixService }: { kiwixService: ServiceS
         )
       })
       setLibraries(ordered)
-    })
+      setLibraryInventoryState('ready')
+    } catch {
+      setLibraries([])
+      setLibraryInventoryState('error')
+    }
+  }
 
-    api.getStoredRAGFiles().then((files) => setDocuments(files || []))
+  async function loadDocuments() {
+    setDocumentInventoryState('loading')
+    try {
+      const files = await api.getStoredRAGFiles()
+      if (!files) throw new Error('No document inventory response')
+      setDocuments(files)
+      setDocumentInventoryState('ready')
+    } catch {
+      setDocuments([])
+      setDocumentInventoryState('error')
+    }
+  }
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    if (params.get('view') === 'search') setView('search')
+    const initialQuery = params.get('q')?.trim()
+    const initialSource = params.get('source')?.trim()
+    if (initialQuery) setQuery(initialQuery.slice(0, 120))
+    if (initialSource) setSource(initialSource)
+
+    void loadLibraries()
+    void loadDocuments()
   }, [])
 
   useEffect(() => {
@@ -214,7 +241,7 @@ export default function LibrarySearch({ kiwixService }: { kiwixService: ServiceS
       response?.partial
         ? 'Document text search is partially unavailable; filename matches are still shown.'
         : response
-          ? `Searched text from ${response.indexedDocuments} indexed saved document${response.indexedDocuments === 1 ? '' : 's'} without an AI model.`
+          ? `Searched text from ${response.indexedDocuments} of ${response.totalDocuments} saved document${response.totalDocuments === 1 ? '' : 's'} without an AI model.`
           : 'Saved-document search is temporarily unavailable.'
     )
     return results
@@ -589,7 +616,12 @@ export default function LibrarySearch({ kiwixService }: { kiwixService: ServiceS
                   {documentResults.map((result) => (
                     <a
                       key={result.source}
-                      href={libraryDocumentUrl(result.source, result.title, query)}
+                      href={libraryDocumentUrl(
+                        result.source,
+                        result.title,
+                        query,
+                        result.pageNumber ?? undefined
+                      )}
                       className="rounded-lg border border-border-default bg-surface-secondary px-4 py-3 hover:border-desert-green hover:bg-surface-tertiary"
                     >
                       <span className="font-semibold">{result.title}</span>
@@ -598,7 +630,7 @@ export default function LibrarySearch({ kiwixService }: { kiwixService: ServiceS
                       </span>
                       <span className="mt-2 block text-xs font-medium text-desert-green">
                         {result.matchKind === 'content'
-                          ? 'Matching passage in indexed original'
+                          ? `Matching passage in searchable original${result.pageNumber ? ` · Page ${result.pageNumber}` : ''}`
                           : 'Matching document title'}{' '}
                         · Open saved source
                       </span>
@@ -668,7 +700,13 @@ export default function LibrarySearch({ kiwixService }: { kiwixService: ServiceS
                     Searchable collections with offline articles, guides, and visual references.
                   </p>
                 </div>
-                <span className="text-sm text-text-muted">{visibleLibraries.length} shown</span>
+                <span className="text-sm text-text-muted">
+                  {libraryInventoryState === 'loading'
+                    ? 'Loading…'
+                    : libraryInventoryState === 'error'
+                      ? 'Unavailable'
+                      : `${visibleLibraries.length} shown`}
+                </span>
               </div>
               <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
                 {visibleLibraries.map((file) => {
@@ -810,9 +848,34 @@ export default function LibrarySearch({ kiwixService }: { kiwixService: ServiceS
                   )
                 })}
               </div>
-              {visibleLibraries.length === 0 && (
+              {libraryInventoryState === 'loading' && (
+                <div
+                  className="rounded-xl border border-border-default bg-surface-primary p-8 text-center text-text-secondary"
+                  role="status"
+                >
+                  Loading installed article libraries…
+                </div>
+              )}
+              {libraryInventoryState === 'error' && (
+                <div
+                  className="rounded-xl border border-amber-500/40 bg-amber-500/10 p-8 text-center text-text-secondary"
+                  role="alert"
+                >
+                  <p>The local article-library inventory did not respond.</p>
+                  <button
+                    type="button"
+                    onClick={() => void loadLibraries()}
+                    className="mt-4 inline-flex items-center gap-2 rounded-lg border border-border-default bg-surface-primary px-4 py-2 text-sm font-semibold text-text-primary"
+                  >
+                    <IconRefresh size={17} /> Try again
+                  </button>
+                </div>
+              )}
+              {libraryInventoryState === 'ready' && visibleLibraries.length === 0 && (
                 <div className="rounded-xl border border-dashed border-border-default p-8 text-center text-text-secondary">
-                  No installed article library matches those filters.
+                  {libraries.length === 0
+                    ? 'No article libraries are installed.'
+                    : 'No installed article library matches those filters.'}
                 </div>
               )}
             </section>
@@ -825,7 +888,31 @@ export default function LibrarySearch({ kiwixService }: { kiwixService: ServiceS
                   matter.
                 </p>
               </div>
-              {documentCollections.length > 0 ? (
+              {documentInventoryState === 'loading' ? (
+                <div
+                  className="rounded-xl border border-border-default bg-surface-primary p-7 text-text-secondary"
+                  role="status"
+                >
+                  Loading saved documents and manuals…
+                </div>
+              ) : documentInventoryState === 'error' ? (
+                <div
+                  className="rounded-xl border border-amber-500/40 bg-amber-500/10 p-7 text-text-secondary"
+                  role="alert"
+                >
+                  <p>
+                    The saved-document inventory did not respond. Article libraries remain
+                    available.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => void loadDocuments()}
+                    className="mt-4 inline-flex items-center gap-2 rounded-lg border border-border-default bg-surface-primary px-4 py-2 text-sm font-semibold text-text-primary"
+                  >
+                    <IconRefresh size={17} /> Try again
+                  </button>
+                </div>
+              ) : documentCollections.length > 0 ? (
                 <div className="grid gap-4 lg:grid-cols-2">
                   {documentCollections.map((collection) => {
                     const expanded = expandedCollections.has(collection.id)

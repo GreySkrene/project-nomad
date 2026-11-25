@@ -12,8 +12,25 @@ type KiwixSuggestion = {
 type SearchGate = {
   id: string
   query: string
+  documentQuery?: string
   relevantTitle: RegExp
   trustedSource: RegExp
+  trustedDocument: RegExp
+}
+
+type DocumentSearchResult = {
+  fileName: string
+  title: string
+  excerpt: string
+  pageNumber: number | null
+  matchKind: 'content' | 'title'
+}
+
+type DocumentSearchResponse = {
+  results: DocumentSearchResult[]
+  partial: boolean
+  indexedDocuments: number
+  totalDocuments: number
 }
 
 const NOMAD_URL = process.env.NOMAD_URL ?? 'http://localhost:8080'
@@ -27,60 +44,72 @@ const gates: SearchGate[] = [
     query: 'CPR',
     relevantTitle: /\b(cpr|cardiopulmonary resuscitation)\b/i,
     trustedSource: /WikiMed|MedlinePlus/i,
+    trustedDocument: /AHA-2025-CPR-CHOKING|who-basic-emergency-care/i,
   },
   {
     id: 'choking',
     query: 'choking',
     relevantTitle: /\bchoking\b/i,
     trustedSource: /WikiMed|MedlinePlus/i,
+    trustedDocument: /AHA-2025-CPR-CHOKING|who-basic-emergency-care/i,
   },
   {
     id: 'bleeding',
     query: 'bleeding',
     relevantTitle: /\b(bleeding|hemorrhage|haemorrhage)\b/i,
     trustedSource: /WikiMed|MedlinePlus/i,
+    trustedDocument: /who-basic-emergency-care/i,
   },
   {
     id: 'burns',
     query: 'burn',
+    documentQuery: 'burn treatment',
     relevantTitle: /\bburns?\b/i,
     trustedSource: /WikiMed|MedlinePlus/i,
+    trustedDocument: /who-basic-emergency-care/i,
   },
   {
     id: 'fractures-and-splints',
     query: 'splint',
     relevantTitle: /\b(splint|fracture|broken bone)\b/i,
     trustedSource: /WikiMed|MedlinePlus/i,
+    trustedDocument: /who-basic-emergency-care|en_wtnd_2025/i,
   },
   {
     id: 'shock',
     query: 'shock',
     relevantTitle: /\bshock\b/i,
     trustedSource: /WikiMed|MedlinePlus/i,
+    trustedDocument: /who-basic-emergency-care/i,
   },
   {
     id: 'wound-care',
     query: 'wound care',
     relevantTitle: /\b(wound|first aid)\b/i,
     trustedSource: /WikiMed|MedlinePlus/i,
+    trustedDocument: /who-basic-emergency-care/i,
   },
   {
     id: 'water-purification',
     query: 'water',
+    documentQuery: 'boil water',
     relevantTitle: /\bwater\b/i,
     trustedSource: /Ready\.gov/i,
+    trustedDocument: /EPA-Emergency-Disinfection|CDC-Make-Water-Safe|en_midw_2026/i,
   },
   {
     id: 'carbon-monoxide',
     query: 'carbon monoxide poisoning',
     relevantTitle: /\bcarbon monoxide poisoning\b/i,
     trustedSource: /WikiMed|MedlinePlus/i,
+    trustedDocument: /CPSC-Camping-Equipment-Carbon-Monoxide|FEMA-Power-Outage/i,
   },
   {
     id: 'emergency-heat',
     query: 'power outage',
     relevantTitle: /\b(power outage|winter storm|hypothermia|extreme cold)\b/i,
     trustedSource: /Ready\.gov/i,
+    trustedDocument: /FEMA-Power-Outage/i,
   },
 ]
 
@@ -110,6 +139,13 @@ async function suggestionsFor(file: ZimFile, query: string): Promise<KiwixSugges
     }))
 }
 
+async function documentsFor(query: string): Promise<DocumentSearchResponse> {
+  const url = new URL('/api/rag/files/search', NOMAD_URL)
+  url.searchParams.set('q', query)
+  url.searchParams.set('limit', '12')
+  return json<DocumentSearchResponse>(url.href)
+}
+
 async function main() {
   const installed = await json<{ files: ZimFile[] }>(`${NOMAD_URL}/api/zim/list`)
   if (!installed.files.length) throw new Error('NOMAD reports no installed ZIM libraries')
@@ -117,9 +153,10 @@ async function main() {
   let failed = 0
   const report = []
   for (const gate of gates) {
-    const settled = await Promise.allSettled(
-      installed.files.map((file) => suggestionsFor(file, gate.query))
-    )
+    const [settled, documentSearch] = await Promise.all([
+      Promise.allSettled(installed.files.map((file) => suggestionsFor(file, gate.query))),
+      documentsFor(gate.documentQuery ?? gate.query),
+    ])
     const reachable = settled.filter((result) => result.status === 'fulfilled')
     const combined = reachable.flatMap((result) => result.value)
     const selected = selectDiverseTitleSuggestions(gate.query, combined, 12, 4)
@@ -127,7 +164,10 @@ async function main() {
       (result) =>
         gate.relevantTitle.test(result.value) && gate.trustedSource.test(result.sourceTitle)
     )
-    const passed = Boolean(relevant)
+    const trustedDocument = documentSearch.results.find((result) =>
+      gate.trustedDocument.test(result.fileName)
+    )
+    const passed = Boolean(relevant) && Boolean(trustedDocument) && !documentSearch.partial
     if (!passed) failed += 1
     report.push({
       id: gate.id,
@@ -136,12 +176,23 @@ async function main() {
       relevant: relevant
         ? { title: relevant.value, source: relevant.sourceTitle, path: relevant.path }
         : null,
+      trustedDocument: trustedDocument
+        ? {
+            title: trustedDocument.title,
+            fileName: trustedDocument.fileName,
+            pageNumber: trustedDocument.pageNumber,
+            matchKind: trustedDocument.matchKind,
+          }
+        : null,
       topResults: selected.slice(0, 5).map((result) => ({
         title: result.value,
         source: result.sourceTitle,
       })),
       searchedLibraries: installed.files.length,
       reachableLibraries: reachable.length,
+      searchedDocuments: documentSearch.indexedDocuments,
+      totalDocuments: documentSearch.totalDocuments,
+      documentSearchPartial: documentSearch.partial,
     })
   }
 

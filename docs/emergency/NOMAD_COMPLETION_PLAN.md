@@ -399,9 +399,13 @@ the separate project. Content and UI validation do not require local generation.
   the final disconnected acceptance test.
 - [x] Add a repeatable live emergency-search audit (`npm run audit:emergency-search`)
   across all installed Kiwix libraries. On 2026-11-25 all 18 libraries responded and
-  all ten release-gate topics surfaced an accepted emergency source. Search ranking now
-  promotes WikiMed/MedlinePlus for clear medical intent and Ready.gov/CDC for clear
-  civil-emergency intent, while preserving literal relevance for unrelated queries.
+  all ten release-gate topics surfaced an accepted emergency source. The audit now
+  also requires a trusted saved-document result for every gate, fails on a partial
+  document index, and records the source page when available. The post-index run
+  passed 10/10 across all 18 reachable article libraries and 127 passage-searchable
+  documents. Search ranking promotes WikiMed/MedlinePlus for clear medical intent
+  and Ready.gov/CDC for clear civil-emergency intent, while preserving literal
+  relevance for unrelated queries.
 - [ ] After replacements: confirm exact models for equipment manuals still marked
   `[!]`, then perform reboot and physically disconnected acceptance tests.
 - [x] Investigated the current UI, produced six redesign concepts, and recorded the user's Style 2 + Style 3 selection.
@@ -435,3 +439,85 @@ the separate project. Content and UI validation do not require local generation.
   explicit role (Emergency core, Practical reference, Background reference, or
   Supplemental). Community Q&A archives are visibly supplemental rather than presented
   as coherent manuals or emergency authority. No installed archive was deleted.
+
+## M. Priority follow-up checkpoint — 2026-11-25 America/Denver
+
+This queue records the post-reader investigation and UI audit. Work in this order;
+do not delete content, expand map coverage, expose NOMAD to the LAN, or touch LM
+Studio merely to advance the queue.
+
+### P0 — search and reference correctness
+
+- [x] Match saved-document search terms as words rather than arbitrary substrings.
+  `splint` must not match only `splinter`/`splinters`; exact and controlled plural
+  forms must continue to work. Add focused regression tests and repeat the live
+  query against the installed 43-document lexical index. Six focused tests pass;
+  live `splint` returns no saved-document false positive, while `splinters`, `solar
+  input`, `boil water`, and `choking` retain their expected results.
+- [x] Prevent Kiwix Save reference from silently retaining the originally opened
+  article after the user follows an internal cross-origin article link. Until NOMAD
+  can identify the new URL, the UI must disclose the limitation or disable the
+  potentially incorrect save action rather than persisting a false reference. The
+  deployed reader detects a second cross-origin frame navigation, disables Save,
+  explains why, and offers Return to tracked article. Live browser QA followed
+  WikiMed's internal `Specialty` link and verified the disabled action and warning.
+- [x] Extend deterministic lexical search to validated PDF/Markdown originals that
+  are present in the managed library but intentionally remain in Manual ingest state.
+  A resumable, bounded disk index now covers all 85 such originals without changing
+  their database state or calling LM Studio. It stores 3,667 page/chunk records and
+  combines them with the existing Qdrant text at query time. Live API checks report
+  127 of 128 originals with passage text and all 128 available to title matching;
+  the graphical Idaho highway-map PDF is the title-only exception. `splint` now
+  returns WHO Basic Emergency Care page 191, its quick cards page 4, and Hesperian
+  pages 25/14; `cellular level` opens the replacement Anatomy & Physiology book at
+  page 5. Keep this model-free and preserve the existing license/browse-only states.
+- [x] Replace opaque split-book filenames in results with emergency-readable labels.
+  Live `splint` results now identify `Where There Is No Doctor (2025) — Part 10`
+  at page 25 and `Where There Is No Dentist (2024) — Part 7` at page 28 instead
+  of exposing only `en_wtnd_2025_10` / `en_dent_2024_07` codes.
+
+### P0 — truthful and recoverable UI
+
+- [x] Route the Command Center's Document Library tile to the persistent
+  model-independent Browse + Search surface instead of the AI/knowledge-base modal.
+- [x] Replace unconditional `Offline ready` claims with a truthful local-readiness
+  summary derived from the services/capabilities NOMAD can actually inspect. AI must
+  remain explicitly paused.
+- [x] Give library inventory loading, failure, retry, and genuine-empty states
+  distinct UI treatments. Never render a transient API wait or failed request as
+  `0 shown` / `No installed article library`.
+- [x] Rebalance the Command Center so emergency lookup, original documents, maps,
+  and medical reference precede education and maintenance tools.
+
+The complete P0 slice above is deployed as
+`project-nomad-local:search-integrity-20261125`. Live browser QA reported the actual
+Kiwix-derived `Local library ready` state, Document Library `/library-search` target,
+the intended first eight tile order, 18 loaded article libraries, and no false empty
+state. With both inventory APIs deliberately blocked, two distinct failure messages
+and two retry controls appeared and the false empty message remained absent. The
+rollback Compose file is
+`/opt/project-nomad/compose.yml.pre-search-integrity-20261125` (the earlier lexical
+and UI-only rollbacks are also retained).
+
+### P1 — final operational proof and storage
+
+- [ ] After the P0 fixes, reboot Windows and perform the physically disconnected
+  launcher/library/Kiwix/Kolibri/map/routing/document/print acceptance test.
+- [ ] Reclaim unused Docker build cache only after a fresh measurement and explicit
+  review of the prune target. Audit measurement: 54.85 GB build cache, 42.44 GB
+  reclaimable; C: had 47.7 GiB free. NOMAD content itself measured about 84 GB under
+  `/opt/project-nomad`, within the requested 100 GB ceiling. WSL VHD compaction is a
+  separate operation and must not be assumed to return host space automatically.
+- [ ] Measure library-only and maps/routing power use. Defer model power tests while
+  LM Studio is reserved and generated emergency answers remain unaccepted.
+
+### P2 — useful expansion after the core passes
+
+- [ ] Run the bounded Utah-only offline geocoder pilot from `GEOCODER_PREFLIGHT.md`;
+  prove address, street, place, typo, reverse-lookup, ambiguity, and out-of-coverage
+  behavior before adding Idaho or wiring suggestions into route endpoints.
+- [ ] Remove Gardening and Woodworking Q&A only after explicit approval of the exact
+  paths in `SUPPLEMENTAL_STORAGE_REVIEW.md` and after post-delete reconciliation.
+- [ ] Treat western routing expansion, satellite imagery, restricted iPhone LAN
+  access, and the coordinated Adonis framework migration as separate reviewed work.
+  Exact-model equipment manuals remain blocked on model/ownership confirmation.

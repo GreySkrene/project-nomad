@@ -326,6 +326,51 @@ The production Docker build completed its Vite and TypeScript compilation. Live 
 
 The local image is intentionally pinned with `pull_policy: never`. A future official NOMAD update may replace or bypass the customized image, so rebuild/review this interface against the new upstream version before changing that pin.
 
+On 2026-11-25 the admin service was upgraded to
+`project-nomad-local:truthful-library-20261125`. Saved-document lexical matching now
+uses exact normalized words with controlled plural handling, eliminating the live
+`splint`/`splinters` false positive without affecting the verified `solar input`,
+`boil water`, and `choking` results. The Command Center's Document Library opens the
+model-independent library; emergency tools precede education and maintenance tools;
+and the global readiness label reflects the live Kiwix service rather than making an
+unconditional offline claim. Library inventories now distinguish loading, failed,
+retryable, and truly empty states. If a user follows an internal cross-origin Kiwix
+link, Save reference is disabled with an explanation and a return-to-tracked-article
+control so NOMAD cannot silently store the wrong citation. TypeScript, 13 focused
+tests, native production build, Docker production build, live API checks, deliberate
+failure-state browser QA, and a real WikiMed internal-navigation check passed. Only
+the admin container was recreated; LM Studio and stored-content services were not
+touched. Rollback Compose file:
+`/opt/project-nomad/compose.yml.pre-truthful-library-20261125`.
+
+The follow-on model-free search deployment is
+`project-nomad-local:lexical-library-20261125`. Its resumable builder indexed 85/85
+Manual-state PDF originals into 3,667 page/chunk records (7.8 MB on disk) without
+changing ingest state or contacting LM Studio. Combined with existing Qdrant text,
+the live API reports passage search for 127 of 128 stored originals and title search
+for all 128. The graphical `Idaho-Official-Highway-Map.pdf` is the title-only case;
+it opens normally for visual use. Live `splint` results include WHO Basic Emergency
+Care page 191 and its quick cards page 4, while `cellular level` links to the complete
+Oregon State Anatomy & Physiology replacement at page 5. The service was healthy
+after the admin-only deployment. Rollback Compose file:
+`/opt/project-nomad/compose.yml.pre-lexical-library-20261125`.
+
+The repeatable `npm run audit:emergency-search` release gate now checks both search
+surfaces for CPR, choking, bleeding, burns, fractures/splints, shock, wound care,
+water purification, carbon monoxide, and emergency heat. Its 2026-11-25 post-index
+run passed 10/10: all 18 Kiwix libraries responded, every topic surfaced an accepted
+article source and a trusted saved original, and the document endpoint reported no
+partial-index condition. This is a discoverability check, not independent validation
+of every instruction inside each source.
+
+The latest pinned image is `project-nomad-local:search-integrity-20261125`. It adds
+the dual-surface release gate, explicit title-only index reporting, and readable
+Hesperian split-book labels. The live index recheck identified exactly one title-only
+file (`Idaho-Official-Highway-Map.pdf`); a live `splint` query displayed the WHO
+source at page 191, *Where There Is No Doctor* part 10 at page 25, and *Where There
+Is No Dentist* part 7 at page 28. Rollback Compose file:
+`/opt/project-nomad/compose.yml.pre-search-integrity-20261125`.
+
 ### Supplemental Q&A storage decision
 
 The 2026-11-23 storage review reconciled the five installed Stack Exchange archives

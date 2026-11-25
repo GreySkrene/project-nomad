@@ -40,6 +40,10 @@ import type {
 } from '../../types/rag.js'
 import { applyRelevanceFloor } from '../utils/misc.js'
 import { rankStoredDocuments, type LexicalDocumentChunk } from '../utils/library_document_search.js'
+import {
+  LIBRARY_LEXICAL_INDEX_PATH,
+  validateLibraryLexicalIndex,
+} from '../utils/library_lexical_index.js'
 import { KB_EVAL_COLLECTION } from '../../constants/kb_collections.js'
 import { UnrecoverableError } from 'bullmq'
 
@@ -87,6 +91,11 @@ export class RagService {
   private documentLexicalCache: {
     signature: string
     chunks: LexicalDocumentChunk[]
+  } | null = null
+  private diskDocumentLexicalCache: {
+    signature: string
+    chunks: LexicalDocumentChunk[]
+    sources: Set<string>
   } | null = null
   public static UPLOADS_STORAGE_PATH = 'storage/kb_uploads'
   public static CONTENT_COLLECTION_NAME = 'nomad_knowledge_base'
@@ -1460,7 +1469,8 @@ export class RagService {
    * searches are local string matching.
    */
   public async searchStoredDocuments(query: string, limit = 12): Promise<DocumentSearchResponse> {
-    const files = (await this.getStoredFiles()).filter((file) => file.isUserUpload)
+    const storedFiles = await this.getStoredFiles()
+    const files = storedFiles.filter((file) => file.isUserUpload)
     const documents = files.map(({ source, fileName }) => ({ source, fileName }))
     const indexed = files.filter((file) => file.chunksEmbedded > 0)
     const signature = indexed
@@ -1477,7 +1487,7 @@ export class RagService {
           RagService.EMBEDDING_DIMENSION
         )
         const sources = indexed.map((file) => file.source)
-        let offset: any = undefined
+        let offset: any
         const maximumChunks = 100_000
 
         while (sources.length > 0 && chunks.length < maximumChunks) {
@@ -1513,12 +1523,55 @@ export class RagService {
       }
     }
 
-    const chunks =
+    const qdrantChunks =
       this.documentLexicalCache?.signature === signature ? this.documentLexicalCache.chunks : []
+    let diskChunks: LexicalDocumentChunk[] = []
+    let diskSources = new Set<string>()
+    try {
+      const indexPath = join(process.cwd(), LIBRARY_LEXICAL_INDEX_PATH)
+      const stats = await getFileStatsIfExists(indexPath)
+      if (stats) {
+        const diskSignature = `${stats.size}\0${stats.modifiedTime.toISOString()}`
+        if (this.diskDocumentLexicalCache?.signature !== diskSignature) {
+          const { readFile } = await import('node:fs/promises')
+          const parsed = JSON.parse(await readFile(indexPath, 'utf-8')) as unknown
+          const validated = validateLibraryLexicalIndex(
+            parsed,
+            documents.map((document) => {
+              const file = files.find((candidate) => candidate.source === document.source)!
+              return {
+                source: document.source,
+                fileName: document.fileName,
+                size: file.size,
+                uploadedAt: file.uploadedAt,
+              }
+            })
+          )
+          this.diskDocumentLexicalCache = {
+            signature: diskSignature,
+            chunks: validated.chunks,
+            sources: validated.sources,
+          }
+        }
+        diskChunks = this.diskDocumentLexicalCache?.chunks ?? []
+        diskSources = this.diskDocumentLexicalCache?.sources ?? new Set<string>()
+      }
+    } catch (error) {
+      partial = true
+      logger.warn(
+        { err: error },
+        '[RagService.searchStoredDocuments] disk lexical index unavailable; continuing with Qdrant text'
+      )
+    }
+
+    const chunks = [...qdrantChunks, ...diskChunks]
+    const searchableSources = new Set(qdrantChunks.map((chunk) => chunk.source))
+    for (const source of diskSources) searchableSources.add(source)
     return {
       results: rankStoredDocuments(query, documents, chunks, limit),
       partial,
-      indexedDocuments: new Set(chunks.map((chunk) => chunk.source)).size,
+      indexedDocuments: searchableSources.size,
+      totalDocuments: documents.length,
     }
   }
 

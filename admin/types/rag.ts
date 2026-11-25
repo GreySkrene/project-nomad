@@ -212,6 +212,8 @@ export type DocumentSearchResult = {
   excerpt: string
   /** Ingested chunk number, not a PDF page number. */
   chunkIndex: number | null
+  /** Exact source PDF page when supplied by the model-free disk index. */
+  pageNumber: number | null
   score: number
   matchKind: 'title' | 'content'
 }
@@ -221,6 +223,8 @@ export type DocumentSearchResponse = {
   /** True when filename search worked but the local text index was unavailable. */
   partial: boolean
   indexedDocuments: number
+  /** Managed originals available by filename, including text-not-yet-indexed files. */
+  totalDocuments: number
 }
 
 /**

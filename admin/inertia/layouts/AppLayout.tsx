@@ -1,8 +1,19 @@
 import Footer from '~/components/Footer'
 import { Link, router } from '@inertiajs/react'
-import { IconArrowLeft, IconHome, IconShieldCheck } from '@tabler/icons-react'
+import {
+  IconAlertTriangle,
+  IconArrowLeft,
+  IconHome,
+  IconLoader2,
+  IconShieldCheck,
+} from '@tabler/icons-react'
 import classNames from 'classnames'
 import ThemeToggle from '~/components/ThemeToggle'
+import { useEffect, useState } from 'react'
+import api from '~/lib/api'
+import { SERVICE_NAMES } from '../../constants/service_names'
+
+type LocalReadiness = 'checking' | 'ready' | 'limited'
 
 export default function AppLayout({
   children,
@@ -16,6 +27,33 @@ export default function AppLayout({
    */
   compact?: boolean
 }) {
+  const [localReadiness, setLocalReadiness] = useState<LocalReadiness>('checking')
+
+  useEffect(() => {
+    let active = true
+    api.getSystemServices().then((services) => {
+      if (!active) return
+      const library = services?.find((service) => service.service_name === SERVICE_NAMES.KIWIX)
+      setLocalReadiness(library?.status === 'running' ? 'ready' : 'limited')
+    })
+    return () => {
+      active = false
+    }
+  }, [])
+
+  const readinessLabel =
+    localReadiness === 'ready'
+      ? 'Local library ready'
+      : localReadiness === 'limited'
+        ? 'Check local library'
+        : 'Checking local library'
+  const ReadinessIcon =
+    localReadiness === 'ready'
+      ? IconShieldCheck
+      : localReadiness === 'limited'
+        ? IconAlertTriangle
+        : IconLoader2
+
   return (
     <div className="nomad-shell min-h-screen flex flex-col">
       <header className="nomad-ops-bar">
@@ -32,8 +70,22 @@ export default function AppLayout({
           </span>
         </button>
         <div className="nomad-ops-actions">
-          <span className="nomad-offline-badge">
-            <IconShieldCheck size={17} /> Offline ready
+          <span
+            className={`nomad-offline-badge nomad-offline-badge--${localReadiness}`}
+            title={
+              localReadiness === 'ready'
+                ? 'The local Kiwix library service is running. Live alerts still require internet access.'
+                : localReadiness === 'limited'
+                  ? 'NOMAD could not verify that the local Kiwix library service is running.'
+                  : 'Checking the local Kiwix library service.'
+            }
+            role="status"
+          >
+            <ReadinessIcon
+              size={17}
+              className={localReadiness === 'checking' ? 'animate-spin' : undefined}
+            />{' '}
+            {readinessLabel}
           </span>
           <ThemeToggle compact />
           <Link href="/home" className="nomad-home-link" aria-label="Home" title="Home">
