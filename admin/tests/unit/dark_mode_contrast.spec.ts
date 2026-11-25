@@ -90,3 +90,25 @@ test('Builder Tag controls pair their inverted background with semantic text', (
     'Builder Tag text and background must have at least 4.5:1 contrast'
   )
 })
+
+test('dashboard readiness card uses readable semantic text in dark mode', () => {
+  const background = token('--color-surface-primary')
+  assert.ok(
+    contrast(token('--color-text-primary'), background) >= 4.5,
+    'readiness status must have at least 4.5:1 contrast'
+  )
+  assert.ok(
+    contrast(token('--color-text-secondary'), background) >= 4.5,
+    'readiness detail must have at least 4.5:1 contrast'
+  )
+  assert.match(
+    css,
+    /\.nomad-readiness-card strong\s*\{[^}]*color:\s*var\(--color-text-primary\)/,
+    'readiness status must explicitly use primary semantic text'
+  )
+  assert.match(
+    css,
+    /\.nomad-readiness-card small\s*\{[^}]*color:\s*var\(--color-text-secondary\)/,
+    'readiness detail must explicitly use secondary semantic text'
+  )
+})
