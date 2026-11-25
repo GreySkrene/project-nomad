@@ -488,6 +488,10 @@ Studio merely to advance the queue.
   `0 shown` / `No installed article library`.
 - [x] Rebalance the Command Center so emergency lookup, original documents, maps,
   and medical reference precede education and maintenance tools.
+- [x] Render-check the deployed dashboard and library at desktop width. Loading
+  inventories show explicit progress rather than false empty states; the dashboard
+  readiness card now sets explicit theme-aware primary/secondary text colors after
+  the audit exposed low-contrast inherited text in dark mode.
 
 The complete P0 slice above is deployed as
 `project-nomad-local:search-integrity-20261125`. Live browser QA reported the actual

@@ -98,8 +98,8 @@ body {
 .nomad-kicker { margin-bottom: 0.55rem; color: var(--color-desert-orange) !important; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.72rem !important; font-weight: 800; letter-spacing: 0.16em; }
 .nomad-readiness-card { display: flex; align-items: center; gap: 0.75rem; min-width: 16rem; padding: 0.8rem 1rem; border: 1px solid var(--color-border-default); border-radius: 0.45rem; background: var(--color-surface-primary); box-shadow: 0 10px 30px rgb(0 0 0 / 8%); }
 .nomad-readiness-card span:last-child { display: flex; flex-direction: column; }
-.nomad-readiness-card strong { font-size: 0.82rem; }
-.nomad-readiness-card small { margin-top: 0.15rem; color: var(--color-text-muted); font-size: 0.7rem; }
+.nomad-readiness-card strong { color: var(--color-text-primary); font-size: 0.82rem; }
+.nomad-readiness-card small { margin-top: 0.15rem; color: var(--color-text-secondary); font-size: 0.7rem; }
 .nomad-status-dot { width: 0.65rem; height: 0.65rem; flex: none; border-radius: 999px; background: #3bc48d; box-shadow: 0 0 0 4px rgb(59 196 141 / 14%), 0 0 15px rgb(59 196 141 / 55%); }
 .nomad-status-dot--limited { background: #e3a33c; box-shadow: 0 0 0 4px rgb(227 163 60 / 14%), 0 0 15px rgb(227 163 60 / 45%); }
 .nomad-tile-grid { padding-inline: clamp(1rem, 4vw, 3.5rem); padding-bottom: 3rem; }
