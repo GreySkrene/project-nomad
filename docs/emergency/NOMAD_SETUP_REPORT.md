@@ -237,8 +237,8 @@ excerpt. The endpoint reported a complete (not partial) local index. Kiwix searc
 still separate, and sources outside the managed-upload boundary are future work.
 
 Both persistent readers now share device-local Recent and Saved References. The
-Library Browse screen shows the six most recent entries from each list, and saved
-items can be removed without deleting any source content. Stored links are limited to
+Library Browse screen shows six entries from each list by default with Show all/less
+controls, and saved items can be removed without deleting any source content. Stored links are limited to
 the two internal NOMAD reader routes; external or malformed values are discarded.
 This feature requires no login, network, model, or server-side profile and therefore
 continues to work in the low-power offline workflow.

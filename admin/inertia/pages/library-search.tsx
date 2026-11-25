@@ -74,6 +74,8 @@ export default function LibrarySearch({ kiwixService }: { kiwixService: ServiceS
   const [documentSearchNote, setDocumentSearchNote] = useState('')
   const [savedReferences, setSavedReferences] = useState<LibraryReference[]>([])
   const [recentReferences, setRecentReferences] = useState<LibraryReference[]>([])
+  const [showAllSaved, setShowAllSaved] = useState(false)
+  const [showAllRecent, setShowAllRecent] = useState(false)
   const [correctedFrom, setCorrectedFrom] = useState<string | null>(null)
   const [status, setStatus] = useState(
     'Searches article titles and indexed passages from saved documents.'
@@ -393,34 +395,47 @@ export default function LibrarySearch({ kiwixService }: { kiwixService: ServiceS
               </div>
               {savedReferences.length ? (
                 <ul className="mt-4 space-y-2">
-                  {savedReferences.slice(0, 6).map((reference) => (
-                    <li
-                      key={reference.url}
-                      className="flex items-center gap-2 rounded-lg bg-surface-secondary p-3"
-                    >
-                      <a href={reference.url} className="min-w-0 flex-1 hover:text-desert-green">
-                        <span className="block truncate text-sm font-semibold">
-                          {reference.title}
-                        </span>
-                        <span className="block truncate text-xs text-text-muted">
-                          {reference.sourceTitle}
-                        </span>
-                      </a>
-                      <button
-                        type="button"
-                        onClick={() => removeSavedReference(reference.url)}
-                        className="rounded p-2 text-text-muted hover:bg-surface-tertiary hover:text-red-500"
-                        aria-label={`Remove ${reference.title} from saved references`}
+                  {(showAllSaved ? savedReferences : savedReferences.slice(0, 6)).map(
+                    (reference) => (
+                      <li
+                        key={reference.url}
+                        className="flex items-center gap-2 rounded-lg bg-surface-secondary p-3"
                       >
-                        <IconTrash size={16} />
-                      </button>
-                    </li>
-                  ))}
+                        <a href={reference.url} className="min-w-0 flex-1 hover:text-desert-green">
+                          <span className="block truncate text-sm font-semibold">
+                            {reference.title}
+                          </span>
+                          <span className="block truncate text-xs text-text-muted">
+                            {reference.sourceTitle}
+                          </span>
+                        </a>
+                        <button
+                          type="button"
+                          onClick={() => removeSavedReference(reference.url)}
+                          className="rounded p-2 text-text-muted hover:bg-surface-tertiary hover:text-red-500"
+                          aria-label={`Remove ${reference.title} from saved references`}
+                        >
+                          <IconTrash size={16} />
+                        </button>
+                      </li>
+                    )
+                  )}
                 </ul>
               ) : (
                 <p className="mt-4 text-sm leading-6 text-text-secondary">
                   Open an article or manual and choose Save reference for one-click offline access.
                 </p>
+              )}
+              {savedReferences.length > 6 && (
+                <button
+                  type="button"
+                  onClick={() => setShowAllSaved((current) => !current)}
+                  className="mt-3 text-sm font-semibold text-desert-green underline"
+                >
+                  {showAllSaved
+                    ? 'Show fewer saved references'
+                    : `Show all ${savedReferences.length}`}
+                </button>
               )}
             </div>
 
@@ -433,26 +448,39 @@ export default function LibrarySearch({ kiwixService }: { kiwixService: ServiceS
               </div>
               {recentReferences.length ? (
                 <ul className="mt-4 grid gap-2 sm:grid-cols-2">
-                  {recentReferences.slice(0, 6).map((reference) => (
-                    <li key={reference.url}>
-                      <a
-                        href={reference.url}
-                        className="block rounded-lg bg-surface-secondary p-3 hover:bg-surface-tertiary hover:text-desert-green"
-                      >
-                        <span className="block truncate text-sm font-semibold">
-                          {reference.title}
-                        </span>
-                        <span className="block truncate text-xs text-text-muted">
-                          {reference.sourceTitle}
-                        </span>
-                      </a>
-                    </li>
-                  ))}
+                  {(showAllRecent ? recentReferences : recentReferences.slice(0, 6)).map(
+                    (reference) => (
+                      <li key={reference.url}>
+                        <a
+                          href={reference.url}
+                          className="block rounded-lg bg-surface-secondary p-3 hover:bg-surface-tertiary hover:text-desert-green"
+                        >
+                          <span className="block truncate text-sm font-semibold">
+                            {reference.title}
+                          </span>
+                          <span className="block truncate text-xs text-text-muted">
+                            {reference.sourceTitle}
+                          </span>
+                        </a>
+                      </li>
+                    )
+                  )}
                 </ul>
               ) : (
                 <p className="mt-4 text-sm leading-6 text-text-secondary">
                   Articles and manuals you open will appear here automatically.
                 </p>
+              )}
+              {recentReferences.length > 6 && (
+                <button
+                  type="button"
+                  onClick={() => setShowAllRecent((current) => !current)}
+                  className="mt-3 text-sm font-semibold text-desert-green underline"
+                >
+                  {showAllRecent
+                    ? 'Show fewer recent references'
+                    : `Show all ${recentReferences.length}`}
+                </button>
               )}
             </div>
           </section>
