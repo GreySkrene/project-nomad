@@ -501,11 +501,18 @@ and UI-only rollbacks are also retained).
 
 ### P1 — final operational proof and storage
 
+- [x] Add a local-only, model-free acceptance harness for the reboot/disconnected
+  session. `install/test_offline_readiness.ps1` checks NOMAD, zero unfinished
+  downloads, Kiwix inventory/reader, Kolibri guest access, map archives, routing
+  snapshot truthfulness, saved-document completeness, and the WHO splint page-191
+  reader/original path. Its connected baseline passed 9/9 on 2026-11-25. It
+  explicitly does not claim the network is disconnected.
 - [ ] After the P0 fixes, reboot Windows and perform the physically disconnected
   launcher/library/Kiwix/Kolibri/map/routing/document/print acceptance test.
 - [ ] Reclaim unused Docker build cache only after a fresh measurement and explicit
-  review of the prune target. Audit measurement: 54.85 GB build cache, 42.44 GB
-  reclaimable; C: had 47.7 GiB free. NOMAD content itself measured about 84 GB under
+  review of the prune target. After the final image builds on 2026-11-25, Docker
+  reported 60.6 GB build cache with 46.81 GB reclaimable; C: had 41.4 GiB free.
+  NOMAD content itself measured about 84 GB under
   `/opt/project-nomad`, within the requested 100 GB ceiling. WSL VHD compaction is a
   separate operation and must not be assumed to return host space automatically.
 - [ ] Measure library-only and maps/routing power use. Defer model power tests while

@@ -123,6 +123,18 @@ that ten core emergency topics still surface both an accepted Kiwix article and 
 trusted saved original; the audit fails if either search surface is missing or the
 document index is partial.
 
+After a reboot, physically disconnect networking and run the local-only acceptance
+harness from PowerShell. It does not invoke AI or contact an external host:
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\install\test_offline_readiness.ps1
+```
+
+The script validates the local interface, article and document search, exact-page
+original access, Kiwix, Kolibri guest access, installed maps, private routing, and
+unfinished-download state. Its success is offline evidence only when networking was
+physically disconnected before it ran.
+
 Opened articles and manuals are recorded in a device-local Recent list, and either
 reader can save a reference for one-click return from the Library Browse screen.
 These lists live in browser storage, contain only internal NOMAD reader links, and
