@@ -88,6 +88,34 @@ Add-ReadinessCheck 'Offline routing engine' {
     "$($routing.coverage), snapshot $($routing.snapshotDate), Valhalla $($routing.version)"
 }
 
+Add-ReadinessCheck 'West Jordan to Marysvale offline route' {
+    $routeRequest = @{
+        locations = @(
+            @{ latitude = 40.6097; longitude = -111.9391 }
+            @{ latitude = 38.4494; longitude = -112.2291 }
+        )
+        mode = 'driving'
+        priority = 'fastest'
+        highwayPreference = 'neutral'
+        avoidTolls = $false
+        avoidFerries = $false
+        avoidUnpaved = $false
+        avoidTracks = $false
+    } | ConvertTo-Json -Depth 5
+    $route = Invoke-RestMethod `
+        -Uri "$($NomadUrl.TrimEnd('/'))/api/maps/routing/route" `
+        -Method Post `
+        -ContentType 'application/json' `
+        -Body $routeRequest `
+        -TimeoutSec 45
+    $miles = [double]$route.summary.distanceMiles
+    $maneuvers = @($route.legs | ForEach-Object { $_.maneuvers }).Count
+    if ($miles -lt 150 -or $miles -gt 220) { throw "Implausible route distance: $miles miles" }
+    if ($maneuvers -lt 5) { throw "Route returned only $maneuvers maneuvers" }
+    if ($route.liveConditionsIncluded) { throw 'Route incorrectly claims live conditions' }
+    ('{0:N1} miles, {1} maneuvers, snapshot {2}' -f $miles, $maneuvers, $route.snapshotDate)
+}
+
 Add-ReadinessCheck 'Trusted splint passage and exact PDF page' {
     $search = Get-LocalJson '/api/rag/files/search?q=splint&limit=5'
     if ($search.partial) { throw 'Saved-document search reports a partial index' }

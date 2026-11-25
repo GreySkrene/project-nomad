@@ -504,8 +504,9 @@ and UI-only rollbacks are also retained).
 - [x] Add a local-only, model-free acceptance harness for the reboot/disconnected
   session. `install/test_offline_readiness.ps1` checks NOMAD, zero unfinished
   downloads, Kiwix inventory/reader, Kolibri guest access, map archives, routing
-  snapshot truthfulness, saved-document completeness, and the WHO splint page-191
-  reader/original path. Its connected baseline passed 9/9 on 2026-11-25. It
+  snapshot truthfulness, an actual West Jordan-to-Marysvale route, saved-document
+  completeness, and the WHO splint page-191 reader/original path. Its connected
+  baseline passed 10/10 on 2026-11-25. It
   explicitly does not claim the network is disconnected.
 - [ ] After the P0 fixes, reboot Windows and perform the physically disconnected
   launcher/library/Kiwix/Kolibri/map/routing/document/print acceptance test.

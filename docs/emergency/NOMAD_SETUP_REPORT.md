@@ -372,9 +372,10 @@ Is No Dentist* part 7 at page 28. Rollback Compose file:
 `/opt/project-nomad/compose.yml.pre-search-integrity-20261125`.
 
 The new `install/test_offline_readiness.ps1` local-only acceptance harness passed
-9/9 in its connected baseline: NOMAD, zero download jobs, 18-archive Kiwix inventory,
+10/10 in its connected baseline: NOMAD, zero download jobs, 18-archive Kiwix inventory,
 Kiwix reader, Kolibri guest learning page, two map archives, the Utah/Idaho routing
-snapshot, saved-document search, and the WHO page-191 reader/original path. This is
+snapshot, a real West Jordan-to-Marysvale route, saved-document search, and the WHO
+page-191 reader/original path. This is
 not yet the required offline proof; rerun the same script only after a Windows reboot
 and physical network disconnection. The harness never invokes AI. The final build
 left 41.4 GiB free on C:; Docker reported 60.6 GB build cache, 46.81 GB reclaimable.
