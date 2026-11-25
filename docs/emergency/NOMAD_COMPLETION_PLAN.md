@@ -71,11 +71,18 @@ the separate project. Content and UI validation do not require local generation.
 
 - [x] Inventory exactly which resources are currently indexed in Qdrant.
 - [x] Import the original authoritative emergency set through NOMAD's supported RAG path; after cleanup 43 user documents / 3,921 chunks remain indexed and 82 validated replacements are directly browsable in Manual mode.
-- [ ] Index the highest-value authoritative ZIMs that are not already indexed.
-- [ ] Avoid duplicate embeddings for sources already present.
+- [!] Keep ZIM archives in Kiwix's purpose-built title/full-text index rather than
+  duplicating whole archives into Qdrant. NOMAD does not provide a supported universal
+  Kiwix-to-RAG ingestion path, and the model-independent library exposes Kiwix search
+  separately and truthfully.
+- [x] Avoid duplicate document search copies: the disk index builder selects only
+  Manual-state managed originals, while existing Qdrant-indexed sources remain in the
+  Qdrant lexical cache. Results are deduplicated to one best passage per source.
 - [x] Test retrieval with medical, water, winter outage, earthquake, and Rexburg hazard questions.
 - [x] Verify that each answer cites a real stored source and inspect the corresponding stored passages.
-- [x] Document the limitation that NOMAD does not preserve PDF page numbers.
+- [x] Document page-number scope accurately: the new PDF disk index preserves exact
+  pages and deep-links the offline PDF reader, while legacy Qdrant chunks still lack
+  page metadata.
 
 ## C. Regional emergency coverage
 
