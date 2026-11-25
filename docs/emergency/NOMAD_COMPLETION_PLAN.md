@@ -313,9 +313,11 @@ the separate project. Content and UI validation do not require local generation.
   per original source. Filename matching still works if the text index is unavailable.
   Live validation searched 43 indexed saved documents and put the Jackery Explorer
   quick reference first for `solar input`, with the actual input limits in the excerpt.
-- [ ] Extend this same lexical surface to any audited PDF/Markdown sources that are
-  stored outside the managed upload directory. The current safety boundary only opens
-  and searches managed originals; Kiwix and Kolibri retain their own indexes.
+- [!] Do not search arbitrary files outside NOMAD's managed library boundary. The
+  earlier wording assumed audited originals remained elsewhere; the live inventory
+  now contains them as managed originals, and today's bounded disk index covers all
+  85 Manual-state PDFs plus the existing 43 indexed documents. Kiwix and Kolibri
+  correctly retain their own indexes.
 - [x] Add device-local Recent and Saved References shared by Kiwix articles and saved
   manuals. Both readers record their stable internal link and offer Save/Unsave; the
   Browse screen provides one-click return and safe removal. Parsed browser storage
