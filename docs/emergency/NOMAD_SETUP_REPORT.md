@@ -236,6 +236,13 @@ Explorer 600 v2 quick reference first with its 16–60 V, 10.5 A, 200 W limits i
 excerpt. The endpoint reported a complete (not partial) local index. Kiwix search is
 still separate, and sources outside the managed-upload boundary are future work.
 
+Both persistent readers now share device-local Recent and Saved References. The
+Library Browse screen shows the six most recent entries from each list, and saved
+items can be removed without deleting any source content. Stored links are limited to
+the two internal NOMAD reader routes; external or malformed values are discarded.
+This feature requires no login, network, model, or server-side profile and therefore
+continues to work in the low-power offline workflow.
+
 On 2026-11-19 the same pinned local image was rebuilt with a **Document Library**
 dashboard tile. It opens stored source files directly and explicitly states that AI
 indexing is optional, so the emergency document workflow remains usable while LM

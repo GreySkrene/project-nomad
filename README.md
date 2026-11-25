@@ -108,6 +108,11 @@ original document, keeps the source link beside the excerpt, and falls back to t
 matches if the local knowledge index is unavailable. Kiwix article full-text search
 remains a separate, clearly labelled action.
 
+Opened articles and manuals are recorded in a device-local Recent list, and either
+reader can save a reference for one-click return from the Library Browse screen.
+These lists live in browser storage, contain only internal NOMAD reader links, and
+remain available offline without an account or AI service.
+
 ## Installation & Quickstart
 Project NOMAD can be installed on any Debian-based operating system (we recommend Ubuntu 26.04 LTS; 24.04 LTS and Debian 12 are also supported). Installation is completely terminal-based, and all tools and resources are designed to be accessed through the browser, so there's no need for a desktop environment if you'd rather setup NOMAD as a "server" and access it through other clients.
 

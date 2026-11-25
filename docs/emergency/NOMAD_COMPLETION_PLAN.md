@@ -308,8 +308,11 @@ the separate project. Content and UI validation do not require local generation.
 - [ ] Extend this same lexical surface to any audited PDF/Markdown sources that are
   stored outside the managed upload directory. The current safety boundary only opens
   and searches managed originals; Kiwix and Kolibri retain their own indexes.
-- [ ] Add recent/saved-reference controls after the document reader establishes one
-  stable citation/bookmark model for both Kiwix articles and local files.
+- [x] Add device-local Recent and Saved References shared by Kiwix articles and saved
+  manuals. Both readers record their stable internal link and offer Save/Unsave; the
+  Browse screen provides one-click return and safe removal. Parsed browser storage
+  rejects external and non-reader URLs, caps history/bookmark counts, and degrades
+  without breaking the reader when storage is unavailable.
 - [!] Keep Kolibri in its separate reader unless a supported integration becomes
   available. Its live response denies framing; forking it only for visual consistency
   is not justified.

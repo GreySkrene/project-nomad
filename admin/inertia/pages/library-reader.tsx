@@ -4,6 +4,7 @@ import {
   IconAlertTriangle,
   IconArrowLeft,
   IconBook2,
+  IconBookmark,
   IconExternalLink,
   IconSearch,
   IconShieldCheck,
@@ -23,6 +24,12 @@ import {
 } from '~/lib/library_reader'
 import { getServiceLink } from '~/lib/navigation'
 import { selectDiverseTitleSuggestions } from '~/lib/library_search_rank'
+import {
+  isReferenceSaved,
+  recordRecentReference,
+  toggleSavedReference,
+  type LibraryReference,
+} from '~/lib/library_references'
 import type { ServiceSlim } from '../../types/services'
 import type { ZimFileWithMetadata } from '../../types/zim'
 
@@ -47,6 +54,7 @@ export default function LibraryReader({ kiwixService }: { kiwixService: ServiceS
   const [results, setResults] = useState<KiwixSuggestion[]>([])
   const [searchOpen, setSearchOpen] = useState(false)
   const [searching, setSearching] = useState(false)
+  const [saved, setSaved] = useState(false)
   const [searchStatus, setSearchStatus] = useState('Search article titles in your offline library.')
   const searchRequest = useRef(0)
   const searchInput = useRef<HTMLInputElement>(null)
@@ -78,12 +86,32 @@ export default function LibraryReader({ kiwixService }: { kiwixService: ServiceS
       : kiwixArticleUrl(kiwixBase, location.source, location.path)
   }, [kiwixBase, location])
 
+  const referenceUrl = location ? libraryReaderUrl(location) : ''
+
+  function currentReference(): LibraryReference | null {
+    if (!location || !referenceUrl) return null
+    return {
+      kind: 'article',
+      title: pageTitle,
+      sourceTitle,
+      url: referenceUrl,
+      touchedAt: new Date().toISOString(),
+    }
+  }
+
   useEffect(() => {
     api.listZimFiles().then((response) => setLibraries(response.data.files))
     const onPopState = () => setLocation(readLocation())
     window.addEventListener('popstate', onPopState)
     return () => window.removeEventListener('popstate', onPopState)
   }, [])
+
+  useEffect(() => {
+    const reference = currentReference()
+    if (!reference) return
+    recordRecentReference(reference)
+    setSaved(isReferenceSaved(reference.url))
+  }, [referenceUrl, pageTitle, sourceTitle])
 
   useEffect(() => {
     if (searchOpen) window.setTimeout(() => searchInput.current?.focus(), 0)
@@ -265,6 +293,17 @@ export default function LibraryReader({ kiwixService }: { kiwixService: ServiceS
                 {pageTitle}
               </h1>
             </div>
+            <button
+              type="button"
+              onClick={() => {
+                const reference = currentReference()
+                if (reference) setSaved(toggleSavedReference(reference))
+              }}
+              className={`inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-sm font-semibold ${saved ? 'border-desert-green bg-desert-green/10 text-desert-green' : 'border-border-default text-text-secondary hover:bg-surface-secondary'}`}
+              aria-pressed={saved}
+            >
+              <IconBookmark size={17} /> {saved ? 'Saved' : 'Save reference'}
+            </button>
             <button
               type="button"
               onClick={() => setSearchOpen((current) => !current)}

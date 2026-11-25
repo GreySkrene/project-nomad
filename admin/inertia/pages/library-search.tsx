@@ -3,7 +3,9 @@ import { Head, Link } from '@inertiajs/react'
 import {
   IconBook2,
   IconBooks,
+  IconBookmark,
   IconClockExclamation,
+  IconClock,
   IconChevronDown,
   IconChevronUp,
   IconExternalLink,
@@ -11,6 +13,7 @@ import {
   IconPhoto,
   IconSearch,
   IconSparkles,
+  IconTrash,
 } from '@tabler/icons-react'
 
 import AppLayout from '~/layouts/AppLayout'
@@ -27,6 +30,13 @@ import {
 import { libraryDocumentUrl, libraryReaderUrl, sourceName } from '~/lib/library_reader'
 import { getServiceLink } from '~/lib/navigation'
 import { selectDiverseTitleSuggestions } from '~/lib/library_search_rank'
+import {
+  LIBRARY_REFERENCES_EVENT,
+  loadRecentReferences,
+  loadSavedReferences,
+  removeSavedReference,
+  type LibraryReference,
+} from '~/lib/library_references'
 import type { DocumentSearchResult, StoredFileInfo } from '../../types/rag'
 import type { ServiceSlim } from '../../types/services'
 import type { ZimFileWithMetadata } from '../../types/zim'
@@ -62,6 +72,8 @@ export default function LibrarySearch({ kiwixService }: { kiwixService: ServiceS
   const [suggestions, setSuggestions] = useState<KiwixSuggestion[]>([])
   const [documentResults, setDocumentResults] = useState<DocumentSearchResult[]>([])
   const [documentSearchNote, setDocumentSearchNote] = useState('')
+  const [savedReferences, setSavedReferences] = useState<LibraryReference[]>([])
+  const [recentReferences, setRecentReferences] = useState<LibraryReference[]>([])
   const [correctedFrom, setCorrectedFrom] = useState<string | null>(null)
   const [status, setStatus] = useState(
     'Searches article titles and indexed passages from saved documents.'
@@ -96,6 +108,22 @@ export default function LibrarySearch({ kiwixService }: { kiwixService: ServiceS
     })
 
     api.getStoredRAGFiles().then((files) => setDocuments(files || []))
+  }, [])
+
+  useEffect(() => {
+    const refresh = () => {
+      setSavedReferences(loadSavedReferences())
+      setRecentReferences(loadRecentReferences())
+    }
+    refresh()
+    window.addEventListener(LIBRARY_REFERENCES_EVENT, refresh)
+    window.addEventListener('storage', refresh)
+    window.addEventListener('focus', refresh)
+    return () => {
+      window.removeEventListener(LIBRARY_REFERENCES_EVENT, refresh)
+      window.removeEventListener('storage', refresh)
+      window.removeEventListener('focus', refresh)
+    }
   }, [])
 
   const visibleLibraries = useMemo(() => {
@@ -353,6 +381,82 @@ export default function LibrarySearch({ kiwixService }: { kiwixService: ServiceS
             outbreaks, recalls, and contamination notices still require live verification.
           </p>
         </aside>
+
+        {view === 'browse' && (
+          <section className="mb-8 grid gap-4 lg:grid-cols-2">
+            <div className="rounded-xl border border-border-default bg-surface-primary p-5 shadow-sm">
+              <div className="flex items-center justify-between gap-3">
+                <h2 className="flex items-center gap-2 text-lg font-semibold">
+                  <IconBookmark size={20} className="text-desert-green" /> Saved references
+                </h2>
+                <span className="text-xs text-text-muted">{savedReferences.length} saved</span>
+              </div>
+              {savedReferences.length ? (
+                <ul className="mt-4 space-y-2">
+                  {savedReferences.slice(0, 6).map((reference) => (
+                    <li
+                      key={reference.url}
+                      className="flex items-center gap-2 rounded-lg bg-surface-secondary p-3"
+                    >
+                      <a href={reference.url} className="min-w-0 flex-1 hover:text-desert-green">
+                        <span className="block truncate text-sm font-semibold">
+                          {reference.title}
+                        </span>
+                        <span className="block truncate text-xs text-text-muted">
+                          {reference.sourceTitle}
+                        </span>
+                      </a>
+                      <button
+                        type="button"
+                        onClick={() => removeSavedReference(reference.url)}
+                        className="rounded p-2 text-text-muted hover:bg-surface-tertiary hover:text-red-500"
+                        aria-label={`Remove ${reference.title} from saved references`}
+                      >
+                        <IconTrash size={16} />
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="mt-4 text-sm leading-6 text-text-secondary">
+                  Open an article or manual and choose Save reference for one-click offline access.
+                </p>
+              )}
+            </div>
+
+            <div className="rounded-xl border border-border-default bg-surface-primary p-5 shadow-sm">
+              <div className="flex items-center justify-between gap-3">
+                <h2 className="flex items-center gap-2 text-lg font-semibold">
+                  <IconClock size={20} className="text-desert-green" /> Recently opened
+                </h2>
+                <span className="text-xs text-text-muted">Stored on this device</span>
+              </div>
+              {recentReferences.length ? (
+                <ul className="mt-4 grid gap-2 sm:grid-cols-2">
+                  {recentReferences.slice(0, 6).map((reference) => (
+                    <li key={reference.url}>
+                      <a
+                        href={reference.url}
+                        className="block rounded-lg bg-surface-secondary p-3 hover:bg-surface-tertiary hover:text-desert-green"
+                      >
+                        <span className="block truncate text-sm font-semibold">
+                          {reference.title}
+                        </span>
+                        <span className="block truncate text-xs text-text-muted">
+                          {reference.sourceTitle}
+                        </span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="mt-4 text-sm leading-6 text-text-secondary">
+                  Articles and manuals you open will appear here automatically.
+                </p>
+              )}
+            </div>
+          </section>
+        )}
 
         {view === 'search' ? (
           <section className="rounded-xl border border-border-default bg-surface-primary p-5 shadow-sm sm:p-7">

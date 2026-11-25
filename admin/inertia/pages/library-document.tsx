@@ -3,6 +3,7 @@ import { Head, Link } from '@inertiajs/react'
 import {
   IconAlertTriangle,
   IconArrowLeft,
+  IconBookmark,
   IconChevronDown,
   IconDownload,
   IconFileText,
@@ -13,6 +14,13 @@ import remarkGfm from 'remark-gfm'
 
 import AppLayout from '~/layouts/AppLayout'
 import api from '~/lib/api'
+import { libraryDocumentUrl } from '~/lib/library_reader'
+import {
+  isReferenceSaved,
+  recordRecentReference,
+  toggleSavedReference,
+  type LibraryReference,
+} from '~/lib/library_references'
 
 type TextDocument = {
   content: string
@@ -75,6 +83,7 @@ export default function LibraryDocument() {
   const [failed, setFailed] = useState(!source)
   const [findQuery, setFindQuery] = useState(requestedQuery)
   const [findStatus, setFindStatus] = useState('')
+  const [saved, setSaved] = useState(false)
   const contentRef = useRef<HTMLElement>(null)
   const findCursor = useRef<FindCursor>({ node: 0, offset: 0, query: '' })
 
@@ -94,6 +103,20 @@ export default function LibraryDocument() {
 
   const title = requestedTitle || document?.fileName || fallbackTitle
   const isMarkdown = ['md', 'markdown'].includes(document?.extension ?? extension)
+  const referenceUrl = source
+    ? libraryDocumentUrl(source, requestedTitle || fallbackTitle, requestedQuery)
+    : ''
+
+  function currentReference(): LibraryReference | null {
+    if (!source || !referenceUrl) return null
+    return {
+      kind: 'document',
+      title,
+      sourceTitle: 'Saved original document',
+      url: referenceUrl,
+      touchedAt: new Date().toISOString(),
+    }
+  }
 
   function findNext() {
     const root = contentRef.current
@@ -113,6 +136,13 @@ export default function LibraryDocument() {
     const timer = window.setTimeout(findNext, 50)
     return () => window.clearTimeout(timer)
   }, [document, requestedQuery, isPdf])
+
+  useEffect(() => {
+    const reference = currentReference()
+    if (!reference) return
+    recordRecentReference(reference)
+    setSaved(isReferenceSaved(reference.url))
+  }, [referenceUrl, title])
 
   return (
     <AppLayout>
@@ -134,6 +164,19 @@ export default function LibraryDocument() {
                 {title}
               </h1>
             </div>
+            {source && (
+              <button
+                type="button"
+                onClick={() => {
+                  const reference = currentReference()
+                  if (reference) setSaved(toggleSavedReference(reference))
+                }}
+                className={`inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-sm font-semibold ${saved ? 'border-desert-green bg-desert-green/10 text-desert-green' : 'border-border-default text-text-secondary hover:bg-surface-secondary'}`}
+                aria-pressed={saved}
+              >
+                <IconBookmark size={17} /> {saved ? 'Saved' : 'Save reference'}
+              </button>
+            )}
             {source && (
               <a
                 href={downloadUrl}
