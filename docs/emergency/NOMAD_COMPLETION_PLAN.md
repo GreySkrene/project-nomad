@@ -284,9 +284,16 @@ the separate project. Content and UI validation do not require local generation.
   first. Kiwix, routing, maps, databases, Kolibri, stored content, and LM Studio were
   not restarted or changed. Rollback Compose file:
   `/opt/project-nomad/compose.yml.pre-library-reader-20261125`.
-- [ ] Add a native saved-document reader: inline PDF.js with page search/zoom/page
-  citations and safe Markdown rendering, without weakening the existing download
-  endpoint's framing protection.
+- [x] Add the first native saved-document reader. Markdown is rendered safely without
+  raw HTML using Field Manual headings, lists, tables, and warnings. PDFs open in the
+  browser's offline PDF viewer inside the persistent NOMAD shell through a PDF-only,
+  same-origin inline endpoint. The original download endpoint remains attachment-only
+  with `X-Frame-Options: DENY`; inline Markdown returns 415 and traversal outside the
+  uploads directory returns 404.
+- [ ] Bundle PDF.js for a browser-independent PDF toolbar, explicit current-page deep
+  links, deterministic page search, and page-number citations. The initial inline
+  viewer provides immediate local usability but does not yet establish NOMAD-owned
+  page citation state.
 - [ ] Add deterministic lexical search across the 121 PDFs and 19 Markdown files so
   saved manuals are discoverable without embeddings or an AI service.
 - [ ] Add recent/saved-reference controls after the document reader establishes one

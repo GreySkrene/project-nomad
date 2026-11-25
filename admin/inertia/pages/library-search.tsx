@@ -24,7 +24,7 @@ import {
   readerDetails,
   type LibraryCategory,
 } from '~/lib/library_browse_catalog'
-import { libraryReaderUrl, sourceName } from '~/lib/library_reader'
+import { libraryDocumentUrl, libraryReaderUrl, sourceName } from '~/lib/library_reader'
 import { getServiceLink } from '~/lib/navigation'
 import { selectDiverseTitleSuggestions } from '~/lib/library_search_rank'
 import type { StoredFileInfo } from '../../types/rag'
@@ -687,7 +687,10 @@ export default function LibrarySearch({ kiwixService }: { kiwixService: ServiceS
                                   </span>
                                 </div>
                                 <a
-                                  href={`/api/rag/files/download?source=${encodeURIComponent(file.source)}`}
+                                  href={libraryDocumentUrl(
+                                    file.source,
+                                    friendlyDocumentName(file.fileName)
+                                  )}
                                   className="shrink-0 text-sm font-semibold text-desert-green underline"
                                 >
                                   Open

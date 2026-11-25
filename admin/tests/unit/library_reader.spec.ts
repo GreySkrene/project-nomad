@@ -4,6 +4,7 @@ import test from 'node:test'
 import {
   kiwixArticleUrl,
   kiwixSearchUrl,
+  libraryDocumentUrl,
   libraryReaderUrl,
   parseLibraryReaderLocation,
   sourceName,
@@ -52,4 +53,14 @@ test('round trips safe article state through the NOMAD reader route', () => {
 test('rejects malformed source identifiers and empty search state', () => {
   assert.equal(parseLibraryReaderLocation('?source=../../etc/passwd&path=A/Test'), null)
   assert.equal(parseLibraryReaderLocation('?source=wikimed&mode=search'), null)
+})
+
+test('builds a NOMAD document route without exposing parameters as path segments', () => {
+  const url = new URL(
+    libraryDocumentUrl('/app/storage/kb_uploads/first aid.pdf', 'First Aid Manual.pdf'),
+    'http://nomad.local'
+  )
+  assert.equal(url.pathname, '/library/document')
+  assert.equal(url.searchParams.get('source'), '/app/storage/kb_uploads/first aid.pdf')
+  assert.equal(url.searchParams.get('title'), 'First Aid Manual.pdf')
 })

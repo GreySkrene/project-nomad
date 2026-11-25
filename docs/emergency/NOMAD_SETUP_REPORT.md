@@ -212,7 +212,14 @@ across the installed archives. Focused URL/ranking/browse tests passed 17/17, al
 with TypeScript, the production build, and the native Docker build. Live Chromium
 inspection loaded the real WikiMed `Splint (medicine)` child frame and returned its
 article text; the in-reader `splint` query produced four WikiMed results with the
-medical article first. This does not yet wrap saved PDFs/Markdown or Kolibri, and it
+medical article first. A follow-up added a saved-document reader: Markdown uses a
+safe Field Manual presentation, and PDFs open through a PDF-only same-origin inline
+endpoint inside the same persistent shell. Live checks loaded the real AHA CPR/
+choking Markdown guide and the 52,241,264-byte Idaho State Hazard Mitigation Plan.
+The PDF endpoint returned `application/pdf`, `inline`, and `SAMEORIGIN`; a non-PDF
+returned 415, traversal outside uploads returned 404, and the original download route
+remained `attachment` plus `DENY`. A bundled PDF.js toolbar/page-citation model and a
+cross-document lexical index remain future work. Kolibri is still separate, and this
 does not create a universal index across content types. Only the admin container was
 recreated; the rollback Compose file is
 `/opt/project-nomad/compose.yml.pre-library-reader-20261125`.

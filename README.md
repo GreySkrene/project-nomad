@@ -95,9 +95,11 @@ Article cards, ranked results, and Kiwix full-text results now open inside NOMAD
 Night Operations reader instead of replacing the entire interface. The shell keeps
 the source title, offline-snapshot warning, original-view link, and ranked/spelling-
 aware library search available while the original archived article remains intact.
-This unified reader currently covers installed Kiwix archives. Saved PDFs/Markdown
-files and Kolibri still use their own readers, and no claim is made that maps, course
-content, and documents share one universal index.
+The persistent shell covers installed Kiwix archives and saved source documents:
+Markdown gets a Field Manual view, while PDFs use the browser's offline PDF viewer
+inside NOMAD with the original download still available. Kolibri remains separate,
+and no claim is made that maps, course content, Kiwix, and documents share one
+universal index.
 
 ## Installation & Quickstart
 Project NOMAD can be installed on any Debian-based operating system (we recommend Ubuntu 26.04 LTS; 24.04 LTS and Debian 12 are also supported). Installation is completely terminal-based, and all tools and resources are designed to be accessed through the browser, so there's no need for a desktop environment if you'd rather setup NOMAD as a "server" and access it through other clients.

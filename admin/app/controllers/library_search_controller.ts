@@ -24,6 +24,10 @@ export default class LibrarySearchController {
     })
   }
 
+  async document({ inertia }: HttpContext) {
+    return inertia.render('library-document')
+  }
+
   async spelling({ request, response }: HttpContext) {
     const query = String(request.input('q', '')).trim()
     if (!query || query.length > 120) {

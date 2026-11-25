@@ -92,6 +92,7 @@ router.get('/', [HomeController, 'index'])
 router.get('/home', [HomeController, 'home'])
 router.get('/library-search', [LibrarySearchController, 'index'])
 router.get('/library/read', [LibrarySearchController, 'reader'])
+router.get('/library/document', [LibrarySearchController, 'document'])
 router.get('/api/library-search/spelling', [LibrarySearchController, 'spelling'])
 router.on('/about').renderInertia('about')
 router.get('/chat', [ChatsController, 'inertia'])
@@ -457,6 +458,11 @@ router
     })
     documented(router.get('/files/download', [RagController, 'downloadFile']), {
       summary: 'Download a RAG file',
+      tags: ['rag'],
+      query: fileSourceSchema,
+    })
+    documented(router.get('/files/inline', [RagController, 'inlineFile']), {
+      summary: 'View a stored PDF inline in the same-origin NOMAD document reader',
       tags: ['rag'],
       query: fileSourceSchema,
     })

@@ -7,13 +7,20 @@ import app from '@adonisjs/core/services/app'
 import { randomBytes } from 'node:crypto'
 import { sanitizeFilename } from '../utils/fs.js'
 import { basename } from 'node:path'
-import { deleteFileSchema, embedFileSchema, estimateBatchSchema, fileSourceSchema, getJobStatusSchema } from '#validators/rag'
+import { createReadStream } from 'node:fs'
+import {
+  deleteFileSchema,
+  embedFileSchema,
+  estimateBatchSchema,
+  fileSourceSchema,
+  getJobStatusSchema,
+} from '#validators/rag'
 import logger from '@adonisjs/core/services/logger'
 import { sanitizeCollectionName } from '../../constants/kb_collections.js'
 
 @inject()
 export default class RagController {
-  constructor(private ragService: RagService) { }
+  constructor(private ragService: RagService) {}
 
   public async upload({ request, response }: HttpContext) {
     const uploadedFile = request.file('file')
@@ -294,5 +301,24 @@ export default class RagController {
     }
     const fileName = filePath.split(/[/\\]/).at(-1) ?? 'download'
     return response.attachment(filePath, fileName)
+  }
+
+  public async inlineFile({ request, response }: HttpContext) {
+    const { source } = await request.validateUsing(fileSourceSchema)
+    const filePath = await this.ragService.resolveDownloadPath(source)
+    if (!filePath) {
+      return response.status(404).json({ error: 'File not found' })
+    }
+    if (!filePath.toLowerCase().endsWith('.pdf')) {
+      return response.status(415).json({ error: 'Only PDF files can be viewed inline' })
+    }
+
+    const fileName = basename(filePath).replace(/[\r\n"]/g, '_')
+    response.header('Content-Type', 'application/pdf')
+    response.header('Content-Disposition', `inline; filename="${fileName}"`)
+    response.header('X-Frame-Options', 'SAMEORIGIN')
+    response.header('Cross-Origin-Resource-Policy', 'same-origin')
+    response.header('Cache-Control', 'private, max-age=3600')
+    return response.stream(createReadStream(filePath))
   }
 }

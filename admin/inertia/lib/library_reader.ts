@@ -42,6 +42,12 @@ export function libraryReaderUrl(location: LibraryReaderLocation): string {
   return `/library/read?${params.toString()}`
 }
 
+export function libraryDocumentUrl(source: string, fileName?: string): string {
+  const params = new URLSearchParams({ source })
+  if (fileName) params.set('title', fileName)
+  return `/library/document?${params.toString()}`
+}
+
 export function parseLibraryReaderLocation(search: string): LibraryReaderLocation | null {
   const params = new URLSearchParams(search)
   const source = params.get('source')?.trim() ?? ''
