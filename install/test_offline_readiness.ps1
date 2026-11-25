@@ -84,7 +84,10 @@ Add-ReadinessCheck 'Installed map archives' {
 Add-ReadinessCheck 'Offline routing engine' {
     $routing = Get-LocalJson '/api/maps/routing/health'
     if (-not $routing.available) { throw 'Routing engine is unavailable' }
-    if ($routing.liveConditionsIncluded) { throw 'Routing incorrectly claims live conditions' }
+    if ($null -eq $routing.liveConditionsIncluded -or [bool]$routing.liveConditionsIncluded) {
+        throw 'Routing must explicitly report liveConditionsIncluded=false'
+    }
+    if (-not $routing.snapshotDate) { throw 'Routing snapshot date is missing' }
     "$($routing.coverage), snapshot $($routing.snapshotDate), Valhalla $($routing.version)"
 }
 
@@ -112,7 +115,10 @@ Add-ReadinessCheck 'West Jordan to Marysvale offline route' {
     $maneuvers = @($route.legs | ForEach-Object { $_.maneuvers }).Count
     if ($miles -lt 150 -or $miles -gt 220) { throw "Implausible route distance: $miles miles" }
     if ($maneuvers -lt 5) { throw "Route returned only $maneuvers maneuvers" }
-    if ($route.liveConditionsIncluded) { throw 'Route incorrectly claims live conditions' }
+    if ($null -eq $route.liveConditionsIncluded -or [bool]$route.liveConditionsIncluded) {
+        throw 'Route must explicitly report liveConditionsIncluded=false'
+    }
+    if (-not $route.snapshotDate) { throw 'Route snapshot date is missing' }
     ('{0:N1} miles, {1} maneuvers, snapshot {2}' -f $miles, $maneuvers, $route.snapshotDate)
 }
 
