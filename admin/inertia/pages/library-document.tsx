@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Head, Link } from '@inertiajs/react'
 import {
   IconAlertTriangle,
@@ -12,9 +12,11 @@ import {
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 
+import PdfDocumentReader from '~/components/library/PdfDocumentReader'
 import AppLayout from '~/layouts/AppLayout'
 import api from '~/lib/api'
 import { libraryDocumentUrl } from '~/lib/library_reader'
+import { parsePdfPage } from '~/lib/pdf_reader'
 import {
   isReferenceSaved,
   recordRecentReference,
@@ -75,6 +77,7 @@ export default function LibraryDocument() {
   const source = (params.get('source') ?? '').slice(0, 4_000)
   const requestedTitle = (params.get('title') ?? '').slice(0, 300)
   const requestedQuery = (params.get('q') ?? '').slice(0, 120)
+  const initialPdfPage = parsePdfPage(params.get('page'))
   const fallbackTitle = requestedTitle || source.split(/[/\\]/).at(-1) || 'Saved document'
   const extension = extensionOf(source)
   const isPdf = extension === 'pdf'
@@ -84,6 +87,7 @@ export default function LibraryDocument() {
   const [findQuery, setFindQuery] = useState(requestedQuery)
   const [findStatus, setFindStatus] = useState('')
   const [saved, setSaved] = useState(false)
+  const [pdfPage, setPdfPage] = useState(initialPdfPage)
   const contentRef = useRef<HTMLElement>(null)
   const findCursor = useRef<FindCursor>({ node: 0, offset: 0, query: '' })
 
@@ -104,8 +108,20 @@ export default function LibraryDocument() {
   const title = requestedTitle || document?.fileName || fallbackTitle
   const isMarkdown = ['md', 'markdown'].includes(document?.extension ?? extension)
   const referenceUrl = source
-    ? libraryDocumentUrl(source, requestedTitle || fallbackTitle, requestedQuery)
+    ? libraryDocumentUrl(
+        source,
+        requestedTitle || fallbackTitle,
+        requestedQuery,
+        isPdf ? pdfPage : undefined
+      )
     : ''
+
+  const handlePdfPageChange = useCallback((page: number) => {
+    setPdfPage(page)
+    const url = new URL(window.location.href)
+    url.searchParams.set('page', String(page))
+    window.history.replaceState(window.history.state, '', `${url.pathname}${url.search}${url.hash}`)
+  }, [])
 
   function currentReference(): LibraryReference | null {
     if (!source || !referenceUrl) return null
@@ -141,6 +157,13 @@ export default function LibraryDocument() {
     const reference = currentReference()
     if (!reference) return
     recordRecentReference(reference)
+    // Record the arrival page once; turning pages must not fill Recents with one PDF.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [source, title])
+
+  useEffect(() => {
+    const reference = currentReference()
+    if (!reference) return
     setSaved(isReferenceSaved(reference.url))
   }, [referenceUrl, title])
 
@@ -193,13 +216,7 @@ export default function LibraryDocument() {
           whether guidance is current.
         </aside>
 
-        {isPdf ? (
-          <div className="border-b border-border-default bg-surface-primary px-4 py-2 text-center text-xs text-text-secondary">
-            Search this PDF with{' '}
-            <kbd className="rounded border border-border-default px-1.5 py-0.5">Ctrl+F</kbd> in the
-            offline PDF viewer.
-          </div>
-        ) : source ? (
+        {!isPdf && source ? (
           <div className="border-b border-border-default bg-surface-primary px-4 py-3">
             <div className="mx-auto flex max-w-5xl flex-wrap items-center gap-2">
               <IconSearch size={18} className="text-text-muted" />
@@ -236,13 +253,13 @@ export default function LibraryDocument() {
         ) : null}
 
         {isPdf && source ? (
-          <div className="relative min-h-[75vh] flex-1 bg-surface-tertiary">
-            <iframe
-              src={inlineUrl}
-              title={`${title} — stored PDF`}
-              className="absolute inset-0 h-full min-h-[75vh] w-full border-0"
-            />
-          </div>
+          <PdfDocumentReader
+            initialPage={initialPdfPage}
+            initialQuery={requestedQuery}
+            title={title}
+            url={inlineUrl}
+            onPageChange={handlePdfPageChange}
+          />
         ) : (
           <article ref={contentRef} className="mx-auto w-full max-w-5xl flex-1 px-5 py-8">
             {loading && <p className="text-text-secondary">Loading saved document…</p>}

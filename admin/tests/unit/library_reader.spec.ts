@@ -60,7 +60,8 @@ test('builds a NOMAD document route without exposing parameters as path segments
     libraryDocumentUrl(
       '/app/storage/kb_uploads/first aid.pdf',
       'First Aid Manual.pdf',
-      'control bleeding'
+      'control bleeding',
+      17
     ),
     'http://nomad.local'
   )
@@ -68,4 +69,5 @@ test('builds a NOMAD document route without exposing parameters as path segments
   assert.equal(url.searchParams.get('source'), '/app/storage/kb_uploads/first aid.pdf')
   assert.equal(url.searchParams.get('title'), 'First Aid Manual.pdf')
   assert.equal(url.searchParams.get('q'), 'control bleeding')
+  assert.equal(url.searchParams.get('page'), '17')
 })

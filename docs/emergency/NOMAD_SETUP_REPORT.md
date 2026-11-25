@@ -180,7 +180,10 @@ The supported `NOMAD.md` prompt was configured with an emergency-answer policy t
 
 **Current safety decision:** deterministic source search, vetted quick-reference pages, and direct original-file access are the emergency core. AI is currently disabled for NOMAD. Earlier Qwen3 4B and 8B tests remain documented, but neither model is accepted as an authoritative medical or safety system.
 
-NOMAD citations identify the stored title/file/path. PDF page numbers are not preserved during extraction, so page-number citations are unavailable.
+NOMAD RAG citations identify the stored title/file/path. PDF page numbers are not
+preserved during extraction, so generated/RAG citations still cannot supply a proven
+page number. The original-document reader separately tracks the visible PDF page and
+can copy a title, page number, and deep link for manual source citations.
 
 ## 9. Capability boundaries
 
@@ -189,7 +192,7 @@ NOMAD citations identify the stored title/file/path. PDF page numbers are not pr
 | Completely offline libraries | Kiwix, Kolibri, maps, source files, and local models are stored locally |
 | Universal search | Partial: all installed Kiwix archives share ranked title search and a persistent reader; PDF/Markdown, RAG, Kolibri, and maps remain separate |
 | RAG citations | Stored filename/path citations work |
-| PDF page citations | Not supported |
+| PDF page citations | Supported in the original-document PDF reader; not recoverable from existing RAG chunks |
 | Safety-critical generated answers | Not accepted; source verification required |
 | Map pan/zoom | Installed; final disconnected regional visual check pending |
 | Map routing/address search | Utah/Idaho calculation is installed for pins, map clicks, coordinates, waypoints, modes, and preferences; address search remains unavailable until a separate offline geocoder is measured and installed |
@@ -218,10 +221,19 @@ endpoint inside the same persistent shell. Live checks loaded the real AHA CPR/
 choking Markdown guide and the 52,241,264-byte Idaho State Hazard Mitigation Plan.
 The PDF endpoint returned `application/pdf`, `inline`, and `SAMEORIGIN`; a non-PDF
 returned 415, traversal outside uploads returned 404, and the original download route
-remained `attachment` plus `DENY`. A bundled PDF.js toolbar/page-citation model remains
-future work. Search-result links now preserve the query when opening a saved manual;
-rendered Markdown/text selects the first passage and offers Find next, while PDFs
-clearly use the browser's offline `Ctrl+F` viewer search. Kolibri is still separate,
+remained `attachment` plus `DENY`. A follow-up bundled pinned PDF.js 5.4.296 and
+replaced the browser-owned PDF frame with NOMAD page navigation, zoom, deterministic
+full-document search, page-deep links, and copyable page citations. The worker is
+part of the offline production bundle (1,046,214 bytes). Focused tests passed 12/12,
+TypeScript passed, and the production build completed. Live browser QA opened the
+17-page Jackery manual at page 3, rendered its PDF canvas, found `solar input` on page
+8 despite PDF layout gaps, navigated there, and rewrote the deep link to `page=8`.
+The deployed admin image is `project-nomad-local:pdf-reader-20261125`; its rollback
+Compose file is `/opt/project-nomad/compose.yml.pre-pdf-reader-20261125`.
+Search-result links preserve
+the query when opening a saved manual; rendered Markdown/text selects the first
+passage and offers Find next. PDF page state is reader-owned but is not retroactively
+present in existing RAG chunks. Kolibri is still separate,
 and this does not create a universal index across content types. Only the admin
 container was recreated; the rollback Compose file is
 `/opt/project-nomad/compose.yml.pre-library-reader-20261125`.

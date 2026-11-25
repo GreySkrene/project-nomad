@@ -96,10 +96,11 @@ Night Operations reader instead of replacing the entire interface. The shell kee
 the source title, offline-snapshot warning, original-view link, and ranked/spelling-
 aware library search available while the original archived article remains intact.
 The persistent shell covers installed Kiwix archives and saved source documents:
-Markdown gets a Field Manual view, while PDFs use the browser's offline PDF viewer
-inside NOMAD with the original download still available. Kolibri remains separate,
-and no claim is made that maps, course content, Kiwix, and documents share one
-universal index.
+Markdown gets a Field Manual view, while PDFs use NOMAD's bundled offline PDF.js
+reader with page navigation, zoom, full-document text search, page-deep links, and
+copyable page citations. The original download remains available. Kolibri remains
+separate, and no claim is made that maps, course content, Kiwix, and documents share
+one universal index.
 
 The Library Search tab also searches passages already stored in the local knowledge
 index for saved manuals. This is deterministic lexical matching: it does not call an

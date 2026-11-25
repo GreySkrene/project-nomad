@@ -294,10 +294,18 @@ the separate project. Content and UI validation do not require local generation.
   in-document Find next control for rendered Markdown/text. It uses DOM ranges rather
   than rewriting source HTML and automatically selects the first matching passage.
   PDFs clearly point to the browser's local `Ctrl+F` support until PDF.js is bundled.
-- [ ] Bundle PDF.js for a browser-independent PDF toolbar, explicit current-page deep
-  links, deterministic page search, and page-number citations. The initial inline
-  viewer provides immediate local usability but does not yet establish NOMAD-owned
-  page citation state.
+- [x] Bundle pinned PDF.js 5.4.296 for a browser-independent PDF toolbar, explicit
+  current-page deep links, deterministic page search, zoom, and copyable page-number
+  citations. Page input is bounded to the loaded PDF; normalized all-term search
+  tolerates PDF layout gaps, wraps once, and reports the matching page; ordinary page
+  turns do not flood Recent References. Focused tests passed 12/12, TypeScript and the production build passed, and the build
+  emitted the worker locally as a 1,046,214-byte asset. This establishes reader-page
+  citation state; it does not retrofit page numbers into previously extracted RAG
+  chunks. Live headless-browser QA opened the 17-page Jackery manual at page 3,
+  rendered its canvas, found `solar input` on page 8, navigated there, and updated the
+  deep link to `page=8`. Deployed admin image:
+  `project-nomad-local:pdf-reader-20261125`; rollback Compose file:
+  `/opt/project-nomad/compose.yml.pre-pdf-reader-20261125`.
 - [x] Add deterministic lexical search for saved uploaded manuals using the passages
   already stored in the local knowledge index. Queries do not call Ollama, LM Studio,
   or an embedding model; the service caches the bounded set of uploaded-document
