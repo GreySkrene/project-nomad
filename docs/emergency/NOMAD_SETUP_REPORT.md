@@ -423,13 +423,12 @@ The reproducible emergency-profile branch was rebased onto upstream commit
 - the Kiwix installer profile parsed and dry-ran successfully against the live
   NOMAD API.
 
-A broad Windows unit run passed 597 of 610 tests. The 13 failures included
-Linux-only `libzim` native-binding imports, tests requiring a populated Adonis
-server environment, Japa tests invoked under Node's runner, a Windows path
-normalization assertion, and a temporary-file lock. These are not counted as a
-clean suite pass. The running Linux image and the final public branch are not
-the same build: the laptop remains on its tested local v1.35.1 image until a
-separate upgrade is approved and retested.
+The final 2026-11-25 broad Windows unit run passed 708 of 721 tests. The 13
+failures remain harness/platform-specific: Linux-only `libzim` native-binding
+imports, tests requiring a booted/populated Adonis environment, one Windows path
+normalization assertion, and one temporary-file lock. These are not counted as a
+clean suite pass. The focused search, reader, route, readiness, and dark-contrast
+tests pass, and the running Linux production image completed its own build.
 
 The current hardened production tree reports 20 package rows (0 critical, 2 high,
 18 moderate), down from 59 rows before remediation. The remaining high rows are the
