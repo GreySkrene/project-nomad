@@ -363,6 +363,12 @@ article source and a trusted saved original, and the document endpoint reported 
 partial-index condition. This is a discoverability check, not independent validation
 of every instruction inside each source.
 
+On the final deployment, the ten saved-document release-gate queries had a measured
+median response time of 1.30 seconds and maximum of 1.50 seconds; every response was
+complete and reported 127 passage-searchable originals. This favors the existing
+bounded index over a more memory-heavy optimization until disconnected testing shows
+a real usability problem.
+
 The latest pinned image is `project-nomad-local:search-integrity-20261125`. It adds
 the dual-surface release gate, explicit title-only index reporting, and readable
 Hesperian split-book labels. The live index recheck identified exactly one title-only

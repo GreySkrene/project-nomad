@@ -470,7 +470,9 @@ Studio merely to advance the queue.
   the graphical Idaho highway-map PDF is the title-only exception. `splint` now
   returns WHO Basic Emergency Care page 191, its quick cards page 4, and Hesperian
   pages 25/14; `cellular level` opens the replacement Anatomy & Physiology book at
-  page 5. Keep this model-free and preserve the existing license/browse-only states.
+  page 5. A final ten-query timing run had a 1.30-second median and 1.50-second
+  maximum with no partial responses. Keep this model-free and preserve the existing
+  license/browse-only states.
 - [x] Replace opaque split-book filenames in results with emergency-readable labels.
   Live `splint` results now identify `Where There Is No Doctor (2025) — Part 10`
   at page 25 and `Where There Is No Dentist (2024) — Part 7` at page 28 instead
