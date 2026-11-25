@@ -205,6 +205,24 @@ export type StoredFileInfo = {
   active: boolean
 }
 
+export type DocumentSearchResult = {
+  source: string
+  fileName: string
+  title: string
+  excerpt: string
+  /** Ingested chunk number, not a PDF page number. */
+  chunkIndex: number | null
+  score: number
+  matchKind: 'title' | 'content'
+}
+
+export type DocumentSearchResponse = {
+  results: DocumentSearchResult[]
+  /** True when filename search worked but the local text index was unavailable. */
+  partial: boolean
+  indexedDocuments: number
+}
+
 /**
  * Result of computing per-file warnings. `ok: false` means the computation
  * itself failed (Qdrant unreachable, DB outage, FS read error) — distinct from

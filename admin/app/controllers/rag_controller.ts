@@ -10,6 +10,7 @@ import { basename } from 'node:path'
 import { createReadStream } from 'node:fs'
 import {
   deleteFileSchema,
+  documentSearchSchema,
   embedFileSchema,
   estimateBatchSchema,
   fileSourceSchema,
@@ -291,6 +292,11 @@ export default class RagController {
       return response.status(404).json({ error: 'File not found or not viewable' })
     }
     return response.status(200).json(result)
+  }
+
+  public async searchFiles({ request, response }: HttpContext) {
+    const { q, limit } = await request.validateUsing(documentSearchSchema)
+    return response.status(200).json(await this.ragService.searchStoredDocuments(q, limit ?? 12))
   }
 
   public async downloadFile({ request, response }: HttpContext) {

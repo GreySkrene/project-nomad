@@ -27,7 +27,7 @@ import {
 import { libraryDocumentUrl, libraryReaderUrl, sourceName } from '~/lib/library_reader'
 import { getServiceLink } from '~/lib/navigation'
 import { selectDiverseTitleSuggestions } from '~/lib/library_search_rank'
-import type { StoredFileInfo } from '../../types/rag'
+import type { DocumentSearchResult, StoredFileInfo } from '../../types/rag'
 import type { ServiceSlim } from '../../types/services'
 import type { ZimFileWithMetadata } from '../../types/zim'
 
@@ -45,7 +45,7 @@ type ViewMode = 'browse' | 'search'
 function friendlyDocumentName(fileName: string) {
   return fileName
     .replace(/-[a-f0-9]{12}(?=\.[^.]+$)/i, '')
-    .replace(/\.[^.]+$/, '')
+    .replace(/(?:\.[^.]+)+$/, '')
     .replaceAll('_', ' ')
     .replaceAll('-', ' ')
 }
@@ -60,8 +60,12 @@ export default function LibrarySearch({ kiwixService }: { kiwixService: ServiceS
   const [browseFilter, setBrowseFilter] = useState('')
   const [expandedCollections, setExpandedCollections] = useState<Set<string>>(new Set())
   const [suggestions, setSuggestions] = useState<KiwixSuggestion[]>([])
+  const [documentResults, setDocumentResults] = useState<DocumentSearchResult[]>([])
+  const [documentSearchNote, setDocumentSearchNote] = useState('')
   const [correctedFrom, setCorrectedFrom] = useState<string | null>(null)
-  const [status, setStatus] = useState('Searches article titles across every installed library.')
+  const [status, setStatus] = useState(
+    'Searches article titles and indexed passages from saved documents.'
+  )
   const [loading, setLoading] = useState(false)
   const searchInput = useRef<HTMLInputElement>(null)
   const searchRequest = useRef(0)
@@ -166,9 +170,29 @@ export default function LibrarySearch({ kiwixService }: { kiwixService: ServiceS
     return paths
   }
 
+  async function lookupDocuments(term: string, selectedSource = source) {
+    const trimmed = term.trim()
+    if (!trimmed || !['all', 'documents'].includes(selectedSource)) {
+      setDocumentResults([])
+      setDocumentSearchNote('')
+      return []
+    }
+    const response = await api.searchStoredDocuments(trimmed, 12)
+    const results = response?.results ?? []
+    setDocumentResults(results)
+    setDocumentSearchNote(
+      response?.partial
+        ? 'Document text search is partially unavailable; filename matches are still shown.'
+        : response
+          ? `Searched text from ${response.indexedDocuments} indexed saved document${response.indexedDocuments === 1 ? '' : 's'} without an AI model.`
+          : 'Saved-document search is temporarily unavailable.'
+    )
+    return results
+  }
+
   useEffect(() => {
     searchRequest.current += 1
-    if (view !== 'search' || !query.trim() || !source) {
+    if (view !== 'search' || !query.trim() || !source || source === 'documents') {
       setSuggestions([])
       return
     }
@@ -215,7 +239,10 @@ export default function LibrarySearch({ kiwixService }: { kiwixService: ServiceS
     setLoading(true)
     setCorrectedFrom(null)
     try {
-      const titleResults = await lookupTitles(original)
+      const [titleResults, savedResults] = await Promise.all([
+        source === 'documents' ? Promise.resolve([]) : lookupTitles(original),
+        lookupDocuments(original),
+      ])
       const exact = titleResults.find(
         (result) => result.value.toLowerCase() === original.toLowerCase()
       )
@@ -226,20 +253,24 @@ export default function LibrarySearch({ kiwixService }: { kiwixService: ServiceS
       if (spelling.suggestion) {
         setCorrectedFrom(original)
         setQuery(spelling.suggestion)
-        const correctedResults = await lookupTitles(spelling.suggestion)
+        const [correctedResults, correctedSavedResults] = await Promise.all([
+          source === 'documents' ? Promise.resolve([]) : lookupTitles(spelling.suggestion),
+          lookupDocuments(spelling.suggestion),
+        ])
+        const totalResults = correctedResults.length + correctedSavedResults.length
         setStatus(
-          correctedResults.length
-            ? `Showing title matches for “${spelling.suggestion}”.`
-            : `No title match for “${spelling.suggestion}”; try full-text search.`
+          totalResults
+            ? `Showing offline matches for “${spelling.suggestion}”.`
+            : `No indexed offline match for “${spelling.suggestion}”.`
         )
-      } else if (titleResults.length) {
-        setStatus('Choose the intended article, or search inside every article.')
+      } else if (titleResults.length || savedResults.length) {
+        setStatus('Choose an article or saved original document below.')
       } else {
-        setStatus('No close title was found. Searching inside article text may still help.')
+        setStatus('No indexed match was found. Kiwix full-text search may still help.')
       }
     } catch {
       setStatus(
-        'Search could not reach the local Kiwix service. Check that Information Library is running.'
+        'Search could not reach one of the local library services. Check that NOMAD is running.'
       )
     } finally {
       setLoading(false)
@@ -335,10 +366,13 @@ export default function LibrarySearch({ kiwixService }: { kiwixService: ServiceS
                 onChange={(event) => {
                   setSource(event.target.value)
                   setCorrectedFrom(null)
+                  setDocumentResults([])
+                  setDocumentSearchNote('')
                 }}
                 className="w-full rounded-lg border border-border-default bg-surface-secondary px-4 py-3 text-text-primary focus:border-desert-green focus:outline-none"
               >
-                <option value="all">All installed article libraries</option>
+                <option value="all">All offline articles and saved documents</option>
+                <option value="documents">Saved documents & manuals</option>
                 {libraries.map((file) => (
                   <option key={file.name} value={sourceName(file.name)}>
                     {displayTitle(file)}
@@ -363,6 +397,8 @@ export default function LibrarySearch({ kiwixService }: { kiwixService: ServiceS
                     onChange={(event) => {
                       setQuery(event.target.value)
                       setCorrectedFrom(null)
+                      setDocumentResults([])
+                      setDocumentSearchNote('')
                     }}
                     placeholder="Try cloud, cumulonimbus, earthquake…"
                     className="w-full rounded-lg border border-border-default bg-surface-secondary py-3 pl-12 pr-4 text-lg text-text-primary placeholder:text-text-muted focus:border-desert-green focus:outline-none"
@@ -381,13 +417,15 @@ export default function LibrarySearch({ kiwixService }: { kiwixService: ServiceS
             {correctedFrom && (
               <div className="mt-5 rounded-lg border border-desert-green/40 bg-desert-green/10 px-4 py-3">
                 <strong>Spelling corrected:</strong> “{correctedFrom}” → “{query}”.{' '}
-                <button
-                  type="button"
-                  onClick={() => openFullText(correctedFrom)}
-                  className="underline"
-                >
-                  Search the original text instead
-                </button>
+                {source !== 'documents' && (
+                  <button
+                    type="button"
+                    onClick={() => openFullText(correctedFrom)}
+                    className="underline"
+                  >
+                    Search the original article text instead
+                  </button>
+                )}
               </div>
             )}
             <p className="mt-5 text-sm text-text-secondary" aria-live="polite">
@@ -410,20 +448,52 @@ export default function LibrarySearch({ kiwixService }: { kiwixService: ServiceS
                 ))}
               </div>
             )}
-            <div className="mt-6 border-t border-border-default pt-5">
-              <button
-                type="button"
-                disabled={!query.trim()}
-                onClick={() => openFullText()}
-                className="inline-flex items-center gap-2 text-sm font-medium text-desert-green underline disabled:opacity-40"
-              >
-                <IconSearch size={17} /> Search for “{query || '…'}” inside article text
-              </button>
-              <p className="mt-2 text-xs text-text-muted">
-                Full-text results are broader and may rank a different meaning of the same word
-                first.
-              </p>
-            </div>
+            {documentResults.length > 0 && (
+              <section className="mt-6 border-t border-border-default pt-5">
+                <h2 className="text-sm font-semibold uppercase tracking-wide text-text-muted">
+                  Saved documents & manuals
+                </h2>
+                <div className="mt-3 grid gap-3">
+                  {documentResults.map((result) => (
+                    <a
+                      key={result.source}
+                      href={libraryDocumentUrl(result.source, result.title, query)}
+                      className="rounded-lg border border-border-default bg-surface-secondary px-4 py-3 hover:border-desert-green hover:bg-surface-tertiary"
+                    >
+                      <span className="font-semibold">{result.title}</span>
+                      <span className="mt-1 block text-sm leading-6 text-text-secondary">
+                        {result.excerpt}
+                      </span>
+                      <span className="mt-2 block text-xs font-medium text-desert-green">
+                        {result.matchKind === 'content'
+                          ? 'Matching passage in indexed original'
+                          : 'Matching document title'}{' '}
+                        · Open saved source
+                      </span>
+                    </a>
+                  ))}
+                </div>
+              </section>
+            )}
+            {documentSearchNote && (
+              <p className="mt-3 text-xs text-text-muted">{documentSearchNote}</p>
+            )}
+            {source !== 'documents' && (
+              <div className="mt-6 border-t border-border-default pt-5">
+                <button
+                  type="button"
+                  disabled={!query.trim()}
+                  onClick={() => openFullText()}
+                  className="inline-flex items-center gap-2 text-sm font-medium text-desert-green underline disabled:opacity-40"
+                >
+                  <IconSearch size={17} /> Search for “{query || '…'}” inside article text
+                </button>
+                <p className="mt-2 text-xs text-text-muted">
+                  Full-text results are broader and may rank a different meaning of the same word
+                  first.
+                </p>
+              </div>
+            )}
           </section>
         ) : (
           <div className="space-y-10">

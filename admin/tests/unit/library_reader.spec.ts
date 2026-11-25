@@ -57,10 +57,15 @@ test('rejects malformed source identifiers and empty search state', () => {
 
 test('builds a NOMAD document route without exposing parameters as path segments', () => {
   const url = new URL(
-    libraryDocumentUrl('/app/storage/kb_uploads/first aid.pdf', 'First Aid Manual.pdf'),
+    libraryDocumentUrl(
+      '/app/storage/kb_uploads/first aid.pdf',
+      'First Aid Manual.pdf',
+      'control bleeding'
+    ),
     'http://nomad.local'
   )
   assert.equal(url.pathname, '/library/document')
   assert.equal(url.searchParams.get('source'), '/app/storage/kb_uploads/first aid.pdf')
   assert.equal(url.searchParams.get('title'), 'First Aid Manual.pdf')
+  assert.equal(url.searchParams.get('q'), 'control bleeding')
 })

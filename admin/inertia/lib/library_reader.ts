@@ -42,9 +42,10 @@ export function libraryReaderUrl(location: LibraryReaderLocation): string {
   return `/library/read?${params.toString()}`
 }
 
-export function libraryDocumentUrl(source: string, fileName?: string): string {
+export function libraryDocumentUrl(source: string, fileName?: string, query?: string): string {
   const params = new URLSearchParams({ source })
   if (fileName) params.set('title', fileName)
+  if (query?.trim()) params.set('q', query.trim())
   return `/library/document?${params.toString()}`
 }
 

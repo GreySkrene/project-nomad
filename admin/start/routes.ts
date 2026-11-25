@@ -456,6 +456,10 @@ router
       tags: ['rag'],
       query: fileSourceSchema,
     })
+    documented(router.get('/files/search', [RagController, 'searchFiles']), {
+      summary: 'Search stored manuals lexically without an AI model',
+      tags: ['rag'],
+    })
     documented(router.get('/files/download', [RagController, 'downloadFile']), {
       summary: 'Download a RAG file',
       tags: ['rag'],

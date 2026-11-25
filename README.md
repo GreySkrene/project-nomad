@@ -101,6 +101,13 @@ inside NOMAD with the original download still available. Kolibri remains separat
 and no claim is made that maps, course content, Kiwix, and documents share one
 universal index.
 
+The Library Search tab also searches passages already stored in the local knowledge
+index for saved manuals. This is deterministic lexical matching: it does not call an
+LLM, LM Studio, or an embedding model at query time. It returns one best passage per
+original document, keeps the source link beside the excerpt, and falls back to title
+matches if the local knowledge index is unavailable. Kiwix article full-text search
+remains a separate, clearly labelled action.
+
 ## Installation & Quickstart
 Project NOMAD can be installed on any Debian-based operating system (we recommend Ubuntu 26.04 LTS; 24.04 LTS and Debian 12 are also supported). Installation is completely terminal-based, and all tools and resources are designed to be accessed through the browser, so there's no need for a desktop environment if you'd rather setup NOMAD as a "server" and access it through other clients.
 

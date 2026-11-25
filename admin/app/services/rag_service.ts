@@ -30,8 +30,16 @@ import { decideOrphans } from '../utils/kb_orphan_decision.js'
 import { decideContentReindex, type ReindexOutcome } from '../utils/content_reindex_decision.js'
 import KbRatioRegistry from '#models/kb_ratio_registry'
 import { decideWarnings } from '../utils/kb_warning_decision.js'
-import type { FileWarning, FileWarningsResult, RetrievalFloorStats, RetrievalStages, StoredFileInfo } from '../../types/rag.js'
+import type {
+  DocumentSearchResponse,
+  FileWarning,
+  FileWarningsResult,
+  RetrievalFloorStats,
+  RetrievalStages,
+  StoredFileInfo,
+} from '../../types/rag.js'
 import { applyRelevanceFloor } from '../utils/misc.js'
+import { rankStoredDocuments, type LexicalDocumentChunk } from '../utils/library_document_search.js'
 import { KB_EVAL_COLLECTION } from '../../constants/kb_collections.js'
 import { UnrecoverableError } from 'bullmq'
 
@@ -76,6 +84,10 @@ export class RagService {
   // Skips the getCollections/createPayloadIndex round-trips that otherwise run on
   // every embed call — ~45% of per-document Qdrant time on large ingestions (#1129)
   private ensuredCollections = new Set<string>()
+  private documentLexicalCache: {
+    signature: string
+    chunks: LexicalDocumentChunk[]
+  } | null = null
   public static UPLOADS_STORAGE_PATH = 'storage/kb_uploads'
   public static CONTENT_COLLECTION_NAME = 'nomad_knowledge_base'
   public static EMBEDDING_DIMENSION = 768 // Nomic Embed Text v1.5 dimension is 768
@@ -386,8 +398,12 @@ export class RagService {
       // TokenChunker uses character-based tokenization (1 char = 1 token)
       // We need to convert our embedding model's token counts to character counts
       // since nomic-embed-text tokenizer uses ~3 chars per token
-      const targetCharsPerChunk = Math.floor(RagService.TARGET_TOKENS_PER_CHUNK * RagService.CHAR_TO_TOKEN_RATIO)
-      const overlapChars = Math.floor(RagService.CHUNK_OVERLAP_TOKENS * RagService.CHAR_TO_TOKEN_RATIO)
+      const targetCharsPerChunk = Math.floor(
+        RagService.TARGET_TOKENS_PER_CHUNK * RagService.CHAR_TO_TOKEN_RATIO
+      )
+      const overlapChars = Math.floor(
+        RagService.CHUNK_OVERLAP_TOKENS * RagService.CHAR_TO_TOKEN_RATIO
+      )
 
       const chunker = await TokenChunker.create({
         chunkSize: targetCharsPerChunk,
@@ -1433,6 +1449,76 @@ export class RagService {
     } catch (error) {
       logger.error('Error retrieving stored files:', error)
       return []
+    }
+  }
+
+  /**
+   * Search saved manuals using the text already stored in Qdrant. This path is
+   * deliberately lexical: it does not start or call Ollama/LM Studio and does
+   * not create a query embedding. The first search after a content change
+   * loads uploaded-document chunks into a bounded in-process cache; later
+   * searches are local string matching.
+   */
+  public async searchStoredDocuments(query: string, limit = 12): Promise<DocumentSearchResponse> {
+    const files = (await this.getStoredFiles()).filter((file) => file.isUserUpload)
+    const documents = files.map(({ source, fileName }) => ({ source, fileName }))
+    const indexed = files.filter((file) => file.chunksEmbedded > 0)
+    const signature = indexed
+      .map((file) => `${file.source}\0${file.chunksEmbedded}\0${file.uploadedAt ?? ''}`)
+      .sort()
+      .join('\n')
+    let partial = false
+
+    if (this.documentLexicalCache?.signature !== signature) {
+      const chunks: LexicalDocumentChunk[] = []
+      try {
+        await this._ensureCollection(
+          RagService.CONTENT_COLLECTION_NAME,
+          RagService.EMBEDDING_DIMENSION
+        )
+        const sources = indexed.map((file) => file.source)
+        let offset: any = undefined
+        const maximumChunks = 100_000
+
+        while (sources.length > 0 && chunks.length < maximumChunks) {
+          const page = await this.qdrant!.scroll(RagService.CONTENT_COLLECTION_NAME, {
+            filter: { must: [{ key: 'source', match: { any: sources } }] },
+            limit: 256,
+            offset,
+            with_payload: ['source', 'text', 'chunk_index'],
+            with_vector: false,
+          })
+          for (const point of page.points) {
+            const source = point.payload?.source
+            const text = point.payload?.text
+            if (typeof source !== 'string' || typeof text !== 'string' || !text.trim()) continue
+            chunks.push({
+              source,
+              text,
+              chunkIndex:
+                typeof point.payload?.chunk_index === 'number' ? point.payload.chunk_index : 0,
+            })
+          }
+          offset = page.next_page_offset
+          if (offset === null || offset === undefined) break
+        }
+        if (chunks.length >= maximumChunks) partial = true
+        this.documentLexicalCache = { signature, chunks }
+      } catch (error) {
+        partial = true
+        logger.warn(
+          { err: error },
+          '[RagService.searchStoredDocuments] text cache unavailable; using filenames only'
+        )
+      }
+    }
+
+    const chunks =
+      this.documentLexicalCache?.signature === signature ? this.documentLexicalCache.chunks : []
+    return {
+      results: rankStoredDocuments(query, documents, chunks, limit),
+      partial,
+      indexedDocuments: new Set(chunks.map((chunk) => chunk.source)).size,
     }
   }
 

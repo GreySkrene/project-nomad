@@ -290,12 +290,24 @@ the separate project. Content and UI validation do not require local generation.
   same-origin inline endpoint. The original download endpoint remains attachment-only
   with `X-Frame-Options: DENY`; inline Markdown returns 415 and traversal outside the
   uploads directory returns 404.
+- [x] Preserve a saved-manual search term when a result opens and provide a safe
+  in-document Find next control for rendered Markdown/text. It uses DOM ranges rather
+  than rewriting source HTML and automatically selects the first matching passage.
+  PDFs clearly point to the browser's local `Ctrl+F` support until PDF.js is bundled.
 - [ ] Bundle PDF.js for a browser-independent PDF toolbar, explicit current-page deep
   links, deterministic page search, and page-number citations. The initial inline
   viewer provides immediate local usability but does not yet establish NOMAD-owned
   page citation state.
-- [ ] Add deterministic lexical search across the 121 PDFs and 19 Markdown files so
-  saved manuals are discoverable without embeddings or an AI service.
+- [x] Add deterministic lexical search for saved uploaded manuals using the passages
+  already stored in the local knowledge index. Queries do not call Ollama, LM Studio,
+  or an embedding model; the service caches the bounded set of uploaded-document
+  chunks, applies AND matching and phrase/title boosts, and returns one best excerpt
+  per original source. Filename matching still works if the text index is unavailable.
+  Live validation searched 43 indexed saved documents and put the Jackery Explorer
+  quick reference first for `solar input`, with the actual input limits in the excerpt.
+- [ ] Extend this same lexical surface to any audited PDF/Markdown sources that are
+  stored outside the managed upload directory. The current safety boundary only opens
+  and searches managed originals; Kiwix and Kolibri retain their own indexes.
 - [ ] Add recent/saved-reference controls after the document reader establishes one
   stable citation/bookmark model for both Kiwix articles and local files.
 - [!] Keep Kolibri in its separate reader unless a supported integration becomes

@@ -218,11 +218,23 @@ endpoint inside the same persistent shell. Live checks loaded the real AHA CPR/
 choking Markdown guide and the 52,241,264-byte Idaho State Hazard Mitigation Plan.
 The PDF endpoint returned `application/pdf`, `inline`, and `SAMEORIGIN`; a non-PDF
 returned 415, traversal outside uploads returned 404, and the original download route
-remained `attachment` plus `DENY`. A bundled PDF.js toolbar/page-citation model and a
-cross-document lexical index remain future work. Kolibri is still separate, and this
-does not create a universal index across content types. Only the admin container was
-recreated; the rollback Compose file is
+remained `attachment` plus `DENY`. A bundled PDF.js toolbar/page-citation model remains
+future work. Search-result links now preserve the query when opening a saved manual;
+rendered Markdown/text selects the first passage and offers Find next, while PDFs
+clearly use the browser's offline `Ctrl+F` viewer search. Kolibri is still separate,
+and this does not create a universal index across content types. Only the admin
+container was recreated; the rollback Compose file is
 `/opt/project-nomad/compose.yml.pre-library-reader-20261125`.
+
+The next deployed slice added saved-manual passage search to the same Library Search
+tab. It reuses text already present in the local Qdrant knowledge index but performs
+deterministic lexical matching only: no LLM, LM Studio, Ollama, or query embedding is
+called. It uses AND semantics for multi-word queries, phrase/title boosts, and one
+best result per source, with a filename-only fallback if indexed text is unavailable.
+Live `solar input` validation searched 43 indexed saved documents and returned the
+Explorer 600 v2 quick reference first with its 16–60 V, 10.5 A, 200 W limits in the
+excerpt. The endpoint reported a complete (not partial) local index. Kiwix search is
+still separate, and sources outside the managed-upload boundary are future work.
 
 On 2026-11-19 the same pinned local image was rebuilt with a **Document Library**
 dashboard tile. It opens stored source files directly and explicitly states that AI

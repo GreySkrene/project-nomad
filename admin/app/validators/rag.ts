@@ -25,6 +25,13 @@ export const fileSourceSchema = vine.compile(
   })
 )
 
+export const documentSearchSchema = vine.compile(
+  vine.object({
+    q: vine.string().trim().minLength(2).maxLength(120),
+    limit: vine.number().min(1).max(25).optional(),
+  })
+)
+
 export const estimateBatchSchema = vine.compile(
   vine.object({
     files: vine
