@@ -19,6 +19,34 @@ function sourcePriority(source: string): number {
   return 5
 }
 
+const MEDICAL_INTENT =
+  /\b(cpr|chok(?:e|ing)|bleed(?:ing)?|burns?|fractures?|splints?|shock|wounds?|first aid|poison(?:ing)?)\b/i
+const CIVIL_EMERGENCY_INTENT =
+  /\b(power outages?|emergency heat|water(?: purification)?|earthquakes?|wildfires?|floods?|tornado(?:es)?|winter storms?|extreme (?:heat|cold))\b/i
+
+/**
+ * Prefer an emergency authority when the query has clear safety intent. The bonus is
+ * deliberately smaller than two title-relevance tiers, so it can promote a trusted
+ * title prefix over an ambiguous exact encyclopedia title without making a loosely
+ * related authority result beat a strong literal match.
+ */
+function emergencyAuthorityBonus(query: string, source: string): number {
+  const name = source.toLocaleLowerCase()
+  if (
+    MEDICAL_INTENT.test(query) &&
+    (name.includes('medlineplus') || name.includes('wikipedia_en_medicine'))
+  ) {
+    return -110
+  }
+  if (
+    CIVIL_EMERGENCY_INTENT.test(query) &&
+    (name.includes('ready.gov') || name.includes('cdc.gov'))
+  ) {
+    return -110
+  }
+  return 0
+}
+
 /** Rank literal title relevance before source preference. */
 export function titleSuggestionScore(query: string, result: RankedTitle): number {
   const term = normalized(query)
@@ -33,7 +61,9 @@ export function titleSuggestionScore(query: string, result: RankedTitle): number
   else if (title.startsWith(term)) titleScore = 35
   else if (title.includes(term)) titleScore = 40
 
-  return titleScore * 10 + sourcePriority(result.source)
+  return (
+    titleScore * 10 + sourcePriority(result.source) + emergencyAuthorityBonus(term, result.source)
+  )
 }
 
 export function rankTitleSuggestions<T extends RankedTitle>(query: string, results: T[]): T[] {

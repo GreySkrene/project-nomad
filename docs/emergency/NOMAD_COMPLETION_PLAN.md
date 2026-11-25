@@ -1,6 +1,6 @@
 # Project NOMAD completion plan
 
-Last updated: 2026-11-23 (America/Denver)
+Last updated: 2026-11-25 (America/Denver)
 
 Status key: `[x]` verified complete, `[-]` in progress, `[ ]` not started, `[!]` blocked or needs a decision.
 
@@ -277,12 +277,16 @@ the separate project. Content and UI validation do not require local generation.
   down from 59 (3 critical, 20 high, 29 moderate, 7 low). MapLibre v6, Sharp, tar,
   systeminformation, libzim, and other safe fixes passed type-check, production build,
   native-container, live route, and rendered-map checks. The two remaining high rows
-  are the paired Lucid/Faker finding whose published fix requires a dedicated Adonis/
-  Lucid major migration. See `DEPENDENCY_SECURITY_AUDIT.md`; keep the service LAN-only.
-- [ ] Migrate and regression-test the Adonis/Lucid framework family that remains behind
-  the final two high production audit rows. Treat this as a planned framework upgrade,
-  not an `npm audit fix --force`: verify database migrations, sessions/auth, downloads,
-  ZIM inspection, maps, documents, launcher startup, and rollback before deployment.
+  are the paired Lucid/Faker finding whose published fix requires a coordinated Node 24/
+  Adonis 7 framework-family migration. See `DEPENDENCY_SECURITY_AUDIT.md`; keep the
+  service LAN-only.
+- [ ] Migrate and regression-test the Adonis framework family that remains behind the
+  final two high production audit rows. The 2026-11-25 compatibility preflight confirmed
+  that Lucid 22.5 requires Node 24, Core 7, and Assembler 8, while Auth 9 and Session 7
+  accept only the current Core 6/Lucid 20-21 family. Treat this as a coordinated
+  Node/Core/Assembler/Lucid/Auth/Session migration, not an `npm audit fix --force` or a
+  Lucid-only bump. Verify database migrations, sessions/auth, downloads, ZIM inspection,
+  maps, documents, launcher startup, and rollback before deployment.
 - [x] Publish the reviewed work to the public GitHub fork at `https://github.com/GreySkrene/project-nomad`.
 
 ## J. Resumable checkpoint — 2026-11-19 America/Denver
@@ -329,6 +333,11 @@ the separate project. Content and UI validation do not require local generation.
   content-plus-discoverability check to CPR, choking, bleeding, burns, fractures,
   shock, wound care, water purification, carbon monoxide, and emergency heat during
   the final disconnected acceptance test.
+- [x] Add a repeatable live emergency-search audit (`npm run audit:emergency-search`)
+  across all installed Kiwix libraries. On 2026-11-25 all 18 libraries responded and
+  all ten release-gate topics surfaced an accepted emergency source. Search ranking now
+  promotes WikiMed/MedlinePlus for clear medical intent and Ready.gov/CDC for clear
+  civil-emergency intent, while preserving literal relevance for unrelated queries.
 - [ ] After replacements: confirm exact models for equipment manuals still marked
   `[!]`, then perform reboot and physically disconnected acceptance tests.
 - [x] Investigated the current UI, produced six redesign concepts, and recorded the user's Style 2 + Style 3 selection.

@@ -1,6 +1,6 @@
 # Dependency security audit
 
-Audit date: 2026-11-23 (America/Denver)
+Audit date: 2026-11-25 (initial remediation 2026-11-23, America/Denver)
 
 Scope: `admin` production dependencies, measured with
 `npm audit --omit=dev`. This is a package-advisory audit, not a claim that every
@@ -41,11 +41,17 @@ where the application path was inspected and tested.
 ## Remaining findings
 
 The two remaining high package rows are `@adonisjs/lucid` and its transitive
-`@faker-js/faker`. The published npm remediation upgrades Lucid from 21 to 22 and is
-a framework-major migration. NOMAD production source contains no Faker import or
-`helpers.fake` call, which reduces direct reachability of that specific Faker issue,
-but does not erase the advisory. Lucid is used by the application, so its major upgrade
-requires a dedicated database/auth/session regression pass.
+`@faker-js/faker`. NOMAD production source contains no Faker import or `helpers.fake`
+call, which reduces direct reachability of that specific Faker issue, but does not erase
+the advisory.
+
+The 2026-11-25 compatibility preflight proved that this is not a Lucid-only upgrade.
+The npm remediation currently selects Lucid 22.5.0, which requires Node 24, Adonis Core
+7, and Assembler 8. NOMAD's tested production image uses Node 22 and Core 6; the
+installed Auth 9 and Session 7 packages explicitly peer only with Lucid 20/21 and Core
+6. A safe fix therefore requires a coordinated Node/Core/Assembler/Lucid/Auth/Session
+framework migration, followed by database, authentication, session, build, launcher,
+and live-service regression testing. No forced or partial upgrade was applied.
 
 The 18 moderate rows are primarily the existing Adonis 6 framework family and direct
 packages whose patched releases require major upgrades, including `stream-json`.

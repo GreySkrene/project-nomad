@@ -1,6 +1,6 @@
 # Project NOMAD Offline Emergency System — Setup Report
 
-Report date: 2026-11-23 (America/Denver)
+Report date: 2026-11-25 (America/Denver)
 Status: core services and content are installed; safety acceptance and fully disconnected/reboot testing are not complete
 
 Large-archive integrity baseline: all 18 installed ZIMs and three PMTiles archives
@@ -35,7 +35,7 @@ NOMAD is reached at `http://localhost:8080`. On 2026-11-13 its health endpoint r
 | FlatNotes | 5.5.4 | Running on port 8200 | Offline notes |
 | Offline maps | Protomaps/PMTiles | Installed | Pan/zoom vector map |
 | Offline routing | Valhalla 3.9.1, immutable image digest | Healthy; private Docker port only | Utah/Idaho driving, walking, and cycling routes |
-| LM Studio | Windows port 1234 | Connected from NOMAD | Local and LM Link inference/embeddings |
+| LM Studio | Windows port 1234 | NOMAD integration paused; not touched during current work | Optional local and LM Link inference/embeddings |
 
 All eleven NOMAD containers, including the private routing service, were running when
 checked. NOMAD admin and routing reported healthy; the remaining previously installed
@@ -46,8 +46,19 @@ The 2026-11-23 production dependency hardening pass reduced `npm audit --omit=de
 from 59 package rows (3 critical and 20 high) to 20 (0 critical and 2 high), without
 using `npm audit fix --force`. MapLibre 6.19.0, Sharp 0.35.5, libzim 4.7.0, tar 7.5.23,
 systeminformation 5.33.24, and the other pinned fixes passed the Linux image build and
-live checks. The remaining paired Lucid/Faker high finding requires a dedicated Adonis/
-Lucid major migration; details are in `DEPENDENCY_SECURITY_AUDIT.md`.
+live checks. The remaining paired Lucid/Faker high finding requires a coordinated
+Node 24/Core 7/Assembler 8/Lucid 22/Auth 10/Session 8 migration; a Lucid-only upgrade
+is incompatible with the tested Node 22/Core 6 runtime. Details are in
+`DEPENDENCY_SECURITY_AUDIT.md`.
+
+On 2026-11-25 a repeatable live search audit queried all 18 installed Kiwix libraries
+for CPR, choking, bleeding, burns, splints, shock, wound care, water, carbon-monoxide
+poisoning, and power outages. All 18 libraries responded and all ten gates surfaced an
+accepted emergency source. Intent-aware ranking now places WikiMed/MedlinePlus ahead
+of ambiguous general titles for clear medical queries and Ready.gov/CDC ahead for clear
+civil-emergency queries. The deployed regressions include WikiMed's *Splint (medical)*
+and *Shock (circulatory)* first, Ready.gov first for water and power outages, and no
+change to literal ranking for unrelated terms.
 
 ## 3. Storage and downloaded content
 
@@ -304,12 +315,12 @@ clean suite pass. The running Linux image and the final public branch are not
 the same build: the laptop remains on its tested local v1.35.1 image until a
 separate upgrade is approved and retested.
 
-`npm audit --omit=dev` reported 60 advisories in the current upstream production
-dependency tree (3 critical, 21 high, 29 moderate, and 7 low). Their practical
-reachability in NOMAD has not been triaged. This reinforces the existing rule:
-keep NOMAD on a trusted local machine/LAN and never expose it directly to the
-public internet. Automated force-upgrades were not applied because several
-suggested fixes are major-version changes.
+The current hardened production tree reports 20 package rows (0 critical, 2 high,
+18 moderate), down from 59 rows before remediation. The remaining high rows are the
+paired Lucid/Faker result described above. Keep NOMAD on a trusted local machine/LAN
+and never expose it directly to the public internet. Automated force-upgrades were not
+applied because the published remediation crosses the Node and Adonis framework
+generation boundary.
 
 ## 11. Update procedure
 
