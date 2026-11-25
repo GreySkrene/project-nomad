@@ -28,8 +28,8 @@ Project NOMAD is a self-contained, offline-first knowledge and education server 
 > useful, supplemental, incomplete, replaced, or defective; downloaded does not
 > automatically mean accepted. Rejected resources stay out of the public profile.
 > The model-independent Browse Library groups the installed sources by practical
-> need, shows summaries and honest format limitations, and links to the original
-> offline reader. The [reader presentation audit](docs/emergency/READER_PRESENTATION_AUDIT.md)
+> need, shows summaries and honest format limitations, and opens original Kiwix
+> articles inside a persistent NOMAD reader. The [reader presentation audit](docs/emergency/READER_PRESENTATION_AUDIT.md)
 > records the live entry-page check for every installed Kiwix archive.
 
 ![Night Operations emergency dashboard](docs/emergency/images/ui-upgrade-live-final.png)
@@ -90,6 +90,14 @@ and limits one archive from crowding out the rest. The regression query `splint`
 is covered by automated tests and a deployed browser test against WikiMed and
 MedlinePlus. Basic splint guidance was present offline; the defect was that the old
 single-archive search made it practically undiscoverable.
+
+Article cards, ranked results, and Kiwix full-text results now open inside NOMAD's
+Night Operations reader instead of replacing the entire interface. The shell keeps
+the source title, offline-snapshot warning, original-view link, and ranked/spelling-
+aware library search available while the original archived article remains intact.
+This unified reader currently covers installed Kiwix archives. Saved PDFs/Markdown
+files and Kolibri still use their own readers, and no claim is made that maps, course
+content, and documents share one universal index.
 
 ## Installation & Quickstart
 Project NOMAD can be installed on any Debian-based operating system (we recommend Ubuntu 26.04 LTS; 24.04 LTS and Debian 12 are also supported). Installation is completely terminal-based, and all tools and resources are designed to be accessed through the browser, so there's no need for a desktop environment if you'd rather setup NOMAD as a "server" and access it through other clients.

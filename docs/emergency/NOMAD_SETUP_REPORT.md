@@ -87,7 +87,10 @@ The two illustrated upgrades were independently validated on 2026-11-18. Kiwix c
 - Best of Wikipedia maxi: `1b455d589e026d541ad6917ad1911b787448424a4d455e0f1a9531f065839c09`
 - Wikibooks maxi: `835014cde2c385f80a6388847fb8962429966a3a64a03b58552f1684cc83e7c8`
 
-Kiwix, Kolibri, NOMAD RAG, and maps are separate search interfaces. NOMAD does not currently provide one universal search across all four.
+NOMAD provides one ranked title-search surface across all installed Kiwix archives,
+and Kiwix articles now stay inside a persistent NOMAD reader with the same search
+available. Kolibri, saved PDF/Markdown documents, NOMAD RAG, and maps still have
+separate indexes; there is no universal search across all content types.
 
 The Browse Library now labels each article collection as Emergency core, Practical
 reference, Background reference, or Supplemental. Stack Exchange archives are visibly
@@ -184,7 +187,7 @@ NOMAD citations identify the stored title/file/path. PDF page numbers are not pr
 | Requirement | Verified behavior |
 |---|---|
 | Completely offline libraries | Kiwix, Kolibri, maps, source files, and local models are stored locally |
-| Universal search | Not available: RAG, Kiwix, Kolibri, and maps use separate interfaces |
+| Universal search | Partial: all installed Kiwix archives share ranked title search and a persistent reader; PDF/Markdown, RAG, Kolibri, and maps remain separate |
 | RAG citations | Stored filename/path citations work |
 | PDF page citations | Not supported |
 | Safety-critical generated answers | Not accepted; source verification required |
@@ -199,6 +202,20 @@ NOMAD citations identify the stored title/file/path. PDF page numbers are not pr
 On 2026-11-16 the selected Night Operations + Field Manual interface was compiled into the local Docker image `project-nomad-local:night-manual-20261116` and assigned only to the `admin` service. The existing MySQL database, Redis, storage mount, Kiwix, Kolibri, maps, Qdrant, FlatNotes, and downloaded content were not replaced.
 
 The upgraded interface provides a compact dark operations header, responsive command tiles, Night Ops as the default for new browsers, a retained Day Ops toggle, paper-style documentation panels, and clearer source-record styling. Because NOMAD AI is paused and did not pass safety acceptance, the dashboard no longer offers an actionable AI tile or floating chat button; it shows a disabled status card instead.
+
+On 2026-11-25 the admin service was upgraded to
+`project-nomad-local:library-reader-20261125`. Article cards, ranked title matches,
+and Kiwix full-text results now open in a persistent NOMAD reader rather than
+replacing the interface. The reader retains source identity, Library navigation, a
+live-information warning, original-view access, and ranked/spelling-aware search
+across the installed archives. Focused URL/ranking/browse tests passed 17/17, along
+with TypeScript, the production build, and the native Docker build. Live Chromium
+inspection loaded the real WikiMed `Splint (medicine)` child frame and returned its
+article text; the in-reader `splint` query produced four WikiMed results with the
+medical article first. This does not yet wrap saved PDFs/Markdown or Kolibri, and it
+does not create a universal index across content types. Only the admin container was
+recreated; the rollback Compose file is
+`/opt/project-nomad/compose.yml.pre-library-reader-20261125`.
 
 On 2026-11-19 the same pinned local image was rebuilt with a **Document Library**
 dashboard tile. It opens stored source files directly and explicitly states that AI

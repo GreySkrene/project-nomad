@@ -11,7 +11,16 @@ export default class LibrarySearchController {
   async index({ inertia }: HttpContext) {
     const services = await this.systemService.getServices({ installedOnly: true })
     return inertia.render('library-search', {
-      kiwixService: services.find((service) => service.service_name === SERVICE_NAMES.KIWIX) ?? null,
+      kiwixService:
+        services.find((service) => service.service_name === SERVICE_NAMES.KIWIX) ?? null,
+    })
+  }
+
+  async reader({ inertia }: HttpContext) {
+    const services = await this.systemService.getServices({ installedOnly: true })
+    return inertia.render('library-reader', {
+      kiwixService:
+        services.find((service) => service.service_name === SERVICE_NAMES.KIWIX) ?? null,
     })
   }
 

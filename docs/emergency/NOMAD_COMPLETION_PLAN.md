@@ -261,6 +261,40 @@ the separate project. Content and UI validation do not require local generation.
   and per-source fixes over modifying original authoritative content. See
   `READER_PRESENTATION_AUDIT.md`.
 
+## I2. Persistent offline reader and cross-library search
+
+- [x] Trace the disruptive source transition to its implementation: article cards,
+  title results, and full-text actions navigated the top-level window directly to
+  Kiwix on port 8090, intentionally discarding NOMAD's theme, navigation, warnings,
+  and custom ranking controls.
+- [x] Add a universal NOMAD reader shell for installed Kiwix archives. It preserves
+  the original archived HTML and source styling in a cross-origin frame while keeping
+  Library navigation, source identity, the offline/live-information warning, and an
+  Original view escape hatch visible.
+- [x] Keep ranked local search available inside the reader, with all-source/current-
+  source scope, spelling correction, emergency-authority ranking, diverse source
+  results, and Kiwix full-text fallback. Opening another result replaces only the
+  article frame and records a browser-history entry.
+- [x] Validate reader URL construction and input bounds with focused tests. TypeScript,
+  17 affected unit tests, production build, and Docker build passed.
+- [x] Deploy `project-nomad-local:library-reader-20261125` to the admin service only.
+  Live Chromium frame inspection proved the NOMAD parent and real WikiMed child were
+  loaded on their separate origins and returned the actual Splint article text. The
+  in-reader `splint` search returned four ranked WikiMed results with `Splint (medical)`
+  first. Kiwix, routing, maps, databases, Kolibri, stored content, and LM Studio were
+  not restarted or changed. Rollback Compose file:
+  `/opt/project-nomad/compose.yml.pre-library-reader-20261125`.
+- [ ] Add a native saved-document reader: inline PDF.js with page search/zoom/page
+  citations and safe Markdown rendering, without weakening the existing download
+  endpoint's framing protection.
+- [ ] Add deterministic lexical search across the 121 PDFs and 19 Markdown files so
+  saved manuals are discoverable without embeddings or an AI service.
+- [ ] Add recent/saved-reference controls after the document reader establishes one
+  stable citation/bookmark model for both Kiwix articles and local files.
+- [!] Keep Kolibri in its separate reader unless a supported integration becomes
+  available. Its live response denies framing; forking it only for visual consistency
+  is not justified.
+
 ## K. Public, reproducible personal-project fork
 
 - [x] Define the emergency-family Kiwix selection in a machine-readable profile with exact filenames, URLs, sizes, and rationale.

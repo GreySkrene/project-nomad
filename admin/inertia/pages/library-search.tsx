@@ -24,6 +24,7 @@ import {
   readerDetails,
   type LibraryCategory,
 } from '~/lib/library_browse_catalog'
+import { libraryReaderUrl, sourceName } from '~/lib/library_reader'
 import { getServiceLink } from '~/lib/navigation'
 import { selectDiverseTitleSuggestions } from '~/lib/library_search_rank'
 import type { StoredFileInfo } from '../../types/rag'
@@ -40,15 +41,6 @@ type KiwixSuggestion = {
 }
 
 type ViewMode = 'browse' | 'search'
-
-function sourceName(filename: string) {
-  return filename.replace(/\.zim$/i, '')
-}
-
-function articleUrl(baseUrl: string, source: string, path: string) {
-  const safePath = path.split('/').map(encodeURIComponent).join('/')
-  return `${baseUrl}/content/${encodeURIComponent(source)}/${safePath}`
-}
 
 function friendlyDocumentName(fileName: string) {
   return fileName
@@ -81,7 +73,12 @@ export default function LibrarySearch({ kiwixService }: { kiwixService: ServiceS
   )
 
   useEffect(() => {
-    if (new URLSearchParams(window.location.search).get('view') === 'search') setView('search')
+    const params = new URLSearchParams(window.location.search)
+    if (params.get('view') === 'search') setView('search')
+    const initialQuery = params.get('q')?.trim()
+    const initialSource = params.get('source')?.trim()
+    if (initialQuery) setQuery(initialQuery.slice(0, 120))
+    if (initialSource) setSource(initialSource)
 
     api.listZimFiles().then((response) => {
       const ordered = [...response.data.files].sort((a, b) => {
@@ -182,15 +179,25 @@ export default function LibrarySearch({ kiwixService }: { kiwixService: ServiceS
   }, [query, source, kiwixBase, view, libraries])
 
   function openArticle(result: KiwixSuggestion) {
-    if (result.path) window.location.href = articleUrl(kiwixBase, result.source, result.path)
+    if (result.path) {
+      window.location.href = libraryReaderUrl({
+        source: result.source,
+        path: result.path,
+        title: result.value,
+        sourceTitle: result.sourceTitle,
+      })
+    }
   }
 
   function openFullText(term = query, selectedSource = source) {
     if (!term.trim()) return
-    const url = new URL('/search', kiwixBase)
-    url.searchParams.set('pattern', term.trim())
-    if (selectedSource !== 'all') url.searchParams.set('content', selectedSource)
-    window.location.href = url.href
+    const selectedFile = libraries.find((file) => sourceName(file.name) === selectedSource)
+    window.location.href = libraryReaderUrl({
+      source: selectedSource,
+      sourceTitle: selectedFile ? displayTitle(selectedFile) : 'All installed article libraries',
+      mode: 'search',
+      query: term.trim(),
+    })
   }
 
   function startSearch(term: string, selectedSource: string) {
@@ -467,8 +474,17 @@ export default function LibrarySearch({ kiwixService }: { kiwixService: ServiceS
                   const reader = readerDetails(file)
                   const sourceId = sourceName(file.name)
                   const browseHref = reader.entryPath
-                    ? articleUrl(kiwixBase, sourceId, reader.entryPath)
-                    : `${kiwixBase}/content/${encodeURIComponent(sourceId)}/`
+                    ? libraryReaderUrl({
+                        source: sourceId,
+                        path: reader.entryPath,
+                        title: displayTitle(file),
+                        sourceTitle: displayTitle(file),
+                      })
+                    : libraryReaderUrl({
+                        source: sourceId,
+                        title: displayTitle(file),
+                        sourceTitle: displayTitle(file),
+                      })
                   return (
                     <article
                       key={file.name}
@@ -574,10 +590,10 @@ export default function LibrarySearch({ kiwixService }: { kiwixService: ServiceS
                         <div className="mt-auto flex gap-2 pt-5">
                           <a
                             href={browseHref}
-                            title={`Opens in Kiwix using the ${reader.presentation.toLowerCase()}`}
+                            title={`Opens the ${reader.presentation.toLowerCase()} inside NOMAD's offline reader`}
                             className="inline-flex items-center gap-1.5 rounded-lg bg-desert-green px-3 py-2 text-sm font-semibold text-white"
                           >
-                            Browse contents <IconExternalLink size={14} />
+                            Browse contents <IconBook2 size={14} />
                           </a>
                           <button
                             type="button"
