@@ -441,6 +441,14 @@ report a generated duplicate anchor and unnamed vendor controls; these render-ti
 dependent findings are recorded as a third-party limitation outside emergency
 workflows.
 
+Final reconciliation on 2026-11-25 confirmed the running admin container healthy
+on image digest `sha256:fae463708851895a6f3af4fb3cdeb4bba85bc5a460297ad6e8902a1a03af1220`.
+The consolidated 31-result mobile/UI/PDF audit passed, as did the connected
+model-free readiness baseline (10/10, including the Kiwix reader, Kolibri guest
+page, West Jordan-to-Marysvale route, and WHO splint page 191). This baseline does
+not claim physical disconnection. Public branch `emergency-family-profile` was
+verified at commit `85a3b4270add369bb1e482e6b572429f28aa527c`.
+
 ## 10. Tests still required
 
 1. Reboot Windows and verify launcher Start, Open, status, and Stop Everything.
