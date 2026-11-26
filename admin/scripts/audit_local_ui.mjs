@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict'
-import { spawn } from 'node:child_process'
+import { spawn, spawnSync } from 'node:child_process'
 import { existsSync, mkdtempSync, rmSync } from 'node:fs'
 import { createServer } from 'node:net'
 import { tmpdir } from 'node:os'
@@ -391,7 +391,17 @@ try {
   )
 } finally {
   if (socket?.readyState === WebSocket.OPEN) socket.close()
-  edge.kill()
+  if (process.platform === 'win32' && edge.pid) {
+    // Edge delegates profile files to child processes. End only the isolated
+    // audit process tree so interrupted runs do not leave locked ~200 MB temp
+    // profiles behind; never target a user's normal Edge processes.
+    spawnSync('taskkill.exe', ['/PID', String(edge.pid), '/T', '/F'], {
+      stdio: 'ignore',
+      windowsHide: true,
+    })
+  } else {
+    edge.kill()
+  }
   await Promise.race([new Promise((resolve) => edge.once('exit', resolve)), pause(1500)])
   try {
     rmSync(profile, { recursive: true, force: true, maxRetries: 10, retryDelay: 250 })
