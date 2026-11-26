@@ -81,8 +81,9 @@ try {
   socket.addEventListener('message', (event) => {
     const message = JSON.parse(event.data)
     if (!message.id || !pending.has(message.id)) return
-    const { resolve, reject } = pending.get(message.id)
+    const { resolve, reject, timeout } = pending.get(message.id)
     pending.delete(message.id)
+    clearTimeout(timeout)
     if (message.error) reject(new Error(message.error.message))
     else resolve(message.result)
   })
@@ -90,7 +91,11 @@ try {
   const send = (method, params = {}) =>
     new Promise((resolve, reject) => {
       const id = ++nextId
-      pending.set(id, { resolve, reject })
+      const timeout = setTimeout(() => {
+        pending.delete(id)
+        reject(new Error(`Edge DevTools command timed out: ${method}`))
+      }, 20_000)
+      pending.set(id, { resolve, reject, timeout })
       socket.send(JSON.stringify({ id, method, params }))
     })
 
@@ -123,7 +128,18 @@ try {
       deviceScaleFactor: 1,
       mobile: true,
     })
-    await send('Page.navigate', { url: `${baseUrl}${path}` })
+    await send('Page.stopLoading')
+    try {
+      await send('Page.navigate', { url: `${baseUrl}${path}` })
+    } catch (error) {
+      // Edge can commit a navigation but omit the Page.navigate response when
+      // leaving a page with active requests. Continue to the independent URL,
+      // text, viewport, and accessibility assertions below; they will fail if
+      // the destination did not actually render.
+      if (!error.message.includes('Page.navigate')) {
+        throw new Error(`${path}: ${error.message}`, { cause: error })
+      }
+    }
     await pause(waitMilliseconds)
     let result
     for (let attempt = 0; attempt < 20; attempt += 1) {

@@ -62,10 +62,11 @@ Services, Chat, drug interaction comparison, model/content search, and update
 settings; it also fixed long documentation tables forcing a 423-pixel minimum
 viewport. First-party surfaces now pass these checks.
 
-The bundled Scalar API Reference still renders one duplicate generated anchor ID
-and one unnamed toggle. The runner reports these separately as dependency-owned
-findings rather than hiding them or claiming NOMAD fixed third-party markup. The API
-reference remains optional maintenance UI and is not on an emergency workflow.
+The bundled Scalar API Reference can still render a duplicate generated anchor and
+unnamed vendor controls (its display toggle and optional Ask Agent inputs vary with
+render timing). The runner reports these separately as dependency-owned findings
+rather than hiding them or claiming NOMAD fixed third-party markup. The API reference
+remains optional maintenance UI and is not on an emergency workflow.
 
 ## Safety decisions retained
 

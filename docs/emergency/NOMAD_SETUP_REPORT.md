@@ -436,9 +436,10 @@ The audit was subsequently strengthened to reject duplicate element IDs and visi
 controls without accessible names. It found and fixed first-party defects in the
 backup file picker, app and content searches, Chat controls, drug comparison, update
 email, model search, and documentation navigation. Long documentation tables were
-also constrained to the 390-pixel viewport. Scalar's bundled API Reference still
-reports one generated duplicate anchor and one unnamed vendor toggle; this is
-recorded as a third-party limitation outside emergency workflows.
+also constrained to the 390-pixel viewport. Scalar's bundled API Reference can still
+report a generated duplicate anchor and unnamed vendor controls; these render-timing
+dependent findings are recorded as a third-party limitation outside emergency
+workflows.
 
 ## 10. Tests still required
 
