@@ -1478,7 +1478,11 @@ export class OllamaService {
   private sortModels(models: NomadOllamaModel[], sort?: 'pulls' | 'name'): NomadOllamaModel[] {
     if (sort === 'pulls') {
       models.sort((a, b) => {
-        const parsePulls = (pulls: string) => {
+        const parsePulls = (value: unknown) => {
+          if (typeof value !== 'string') return 0
+          const pulls = value.trim().toUpperCase()
+          const numeric = Number.parseFloat(pulls)
+          if (!Number.isFinite(numeric)) return 0
           const multiplier = pulls.endsWith('K')
             ? 1_000
             : pulls.endsWith('M')
@@ -1486,18 +1490,22 @@ export class OllamaService {
               : pulls.endsWith('B')
                 ? 1_000_000_000
                 : 1
-          return parseFloat(pulls) * multiplier
+          return numeric * multiplier
         }
         return parsePulls(b.estimated_pulls) - parsePulls(a.estimated_pulls)
       })
     } else if (sort === 'name') {
-      models.sort((a, b) => a.name.localeCompare(b.name))
+      models.sort((a, b) => String(a.name || '').localeCompare(String(b.name || '')))
     }
 
     models.forEach((model) => {
       if (model.tags && Array.isArray(model.tags)) {
         model.tags.sort((a, b) => {
-          const parseSize = (size: string) => {
+          const parseSize = (value: unknown) => {
+            if (typeof value !== 'string') return Number.POSITIVE_INFINITY
+            const size = value.trim().toUpperCase()
+            const numeric = Number.parseFloat(size)
+            if (!Number.isFinite(numeric)) return Number.POSITIVE_INFINITY
             const multiplier = size.endsWith('KB')
               ? 1 / 1_000
               : size.endsWith('MB')
@@ -1507,7 +1515,7 @@ export class OllamaService {
                   : size.endsWith('TB')
                     ? 1_000
                     : 0
-            return parseFloat(size) * multiplier
+            return numeric * multiplier
           }
           return parseSize(a.size) - parseSize(b.size)
         })

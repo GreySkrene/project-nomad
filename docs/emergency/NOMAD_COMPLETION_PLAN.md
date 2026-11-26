@@ -597,5 +597,8 @@ and UI-only rollbacks are also retained).
   comparison, update/model/content search, and documentation navigation. Record the
   remaining Scalar API Reference findings as dependency-owned rather than silently
   passing them.
+- [x] Make optional model-catalog sorting tolerate missing upstream pull-count and
+  tag-size metadata. The production endpoint returned 15 sorted models after the
+  fix with AI still paused, and the prior null `endsWith` exception disappeared.
 - [ ] Complete the existing physical-disconnection/reboot gate; it remains more
   important than adding another major feature.

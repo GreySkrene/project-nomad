@@ -94,3 +94,29 @@ test('non-streaming native and compat responses carry done_reason', async () => 
   })
   assert.equal((await compat._chatCompat(request)).done_reason, 'stop')
 })
+
+test('model catalog sorting tolerates missing pull and size metadata', () => {
+  const service = new OllamaService() as any
+  const models = [
+    {
+      name: 'metadata-missing',
+      estimated_pulls: null,
+      tags: [{ name: 'latest', size: null }],
+    },
+    {
+      name: 'complete',
+      estimated_pulls: '2K',
+      tags: [
+        { name: 'small', size: '500 MB' },
+        { name: 'large', size: '2 GB' },
+      ],
+    },
+  ]
+
+  assert.doesNotThrow(() => service.sortModels(models, 'pulls'))
+  assert.equal(models[0].name, 'complete')
+  assert.deepEqual(
+    models[0].tags.map((tag: { name: string }) => tag.name),
+    ['small', 'large']
+  )
+})

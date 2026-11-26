@@ -447,7 +447,14 @@ The consolidated 31-result mobile/UI/PDF audit passed, as did the connected
 model-free readiness baseline (10/10, including the Kiwix reader, Kolibri guest
 page, West Jordan-to-Marysvale route, and WHO splint page 191). This baseline does
 not claim physical disconnection. Public branch `emergency-family-profile` was
-verified at commit `85a3b4270add369bb1e482e6b572429f28aa527c`.
+verified after the final UI-audit commits were pushed.
+
+The final runtime-log review also exposed a nullable-metadata bug in the optional
+model catalog: cached pull counts or tag sizes could be `null`, causing sorting to
+call `endsWith` on a non-string. Sorting now treats missing/invalid metrics as
+unknown. The production build passed, `/api/ollama/models?sort=pulls&limit=15`
+returned 15 models, and post-deploy logs no longer contain the exception. This did
+not start or connect to LM Studio; AI remains intentionally paused.
 
 ## 10. Tests still required
 
