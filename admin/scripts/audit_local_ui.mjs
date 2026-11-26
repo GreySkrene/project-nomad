@@ -8,6 +8,7 @@ import { PDFParse } from 'pdf-parse'
 
 const baseUrl = (process.argv[2] || 'http://localhost:8080').replace(/\/$/, '')
 const routeFilter = process.argv[3] || ''
+const auditStartedAt = Date.now()
 const edgeCandidates = [
   'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe',
   'C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe',
@@ -214,12 +215,14 @@ try {
         `${path} did not render expected text: ${text}. Rendered: ${result.bodyText.slice(0, 800)}`
       )
     }
-    return {
+    const report = {
       path: result.path,
       innerWidth: result.innerWidth,
       scrollWidth: result.scrollWidth,
       accessibleControls: true,
     }
+    console.error(`audited ${report.path} (${report.scrollWidth}px)`)
+    return report
   }
 
   const reports = []
@@ -374,7 +377,14 @@ try {
   )
   console.log(
     JSON.stringify(
-      { ok: true, viewport: '390x844', reports, vendorAccessibilityIssues },
+      {
+        ok: true,
+        viewport: '390x844',
+        auditedResults: reports.length,
+        durationMs: Date.now() - auditStartedAt,
+        reports,
+        vendorAccessibilityIssues,
+      },
       null,
       2
     )
