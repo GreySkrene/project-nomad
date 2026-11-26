@@ -15,12 +15,12 @@ Think of it as having Wikipedia, Khan Academy, an AI assistant, and offline maps
 ### Browse Offline Knowledge
 Access millions of Wikipedia articles, medical references, how-to guides, and ebooks — all stored locally on your server. No internet required.
 
-*Launch the Information Library from the home screen or the [Supply Depot](/supply-depot).*
+*Launch the Information Library from the home screen or [Apps & Services](/supply-depot).*
 
 ### Learn Something New
 Khan Academy courses covering math, science, economics, and more. Complete with videos and exercises, all available offline.
 
-*Launch the Education Platform from the home screen or the [Supply Depot](/supply-depot).*
+*Launch the Education Platform from the home screen or [Apps & Services](/supply-depot).*
 
 ### Chat with AI
 Ask questions, get explanations, brainstorm ideas, or get help with writing. Your local AI assistant works completely offline — and you can upload documents to the Knowledge Base for document-aware responses.
@@ -60,7 +60,7 @@ Or explore the **[Getting Started Guide](/docs/getting-started)** for a walkthro
 |--------------|---------|
 | Chat with the AI | [AI Chat →](/chat) |
 | Upload documents for AI | [Knowledge Base →](/knowledge-base) |
-| Install more apps | [Supply Depot →](/supply-depot) |
+| Install more apps | [Apps & Services →](/supply-depot) |
 | Add Wikipedia/reference content | [Content Explorer →](/settings/zim/remote-explorer) |
 | Manage installed content | [Content Manager →](/settings/zim) |
 | Download map regions | [Maps Manager →](/settings/maps) |

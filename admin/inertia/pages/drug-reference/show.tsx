@@ -112,9 +112,7 @@ export default function DrugReferenceShow({ label, situations = [] }: PageProps)
         )}
 
         {/* 2. Indications & Usage */}
-        {label.indications && (
-          <LabelSection title="Indications & Usage" body={label.indications} />
-        )}
+        {label.indications && <LabelSection title="Indications & Usage" body={label.indications} />}
 
         {/* Reverse link — curated situations this label treats. The other half of
             the symbiotic surface: each chip jumps back to Drug Reference with the
@@ -124,7 +122,7 @@ export default function DrugReferenceShow({ label, situations = [] }: PageProps)
             <div className="mb-2 flex items-center gap-2">
               <IconFirstAidKit size={18} className="flex-shrink-0 text-desert-olive-dark" />
               <h2 className="text-sm font-bold uppercase tracking-wide text-desert-green-darker">
-                Commonly used for
+                FDA label mentions
               </h2>
             </div>
             <div className="flex flex-wrap gap-2">
@@ -142,14 +140,10 @@ export default function DrugReferenceShow({ label, situations = [] }: PageProps)
         )}
 
         {/* 3. Dosage & Administration */}
-        {label.dosage && (
-          <LabelSection title="Dosage & Administration" body={label.dosage} />
-        )}
+        {label.dosage && <LabelSection title="Dosage & Administration" body={label.dosage} />}
 
         {/* 4. Warnings */}
-        {label.warnings && (
-          <LabelSection title="Warnings" body={label.warnings} />
-        )}
+        {label.warnings && <LabelSection title="Warnings" body={label.warnings} />}
 
         {/* 5. Drug Interactions — single-drug label text, not a pairwise checker */}
         {label.drug_interactions && (
@@ -166,14 +160,10 @@ export default function DrugReferenceShow({ label, situations = [] }: PageProps)
         )}
 
         {/* 7. When Using (OTC) */}
-        {label.when_using && (
-          <LabelSection title="When Using" body={label.when_using} />
-        )}
+        {label.when_using && <LabelSection title="When Using" body={label.when_using} />}
 
         {/* 8. Stop Use (OTC) */}
-        {label.stop_use && (
-          <LabelSection title="Stop Use" body={label.stop_use} />
-        )}
+        {label.stop_use && <LabelSection title="Stop Use" body={label.stop_use} />}
 
         {/* ── Footer citation ───────────────────────────────────────────────── */}
         <footer className="mt-8 pt-4 border-t border-border-subtle text-xs text-text-secondary space-y-1">
@@ -183,12 +173,10 @@ export default function DrugReferenceShow({ label, situations = [] }: PageProps)
             endorsed by the FDA.
           </p>
           <p>
-            Do not rely on this data to make decisions regarding medical care. While every effort
-            is made to ensure accuracy, you should assume all results are unvalidated.
+            Do not rely on this data to make decisions regarding medical care. While every effort is
+            made to ensure accuracy, you should assume all results are unvalidated.
           </p>
-          {label.set_id && (
-            <p className="font-mono opacity-60">set_id: {label.set_id}</p>
-          )}
+          {label.set_id && <p className="font-mono opacity-60">set_id: {label.set_id}</p>}
           <p className="opacity-60">Last refreshed: {label.ingested_at.slice(0, 10)}</p>
         </footer>
       </div>
@@ -211,9 +199,7 @@ function LabelSection({
     <section className="mb-6">
       <h2 className="text-base font-bold mb-2 border-b border-border-subtle pb-1">{title}</h2>
       <LabelBlocks text={body} />
-      {footnote && (
-        <p className="mt-2 text-xs text-text-secondary italic">{footnote}</p>
-      )}
+      {footnote && <p className="mt-2 text-xs text-text-secondary italic">{footnote}</p>}
     </section>
   )
 }

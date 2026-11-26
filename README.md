@@ -176,11 +176,14 @@ NOMAD is a management UI ("Command Center") and API that orchestrates a collecti
 - **AI Chat with Knowledge Base** — local AI chat powered by [Ollama](https://ollama.com/) or you can use OpenAI API compatible software such as LM Studio or llama.cpp, with document upload and semantic search (RAG via [Qdrant](https://qdrant.tech/))
 - **Information Library** — offline Wikipedia, medical references, ebooks, and more via [Kiwix](https://kiwix.org/)
 - **Education Platform** — Khan Academy courses with progress tracking via [Kolibri](https://learningequality.org/kolibri/)
+- **Household Readiness** — browser-local food, water, medication, expiration, outage-food, and portable-power planning with JSON backup; no AI or internet required
+- **System Readiness** — one-page checks for local libraries, saved documents, maps, routing, FDA label data, education, downloads, and optional AI state
+- **Offline Backup** — export and selectively restore browser-local household, saved-reference, map-view, and route-plan data without a cloud service
 - **Offline Maps** — downloadable regional maps via [ProtoMaps](https://protomaps.com) for pan/zoom viewing; this fork can optionally add private Utah/Idaho coordinate-and-pin routing, but not address search or live closures
 - **Data Tools** — encryption, encoding, and analysis via [CyberChef](https://gchq.github.io/CyberChef/)
 - **Notes** — local note-taking via [FlatNotes](https://github.com/dullage/flatnotes)
 - **System Benchmark** — hardware scoring with a [community leaderboard](https://benchmark.projectnomad.us)
-- **Supply Depot** — a one-click app catalog (PDF tools, file browser, e-book library, password manager, and more) plus the ability to run your own custom Docker containers
+- **Apps & Services** — a one-click app catalog (PDF tools, file browser, e-book library, password manager, and more) plus the ability to run your own custom Docker containers
 - **Automatic Updates** — opt-in, hands-off updates for the core software, installed apps, and offline content, on a schedule you control
 - **Easy Setup Wizard** — guided first-time configuration with curated content collections
 
@@ -194,10 +197,13 @@ NOMAD also includes built-in tools like a Wikipedia content selector, ZIM librar
 | AI Assistant | Ollama + Qdrant | Built-in chat with document upload and semantic search |
 | Education Platform | Kolibri | Khan Academy courses, progress tracking, multi-user support |
 | Offline Maps | ProtoMaps + optional Valhalla | Downloadable maps for offline pan/zoom and saved pins; this fork's verified Utah/Idaho graph adds coordinate-and-pin routes, but not address search or live conditions |
+| Household Readiness | Built-in, browser-local | Transparent supply coverage, rotation reminders, outage food timer, and editable portable-power budget |
+| System Readiness | Built-in | Partial-failure-safe local capability report with truthful offline limitations |
+| Offline Backup | Built-in, browser-local | Allowlisted JSON export and selective restore for emergency workflow state; explicitly not a full disk backup or encrypted archive |
 | Data Tools | CyberChef | Encryption, encoding, hashing, and data analysis |
 | Notes | FlatNotes | Local note-taking with markdown support |
 | System Benchmark | Built-in | Hardware scoring, Builder Tags, and community leaderboard |
-| Supply Depot | Built-in | One-click app catalog + bring-your-own custom Docker containers |
+| Apps & Services | Built-in | One-click app catalog + bring-your-own custom Docker containers |
 
 ## Device Requirements
 While many similar offline survival computers are designed to be run on bare-minimum, lightweight hardware, Project NOMAD is quite the opposite. To install and run the

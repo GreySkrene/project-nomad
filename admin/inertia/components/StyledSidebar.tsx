@@ -105,6 +105,7 @@ const StyledSidebar: React.FC<StyledSidebarProps> = ({ title, items }) => {
     <>
       <button
         type="button"
+        aria-label={`Open ${title} navigation`}
         className="absolute left-4 top-4 z-50 xl:hidden"
         onClick={() => setSidebarOpen(true)}
       >

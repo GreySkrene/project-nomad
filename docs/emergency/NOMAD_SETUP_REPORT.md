@@ -401,6 +401,45 @@ cleanup gate.
 
 Kolibri's supported device setting `allow_guest_access` is enabled. NOMAD's Education Platform tile opens `/en/learn/` directly, bypassing Kolibri's optional sign-in landing page for normal use. The existing Kolibri administrator account was deliberately preserved for future content and facility administration.
 
+### Household continuity and complete UI audit deployment
+
+On 2026-11-25 the admin-only image was advanced to
+`project-nomad-local:household-readiness-20261125`. The pre-change Compose file is
+retained at `/opt/project-nomad/compose.yml.pre-household-readiness-20261125`; no
+downloaded content, map, database, Kiwix, Kolibri, routing, Qdrant, or LM Studio
+service was recreated. The deployed additions are:
+
+- a model-free System Readiness report covering the core UI, 18 Kiwix archives,
+  158 saved-document records, two detailed map archives, Utah/Idaho routing,
+  the local FDA dataset, Kolibri, downloads, and intentionally optional AI;
+- browser-local household supply coverage, medication-reserve and rotation
+  visibility, outage food timer, editable 640 Wh portable-power budget,
+  deterministic ration arithmetic, and prioritized gaps;
+- an allowlisted, bounded, selective Offline Backup for browser-local household,
+  reference, map-view, and route-plan state, with explicit unencrypted and
+  not-a-full-disk-backup warnings; and
+- a concise printable/PDF emergency summary.
+
+The production Linux build and TypeScript compilation passed. The focused pure
+suite passed 22/22. A dependency-free Edge DevTools audit emulated an actual
+390×844 viewport and measured zero horizontal overflow across the emergency core,
+all Settings pages, content managers, Apps & Services, Easy Setup, drug/situation
+references, Chat, documentation, and API Reference. A populated isolated profile
+verified household persistence, 1,000 kcal/day ration arithmetic, power loads,
+prioritized actions, and backup inventory. The generated emergency-summary PDF was
+parsed back with `pdf-parse`; after scoping a pre-existing route-print CSS rule, the
+76 KiB artifact contained both its heading and saved inventory. Live readiness was
+8 ready, 0 attention, and 1 intentionally optional. Physical-disconnection/reboot
+acceptance remains outstanding.
+
+The audit was subsequently strengthened to reject duplicate element IDs and visible
+controls without accessible names. It found and fixed first-party defects in the
+backup file picker, app and content searches, Chat controls, drug comparison, update
+email, model search, and documentation navigation. Long documentation tables were
+also constrained to the 390-pixel viewport. Scalar's bundled API Reference still
+reports one generated duplicate anchor and one unnamed vendor toggle; this is
+recorded as a third-party limitation outside emergency workflows.
+
 ## 10. Tests still required
 
 1. Reboot Windows and verify launcher Start, Open, status, and Stop Everything.

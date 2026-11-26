@@ -47,7 +47,7 @@ A stable internet connection is required during installation only. After that, N
 
 The installer sets up Docker and the NVIDIA Container Toolkit for you, but it does **not** install the GPU driver itself. You need that on the host beforehand.
 
-On Ubuntu, the easiest way is to check **"Install third-party drivers for graphics and Wi-Fi hardware"** during setup. If you skipped that, or you added the GPU later, install the driver first and then use **Force Reinstall** on the AI Assistant in the [Supply Depot](/supply-depot) to pick it up.
+On Ubuntu, the easiest way is to check **"Install third-party drivers for graphics and Wi-Fi hardware"** during setup. If you skipped that, or you added the GPU later, install the driver first and then use **Force Reinstall** on the AI Assistant in [Apps & Services](/supply-depot) to pick it up.
 
 Without a GPU, the AI Assistant still works. It just runs on the CPU, which is considerably slower.
 
@@ -86,7 +86,7 @@ The Information Library stores compressed versions of websites and references th
 - Classic books from Project Gutenberg
 
 **How to use it:**
-1. Click **Information Library** from the Command Center home screen or the [Supply Depot](/supply-depot)
+1. Click **Information Library** from the Command Center home screen or [Apps & Services](/supply-depot)
 2. Choose a collection (like Wikipedia)
 3. Search or browse just like the regular website
 
@@ -103,7 +103,7 @@ The Education Platform provides complete educational courses that work offline.
 - Works for all ages
 
 **How to use it:**
-1. Click **Education Platform** from the Command Center home screen or the [Supply Depot](/supply-depot)
+1. Click **Education Platform** from the Command Center home screen or [Apps & Services](/supply-depot)
 2. Sign in or create a learner account
 3. Browse courses and start learning
 
@@ -131,9 +131,9 @@ NOMAD includes a built-in AI chat interface powered by Ollama. It runs entirely 
 
 **Tip:** Be specific in your questions. Instead of "tell me about plants," try "what vegetables grow well in shade?"
 
-**Note:** The AI Assistant must be installed first. Enable it during Easy Setup or install it from the [Supply Depot](/supply-depot).
+**Note:** The AI Assistant must be installed first. Enable it during Easy Setup or install it from [Apps & Services](/supply-depot).
 
-**GPU Acceleration:** If your server has an NVIDIA GPU, NOMAD's installer sets up GPU support for you (it installs the [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html) and configures Docker automatically). You only need the NVIDIA driver present on the host, which on Ubuntu you get by enabling "Install third-party drivers" during setup. With a GPU, AI responses are dramatically faster (10-20x improvement). If you add a GPU later, go to the [Supply Depot](/supply-depot) and **Force Reinstall** the AI Assistant to enable it.
+**GPU Acceleration:** If your server has an NVIDIA GPU, NOMAD's installer sets up GPU support for you (it installs the [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html) and configures Docker automatically). You only need the NVIDIA driver present on the host, which on Ubuntu you get by enabling "Install third-party drivers" during setup. With a GPU, AI responses are dramatically faster (10-20x improvement). If you add a GPU later, go to [Apps & Services](/supply-depot) and **Force Reinstall** the AI Assistant to enable it.
 
 ---
 
@@ -190,7 +190,7 @@ View maps without internet. Download the regions you need before going offline.
 
 As your needs change, you can add more content anytime:
 
-- **More apps:** Settings → Supply Depot
+- **More apps:** Settings → Apps & Services
 - **More references:** Settings → Content Explorer or Content Manager
 - **More map regions:** Settings → Maps Manager
 - **More educational content:** Through Kolibri's built-in content browser

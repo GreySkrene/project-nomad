@@ -7,6 +7,7 @@ interface SwitchProps {
   description?: string
   disabled?: boolean
   id?: string
+  ariaLabel?: string
   /** Renders a third, visually distinct "mixed" state (e.g. a collection
    * toggle whose member files aren't uniformly active/inactive) instead of
    * the normal on/off look. Clicking a mixed switch always resolves to the
@@ -22,6 +23,7 @@ export default function Switch({
   description,
   disabled = false,
   id,
+  ariaLabel,
   indeterminate = false,
 }: SwitchProps) {
   const switchId = id || `switch-${label?.replace(/\s+/g, '-').toLowerCase()}`
@@ -46,6 +48,7 @@ export default function Switch({
           id={switchId}
           type="button"
           role="switch"
+          aria-label={ariaLabel}
           aria-checked={indeterminate ? 'mixed' : !!checked}
           disabled={disabled}
           onClick={() => !disabled && onChange(indeterminate ? true : !checked)}

@@ -81,7 +81,7 @@ export default function ConditionsShow({ condition, drugs, remedies, drugRowCoun
         ) : (
           <>
             <div className="flex items-baseline justify-between mb-2">
-              <h2 className="text-base font-semibold">Over-the-counter options</h2>
+              <h2 className="text-base font-semibold">Over-the-counter FDA label matches</h2>
               <span className="text-xs text-gray-500">
                 {drugs.length} result{drugs.length !== 1 ? 's' : ''}
               </span>
@@ -121,8 +121,8 @@ export default function ConditionsShow({ condition, drugs, remedies, drugRowCoun
 
             {/* Plain-text credit — no link-out; the reference is fully bundled. */}
             <p className="mt-3 text-xs text-desert-stone">
-              Sources: NCCIH &ldquo;Herbs at a Glance&rdquo; (NIH) and US-government health
-              guidance (CDC, MedlinePlus/NLM, FDA). Public domain (US government works).
+              Sources: NCCIH &ldquo;Herbs at a Glance&rdquo; (NIH) and US-government health guidance
+              (CDC, MedlinePlus/NLM, FDA). Public domain (US government works).
             </p>
           </div>
         )}

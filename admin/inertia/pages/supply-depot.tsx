@@ -170,7 +170,7 @@ export default function SupplyDepotPage(props: { system: { services: ServiceSlim
       .then((res) => {
         if (res) setPreflight(res)
       })
-      .catch(() => { }) // non-fatal; proceed without warnings
+      .catch(() => {}) // non-fatal; proceed without warnings
       .finally(() => setPreflightLoading(false))
   }, [modal])
 
@@ -284,7 +284,8 @@ export default function SupplyDepotPage(props: { system: { services: ServiceSlim
     try {
       setCheckingUpdates(true)
       const response = await api.checkServiceUpdates()
-      if (!response?.success) throw new Error(response?.message || 'Failed to dispatch update check')
+      if (!response?.success)
+        throw new Error(response?.message || 'Failed to dispatch update check')
     } catch (error: any) {
       showError(`Failed to check for updates: ${error?.message || 'Unknown error'}`)
       setCheckingUpdates(false)
@@ -358,7 +359,7 @@ export default function SupplyDepotPage(props: { system: { services: ServiceSlim
 
   return (
     <AppLayout>
-      <Head title="Supply Depot" />
+      <Head title="Apps & Services" />
 
       {loading && !modal && <LoadingSpinner fullscreen text="Working..." />}
 
@@ -397,11 +398,11 @@ export default function SupplyDepotPage(props: { system: { services: ServiceSlim
               <IconBox className="text-white opacity-90 flex-shrink-0" size={28} />
               <div>
                 <h1 className="text-2xl font-bold text-white uppercase tracking-wide leading-tight">
-                  Supply Depot
+                  Apps & Services
                 </h1>
                 <p className="text-sm text-white/70 mt-1 max-w-xl">
-                  Browse and install curated apps, or add your own custom apps by providing a Docker
-                  image.
+                  Install and manage optional local apps and services. Household emergency supplies
+                  are tracked separately in Household Readiness.
                 </p>
               </div>
             </div>
@@ -421,6 +422,7 @@ export default function SupplyDepotPage(props: { system: { services: ServiceSlim
                 <input
                   type="text"
                   placeholder="Search apps..."
+                  aria-label="Search apps and services"
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   className="w-full pl-9 pr-4 py-2 rounded-md bg-surface-secondary border border-desert-stone-lighter text-text-primary text-sm focus:outline-none focus:ring-1 focus:ring-desert-green placeholder:text-text-muted/50"
@@ -450,10 +452,11 @@ export default function SupplyDepotPage(props: { system: { services: ServiceSlim
                 <button
                   key={cat.id}
                   onClick={() => setActiveCategory(cat.id)}
-                  className={`px-3 py-1 rounded-full text-xs font-medium transition-colors cursor-pointer border ${activeCategory === cat.id
-                    ? 'bg-desert-green text-white border-desert-green'
-                    : 'bg-surface-secondary text-text-muted border-desert-stone-lighter hover:text-text-primary hover:border-desert-stone-light'
-                    }`}
+                  className={`px-3 py-1 rounded-full text-xs font-medium transition-colors cursor-pointer border ${
+                    activeCategory === cat.id
+                      ? 'bg-desert-green text-white border-desert-green'
+                      : 'bg-surface-secondary text-text-muted border-desert-stone-lighter hover:text-text-primary hover:border-desert-stone-light'
+                  }`}
                 >
                   {cat.label}
                 </button>
@@ -502,8 +505,17 @@ export default function SupplyDepotPage(props: { system: { services: ServiceSlim
                       }
                       autoUpdateMasterEnabled={appAutoUpdateMasterEnabled}
                       onToggleAutoUpdate={(enabled) => handleToggleAutoUpdate(service, enabled)}
-                      migrationInstructionsHref={(service.service_name.startsWith(SERVICE_NAMES.KOLIBRI) && educationGen2Installed) ? getSupplyDepotDocLink(SERVICE_NAMES.KOLIBRI) || undefined : undefined}
-                      migrationInstructionsText={(service.service_name === SERVICE_NAMES.KOLIBRI) ? 'How to migrate content to Gen 2' : "How to migrate content from Gen 1"}
+                      migrationInstructionsHref={
+                        service.service_name.startsWith(SERVICE_NAMES.KOLIBRI) &&
+                        educationGen2Installed
+                          ? getSupplyDepotDocLink(SERVICE_NAMES.KOLIBRI) || undefined
+                          : undefined
+                      }
+                      migrationInstructionsText={
+                        service.service_name === SERVICE_NAMES.KOLIBRI
+                          ? 'How to migrate content to Gen 2'
+                          : 'How to migrate content from Gen 1'
+                      }
                     />
                   ))}
                 </div>
@@ -562,10 +574,15 @@ export default function SupplyDepotPage(props: { system: { services: ServiceSlim
         >
           <div className="space-y-3 text-sm text-text-muted">
             <p>
-              This will download and start <strong className="text-text-primary">{modal.service.friendly_name}</strong>
+              This will download and start{' '}
+              <strong className="text-text-primary">{modal.service.friendly_name}</strong>
               {modal.service.ui_location && (
-                <> on port <strong className="text-text-primary">{modal.service.ui_location}</strong></>
-              )}.
+                <>
+                  {' '}
+                  on port <strong className="text-text-primary">{modal.service.ui_location}</strong>
+                </>
+              )}
+              .
             </p>
             {modal.service.powered_by && (
               <p className="text-xs">Powered by {modal.service.powered_by}</p>
@@ -640,7 +657,9 @@ export default function SupplyDepotPage(props: { system: { services: ServiceSlim
           confirmVariant="action"
           confirmLoading={loading}
         >
-          <p className="text-sm text-text-muted">The container will be stopped. Your data is preserved.</p>
+          <p className="text-sm text-text-muted">
+            The container will be stopped. Your data is preserved.
+          </p>
         </StyledModal>
       )}
 
@@ -659,7 +678,9 @@ export default function SupplyDepotPage(props: { system: { services: ServiceSlim
           confirmVariant="action"
           confirmLoading={loading}
         >
-          <p className="text-sm text-text-muted">The container will be briefly stopped and restarted.</p>
+          <p className="text-sm text-text-muted">
+            The container will be briefly stopped and restarted.
+          </p>
         </StyledModal>
       )}
 
@@ -680,8 +701,13 @@ export default function SupplyDepotPage(props: { system: { services: ServiceSlim
           icon={<IconAlertTriangle className="text-desert-red" size={40} />}
         >
           <div className="space-y-2 text-sm text-text-muted">
-            <p className="font-semibold text-desert-red">This will delete all app data and cannot be undone.</p>
-            <p>The container and its associated volumes will be removed, then a fresh installation will begin.</p>
+            <p className="font-semibold text-desert-red">
+              This will delete all app data and cannot be undone.
+            </p>
+            <p>
+              The container and its associated volumes will be removed, then a fresh installation
+              will begin.
+            </p>
           </div>
         </StyledModal>
       )}
@@ -704,7 +730,9 @@ export default function SupplyDepotPage(props: { system: { services: ServiceSlim
           icon={<IconAlertTriangle className="text-desert-red" size={40} />}
         >
           <div className="space-y-3 text-sm text-text-muted">
-            <p className="font-semibold text-desert-red">This will permanently remove this custom app.</p>
+            <p className="font-semibold text-desert-red">
+              This will permanently remove this custom app.
+            </p>
             <p>The container will be stopped and removed. Host volume data will remain on disk.</p>
             <label className="flex items-center gap-2 cursor-pointer select-none">
               <input
@@ -713,7 +741,9 @@ export default function SupplyDepotPage(props: { system: { services: ServiceSlim
                 onChange={(e) => setRemoveImage(e.target.checked)}
                 className="accent-desert-red h-4 w-4 rounded"
               />
-              <span className="text-text-muted text-xs">Also remove the Docker image to reclaim disk space</span>
+              <span className="text-text-muted text-xs">
+                Also remove the Docker image to reclaim disk space
+              </span>
             </label>
           </div>
         </StyledModal>
@@ -737,8 +767,14 @@ export default function SupplyDepotPage(props: { system: { services: ServiceSlim
           icon={<IconAlertTriangle className="text-desert-red" size={40} />}
         >
           <div className="space-y-3 text-sm text-text-muted">
-            <p className="font-semibold text-desert-red">This will remove the app from this device.</p>
-            <p>The container will be stopped and removed, and the app returns to the catalog below. App data under the storage folder stays on disk, so reinstalling brings it back as it was.</p>
+            <p className="font-semibold text-desert-red">
+              This will remove the app from this device.
+            </p>
+            <p>
+              The container will be stopped and removed, and the app returns to the catalog below.
+              App data under the storage folder stays on disk, so reinstalling brings it back as it
+              was.
+            </p>
             <label className="flex items-center gap-2 cursor-pointer select-none">
               <input
                 type="checkbox"
@@ -746,7 +782,9 @@ export default function SupplyDepotPage(props: { system: { services: ServiceSlim
                 onChange={(e) => setRemoveImage(e.target.checked)}
                 className="accent-desert-red h-4 w-4 rounded"
               />
-              <span className="text-text-muted text-xs">Also remove the Docker image to reclaim disk space</span>
+              <span className="text-text-muted text-xs">
+                Also remove the Docker image to reclaim disk space
+              </span>
             </label>
           </div>
         </StyledModal>
@@ -876,13 +914,16 @@ function AppCard({
 }: AppCardProps) {
   const isRunning = service.status === 'running'
   const isStopped = service.installed && !isRunning
-  const catColor = service.category ? CATEGORY_COLORS[service.category] ?? CATEGORY_COLORS.custom : CATEGORY_COLORS.custom
+  const catColor = service.category
+    ? (CATEGORY_COLORS[service.category] ?? CATEGORY_COLORS.custom)
+    : CATEGORY_COLORS.custom
   const isDropdownOpen = openDropdown === service.service_name
   // Port pill: an ui_location may carry an explicit scheme ("https:8480") — show just the port,
   // with a lock when it's served over HTTPS, rather than the raw "https:8480" string.
   const uiIsPath = !!service.ui_location && service.ui_location.startsWith('/')
   const uiIsHttps = /^https:/.test(service.ui_location || '')
-  const uiPort = service.ui_location && !uiIsPath ? service.ui_location.replace(/^https?:/, '') : null
+  const uiPort =
+    service.ui_location && !uiIsPath ? service.ui_location.replace(/^https?:/, '') : null
   // Per-app documentation link (in-app docs page, anchored to this app's section). Null for apps
   // without a doc section (custom apps, undocumented catalog apps) so the Docs item is hidden.
   const docLink = getSupplyDepotDocLink(service.service_name)
@@ -907,10 +948,11 @@ function AppCard({
 
   return (
     <div
-      className={`relative flex flex-col rounded-xl border p-4 bg-surface-primary shadow-sm transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 ${service.installed
-        ? 'border-desert-stone-light'
-        : 'border-desert-stone-lighter hover:border-desert-stone-light'
-        }`}
+      className={`relative flex flex-col rounded-xl border p-4 bg-surface-primary shadow-sm transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 ${
+        service.installed
+          ? 'border-desert-stone-light'
+          : 'border-desert-stone-lighter hover:border-desert-stone-light'
+      }`}
     >
       {/* Installed accent spine (rounded to follow the card corners — the card no longer clips
           overflow so the Manage dropdown can open above the card without being cut off) */}
@@ -923,7 +965,10 @@ function AppCard({
         <div className="flex items-center gap-3">
           <div className="w-12 h-12 rounded-lg bg-desert-green-lighter border border-desert-green-light flex items-center justify-center flex-shrink-0">
             {service.icon ? (
-              <DynamicIcon icon={service.icon as DynamicIconName} className="h-7 w-7 text-desert-green" />
+              <DynamicIcon
+                icon={service.icon as DynamicIconName}
+                className="h-7 w-7 text-desert-green"
+              />
             ) : (
               <IconBrandDocker className="h-7 w-7 text-text-muted" />
             )}
@@ -1029,7 +1074,7 @@ function AppCard({
             {/* Open button — shown when the app has a default location or a user-set custom URL */}
             {(service.ui_location || service.custom_url) && (
               <a
-                href={getServiceLink(service.ui_location || "", service.custom_url)}
+                href={getServiceLink(service.ui_location || '', service.custom_url)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex-1"
@@ -1042,7 +1087,12 @@ function AppCard({
 
             {/* Manage dropdown */}
             <div className="relative" ref={isDropdownOpen ? dropdownRef : null}>
-              <StyledButton size="sm" variant="outline" onClick={toggleDropdown} icon="IconChevronDown">
+              <StyledButton
+                size="sm"
+                variant="outline"
+                onClick={toggleDropdown}
+                icon="IconChevronDown"
+              >
                 Manage
               </StyledButton>
 
@@ -1061,30 +1111,56 @@ function AppCard({
                     </a>
                   )}
                   {isStopped && (
-                    <DropdownItem icon={<IconPlayerPlay className="h-4 w-4" />} label="Start" onClick={onStart} />
+                    <DropdownItem
+                      icon={<IconPlayerPlay className="h-4 w-4" />}
+                      label="Start"
+                      onClick={onStart}
+                    />
                   )}
                   {isRunning && (
-                    <DropdownItem icon={<IconPlayerStop className="h-4 w-4" />} label="Stop" onClick={onStop} />
+                    <DropdownItem
+                      icon={<IconPlayerStop className="h-4 w-4" />}
+                      label="Stop"
+                      onClick={onStop}
+                    />
                   )}
-                  <DropdownItem icon={<IconRefresh className="h-4 w-4" />} label="Restart" onClick={onRestart} />
-                  <DropdownItem icon={<IconFileText className="h-4 w-4" />} label="Logs" onClick={onLogs} />
-                  <DropdownItem icon={<IconChartBar className="h-4 w-4" />} label="Stats" onClick={onStats} />
-                  <DropdownItem icon={<IconPencil className="h-4 w-4" />} label="Edit" onClick={onEdit} />
-                  <DropdownItem icon={<IconWorld className="h-4 w-4" />} label="Set custom URL" onClick={onSetUrl} />
-                  {
-                    migrationInstructionsHref ? (
-                      <a
-                        href={migrationInstructionsHref}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={(e) => e.stopPropagation()}
-                        className="flex items-center gap-2 w-full px-3 py-2 text-xs transition-colors text-left cursor-pointer text-text-primary hover:bg-surface-secondary"
-                      >
-                        <IconBook className="h-4 w-4" />
-                        {migrationInstructionsText || 'Migration instructions'}
-                      </a>
-                    ) : (null)
-                  }
+                  <DropdownItem
+                    icon={<IconRefresh className="h-4 w-4" />}
+                    label="Restart"
+                    onClick={onRestart}
+                  />
+                  <DropdownItem
+                    icon={<IconFileText className="h-4 w-4" />}
+                    label="Logs"
+                    onClick={onLogs}
+                  />
+                  <DropdownItem
+                    icon={<IconChartBar className="h-4 w-4" />}
+                    label="Stats"
+                    onClick={onStats}
+                  />
+                  <DropdownItem
+                    icon={<IconPencil className="h-4 w-4" />}
+                    label="Edit"
+                    onClick={onEdit}
+                  />
+                  <DropdownItem
+                    icon={<IconWorld className="h-4 w-4" />}
+                    label="Set custom URL"
+                    onClick={onSetUrl}
+                  />
+                  {migrationInstructionsHref ? (
+                    <a
+                      href={migrationInstructionsHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="flex items-center gap-2 w-full px-3 py-2 text-xs transition-colors text-left cursor-pointer text-text-primary hover:bg-surface-secondary"
+                    >
+                      <IconBook className="h-4 w-4" />
+                      {migrationInstructionsText || 'Migration instructions'}
+                    </a>
+                  ) : null}
                   {!service.is_custom && onToggleAutoUpdate ? (
                     autoUpdateMasterEnabled ? (
                       <DropdownItem
@@ -1112,13 +1188,32 @@ function AppCard({
                     />
                   ) : null}
                   {service.is_custom ? (
-                    <DropdownItem icon={<IconCloudDownload className="h-4 w-4" />} label="Update (pull latest)" onClick={onUpdate} />
+                    <DropdownItem
+                      icon={<IconCloudDownload className="h-4 w-4" />}
+                      label="Update (pull latest)"
+                      onClick={onUpdate}
+                    />
                   ) : null}
-                  <DropdownItem icon={<IconRefresh className="h-4 w-4 text-desert-orange" />} label="Force Reinstall" onClick={onReinstall} danger />
+                  <DropdownItem
+                    icon={<IconRefresh className="h-4 w-4 text-desert-orange" />}
+                    label="Force Reinstall"
+                    onClick={onReinstall}
+                    danger
+                  />
                   {service.is_custom ? (
-                    <DropdownItem icon={<IconTrash className="h-4 w-4 text-desert-red" />} label="Delete" onClick={onDelete} danger />
+                    <DropdownItem
+                      icon={<IconTrash className="h-4 w-4 text-desert-red" />}
+                      label="Delete"
+                      onClick={onDelete}
+                      danger
+                    />
                   ) : (
-                    <DropdownItem icon={<IconTrash className="h-4 w-4 text-desert-red" />} label="Uninstall" onClick={onUninstall} danger />
+                    <DropdownItem
+                      icon={<IconTrash className="h-4 w-4 text-desert-red" />}
+                      label="Uninstall"
+                      onClick={onUninstall}
+                      danger
+                    />
                   )}
                 </div>
               )}
@@ -1155,10 +1250,11 @@ function DropdownItem({
         e.stopPropagation()
         onClick()
       }}
-      className={`flex items-center gap-2 w-full px-3 py-2 text-xs transition-colors text-left cursor-pointer ${danger
-        ? 'text-desert-red hover:bg-desert-red/10'
-        : 'text-text-primary hover:bg-surface-secondary'
-        }`}
+      className={`flex items-center gap-2 w-full px-3 py-2 text-xs transition-colors text-left cursor-pointer ${
+        danger
+          ? 'text-desert-red hover:bg-desert-red/10'
+          : 'text-text-primary hover:bg-surface-secondary'
+      }`}
     >
       {icon}
       {label}

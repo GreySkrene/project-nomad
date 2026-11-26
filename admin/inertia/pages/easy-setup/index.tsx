@@ -419,7 +419,9 @@ export default function EasySetupWizard(props: {
       const servicesToInstall = remoteOllamaEnabled
         ? selectedServices.filter((s) => s !== SERVICE_NAMES.OLLAMA)
         : selectedServices
-      const installPromises = servicesToInstall.map((serviceName) => api.installService(serviceName))
+      const installPromises = servicesToInstall.map((serviceName) =>
+        api.installService(serviceName)
+      )
 
       await Promise.all(installPromises)
 
@@ -605,12 +607,10 @@ export default function EasySetupWizard(props: {
     // doesn't quietly wipe their setup.
     if (capability.id === 'ai' && isSelected) {
       const hasAiSelections =
-        selectedAiModels.length > 0 ||
-        ingestPolicy !== 'Manual' ||
-        remoteOllamaEnabled
+        selectedAiModels.length > 0 || ingestPolicy !== 'Manual' || remoteOllamaEnabled
       if (hasAiSelections) {
         const confirmed = window.confirm(
-          "Turning off AI will discard your AI model picks, indexing policy, and remote Ollama configuration. Continue?"
+          'Turning off AI will discard your AI model picks, indexing policy, and remote Ollama configuration. Continue?'
         )
         if (!confirmed) return
       }
@@ -693,7 +693,11 @@ export default function EasySetupWizard(props: {
               <ul
                 className={classNames(
                   'mt-3 space-y-1',
-                  installed ? 'text-text-secondary' : selected ? 'text-white' : 'text-text-secondary'
+                  installed
+                    ? 'text-text-secondary'
+                    : selected
+                      ? 'text-white'
+                      : 'text-text-secondary'
                 )}
               >
                 {capability.features.map((feature, idx) => (
@@ -741,13 +745,14 @@ export default function EasySetupWizard(props: {
 
     // Check if ALL core capabilities are already installed (nothing left to install)
     const allInstalled =
-      existingCoreCapabilities.length > 0 &&
-      existingCoreCapabilities.every(isCapabilityInstalled)
+      existingCoreCapabilities.length > 0 && existingCoreCapabilities.every(isCapabilityInstalled)
 
     return (
       <div className="space-y-8">
         <div className="text-center mb-6">
-          <h2 className="text-3xl font-bold text-text-primary mb-2">What do you want NOMAD to do?</h2>
+          <h2 className="text-3xl font-bold text-text-primary mb-2">
+            What do you want NOMAD to do?
+          </h2>
           <p className="text-text-secondary">
             Select the capabilities you need. You can always add more later.
           </p>
@@ -794,7 +799,9 @@ export default function EasySetupWizard(props: {
                                   }}
                                   className="w-4 h-4 accent-desert-green"
                                 />
-                                <span className="text-sm font-medium text-gray-700">Use remote Ollama instance</span>
+                                <span className="text-sm font-medium text-gray-700">
+                                  Use remote Ollama instance
+                                </span>
                               </label>
                               {remoteOllamaEnabled && (
                                 <div className="mt-3">
@@ -809,7 +816,9 @@ export default function EasySetupWizard(props: {
                                     className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-desert-green"
                                   />
                                   {remoteOllamaUrlError && (
-                                    <p className="mt-1 text-xs text-red-600">{remoteOllamaUrlError}</p>
+                                    <p className="mt-1 text-xs text-red-600">
+                                      {remoteOllamaUrlError}
+                                    </p>
                                   )}
                                 </div>
                               )}
@@ -835,7 +844,7 @@ export default function EasySetupWizard(props: {
                   </h3>
                   <p className="text-sm text-text-secondary">
                     Notes, data tools, and the full catalog of add-on apps are available any time in
-                    Supply Depot.
+                    Apps & Services.
                   </p>
                 </div>
                 <StyledButton
@@ -843,7 +852,7 @@ export default function EasySetupWizard(props: {
                   onClick={() => router.visit('/supply-depot')}
                   className="flex-shrink-0"
                 >
-                  Open Supply Depot
+                  Open Apps & Services
                 </StyledButton>
               </div>
             </div>
@@ -891,7 +900,7 @@ export default function EasySetupWizard(props: {
               className={classNames(
                 'relative',
                 selectedMapCollections.includes(collection.slug) &&
-                'ring-4 ring-desert-green rounded-lg',
+                  'ring-4 ring-desert-green rounded-lg',
                 collection.all_installed && 'opacity-75',
                 !isOnline && 'opacity-50 cursor-not-allowed'
               )}
@@ -991,14 +1000,14 @@ export default function EasySetupWizard(props: {
                   category={activeCategory}
                   selectedTierSlug={
                     activeCategory
-                      ? selectedTiers.get(activeCategory.slug)?.slug || activeCategory.installedTierSlug
+                      ? selectedTiers.get(activeCategory.slug)?.slug ||
+                        activeCategory.installedTierSlug
                       : null
                   }
                   onSelectTier={handleTierSelect}
                 />
               </>
             ) : null}
-
           </>
         )}
 
@@ -1171,9 +1180,13 @@ export default function EasySetupWizard(props: {
             Auto-index new content for {aiAssistantName}?
           </h4>
           <p className="text-sm text-text-muted mb-4">
-            When you add new ZIMs, documents, or curated content, should {aiAssistantName} index them automatically so it can search them while answering your questions?
+            When you add new ZIMs, documents, or curated content, should {aiAssistantName} index
+            them automatically so it can search them while answering your questions?
           </p>
-          <div className="inline-flex rounded-md border border-border-default overflow-hidden" role="group">
+          <div
+            className="inline-flex rounded-md border border-border-default overflow-hidden"
+            role="group"
+          >
             <button
               type="button"
               onClick={() => setIngestPolicy('Always')}
@@ -1220,7 +1233,9 @@ export default function EasySetupWizard(props: {
       <div className="space-y-6">
         <div className="text-center mb-6">
           <h2 className="text-3xl font-bold text-text-primary mb-2">Review Your Selections</h2>
-          <p className="text-text-secondary">Review your choices before starting the setup process.</p>
+          <p className="text-text-secondary">
+            Review your choices before starting the setup process.
+          </p>
         </div>
 
         {!hasSelections ? (
@@ -1241,16 +1256,16 @@ export default function EasySetupWizard(props: {
                   {CORE_CAPABILITIES.filter((cap) =>
                     cap.services.some((s) => selectedServices.includes(s))
                   ).map((capability) => (
-                      <li key={capability.id} className="flex items-center">
-                        <IconCheck size={20} className="text-desert-green mr-2" />
-                        <span className="text-text-primary">
-                          {capability.name}
-                          <span className="text-text-muted text-sm ml-2">
-                            ({capability.technicalName})
-                          </span>
+                    <li key={capability.id} className="flex items-center">
+                      <IconCheck size={20} className="text-desert-green mr-2" />
+                      <span className="text-text-primary">
+                        {capability.name}
+                        <span className="text-text-muted text-sm ml-2">
+                          ({capability.technicalName})
                         </span>
-                      </li>
-                    ))}
+                      </span>
+                    </li>
+                  ))}
                 </ul>
               </div>
             )}
@@ -1374,17 +1389,17 @@ export default function EasySetupWizard(props: {
 
             {isAiInSetup && (
               <div className="bg-surface-primary rounded-lg border-2 border-desert-stone-light p-6">
-                <h3 className="text-xl font-semibold text-text-primary mb-2">
-                  Auto-index Setting
-                </h3>
+                <h3 className="text-xl font-semibold text-text-primary mb-2">Auto-index Setting</h3>
                 <p className="text-text-secondary text-sm">
                   {ingestPolicy === 'Always' ? (
                     <>
-                      New content will be <strong>indexed automatically</strong> as it arrives so {aiAssistantName} can search it.
+                      New content will be <strong>indexed automatically</strong> as it arrives so{' '}
+                      {aiAssistantName} can search it.
                     </>
                   ) : (
                     <>
-                      New content will <strong>wait for you to opt in</strong> from the Knowledge Base panel before {aiAssistantName} indexes it.
+                      New content will <strong>wait for you to opt in</strong> from the Knowledge
+                      Base panel before {aiAssistantName} indexes it.
                     </>
                   )}
                 </p>
@@ -1456,8 +1471,8 @@ export default function EasySetupWizard(props: {
                     return `${count} ${count === 1 ? 'capability' : 'capabilities'}`
                   })()}
                   , {selectedMapCollections.length} map region
-                  {selectedMapCollections.length !== 1 && 's'}, {selectedTiers.size}{' '}
-                  content categor{selectedTiers.size !== 1 ? 'ies' : 'y'},{' '}
+                  {selectedMapCollections.length !== 1 && 's'}, {selectedTiers.size} content categor
+                  {selectedTiers.size !== 1 ? 'ies' : 'y'},{' '}
                   {creatorPacksConfigured && (
                     <>
                       {selectedCreatorPacks.length} creator pack

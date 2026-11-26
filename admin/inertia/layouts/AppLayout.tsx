@@ -55,7 +55,7 @@ export default function AppLayout({
         : IconLoader2
 
   return (
-    <div className="nomad-shell min-h-screen flex flex-col">
+    <div className="nomad-shell flex min-h-screen w-full max-w-full flex-col overflow-x-hidden">
       <header className="nomad-ops-bar">
         <button
           type="button"
@@ -70,7 +70,8 @@ export default function AppLayout({
           </span>
         </button>
         <div className="nomad-ops-actions">
-          <span
+          <Link
+            href="/readiness"
             className={`nomad-offline-badge nomad-offline-badge--${localReadiness}`}
             title={
               localReadiness === 'ready'
@@ -86,7 +87,7 @@ export default function AppLayout({
               className={localReadiness === 'checking' ? 'animate-spin' : undefined}
             />{' '}
             {readinessLabel}
-          </span>
+          </Link>
           <ThemeToggle compact />
           <Link href="/home" className="nomad-home-link" aria-label="Home" title="Home">
             <IconHome size={20} />

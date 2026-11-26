@@ -698,6 +698,7 @@ export default function Chat({
                 />
                 <Switch
                   id="chat-rag-toggle"
+                  ariaLabel="Search the knowledge base before answering"
                   checked={ragEnabled}
                   onChange={(v) => ragEnabledMutation.mutate(v)}
                 />
@@ -712,6 +713,7 @@ export default function Chat({
                   />
                   <Switch
                     id="chat-thinking-toggle"
+                    ariaLabel="Use model thinking mode"
                     checked={effectiveThinking(selectedModel)}
                     onChange={(v) => setModelThinking(selectedModel, v)}
                   />

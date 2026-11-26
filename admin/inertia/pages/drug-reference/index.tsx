@@ -4,8 +4,12 @@ import { TabGroup, TabList, Tab, TabPanels, TabPanel } from '@headlessui/react'
 import AppLayout from '~/layouts/AppLayout'
 import StyledButton from '~/components/StyledButton'
 import DrugResultRow from '~/components/drug-reference/DrugResultRow'
-import IngredientGroup, { type IngredientGrouping } from '~/components/drug-reference/IngredientGroup'
-import DrugDisclaimerModal, { hasAcknowledgedDrugDisclaimer } from '~/components/drug-reference/DrugDisclaimerModal'
+import IngredientGroup, {
+  type IngredientGrouping,
+} from '~/components/drug-reference/IngredientGroup'
+import DrugDisclaimerModal, {
+  hasAcknowledgedDrugDisclaimer,
+} from '~/components/drug-reference/DrugDisclaimerModal'
 import IngestStatus from '~/components/drug-reference/IngestStatus'
 import SafetyBanner from '~/components/conditions/SafetyBanner'
 import RemedySafetyNote from '~/components/conditions/RemedySafetyNote'
@@ -20,7 +24,11 @@ import {
   IconChevronDown,
 } from '@tabler/icons-react'
 import type { DrugSearchResult, DrugIngestStatus } from '../../../types/drug_reference'
-import type { ConditionSummary, ConditionDrugsResult, NaturalRemedy } from '../../../types/conditions'
+import type {
+  ConditionSummary,
+  ConditionDrugsResult,
+  NaturalRemedy,
+} from '../../../types/conditions'
 import { remedySourceName } from '../../../util/conditions'
 import { PRODUCT_TYPES } from '../../../types/drug_reference'
 
@@ -136,9 +144,7 @@ function groupByIngredient(results: DrugSearchResult[]): IngredientGrouping[] {
     let g = map.get(key)
     if (!g) {
       const parts = key.split(', ')
-      const label = parts
-        .map((p) => (p ? p.charAt(0) + p.slice(1).toLowerCase() : p))
-        .join(' + ')
+      const label = parts.map((p) => (p ? p.charAt(0) + p.slice(1).toLowerCase() : p)).join(' + ')
       g = { key, label: label || 'Other', single: parts.length <= 1, products: [] }
       map.set(key, g)
     }
@@ -181,7 +187,10 @@ export default function DrugReferenceIndex({
   // ── Tab 2: situations (multi-select) ───────────────────────────────────────
   const [selectedSlugs, setSelectedSlugs] = useState<string[]>([])
   const [sitResults, setSitResults] = useState<
-    Record<string, { label: string; drugs: DrugSearchResult[]; remedies: NaturalRemedy[]; loading: boolean }>
+    Record<
+      string,
+      { label: string; drugs: DrugSearchResult[]; remedies: NaturalRemedy[]; loading: boolean }
+    >
   >({})
   const [browseOpen, setBrowseOpen] = useState(true)
 
@@ -267,7 +276,10 @@ export default function DrugReferenceIndex({
     const val = e.target.value
     setQuery(val)
     if (debounceRef.current) clearTimeout(debounceRef.current)
-    debounceRef.current = setTimeout(() => runDrugSearch(val, productType, route, sort), DEBOUNCE_MS)
+    debounceRef.current = setTimeout(
+      () => runDrugSearch(val, productType, route, sort),
+      DEBOUNCE_MS
+    )
   }
   const handleFilterChange = (pt: string | null) => {
     setProductType(pt)
@@ -300,7 +312,12 @@ export default function DrugReferenceIndex({
     async (c: ConditionSummary, rt: string | null, srt: 'relevance' | 'name') => {
       setSitResults((prev) => ({
         ...prev,
-        [c.slug]: { label: c.label, drugs: prev[c.slug]?.drugs ?? [], remedies: prev[c.slug]?.remedies ?? [], loading: true },
+        [c.slug]: {
+          label: c.label,
+          drugs: prev[c.slug]?.drugs ?? [],
+          remedies: prev[c.slug]?.remedies ?? [],
+          loading: true,
+        },
       }))
       try {
         // Pull a wide result set (200) and rank single-ingredient drugs first, so
@@ -323,7 +340,10 @@ export default function DrugReferenceIndex({
         }))
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Search failed')
-        setSitResults((prev) => ({ ...prev, [c.slug]: { label: c.label, drugs: [], remedies: [], loading: false } }))
+        setSitResults((prev) => ({
+          ...prev,
+          [c.slug]: { label: c.label, drugs: [], remedies: [], loading: false },
+        }))
       }
     },
     []
@@ -459,15 +479,24 @@ export default function DrugReferenceIndex({
         <Head title="Drug Reference" />
         <div className="p-4 max-w-4xl mx-auto">
           <PageHeader rowCount={rowCount} />
-          <DrugDisclaimerModal open={showDisclaimer} onAcknowledge={() => setShowDisclaimer(false)} />
+          <DrugDisclaimerModal
+            open={showDisclaimer}
+            onAcknowledge={() => setShowDisclaimer(false)}
+          />
           <div className="border-2 border-dashed border-desert-stone-lighter rounded-2xl p-8 text-center bg-desert-white">
-            <p className="text-lg font-semibold mb-2 text-desert-green-darker">No FDA drug data yet</p>
+            <p className="text-lg font-semibold mb-2 text-desert-green-darker">
+              No FDA drug data yet
+            </p>
             <p className="mb-6 opacity-70">
               Download the openFDA drug-label dataset to enable offline search. Requires ~1.7 GB
               compressed download (~8–10 GB after ingestion).
             </p>
             <div className="flex flex-wrap items-center justify-center gap-3">
-              <StyledButton variant="primary" onClick={handleTriggerDownload} disabled={triggering || busy}>
+              <StyledButton
+                variant="primary"
+                onClick={handleTriggerDownload}
+                disabled={triggering || busy}
+              >
                 {phase === 'downloading'
                   ? 'Downloading…'
                   : phase === 'ingesting'
@@ -477,7 +506,11 @@ export default function DrugReferenceIndex({
                       : 'Download FDA drug data'}
               </StyledButton>
               {canIngestFromDisk && (
-                <StyledButton variant="secondary" onClick={handleIngestFromDisk} disabled={ingesting || busy}>
+                <StyledButton
+                  variant="secondary"
+                  onClick={handleIngestFromDisk}
+                  disabled={ingesting || busy}
+                >
                   {ingesting ? 'Starting…' : 'Ingest into search'}
                 </StyledButton>
               )}
@@ -554,7 +587,10 @@ export default function DrugReferenceIndex({
               {/* Collapsible filter drawer */}
               <div className="mb-6">
                 <div className="flex items-center gap-2">
-                  <FilterPill active={productType === null} onClick={() => handleFilterChange(null)}>
+                  <FilterPill
+                    active={productType === null}
+                    onClick={() => handleFilterChange(null)}
+                  >
                     All
                   </FilterPill>
                   <FilterPill
@@ -577,8 +613,12 @@ export default function DrugReferenceIndex({
                     className="ml-auto flex items-center gap-1 rounded-full border border-desert-stone-lighter bg-surface-primary px-3 py-1 text-xs text-desert-green-darker hover:border-desert-green"
                   >
                     <IconAdjustmentsHorizontal size={14} />
-                    {route ? ROUTE_FRIENDLY[route] : 'Form'} · {sort === 'name' ? 'A–Z' : 'Best match'}
-                    <IconChevronDown size={14} className={filtersOpen ? 'rotate-180 transition' : 'transition'} />
+                    {route ? ROUTE_FRIENDLY[route] : 'Form'} ·{' '}
+                    {sort === 'name' ? 'A–Z' : 'Best match'}
+                    <IconChevronDown
+                      size={14}
+                      className={filtersOpen ? 'rotate-180 transition' : 'transition'}
+                    />
                   </button>
                 </div>
                 {filtersOpen && (
@@ -621,8 +661,11 @@ export default function DrugReferenceIndex({
                 <div className="rounded-2xl border border-dashed border-desert-stone-lighter/70 p-8 text-center text-sm text-desert-stone">
                   Type a medicine name above to search {rowCount.toLocaleString()} FDA drug labels.
                   <br />
-                  Looking for something to treat a symptom instead? Try the{' '}
-                  <button className="font-semibold text-desert-green underline" onClick={() => setTabIndex(1)}>
+                  Looking for FDA labels that mention a situation? Try the{' '}
+                  <button
+                    className="font-semibold text-desert-green underline"
+                    onClick={() => setTabIndex(1)}
+                  >
                     By situation
                   </button>{' '}
                   tab.
@@ -649,7 +692,11 @@ export default function DrugReferenceIndex({
                   </div>
                   {hasMore && (
                     <div className="flex justify-center border-t border-desert-stone-lighter/40 p-3">
-                      <StyledButton variant="secondary" onClick={handleLoadMore} disabled={drugLoading}>
+                      <StyledButton
+                        variant="secondary"
+                        onClick={handleLoadMore}
+                        disabled={drugLoading}
+                      >
                         {drugLoading ? 'Loading…' : 'Load more products'}
                       </StyledButton>
                     </div>
@@ -708,7 +755,10 @@ export default function DrugReferenceIndex({
                 >
                   <IconFirstAidKit size={14} />
                   {anySituationSelected ? 'Add another situation' : 'Pick one or more situations'}
-                  <IconChevronDown size={14} className={browseOpen ? 'rotate-180 transition' : 'transition'} />
+                  <IconChevronDown
+                    size={14}
+                    className={browseOpen ? 'rotate-180 transition' : 'transition'}
+                  />
                 </button>
 
                 {browseOpen && (
@@ -745,25 +795,30 @@ export default function DrugReferenceIndex({
 
               {!anySituationSelected && (
                 <div className="rounded-2xl border border-dashed border-desert-stone-lighter/70 p-8 text-center text-sm text-desert-stone">
-                  Pick a situation (or a few) above to see the over-the-counter drugs whose FDA labels list it.
+                  Pick a situation (or a few) above to see the over-the-counter drugs whose FDA
+                  labels list it.
                 </div>
               )}
 
               {situationLoading && (
-                <div className="text-center py-6 opacity-60">Finding options…</div>
+                <div className="text-center py-6 opacity-60">Finding label matches…</div>
               )}
 
               {/* Intersection — treats ALL selected situations */}
               {intersection.length > 0 && (
-                <section className={`${CARD_SURFACE} mb-6 overflow-hidden ring-2 ring-desert-olive/30`}>
+                <section
+                  className={`${CARD_SURFACE} mb-6 overflow-hidden ring-2 ring-desert-olive/30`}
+                >
                   <div className="flex items-center gap-2.5 border-b border-desert-olive/20 bg-desert-olive/10 px-4 py-3">
                     <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-desert-olive/20 text-desert-olive-dark">
                       <IconFirstAidKit size={18} />
                     </span>
                     <h2 className="text-sm font-bold text-desert-olive-dark">
-                      Treats all {selectedSlugs.length} selected
+                      Labels mention all {selectedSlugs.length} selected
                     </h2>
-                    <span className="ml-auto text-xs text-desert-stone">{intersection.length} OTC</span>
+                    <span className="ml-auto text-xs text-desert-stone">
+                      {intersection.length} OTC
+                    </span>
                   </div>
                   <div className="divide-y divide-desert-stone-lighter/40">
                     {intersection.map((d) => (
@@ -777,8 +832,8 @@ export default function DrugReferenceIndex({
                   ALL selected (intersection empty), or for a single situation. */}
               {!situationLoading && intersection.length === 0 && selectedSlugs.length >= 2 && (
                 <p className="mb-3 text-sm text-desert-stone">
-                  No single option treats all {selectedSlugs.length} of these — here are options for each
-                  situation.
+                  No single FDA label match mentions all {selectedSlugs.length} of these — here are
+                  separate label matches for each situation.
                 </p>
               )}
               {!situationLoading &&
@@ -786,58 +841,61 @@ export default function DrugReferenceIndex({
                 selectedSlugs.map((slug) => {
                   const r = sitResults[slug]
                   if (!r || r.loading) return null
-                const allDrugs = r.drugs.filter((d) => !intersectionKeys.has(drugKey(d)))
-                const drugs = allDrugs.slice(0, PER_SITUATION_DISPLAY)
-                const remediesShown = remediesEnabled ? r.remedies : []
-                if (allDrugs.length === 0 && remediesShown.length === 0) {
+                  const allDrugs = r.drugs.filter((d) => !intersectionKeys.has(drugKey(d)))
+                  const drugs = allDrugs.slice(0, PER_SITUATION_DISPLAY)
+                  const remediesShown = remediesEnabled ? r.remedies : []
+                  if (allDrugs.length === 0 && remediesShown.length === 0) {
+                    return (
+                      <p key={slug} className="mb-4 text-sm text-desert-stone">
+                        No additional OTC label matches found for <strong>{r.label}</strong>.
+                      </p>
+                    )
+                  }
                   return (
-                    <p key={slug} className="mb-4 text-sm text-desert-stone">
-                      No additional OTC options found for <strong>{r.label}</strong>.
-                    </p>
-                  )
-                }
-                return (
-                  <section key={slug} className={`${CARD_SURFACE} mb-6 overflow-hidden`}>
-                    <div className="flex items-center gap-2.5 border-b border-desert-stone-lighter/40 bg-desert-sand/40 px-4 py-3">
-                      <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-desert-olive/10 text-desert-olive-dark">
-                        <IconFirstAidKit size={18} />
-                      </span>
-                      <h2 className="text-sm font-bold text-desert-green-darker">
-                        For <span className="text-desert-olive-dark">&ldquo;{r.label}&rdquo;</span>
-                      </h2>
-                      <span className="ml-auto text-xs text-desert-stone">
-                        {allDrugs.length} OTC
-                        {allDrugs.length > PER_SITUATION_DISPLAY ? ` · top ${PER_SITUATION_DISPLAY}` : ''}
-                      </span>
-                    </div>
-                    {drugs.length > 0 && (
-                      <div className="divide-y divide-desert-stone-lighter/40">
-                        {drugs.map((d) => (
-                          <DrugResultRow key={`sit-${slug}-${d.id}`} result={d} />
-                        ))}
+                    <section key={slug} className={`${CARD_SURFACE} mb-6 overflow-hidden`}>
+                      <div className="flex items-center gap-2.5 border-b border-desert-stone-lighter/40 bg-desert-sand/40 px-4 py-3">
+                        <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-desert-olive/10 text-desert-olive-dark">
+                          <IconFirstAidKit size={18} />
+                        </span>
+                        <h2 className="text-sm font-bold text-desert-green-darker">
+                          For{' '}
+                          <span className="text-desert-olive-dark">&ldquo;{r.label}&rdquo;</span>
+                        </h2>
+                        <span className="ml-auto text-xs text-desert-stone">
+                          {allDrugs.length} OTC
+                          {allDrugs.length > PER_SITUATION_DISPLAY
+                            ? ` · top ${PER_SITUATION_DISPLAY}`
+                            : ''}
+                        </span>
                       </div>
-                    )}
-                    {remediesShown.length > 0 && (
-                      <div className="border-t border-desert-tan-lighter/40 bg-desert-sand/20">
-                        <div className="flex items-center gap-2 px-4 py-2 border-b border-desert-tan-lighter/30">
-                          <IconLeaf size={14} className="text-desert-tan-dark" />
-                          <span className="text-xs font-semibold uppercase tracking-wide text-desert-tan-dark">
-                            Natural remedies
-                          </span>
-                        </div>
-                        <div className="border-b border-desert-tan-lighter/20 p-3">
-                          <RemedySafetyNote />
-                        </div>
-                        <div className="divide-y divide-desert-tan-lighter/30">
-                          {remediesShown.map((rem) => (
-                            <SituationRemedyRow key={rem.slug} remedy={rem} />
+                      {drugs.length > 0 && (
+                        <div className="divide-y divide-desert-stone-lighter/40">
+                          {drugs.map((d) => (
+                            <DrugResultRow key={`sit-${slug}-${d.id}`} result={d} />
                           ))}
                         </div>
-                      </div>
-                    )}
-                  </section>
-                )
-              })}
+                      )}
+                      {remediesShown.length > 0 && (
+                        <div className="border-t border-desert-tan-lighter/40 bg-desert-sand/20">
+                          <div className="flex items-center gap-2 px-4 py-2 border-b border-desert-tan-lighter/30">
+                            <IconLeaf size={14} className="text-desert-tan-dark" />
+                            <span className="text-xs font-semibold uppercase tracking-wide text-desert-tan-dark">
+                              Natural remedies
+                            </span>
+                          </div>
+                          <div className="border-b border-desert-tan-lighter/20 p-3">
+                            <RemedySafetyNote />
+                          </div>
+                          <div className="divide-y divide-desert-tan-lighter/30">
+                            {remediesShown.map((rem) => (
+                              <SituationRemedyRow key={rem.slug} remedy={rem} />
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </section>
+                  )
+                })}
             </TabPanel>
 
             {/* ══ Tab 3: FDA data ════════════════════════════════════════════ */}
@@ -847,11 +905,21 @@ export default function DrugReferenceIndex({
                   <h2 className="text-sm font-bold text-desert-green-darker">FDA drug data</h2>
                   <div className="flex flex-wrap items-center gap-2">
                     {canIngestFromDisk && (
-                      <StyledButton variant="outline" size="sm" onClick={handleIngestFromDisk} disabled={ingesting || busy}>
+                      <StyledButton
+                        variant="outline"
+                        size="sm"
+                        onClick={handleIngestFromDisk}
+                        disabled={ingesting || busy}
+                      >
                         {ingesting ? 'Starting…' : 'Ingest into search'}
                       </StyledButton>
                     )}
-                    <StyledButton variant="secondary" size="sm" onClick={handleTriggerDownload} disabled={triggering || busy}>
+                    <StyledButton
+                      variant="secondary"
+                      size="sm"
+                      onClick={handleTriggerDownload}
+                      disabled={triggering || busy}
+                    >
                       {phase === 'downloading'
                         ? 'Downloading…'
                         : phase === 'ingesting'
@@ -861,8 +929,8 @@ export default function DrugReferenceIndex({
                   </div>
                 </div>
                 <p className="mb-4 text-xs text-desert-stone">
-                  {rowCount.toLocaleString()} drug labels installed. Updating re-checks openFDA for a newer
-                  dataset and refreshes the offline copy.
+                  {rowCount.toLocaleString()} drug labels installed. Updating re-checks openFDA for
+                  a newer dataset and refreshes the offline copy.
                 </p>
                 {status && <IngestStatus status={status} onRefresh={handleStatusRefresh} />}
               </div>
@@ -892,8 +960,8 @@ function PageHeader({ rowCount }: { rowCount: number }) {
         )}
       </div>
       <p className="text-sm opacity-70">
-        Look up a medicine by name, or start from a symptom to find over-the-counter options — all from
-        offline FDA drug labels.
+        Look up a medicine by name, or see which over-the-counter FDA labels mention a situation.
+        Label matches are not treatment recommendations.
       </p>
     </div>
   )
@@ -905,8 +973,9 @@ function SourceFooter() {
   return (
     <footer className="mt-8 pt-4 border-t border-desert-stone-lighter/40 text-xs text-desert-stone">
       <strong>Source:</strong> U.S. Food &amp; Drug Administration drug labeling, via{' '}
-      <strong>openFDA</strong> — public domain (CC0 1.0). NOMAD is not affiliated with or endorsed by the
-      FDA. Label data and situation matches are label-text only; do not rely on them for medical decisions.
+      <strong>openFDA</strong> — public domain (CC0 1.0). NOMAD is not affiliated with or endorsed
+      by the FDA. Label data and situation matches are label-text only; do not rely on them for
+      medical decisions.
     </footer>
   )
 }
@@ -977,7 +1046,9 @@ function FilterPill({
       type="button"
       onClick={onClick}
       className={`rounded-full border px-3 py-1 text-sm transition-colors ${
-        active ? activeClass : `border-desert-stone-lighter bg-surface-primary text-desert-green-darker ${hoverClass}`
+        active
+          ? activeClass
+          : `border-desert-stone-lighter bg-surface-primary text-desert-green-darker ${hoverClass}`
       }`}
     >
       {children}

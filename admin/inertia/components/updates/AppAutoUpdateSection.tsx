@@ -35,7 +35,7 @@ export default function AppAutoUpdateSection() {
           onChange={(value) => toggleMutation.mutate(value)}
           disabled={toggleMutation.isPending || isLoading}
           label="Enable Automatic App Updates"
-          description="Automatically install minor and patch updates for apps you've opted in (toggle each app in Supply Depot). Major versions always require a manual update. Uses the same update window and cool-off period as the core schedule above."
+          description="Automatically install minor and patch updates for apps you've opted in (toggle each app in Apps & Services). Major versions always require a manual update. Uses the same update window and cool-off period as the core schedule above."
         />
 
         {enabled && status && (
@@ -59,7 +59,7 @@ export default function AppAutoUpdateSection() {
 
             {status.apps.length === 0 ? (
               <p className="text-desert-stone-dark">
-                No apps are opted in yet. Enable auto-update on individual apps from the Supply Depot.
+                No apps are opted in yet. Enable auto-update on individual apps from Apps & Services.
               </p>
             ) : (
               <ul className="space-y-2">

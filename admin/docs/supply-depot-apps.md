@@ -1,6 +1,6 @@
-# Supply Depot Apps
+# Apps & Services
 
-The Supply Depot is where you install extra apps onto your NOMAD beyond the built-in tools. Each app runs in its own container on your NOMAD, fully offline, and shows up with an **Open** button once it finishes installing.
+Apps & Services is where you install extra apps onto your NOMAD beyond the built-in tools. Each app runs in its own container on your NOMAD, fully offline, and shows up with an **Open** button once it finishes installing.
 
 This page covers what you need to know to get up and running with each app *on NOMAD specifically*: whether you log in, what the default credentials are, where your files end up, and anything you need to have on hand first. It does not cover how to use the apps themselves. Each app is its own open-source project with its own documentation, and we link out to that for every one.
 
@@ -21,13 +21,13 @@ Every app you install gets a **Manage** menu on its card. From there you can:
 
 **Custom "Open" links:** By default the **Open** button points at the app on your NOMAD's own address. If you run a reverse proxy or local DNS and would rather open an app at a friendlier address (for example `https://jellyfin.myhomelab.net`), use **Manage › Edit** to set a custom launch URL. NOMAD keeps your original link safely on file, so you can always switch back, and the override sticks across upgrades.
 
-**Keeping apps updated automatically:** Installed apps can update themselves hands-off. This is opt-in at two levels — a master switch in **Settings → Updates** and a per-app toggle in the Supply Depot — and only minor and patch updates are ever applied automatically (major versions always stay manual). See the [Updates guide](/docs/updates) for the full story.
+**Keeping apps updated automatically:** Installed apps can update themselves hands-off. This is opt-in at two levels — a master switch in **Settings → Updates** and a per-app toggle in Apps & Services — and only minor and patch updates are ever applied automatically (major versions always stay manual). See the [Updates guide](/docs/updates) for the full story.
 
 ---
 
 ## Bringing your own app
 
-Beyond the curated catalog, the Supply Depot can run **your own Docker container** as a managed app alongside everything else. Click **Add a custom app** and tell NOMAD:
+Beyond the curated catalog, Apps & Services can run **your own Docker container** as a managed app alongside everything else. Click **Add a custom app** and tell NOMAD:
 
 - the **image** to pull (for example `ghcr.io/owner/app:1.2.3`),
 - any **port mappings**, **volume binds**, **environment variables**, and **memory/CPU limits** it needs.
@@ -52,7 +52,7 @@ A full toolbox for working with PDFs, all on your own hardware. Merge and split 
 
 **Want a password on it?** If you'd rather Stirling require a login (say a few people share your NOMAD and you want this app locked down), you can turn its login back on from NOMAD:
 
-1. On the Supply Depot page, find Stirling PDF and click **Manage > Edit**.
+1. On the Apps & Services page, find Stirling PDF and click **Manage > Edit**.
 2. Under **Environment Variables**, change `SECURITY_ENABLELOGIN=false` to `SECURITY_ENABLELOGIN=true`.
 3. Save. NOMAD rebuilds the app, and the login screen comes back.
 
@@ -116,7 +116,7 @@ A collection of over 100 small utilities you'd otherwise go hunting for online: 
 
 **First time you open it:** It opens straight to the tools. No login, no account, no setup. Pick a tool from the sidebar and use it.
 
-**Your data:** There's nothing to manage. IT Tools doesn't store anything on your NOMAD between sessions, so there are no files, no library to set up, and no credentials to keep track of. It's the simplest app in the Supply Depot.
+**Your data:** There's nothing to manage. IT Tools doesn't store anything on your NOMAD between sessions, so there are no files, no library to set up, and no credentials to keep track of. It's the simplest app in Apps & Services.
 
 **Works offline:** Every tool runs right in your browser against the copy on your NOMAD. Nothing here reaches out to the internet, so all of it keeps working when you're offline.
 
@@ -159,7 +159,7 @@ Click **Register**, then log in with that email and password. The first account 
 **Sharing your NOMAD with others?** By default Homebox lets anyone who can reach it create their own account. That's fine if it's just you, or if you trust everyone on your network. If you'd rather lock it down so no one else can register after you've made your account:
 
 1. Create your owner account first (above).
-2. On the Supply Depot page, find Homebox and click **Manage > Edit**.
+2. On the Apps & Services page, find Homebox and click **Manage > Edit**.
 3. Under **Environment Variables**, add `HBOX_OPTIONS_ALLOW_REGISTRATION=false`.
 4. Save. NOMAD rebuilds the app, and the Register button stops creating new accounts. You can still log in normally.
 
@@ -186,7 +186,7 @@ A private password manager that runs on your own NOMAD. It's compatible with Bit
 **Sharing your NOMAD with others?** By default anyone who can reach Vaultwarden can create their own account (each account is separate and encrypted). If you'd rather no one else can register after you've set yours up:
 
 1. Create your own account first.
-2. On the Supply Depot page, find Vaultwarden and click **Manage > Edit**.
+2. On the Apps & Services page, find Vaultwarden and click **Manage > Edit**.
 3. Under **Environment Variables**, add `SIGNUPS_ALLOWED=false`.
 4. Save. NOMAD rebuilds the app and new sign-ups are turned off; existing accounts keep working.
 
@@ -291,7 +291,7 @@ Reads the Information Library in another language. Open an article and a **Trans
 
 **Choosing languages:** French, Spanish and German are set up by default. To add or remove languages:
 
-1. In the **Supply Depot**, open the Translated Library's **Manage** menu and choose **Edit**.
+1. In **Apps & Services**, open the Translated Library's **Manage** menu and choose **Edit**.
 2. Under **Environment Variables**, find `TRANSLATE_LANGS=fr,es,de`.
 3. Change the list of language codes, separated by commas. For example, `TRANSLATE_LANGS=fr,es,de,sv` adds Swedish.
 4. Click **Save**. The app restarts, downloads any new languages, and adds a button for each one to the **Translate this page** bar.

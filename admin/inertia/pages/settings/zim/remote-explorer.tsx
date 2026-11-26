@@ -310,9 +310,8 @@ export default function ZimRemoteExplorer() {
         confirmVariant="primary"
       >
         <p className="text-text-primary">
-          Are you sure you want to download{' '}
-          <strong>{record.title}</strong>? It may take some time for it
-          to be available depending on the file size and your internet connection. The Kiwix
+          Are you sure you want to download <strong>{record.title}</strong>? It may take some time
+          for it to be available depending on the file size and your internet connection. The Kiwix
           application will be restarted after the download is complete.
         </p>
       </StyledModal>,
@@ -320,7 +319,11 @@ export default function ZimRemoteExplorer() {
     )
   }
 
-  async function confirmCustomDownload(file: { name: string; url: string; size_bytes: number | null }) {
+  async function confirmCustomDownload(file: {
+    name: string
+    url: string
+    size_bytes: number | null
+  }) {
     openModal(
       <StyledModal
         title="Confirm Download?"
@@ -335,10 +338,9 @@ export default function ZimRemoteExplorer() {
         confirmVariant="primary"
       >
         <p className="text-text-primary">
-          Are you sure you want to download{' '}
-          <strong>{file.name}</strong>
-          {file.size_bytes ? ` (${formatBytes(file.size_bytes)})` : ''}? The Kiwix
-          application will be restarted after the download is complete.
+          Are you sure you want to download <strong>{file.name}</strong>
+          {file.size_bytes ? ` (${formatBytes(file.size_bytes)})` : ''}? The Kiwix application will
+          be restarted after the download is complete.
         </p>
       </StyledModal>,
       'confirm-download-custom-modal'
@@ -359,7 +361,11 @@ export default function ZimRemoteExplorer() {
     }
   }
 
-  async function downloadCustomFile(file: { name: string; url: string; size_bytes: number | null }) {
+  async function downloadCustomFile(file: {
+    name: string
+    url: string
+    size_bytes: number | null
+  }) {
     try {
       await api.downloadRemoteZimFile(file.url, {
         title: file.name.replace(/\.zim$/, ''),
@@ -496,11 +502,11 @@ export default function ZimRemoteExplorer() {
   return (
     <SettingsLayout>
       <Head title="Content Explorer | Project NOMAD" />
-      <div className="xl:pl-72 w-full">
-        <main className="px-12 py-6">
-          <div className="flex justify-between items-center">
+      <div className="w-full min-w-0 xl:pl-72">
+        <main className="px-4 pb-6 pt-16 sm:px-8 xl:px-12 xl:py-6">
+          <div className="flex items-center justify-between">
             <div className="flex flex-col">
-              <h1 className="text-4xl font-semibold mb-2">Content Explorer</h1>
+              <h1 className="mb-2 text-3xl font-semibold sm:text-4xl">Content Explorer</h1>
               <p className="text-text-muted">Browse and download content for offline reading!</p>
             </div>
           </div>
@@ -521,7 +527,7 @@ export default function ZimRemoteExplorer() {
               className="!mt-6"
             />
           )}
-          <div className="mt-8 mb-6 flex items-center justify-between">
+          <div className="mb-6 mt-8 flex flex-col items-start justify-between gap-3 sm:flex-row sm:items-center">
             <StyledSectionHeader title="Curated Content" className="!mb-0" />
             <StyledButton
               onClick={() => refreshManifests.mutate()}
@@ -594,7 +600,7 @@ export default function ZimRemoteExplorer() {
           )}
 
           {/* Kiwix Library / Custom Library Browser */}
-          <div className="mt-12 mb-4 flex items-center justify-between">
+          <div className="mb-4 mt-12 flex flex-col items-start justify-between gap-3 sm:flex-row sm:items-center">
             <StyledSectionHeader title="Browse the Kiwix Library" className="!mb-0" />
             <StyledButton
               onClick={() => setManageModalOpen(true)}
@@ -632,12 +638,13 @@ export default function ZimRemoteExplorer() {
                   name="search"
                   label=""
                   placeholder="Search available ZIM files..."
+                  aria-label="Search available offline content files"
                   value={queryUI}
                   onChange={(e) => {
                     setQueryUI(e.target.value)
                     debouncedSetQuery(e.target.value)
                   }}
-                  className="w-1/3"
+                  className="w-full sm:w-1/2 lg:w-1/3"
                   leftIcon={<IconSearch className="w-5 h-5 text-text-muted" />}
                 />
                 {/* Hidden entirely when the catalog list is unavailable (offline), rather
@@ -681,7 +688,10 @@ export default function ZimRemoteExplorer() {
                     accessor: 'summary',
                     render(record) {
                       return (
-                        <span className="block max-w-md truncate text-text-muted" title={record.summary}>
+                        <span
+                          className="block max-w-md truncate text-text-muted"
+                          title={record.summary}
+                        >
                           {record.summary}
                         </span>
                       )
@@ -781,7 +791,9 @@ export default function ZimRemoteExplorer() {
                           {record.size_bytes > 0 && (
                             <div>
                               <span className="text-text-muted">Size: </span>
-                              <span className="text-text-primary">{formatBytes(record.size_bytes)}</span>
+                              <span className="text-text-primary">
+                                {formatBytes(record.size_bytes)}
+                              </span>
                             </div>
                           )}
                         </div>
@@ -858,7 +870,10 @@ export default function ZimRemoteExplorer() {
               )}
 
               {!isBrowsing && !browseError && browseData && (
-                <div className="bg-surface-primary rounded-lg border border-border-subtle overflow-hidden relative" style={{ maxHeight: '600px', overflowY: 'auto' }}>
+                <div
+                  className="bg-surface-primary rounded-lg border border-border-subtle overflow-hidden relative"
+                  style={{ maxHeight: '600px', overflowY: 'auto' }}
+                >
                   {browseData.directories.length === 0 && browseData.files.length === 0 ? (
                     <p className="text-text-muted p-6 text-center">
                       No directories or ZIM files found at this location.
@@ -867,8 +882,12 @@ export default function ZimRemoteExplorer() {
                     <table className="w-full text-sm">
                       <thead>
                         <tr className="border-b border-border-subtle bg-surface-secondary sticky top-0 z-10">
-                          <th className="text-left px-4 py-3 font-medium text-text-secondary">Name</th>
-                          <th className="text-right px-4 py-3 font-medium text-text-secondary w-32">Size</th>
+                          <th className="text-left px-4 py-3 font-medium text-text-secondary">
+                            Name
+                          </th>
+                          <th className="text-right px-4 py-3 font-medium text-text-secondary w-32">
+                            Size
+                          </th>
                           <th className="text-right px-4 py-3 font-medium text-text-secondary w-36"></th>
                         </tr>
                       </thead>
@@ -949,7 +968,9 @@ export default function ZimRemoteExplorer() {
                           <p className="font-medium text-text-primary truncate">
                             {lib.name}
                             {lib.is_default && (
-                              <span className="ml-2 text-xs text-text-muted font-normal">(built-in)</span>
+                              <span className="ml-2 text-xs text-text-muted font-normal">
+                                (built-in)
+                              </span>
                             )}
                           </p>
                           <p className="text-xs text-text-muted truncate">{lib.base_url}</p>

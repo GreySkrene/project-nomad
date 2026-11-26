@@ -535,12 +535,13 @@ export default function ModelsPage(props: {
               name="search"
               label=""
               placeholder="Search language models.."
+              aria-label="Search available language models"
               value={queryUI}
               onChange={(e) => {
                 setQueryUI(e.target.value)
                 debouncedSetQuery(e.target.value)
               }}
-              className="w-1/3"
+              className="w-full sm:w-1/2 lg:w-1/3"
               leftIcon={<IconSearch className="w-5 h-5 text-text-muted" />}
             />
             <StyledButton

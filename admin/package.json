@@ -13,6 +13,7 @@
     "test:unit": "node --import ts-node-maintained/register/esm --test \"tests/unit/**/*.spec.ts\"",
     "test:eval": "node --import ts-node-maintained/register/esm --test \"tests/unit/eval_*.spec.ts\" \"tests/unit/rag_pipeline_*.spec.ts\"",
     "audit:emergency-search": "node --import ts-node-maintained/register/esm scripts/audit_emergency_library_search.ts",
+    "audit:local-ui": "node scripts/audit_local_ui.mjs",
     "index:documents": "node --import ts-node-maintained/register/esm scripts/build_document_lexical_index.ts",
     "lint": "eslint .",
     "format": "prettier --write .",

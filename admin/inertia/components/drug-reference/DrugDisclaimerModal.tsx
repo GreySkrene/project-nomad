@@ -24,7 +24,13 @@ export function hasAcknowledgedDrugDisclaimer(): boolean {
  * acceptance is saved to this browser's localStorage so it isn't shown again on
  * this browser — other browsers/devices see it on their first open.
  */
-export default function DrugDisclaimerModal({ open, onAcknowledge }: { open: boolean; onAcknowledge: () => void }) {
+export default function DrugDisclaimerModal({
+  open,
+  onAcknowledge,
+}: {
+  open: boolean
+  onAcknowledge: () => void
+}) {
   const acknowledge = () => {
     try {
       window.localStorage.setItem(DRUG_DISCLAIMER_ACK_KEY, 'ack')
@@ -51,24 +57,28 @@ export default function DrugDisclaimerModal({ open, onAcknowledge }: { open: boo
 
             <div className="mt-4 space-y-3 text-sm text-text-secondary">
               <p>
-                This tool shows general health information from official <strong>FDA drug labels</strong> and
-                matches symptoms to over-the-counter options. It is provided for <strong>information only</strong>.
+                This tool shows general health information from official{' '}
+                <strong>FDA drug labels</strong> and matches situation terms to text in
+                over-the-counter labels. It is provided for <strong>information only</strong> and
+                does not select a treatment.
               </p>
               <ul className="list-disc space-y-1.5 pl-5">
                 <li>
-                  It is <strong>not medical advice</strong> and not a substitute for a doctor, pharmacist, or nurse.
+                  It is <strong>not medical advice</strong> and not a substitute for a doctor,
+                  pharmacist, or nurse.
                 </li>
                 <li>
-                  It is <strong>not a drug-interaction checker</strong>. Always read each product&rsquo;s full label
-                  and check with a professional before combining medicines.
+                  It is <strong>not a drug-interaction checker</strong>. Always read each
+                  product&rsquo;s full label and check with a professional before combining
+                  medicines.
                 </li>
                 <li>
-                  Situation matches come from label text, not clinical recommendations — they can be incomplete or
-                  include products you wouldn&rsquo;t expect.
+                  Situation matches come from label text, not clinical recommendations — they can be
+                  incomplete or include products you wouldn&rsquo;t expect.
                 </li>
                 <li>
-                  Always follow the directions on the <strong>actual product you have</strong>; dosages and warnings
-                  differ between products.
+                  Always follow the directions on the <strong>actual product you have</strong>;
+                  dosages and warnings differ between products.
                 </li>
                 <li>
                   In an emergency, or if symptoms are severe, worsening, or you&rsquo;re unsure,{' '}
@@ -76,7 +86,8 @@ export default function DrugDisclaimerModal({ open, onAcknowledge }: { open: boo
                 </li>
               </ul>
               <p className="text-xs text-text-muted">
-                Data is from openFDA (U.S. FDA, public domain). NOMAD is not affiliated with or endorsed by the FDA.
+                Data is from openFDA (U.S. FDA, public domain). NOMAD is not affiliated with or
+                endorsed by the FDA.
               </p>
             </div>
 

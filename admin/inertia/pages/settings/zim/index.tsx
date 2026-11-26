@@ -104,7 +104,8 @@ export default function ZimPage() {
   }
 
   const deleteFileMutation = useMutation({
-    mutationFn: async (file: ZimFileWithMetadata) => api.deleteZimFile(file.name.replace('.zim', '')),
+    mutationFn: async (file: ZimFileWithMetadata) =>
+      api.deleteZimFile(file.name.replace('.zim', '')),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['zim-files'] })
     },
@@ -129,16 +130,14 @@ export default function ZimPage() {
   return (
     <SettingsLayout>
       <Head title="Content Manager | Project NOMAD" />
-      <div className="xl:pl-72 w-full">
-        <main className="px-12 py-6">
-          <div className="flex items-center justify-between gap-4">
+      <div className="w-full min-w-0 xl:pl-72">
+        <main className="px-4 pb-6 pt-16 sm:px-8 xl:px-12 xl:py-6">
+          <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
             <div className="flex flex-col">
-              <h1 className="text-4xl font-semibold mb-2">Content Manager</h1>
-              <p className="text-text-muted">
-                Manage your stored content files.
-              </p>
+              <h1 className="mb-2 text-3xl font-semibold sm:text-4xl">Content Manager</h1>
+              <p className="text-text-muted">Manage your stored content files.</p>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <StyledButton
                 variant="secondary"
                 icon={showUploader ? 'IconX' : 'IconUpload'}
@@ -162,7 +161,9 @@ export default function ZimPage() {
           {showUploader && (
             <div className="mt-6">
               <p className="text-text-muted text-sm mb-3">
-                Upload a ZIM file from your browser. Files up to 20 GB are supported. For best results upload from the same machine or over a stable LAN connection. Larger files should be copied directly to the storage volume.
+                Upload a ZIM file from your browser. Files up to 20 GB are supported. For best
+                results upload from the same machine or over a stable LAN connection. Larger files
+                should be copied directly to the storage volume.
               </p>
               <ZimUploader
                 existingFilenames={data?.map((f) => f.name) ?? []}
@@ -186,7 +187,7 @@ export default function ZimPage() {
             <Alert
               title="The Kiwix application is not installed. Please install it to view downloaded ZIM files"
               type="warning"
-              variant='solid'
+              variant="solid"
               className="!mt-6"
             />
           )}
@@ -200,9 +201,7 @@ export default function ZimPage() {
                 accessor: 'title',
                 title: renderSortHeader('Title', 'name'),
                 render: (record) => (
-                  <span className="font-medium">
-                    {record.title || record.name}
-                  </span>
+                  <span className="font-medium">{record.title || record.name}</span>
                 ),
               },
               {

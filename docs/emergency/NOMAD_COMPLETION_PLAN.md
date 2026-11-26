@@ -544,3 +544,58 @@ and UI-only rollbacks are also retained).
 - [ ] Treat western routing expansion, satellite imagery, restricted iPhone LAN
   access, and the coordinated Adonis framework migration as separate reviewed work.
   Exact-model equipment manuals remain blocked on model/ownership confirmation.
+
+## N. Household operations and complete feature UI audit — 2026-11-25
+
+- [x] Audit every current user-facing feature from visible control through local
+  persistence/API behavior. Record normal, empty, loading, error, recovery,
+  destructive, offline, and deferred states in
+  `NOMAD_FEATURE_UI_AUDIT_2026-11-25.md`.
+- [x] Add a model-free System Readiness page that checks the local interface,
+  Kiwix inventory, saved documents, detailed maps, Utah/Idaho routing, FDA label
+  database, Kolibri service, and unfinished download queue. Keep AI explicitly
+  optional and state that a connected check is not proof of disconnection.
+- [x] Add a browser-local Household Readiness planner with visible/editable people,
+  duration, calorie, and water assumptions; supply add/edit/remove; food/water
+  coverage; lowest medication reserve; expiration rotation; and JSON backup/import.
+  Deliberately exclude sensitive identity/prescription/account fields until an
+  encrypted storage and LAN threat model is reviewed.
+- [x] Add a persistent power-outage food-safety timer with general four-hour
+  refrigerator and 24/48-hour freezer windows, full/half-full selection, reset,
+  and explicit temperature/contamination limitations.
+- [x] Add an editable portable-power budget using the confirmed 640 Wh Jackery as
+  the visible default, with watts × hours/day × quantity arithmetic and explicit
+  caveats about losses, temperature, surge loads, and medical devices.
+- [x] Add a deterministic daily ration worksheet that divides each recorded food
+  package and water supply across the selected target period while explicitly
+  rejecting meal-plan, nutrition, food-safety, and medical inference.
+- [x] Add one browser-local Offline Backup page with an allowlisted JSON export,
+  import preview, selective restore, size bounds, replacement confirmation, and
+  explicit unencrypted/location-data and not-a-full-disk-backup warnings.
+- [x] Add a high-contrast printable/PDF emergency summary driven by the same local
+  planner state, including coverage, prioritized gaps, active outage timer, daily
+  ration arithmetic, power loads, inventory locations, and printed limitations.
+- [x] Add Command Center quick actions for first aid, water safety, outage planning,
+  maps/routes, and system readiness. Keep every action useful without AI.
+- [x] Rename the app-container catalog from “Supply Depot” to “Apps & Services” in
+  primary UI so future household supplies cannot be confused with Docker apps.
+- [x] Fix library-search quick-action links: URL-prefilled searches now run the
+  saved-document lookup automatically when inventory becomes ready.
+- [x] Replace treatment-like drug UI claims (“treats,” “options”) with truthful
+  “FDA label match/mentions” language consistent with the existing safety banner.
+- [x] Make invalid coordinate entry recoverable on Maps with an example, visible
+  error, `aria-invalid`, and accessible names for icon-only actions.
+- [x] Verify the production container at desktop and a true emulated 390×844
+  viewport. The repeatable audit covered 25+ emergency/maintenance surfaces with
+  zero horizontal overflow, live readiness 8/0/1, deep-link document search,
+  isolated planner persistence/ration/power/actions, backup inventory, and a
+  76 KiB PDF parsed back for its heading and saved inventory. Pure tests cover
+  partial readiness failure and import validation; destructive restore confirmation
+  remains intentionally manual.
+- [x] Extend the live audit to reject duplicate IDs and unnamed visible controls;
+  fix all discovered first-party defects in backup/import, app search, Chat, drug
+  comparison, update/model/content search, and documentation navigation. Record the
+  remaining Scalar API Reference findings as dependency-owned rather than silently
+  passing them.
+- [ ] Complete the existing physical-disconnection/reboot gate; it remains more
+  important than adding another major feature.

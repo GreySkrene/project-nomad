@@ -27,6 +27,7 @@ export default function Maps(props: {
   const [isHoveringUI, setIsHoveringUI] = useState(false)
 
   const [coordinateSearch, setCoordinateSearch] = useState('')
+  const [coordinateError, setCoordinateError] = useState('')
   const [mapCommand, setMapCommand] = useState<MapCommand | null>(null)
   const [showCoordinatesEnabled, setShowCoordinatesEnabled] = useState(true)
 
@@ -51,7 +52,12 @@ export default function Maps(props: {
 
   const handleCoordinateAction = (action: 'fly' | 'marker') => {
     const coordinates = parseCoordinates()
-    if (!coordinates) return
+    if (!coordinates) {
+      setCoordinateError('Enter latitude, longitude—for example 40.6097, -111.9391.')
+      return
+    }
+
+    setCoordinateError('')
 
     setMapCommand({
       id: Date.now(),
@@ -72,10 +78,10 @@ export default function Maps(props: {
     <MapsLayout>
       <Head title="Maps" />
 
-      <div className="relative w-full h-screen overflow-hidden">
+      <div className="relative h-screen w-screen max-w-[100vw] overflow-hidden">
         {/* Navbar */}
         <div
-          className="absolute top-0 left-0 right-0 z-50 flex justify-between p-4 bg-surface-secondary backdrop-blur-sm shadow-sm"
+          className="absolute left-0 right-0 top-0 z-50 flex w-screen max-w-[100vw] flex-wrap items-center justify-between gap-3 overflow-hidden bg-surface-secondary p-3 shadow-sm backdrop-blur-sm sm:p-4"
           onMouseEnter={() => setIsHoveringUI(true)}
           onMouseLeave={() => setIsHoveringUI(false)}
         >
@@ -84,23 +90,44 @@ export default function Maps(props: {
             <p className="text-lg text-text-secondary">Back to Home</p>
           </Link>
 
-          <div className="flex items-center gap-2">
-            <input
-              type="text"
-              placeholder="lat,lng"
-              value={coordinateSearch}
-              onChange={(event) => setCoordinateSearch(event.target.value)}
-              onKeyDown={(event) => {
-                if (event.key === 'Enter') handleCoordinateAction('fly')
-              }}
-              className="w-52 rounded border border-border-default bg-surface-primary px-2 py-1 text-sm text-text-primary placeholder:text-text-muted focus:border-desert-green focus:outline-none"
-            />
+          <div className="flex w-full flex-wrap items-center justify-start gap-2 sm:w-auto sm:justify-end">
+            <div className="relative">
+              <label htmlFor="map-coordinate-search" className="sr-only">
+                Latitude and longitude
+              </label>
+              <input
+                id="map-coordinate-search"
+                type="text"
+                placeholder="latitude, longitude"
+                value={coordinateSearch}
+                aria-invalid={Boolean(coordinateError)}
+                aria-describedby={coordinateError ? 'map-coordinate-error' : undefined}
+                onChange={(event) => {
+                  setCoordinateSearch(event.target.value)
+                  if (coordinateError) setCoordinateError('')
+                }}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter') handleCoordinateAction('fly')
+                }}
+                className={`w-36 rounded border bg-surface-primary px-2 py-1 text-sm text-text-primary placeholder:text-text-muted focus:outline-none sm:w-52 ${coordinateError ? 'border-desert-red focus:border-desert-red' : 'border-border-default focus:border-desert-green'}`}
+              />
+              {coordinateError && (
+                <p
+                  id="map-coordinate-error"
+                  role="alert"
+                  className="absolute left-0 top-full mt-2 w-72 max-w-[calc(100vw-2rem)] rounded border border-desert-red/60 bg-surface-primary px-3 py-2 text-xs text-desert-red shadow-lg sm:left-auto sm:right-0"
+                >
+                  {coordinateError}
+                </p>
+              )}
+            </div>
 
             <button
               type="button"
               onClick={() => handleCoordinateAction('fly')}
               className="rounded border border-border-default bg-surface-primary p-2 text-text-secondary hover:bg-surface-secondary"
               title="Fly to coordinates"
+              aria-label="Fly to coordinates"
             >
               <IconPlaneTilt size={18} />
             </button>
@@ -110,6 +137,7 @@ export default function Maps(props: {
               onClick={() => handleCoordinateAction('marker')}
               className="rounded border border-border-default bg-surface-primary p-2 text-text-secondary hover:bg-surface-secondary"
               title="Add marker at coordinates"
+              aria-label="Add marker at coordinates"
             >
               <IconMapPin size={18} />
             </button>
@@ -123,11 +151,12 @@ export default function Maps(props: {
                   : 'bg-surface-primary text-text-secondary hover:bg-surface-secondary'
               }`}
               title={showCoordinatesEnabled ? 'Hide coordinates' : 'Show coordinates'}
+              aria-label={showCoordinatesEnabled ? 'Hide coordinates' : 'Show coordinates'}
             >
               <IconCrosshair size={18} />
             </button>
 
-            <Link href="/settings/maps" className="mr-4">
+            <Link href="/settings/maps" className="mr-0 sm:mr-4">
               <StyledButton variant="primary" icon="IconSettings">
                 Manage Map Regions
               </StyledButton>
@@ -168,7 +197,7 @@ export default function Maps(props: {
         </div>
 
         <aside
-          className="absolute bottom-8 left-4 z-40 flex max-w-md gap-3 rounded-lg border border-amber-500/50 bg-surface-primary/95 px-4 py-3 text-sm shadow-lg backdrop-blur-sm"
+          className="absolute bottom-8 left-4 right-4 z-40 flex max-w-md gap-3 rounded-lg border border-amber-500/50 bg-surface-primary/95 px-4 py-3 text-sm shadow-lg backdrop-blur-sm sm:right-auto"
           onMouseEnter={() => setIsHoveringUI(true)}
           onMouseLeave={() => setIsHoveringUI(false)}
           aria-label="Offline map limitation"

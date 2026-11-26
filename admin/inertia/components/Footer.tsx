@@ -11,11 +11,11 @@ export default function Footer() {
 
   return (
     <footer>
-      <div className="flex items-center justify-center gap-3 border-t border-border-subtle py-4">
-        <p className="text-sm/6 text-text-secondary">
+      <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 border-t border-border-subtle px-4 py-4 text-center">
+        <p className="w-full min-w-0 break-all text-sm/6 text-text-secondary sm:w-auto sm:break-normal">
           Project NOMAD&trade; Command Center v{appVersion}
         </p>
-        <span className="text-gray-300">|</span>
+        <span className="hidden text-gray-300 sm:inline">|</span>
         <button
           onClick={() => setDebugModalOpen(true)}
           className="text-sm/6 text-gray-500 hover:text-desert-green flex items-center gap-1 cursor-pointer"

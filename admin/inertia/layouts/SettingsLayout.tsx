@@ -12,7 +12,7 @@ import {
   IconMovie,
   IconSettings,
   IconWand,
-  IconZoom
+  IconZoom,
 } from '@tabler/icons-react'
 import { usePage } from '@inertiajs/react'
 import StyledSidebar from '~/components/StyledSidebar'
@@ -34,12 +34,28 @@ export default function SettingsLayout({ children }: { children: React.ReactNode
   const { data: serviceLogsUrlSetting } = useSystemSetting({ key: 'ui.serviceLogsUrl' })
 
   const navigation = [
-    ...(aiAssistantInstallStatus.isInstalled ? [{ name: aiAssistantName, href: '/settings/models', icon: IconWand, current: false }] : []),
-    { name: 'Supply Depot', href: '/supply-depot', icon: IconBox, current: false },
+    ...(aiAssistantInstallStatus.isInstalled
+      ? [{ name: aiAssistantName, href: '/settings/models', icon: IconWand, current: false }]
+      : []),
+    { name: 'Apps & Services', href: '/supply-depot', icon: IconBox, current: false },
     { name: 'Benchmark', href: '/settings/benchmark', icon: IconChartBar, current: false },
-    { name: 'Content Explorer', href: '/settings/zim/remote-explorer', icon: IconZoom, current: false },
+    {
+      name: 'Content Explorer',
+      href: '/settings/zim/remote-explorer',
+      icon: IconZoom,
+      current: false,
+    },
     { name: 'Content Manager', href: '/settings/zim', icon: IconFolder, current: false },
-    ...(creatorPacksConfigured ? [{ name: 'Creator Packs', href: '/settings/creator-packs', icon: IconMovie, current: false }] : []),
+    ...(creatorPacksConfigured
+      ? [
+          {
+            name: 'Creator Packs',
+            href: '/settings/creator-packs',
+            icon: IconMovie,
+            current: false,
+          },
+        ]
+      : []),
     { name: 'Maps Manager', href: '/settings/maps', icon: IconMapRoute, current: false },
     {
       name: 'Service Logs & Metrics',

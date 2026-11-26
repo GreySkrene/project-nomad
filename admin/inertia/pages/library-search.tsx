@@ -87,6 +87,7 @@ export default function LibrarySearch({ kiwixService }: { kiwixService: ServiceS
   const [loading, setLoading] = useState(false)
   const searchInput = useRef<HTMLInputElement>(null)
   const searchRequest = useRef(0)
+  const initialDocumentSearch = useRef(false)
 
   const kiwixBase = useMemo(
     () =>
@@ -258,6 +259,30 @@ export default function LibrarySearch({ kiwixService }: { kiwixService: ServiceS
     }, 180)
     return () => window.clearTimeout(timer)
   }, [query, source, kiwixBase, view, libraries])
+
+  // A URL such as /library-search?view=search&q=water is used by emergency
+  // quick actions. Title suggestions already react to `query`; run the saved-
+  // document side once as soon as its inventory is ready so the deep link is a
+  // complete search rather than a pre-filled form that still needs Enter.
+  useEffect(() => {
+    if (
+      initialDocumentSearch.current ||
+      view !== 'search' ||
+      documentInventoryState !== 'ready' ||
+      !query.trim() ||
+      !['all', 'documents'].includes(source)
+    ) {
+      return
+    }
+    initialDocumentSearch.current = true
+    void lookupDocuments(query).then((results) => {
+      setStatus(
+        results.length > 0
+          ? 'Choose an article or saved original document below.'
+          : 'No saved-document passage matched. Article-title search may still help.'
+      )
+    })
+  }, [documentInventoryState, query, source, view])
 
   function openArticle(result: KiwixSuggestion) {
     if (result.path) {

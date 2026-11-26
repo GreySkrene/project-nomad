@@ -1,11 +1,16 @@
 import {
   IconBolt,
   IconBox,
+  IconDroplet,
+  IconDatabaseExport,
   IconFiles,
+  IconFirstAidKit,
   IconHelp,
+  IconChecklist,
   IconMapRoute,
   IconPill,
   IconSettings,
+  IconShieldCheck,
   IconWifiOff,
 } from '@tabler/icons-react'
 import { Head, Link, router, usePage } from '@inertiajs/react'
@@ -55,6 +60,39 @@ const DOCUMENT_LIBRARY_ITEM = {
   poweredBy: null,
 }
 
+const HOUSEHOLD_READINESS_ITEM = {
+  label: 'Household Readiness',
+  to: '/emergency-planner',
+  target: '',
+  description: 'Track supplies and calculate food, water, medication, and outage readiness',
+  icon: <IconChecklist size={48} />,
+  installed: true,
+  displayOrder: 0,
+  poweredBy: null,
+}
+
+const SYSTEM_READINESS_ITEM = {
+  label: 'System Readiness',
+  to: '/readiness',
+  target: '',
+  description: 'Check offline libraries, documents, maps, routing, and download state',
+  icon: <IconShieldCheck size={48} />,
+  installed: true,
+  displayOrder: 5,
+  poweredBy: null,
+}
+
+const LOCAL_BACKUP_ITEM = {
+  label: 'Offline Backup',
+  to: '/local-backup',
+  target: '',
+  description: 'Export or restore household, reference, and route data from this browser',
+  icon: <IconDatabaseExport size={48} />,
+  installed: true,
+  displayOrder: 6,
+  poweredBy: null,
+}
+
 // Drug Reference + "When to use what" — offline medical reference tiles.
 // icon and displayOrder here are a reasonable default; both are open for the
 // maintainer to re-pick to fit the dashboard's ordering conventions.
@@ -62,7 +100,7 @@ const DRUG_REFERENCE_ITEM = {
   label: 'Drug Reference',
   to: '/drug-reference',
   target: '',
-  description: 'Offline FDA drug labels. Search by drug name or by symptom',
+  description: 'Read offline FDA label text by drug or situation; not treatment advice',
   icon: <IconPill size={48} />,
   installed: true,
   displayOrder: 4,
@@ -82,10 +120,10 @@ const SYSTEM_ITEMS = [
     poweredBy: null,
   },
   {
-    label: 'Supply Depot',
+    label: 'Apps & Services',
     to: '/supply-depot',
     target: '',
-    description: 'Browse and install curated apps, or add your own Docker container',
+    description: 'Install or manage optional apps and local services',
     icon: <IconBox size={48} />,
     installed: true,
     displayOrder: 51,
@@ -244,8 +282,11 @@ export default function Home(props: {
     })
 
   // Add model-independent reference tools as Core Capabilities.
+  items.push(HOUSEHOLD_READINESS_ITEM)
   items.push(DOCUMENT_LIBRARY_ITEM)
   items.push(MAPS_ITEM)
+  items.push(SYSTEM_READINESS_ITEM)
+  items.push(LOCAL_BACKUP_ITEM)
 
   // Add the offline medical-reference tiles only once the FDA drug dataset is
   // installed (or installing) via the curated Medicine tier. Both tiles read the
@@ -305,20 +346,68 @@ export default function Home(props: {
           <h1>What do you need?</h1>
           <p>Open a trusted offline library, map, manual, or system tool.</p>
         </div>
-        <div className="nomad-readiness-card" role="status">
+        <Link href="/readiness" className="nomad-readiness-card" role="status">
           <span
             className={`nomad-status-dot ${localLibraryRunning ? '' : 'nomad-status-dot--limited'}`}
           />
           <span>
             <strong>
-              {localLibraryRunning ? 'Local library ready' : 'Library needs attention'}
+              {localLibraryRunning ? 'Check system readiness' : 'Library needs attention'}
             </strong>
             <small>
               {localLibraryRunning
-                ? 'Information Library service is running'
-                : 'Restart NOMAD or check Supply Depot'}
+                ? 'Library running · verify every offline capability'
+                : 'Restart NOMAD or check Apps & Services'}
             </small>
           </span>
+        </Link>
+      </section>
+
+      <section className="px-4 pt-4" aria-labelledby="quick-actions-heading">
+        <div className="rounded-xl border border-border-default bg-surface-primary p-4">
+          <div className="flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="nomad-kicker">QUICK ACTIONS</p>
+              <h2 id="quick-actions-heading" className="mt-1 text-xl font-black text-text-primary">
+                Start with the immediate need
+              </h2>
+            </div>
+            <p className="text-xs text-text-muted">
+              Saved sources and local tools · no AI required
+            </p>
+          </div>
+          <div className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-5">
+            <Link
+              href="/library-search?view=search&q=first%20aid"
+              className="flex min-h-12 items-center gap-3 rounded-lg border border-border-default px-3 py-2 font-semibold text-text-primary hover:border-desert-green hover:bg-desert-green/10"
+            >
+              <IconFirstAidKit className="shrink-0 text-desert-green" size={20} /> First aid sources
+            </Link>
+            <Link
+              href="/library-search?view=search&q=emergency%20water%20purification"
+              className="flex min-h-12 items-center gap-3 rounded-lg border border-border-default px-3 py-2 font-semibold text-text-primary hover:border-desert-green hover:bg-desert-green/10"
+            >
+              <IconDroplet className="shrink-0 text-sky-500" size={20} /> Water safety
+            </Link>
+            <Link
+              href="/emergency-planner#outage-timer"
+              className="flex min-h-12 items-center gap-3 rounded-lg border border-border-default px-3 py-2 font-semibold text-text-primary hover:border-desert-green hover:bg-desert-green/10"
+            >
+              <IconBolt className="shrink-0 text-amber-500" size={20} /> Power outage
+            </Link>
+            <Link
+              href="/maps"
+              className="flex min-h-12 items-center gap-3 rounded-lg border border-border-default px-3 py-2 font-semibold text-text-primary hover:border-desert-green hover:bg-desert-green/10"
+            >
+              <IconMapRoute className="shrink-0 text-desert-orange" size={20} /> Routes & maps
+            </Link>
+            <Link
+              href="/readiness"
+              className="flex min-h-12 items-center gap-3 rounded-lg border border-border-default px-3 py-2 font-semibold text-text-primary hover:border-desert-green hover:bg-desert-green/10"
+            >
+              <IconShieldCheck className="shrink-0 text-desert-green" size={20} /> Check NOMAD
+            </Link>
+          </div>
         </div>
       </section>
 

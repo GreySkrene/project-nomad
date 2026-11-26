@@ -471,6 +471,7 @@ export default function SystemUpdatePage(props: { system: Props }) {
                     label=""
                     type="email"
                     placeholder="Your email address"
+                    aria-label="Email address for update notifications"
                     disabled={false}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}

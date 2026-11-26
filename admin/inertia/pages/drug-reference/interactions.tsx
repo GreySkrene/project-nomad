@@ -230,6 +230,7 @@ export default function DrugReferenceInteractions({ ingestStatus, rowCount }: Pa
                 value={query}
                 onChange={handleQueryChange}
                 placeholder="Search for a drug to add…"
+                aria-label="Search for a drug to add to the interaction comparison"
                 disabled={atMax}
                 className="w-full border border-border-default rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-desert-green disabled:bg-surface-secondary disabled:text-text-muted"
               />

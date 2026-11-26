@@ -9,7 +9,7 @@ NOMAD works best when it's kept current while you have internet, so it's ready w
 There are three separate things that can be updated, and you control each one independently:
 
 1. **Software (the core)** — NOMAD itself: the Command Center, new features, bug fixes, and security improvements.
-2. **Apps** — the installable apps from the [Supply Depot](/supply-depot) (Kiwix, the AI Assistant, and any others you've added).
+2. **Apps** — the installable apps from [Apps & Services](/supply-depot) (Kiwix, the AI Assistant, and any others you've added).
 3. **Content** — your offline material: Wikipedia and other Kiwix libraries, and downloaded map regions.
 
 You can update any of these on demand, or set any of them to update automatically.
@@ -22,7 +22,7 @@ To check for and install updates yourself:
 
 1. Go to **[Settings → Check for Updates](/settings/update)**.
 2. If a software update is available, click to install it. NOMAD downloads the update and restarts (usually 2–5 minutes).
-3. Apps can be updated from their card in the [Supply Depot](/supply-depot) using **Manage › Update**.
+3. Apps can be updated from their card in [Apps & Services](/supply-depot) using **Manage › Update**.
 4. Content is managed from **Settings → Content Manager** and **Content Explorer**, where you can download newer versions of installed libraries and maps.
 
 If a software or app update ever fails, NOMAD is designed to recover gracefully — the previous working version keeps running, so your server stays up.
@@ -46,7 +46,7 @@ Turn this on from **Settings → Updates**. When enabled, NOMAD updates its own 
 
 ### Automatic app updates
 
-App auto-updates are opt-in at **two levels**: a master switch in **Settings → Updates**, *and* a per-app toggle on each app's card in the [Supply Depot](/supply-depot). Both have to be on for an app to update itself. App updates share the same update window and cool-off as the core, apply only minor and patch versions, and back off automatically for any individual app that keeps failing.
+App auto-updates are opt-in at **two levels**: a master switch in **Settings → Updates**, *and* a per-app toggle on each app's card in [Apps & Services](/supply-depot). Both have to be on for an app to update itself. App updates share the same update window and cool-off as the core, apply only minor and patch versions, and back off automatically for any individual app that keeps failing.
 
 ### Automatic content updates
 
